@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background-color: #F6F7F8;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 1 1 auto;
+    gap: 100px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 8px;
+}
+
+.headline {
+    font-size: 61px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 50px;
+}
+
+h1 {
+    font-size: 61px;
+}
+
+.header-separating-line-v {
+    height: 59px;
+    width: 3px;
+    background-color: #29abe2;
+}
+
+.subheadline {
+    font-size: 27px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    width: 700px;
+}
+
+.kpi-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.kpi-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.kpi-card:hover {
+    transform: scale(1.1);
+    background-color: #2a3647;
+    color: white;
+}
+
+.kpi-card:hover .card-icon {
+    background-color: white;
+}
+
+.kpi-card:hover .card-icon .edit-svg-path {
+    fill: #2a3647;
+}
+
+.kpi-card:hover .checkmark-svg-path {
+    stroke: #2a3647;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-value {
+    text-align: center;
+    font-size: 64px;
+}
+
+.card-subtitle {
+    text-align: center;
+    font-size: 20px;
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #2a3647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-svg-path {
+    fill: white;
+}
+
+.deadline-container {
+    display: flex;
+    justify-content: center;
+}
+
+.deadline-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 560px;
+    height: 168px;
+}
+
+.deadline-card:hover {
+    transform: scale(1.1);
+    background-color: #2a3647;
+    color: white;
+}
+
+.deadline-card-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.deadline-card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.deadline-card-separating-line-v {
+    height: 102px;
+    width: 2px;
+    background-color: #D1D1D1;
+}
+
+.due-date {
+    text-align: left;
+    font-size: 21px;
+    font-weight: 700;
+    font-style: bold;
+}
+
+.task-summary {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.task-summary-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 168px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.task-summary-card:hover {
+    transform: scale(1.1);
+    background-color: #2a3647;
+    color: white;
+}
+
+aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-msg-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    text-align: right;
+}
+
+.welcome-msg {
+    text-align: right;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.username-field {
+    text-align: right;
+    font-size: 64px;
+    color: #29abe2;
+    font-weight: 700;
+    font-style: bold;
+}
