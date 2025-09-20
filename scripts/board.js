@@ -82,8 +82,10 @@ function renderBoard() {
               <h2 class="task-category">${task.category}</h2>
               <h3>${task.title}</h3>
               <span>${task.description.substring(0, 50)}...</span>
-              <span>Due: ${task.dueDate}</span>
-              <div>Hier stehen subtasks </div>
+              <div class="subtask-card"> 
+                <div class="subtask-progress"></div>
+                <div>${0}/${task.subtasks}</div>
+              </div>
               <div class="task-footer">
                 <div>${task.contact}</div>
                 <div>Priority</div>

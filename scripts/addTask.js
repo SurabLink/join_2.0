@@ -32,14 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
       description,
       dueDate,
       priority,
-      category,
       contact,
+      category,
+      subtasks,
       status: "To Do", // Default
     };
 
     await saveTask(task);
 
     alert("Task erfolgreich erstellt!");
+    subtasks.length = 0;
+    showSubtasks();
     form.reset();
   });
 });
@@ -74,25 +77,42 @@ function selectContacts() {
   }
 }
 
-function addSubtask() {
-  let subtask = document.getElementById('subtask').value;
+function showSubtasks() {
   let subtaskArea = document.getElementById('subtaskArea');
 
-  subtasks.push(subtask);
   subtaskArea.innerHTML = '';
   for (let i = 0; i < subtasks.length; i++) {
     subtaskArea.innerHTML += /*html*/ `
-        <li class="subtask">
-          <span>${subtasks[i]}</span>
-          <div>
-              <img src="./assets/icons/delete.svg" alt="Delete">
-              <img src="./assets/icons/edit.svg" alt="Edit">
-          </div>
-
-
-        </li>
+      <li class="subtask">
+        <span>${subtasks[i]}</span>
+        <div class="subtask-actions">
+          <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
+          <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
+        </div>
+      </li>
     `;
   }
+}
 
+function addSubtask() {
+  let subtask = document.getElementById('subtask').value;
+
+  subtasks.push(subtask);
+
+  showSubtasks();
   document.getElementById('subtask').value = '';
 }
+
+function editSubtask(i) {
+  
+}
+
+function deleteSubtask(i) {
+  subtasks.splice(i, 1);
+  showSubtasks();
+
+}
+
+
+
+
