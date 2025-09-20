@@ -164,9 +164,12 @@
             <label>
               Subtasks
               <div class="subtasks">
-                <input type="text" placeholder="Add new subtask">
-                <button type="button" class="plus">+</button>
+                <input type="text" id="subtask" placeholder="Add new subtask">
+                <button type="button" class="plus" onclick="addSubtask()">+</button>
               </div>
+              <ul id="subtaskArea" class="subtask-list">
+
+              </ul>
             </label>
 
             <div class="actions">

@@ -189,6 +189,32 @@ textarea {
   cursor: pointer;
 }
 
+.subtask-list {
+  height: 80px;
+  width: 400px;
+}
+
+.subtask {
+  height: 40px;
+  width: 300px;
+  margin-left: 20px;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtask img {
+  width: 20px;
+  height: 20px;
+}
+
+.subtask:hover{
+  cursor: pointer;
+  background-color: #e1e1e1;
+}
+
 /* Actions */
 .actions {
   display: flex;

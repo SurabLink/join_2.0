@@ -1,8 +1,10 @@
 let contacts = [
-    { id: 1, name: "Alex Johnson", email: "alex@example.com", phone: "+49 123 456789", avatar: "assets/avatar1.jpg" },
-    { id: 2, name: "Maria Gomez", email: "maria@example.com", phone: "+49 987 654321", avatar: "assets/avatar3.jpg" },
-    { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
+  { id: 1, name: "Alex Johnson", email: "alex@example.com", phone: "+49 123 456789", avatar: "assets/avatar1.jpg" },
+  { id: 2, name: "Maria Gomez", email: "maria@example.com", phone: "+49 987 654321", avatar: "assets/avatar3.jpg" },
+  { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
 ];
+
+let subtasks = [];
 
 
 
@@ -70,4 +72,27 @@ function selectContacts() {
       <option>${contacts[i].name}</option>
     `;
   }
-} 
+}
+
+function addSubtask() {
+  let subtask = document.getElementById('subtask').value;
+  let subtaskArea = document.getElementById('subtaskArea');
+
+  subtasks.push(subtask);
+  subtaskArea.innerHTML = '';
+  for (let i = 0; i < subtasks.length; i++) {
+    subtaskArea.innerHTML += /*html*/ `
+        <li class="subtask">
+          <span>${subtasks[i]}</span>
+          <div>
+              <img src="./assets/icons/delete.svg" alt="Delete">
+              <img src="./assets/icons/edit.svg" alt="Edit">
+          </div>
+
+
+        </li>
+    `;
+  }
+
+  document.getElementById('subtask').value = '';
+}
