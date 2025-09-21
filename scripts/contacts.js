@@ -117,3 +117,33 @@ function closeOverlay() {
 }
 
 document.addEventListener("DOMContentLoaded", loadContacts);
+
+// function openAddContactDialog() {
+//     openAddContact();
+// }
+
+function openAddContactDialog() {
+    let dialog = document.getElementById("add-contact-dialog");
+
+    if (!dialog) {
+        document.body.insertAdjacentHTML("beforeend", getDialogAddContact());
+        dialog = document.getElementById("add-contact-dialog");
+
+        const closeBtn = dialog.querySelector(".ac__close");
+        const cancelBtn = dialog.querySelector("[data-ac-cancel]");
+        [closeBtn, cancelBtn].forEach(btn =>
+            btn.addEventListener("click", () => dialog.close())
+        );
+
+        dialog.addEventListener("cancel", e => {
+            e.preventDefault();
+            dialog.close();
+        });
+    }
+
+    dialog.showModal();
+
+    if (typeof openAddContact === "function") {
+        openAddContact();
+    }
+}
