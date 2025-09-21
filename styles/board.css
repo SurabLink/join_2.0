@@ -219,6 +219,23 @@ h1 {
 
 }
 
+.subtask-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.subtask-progress {
+    height: 8px;
+    width: 120px;
+    background-color: rgb(209, 209, 209);
+    margin-right: 24px;
+    border-radius: 8px;
+
+}
+
 .task-footer {
     display: flex;
     justify-content: space-between;

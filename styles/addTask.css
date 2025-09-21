@@ -189,6 +189,49 @@ textarea {
   cursor: pointer;
 }
 
+.subtask-list {
+  width: 400px;
+}
+
+.subtask-list li::before {
+  content: "•";
+  margin-right: 25px;
+  color: black;
+}
+
+.subtask {
+  height: 40px;
+  width: 300px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.subtask-actions {
+ position: absolute;
+ right: 300px;
+}
+
+.subtask-actions img {
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+}
+
+.subtask-actions img:hover {
+  width: 22px;
+  height: 22px;
+}
+
+.subtask:hover{
+  cursor: pointer;
+  background-color: #e9e9e9;
+}
+
 /* Actions */
 .actions {
   display: flex;
