@@ -87,6 +87,7 @@ function showSubtasks() {
         <span>${subtasks[i]}</span>
         <div class="subtask-actions">
           <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
+          <div class="action-separator"></div>
           <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
         </div>
       </li>
@@ -104,7 +105,7 @@ function addSubtask() {
 }
 
 function editSubtask(i) {
-  
+
 }
 
 function deleteSubtask(i) {

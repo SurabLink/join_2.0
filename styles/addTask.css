@@ -189,22 +189,18 @@ textarea {
   cursor: pointer;
 }
 
-.subtask-list {
-  width: 400px;
-}
-
 .subtask-list li::before {
   content: "•";
-  margin-right: 25px;
+  margin-right: 20px;
   color: black;
 }
 
 .subtask {
   height: 40px;
-  width: 300px;
+  width: auto;
   margin-left: 10px;
   margin-bottom: 4px;
-  padding: 8px;
+  padding: 5px 10px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -212,14 +208,17 @@ textarea {
 }
 
 .subtask-actions {
- position: absolute;
- right: 300px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .subtask-actions img {
   width: 20px;
   height: 20px;
-  margin-left: 2px;
 }
 
 .subtask-actions img:hover {
@@ -227,9 +226,21 @@ textarea {
   height: 22px;
 }
 
-.subtask:hover{
+.subtask:hover {
   cursor: pointer;
-  background-color: #e9e9e9;
+  background-color: #eaeaea;
+}
+
+.subtask:hover .subtask-actions {
+  opacity: 1;
+}
+
+.action-separator {
+  height: 25px;
+  width: 2px;
+  background-color: #b5b5b5;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 /* Actions */

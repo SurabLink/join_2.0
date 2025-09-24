@@ -3,8 +3,6 @@ let colors = [
   "#f4b400", // Gelb
   "#9333ea", // Lila
   "#ef4444", // Rot
-  "#3b82f6", // Blau
-  "#10b981", // Grün
   "#f97316"  // Orange
 ];
 
@@ -90,11 +88,10 @@ function renderBoard() {
                  draggable="true" 
                  ondragstart="startDrag(${task.id})"
                  onclick="openModal(${task.id})">
-              <h2 class="task-category" style="background-color: ${
-                task.category === "User Story"
-                ? "#0038FF" // blau für User Story
-                : "#1FD7C1" // Türkis für Technical Task
-              }">${task.category}</h2>
+              <h2 class="task-category" style="background-color: ${task.category === "User Story"
+            ? "#0038FF" // blau für User Story
+            : "#1FD7C1" // Türkis für Technical Task
+          }">${task.category}</h2>
               <h3>${task.title}</h3>
               <span>${task.description.substring(0, 50)}...</span>
               <div class="subtask-card"> 
@@ -188,22 +185,43 @@ function openModal(id) {
   modal.id = "taskModal";
   modal.className = "modal";
 
-  modal.innerHTML = `
+  modal.innerHTML = /*html*/`
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h2>${task.title}</h2>
-      <p>${task.description}</p>
-      <p><strong>Due date:</strong> ${task.dueDate}</p>
-      <p><strong>Priority:</strong> ${task.priority}</p>
-      <p><strong>Category:</strong> ${task.category}</p>
-
+      <div class="task-category" style="background-color: ${task.category === "User Story"
+            ? "#0038FF" // blau für User Story
+            : "#1FD7C1" // Türkis für Technical Task
+          }">${task.category}</div>
+      <div class="modal-title"><h2>${task.title}</h2></div>
+      <div class="modal-description">${task.description}</div>
+      <div class="modal-date"><strong>Due date:</strong> ${task.dueDate}</div>
+      <div class="modal-priority"><strong>Priority:</strong> <div>${task.priority}</div> ${task.priority === "urgent"
+            ? '<img src="./assets/img/Category_Urgent.svg" alt="Urgent">'
+            : task.priority === "medium"
+              ? '<img src="./assets/icons/medium_orange.svg" alt="Medium" color="orange">'
+              : '<img src="./assets/img/Category_Low.svg" alt="Low">'
+          }</div>
+      <div class="modal-contacts"><strong>Assigned To:</strong> <div>${task.contact}</div></div>
+      <div class="modal-subtasks-area">
+        <span>Subtasks</span>
+        <div class="modal-subtasks">
+          <div> ${task.subtasks}</div>
+        </div>
+      </div>
       <div class="modal-actions">
-        <button onclick="deleteTask()">🗑 Delete</button>
-        <button onclick="closeModal()">Close</button>
+        <div>
+          <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${id})">
+          <span>Delete</span>
+        </div>
+        <div class="action-separator"></div>
+        <div>
+          <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${id})">
+          <span>Edit</span>
+        </div>
       </div>
     </div>
   `;
-
+  modal.style.display = "flex";
   document.body.appendChild(modal);
 }
 
