@@ -105,17 +105,6 @@ body {
     background: #091931;
 }
 
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
 /* Board */
 .content {
     padding: 24px 40px;
@@ -236,31 +225,31 @@ h1 {
 
 }
 
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: -10px;
+    border: 2px solid white;
+    flex-shrink: 0;
+    /* verhindert Verzerrung */
+}
+
+.avatar-container {
+    display: flex;
+}
+
 .task-footer {
     display: flex;
     justify-content: space-between;
-}
-
-/* Tags (z. B. User Story) */
-.tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-}
-
-.tag.blue {
-    background: #2979ff;
-}
-
-.tag.red {
-    background: #d32f2f;
-}
-
-.tag.green {
-    background: #388e3c;
+    align-items: center;
 }
 
 /* Modal */

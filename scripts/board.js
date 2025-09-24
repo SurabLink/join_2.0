@@ -1,3 +1,14 @@
+// Farbpalette für zufällige Auswahl
+let colors = [
+  "#f4b400", // Gelb
+  "#9333ea", // Lila
+  "#ef4444", // Rot
+  "#3b82f6", // Blau
+  "#10b981", // Grün
+  "#f97316"  // Orange
+];
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadTasks();
   renderBoard();
@@ -65,16 +76,16 @@ function renderBoard() {
     
     <div class="board-columns">
   `;
-    
-    columns.forEach(col => {
+
+  columns.forEach(col => {
     html += `
       <div class="board-column" 
            ondragover="allowDrop(event)" 
            ondrop="dropTask(event, '${col}')">
         <h2>${col}</h2>
         ${tasks
-          .filter(t => t.status === col)
-          .map(task => `
+        .filter(t => t.status === col)
+        .map(task => `
             <div class="task-card" 
                  draggable="true" 
                  ondragstart="startDrag(${task.id})"
@@ -87,8 +98,14 @@ function renderBoard() {
                 <div>${0}/${task.subtasks}</div>
               </div>
               <div class="task-footer">
-                <div>${task.contact}</div>
-                <div>Priority</div>
+                <div class="avatar-container" id="avatars-${task.id}"></div>
+                <div>${task.priority === "urgent"
+            ? '<img src="./assets/img/Category_Urgent.svg" alt="Urgent">'
+            : task.priority === "medium"
+              ? '<img src="./assets/icons/medium_orange.svg" alt="Medium" color="orange">'
+              : '<img src="./assets/img/Category_Low.svg" alt="Low">'
+          }
+                </div>
               </div>
             </div>
           `).join('')}
@@ -98,6 +115,34 @@ function renderBoard() {
 
   html += `</div>`;
   content.innerHTML = html;
+  // nach dem Rendern: für alle Tasks Avatare setzen
+  for (let i = 0; i < tasks.length; i++) {
+    renderAvatar(tasks[i]);
+  }
+}
+
+//Funktion um Avatare zu rendern
+function renderAvatar(task) {
+  let container = document.getElementById(`avatars-${task.id}`);
+  
+  if (!container) return;
+  container.innerHTML = ""; // leeren, falls schon Inhalte drin sind
+   // immer in Array verwandeln
+  let contacts = Array.isArray(task.contact) ? task.contact : [task.contact];
+
+  for (let i = 0; i < contacts.length; i++) {
+    const name = contacts[i];
+    const initials = name.split(" ").map(n => n[0]).join("");
+    if (!name) continue; // überspringen, falls leer
+    container.innerHTML += /*html*/`
+      <div class="avatar" style="background-color: ${getRandomColor()};">${initials}</div>
+    `;
+  }
+}
+
+// Hilfsfunktion: Zufällige Farbe zurückgeben
+function getRandomColor() {
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 /** Drag starten */
