@@ -14,7 +14,6 @@ function renderAddTask() {
   selectContacts();
 }
 
-/** Neues Task-Objekt anlegen und in Firebase speichern */
 async function saveToArray(event) {
   event.preventDefault();
   const task = generateTaskFromForm();
