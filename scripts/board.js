@@ -209,8 +209,8 @@ function openModal(id) {
         </div>
       </div>
       <div class="modal-actions">
-        <div class="modal-delete">
-          <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${id})">
+        <div class="modal-delete" onclick="deleteTask()">
+          <img src="./assets/icons/delete.svg" alt="Delete">
           <span>Delete</span>
         </div>
         <div class="action-separator"></div>
