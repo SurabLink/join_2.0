@@ -90,7 +90,11 @@ function renderBoard() {
                  draggable="true" 
                  ondragstart="startDrag(${task.id})"
                  onclick="openModal(${task.id})">
-              <h2 class="task-category">${task.category}</h2>
+              <h2 class="task-category" style="background-color: ${
+                task.category === "User Story"
+                ? "#0038FF" // blau für User Story
+                : "#1FD7C1" // Türkis für Technical Task
+              }">${task.category}</h2>
               <h3>${task.title}</h3>
               <span>${task.description.substring(0, 50)}...</span>
               <div class="subtask-card"> 
@@ -124,10 +128,10 @@ function renderBoard() {
 //Funktion um Avatare zu rendern
 function renderAvatar(task) {
   let container = document.getElementById(`avatars-${task.id}`);
-  
+
   if (!container) return;
   container.innerHTML = ""; // leeren, falls schon Inhalte drin sind
-   // immer in Array verwandeln
+  // immer in Array verwandeln
   let contacts = Array.isArray(task.contact) ? task.contact : [task.contact];
 
   for (let i = 0; i < contacts.length; i++) {
