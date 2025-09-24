@@ -279,7 +279,10 @@ h1 {
     max-width: 90%;
     /* font-family: Arial, sans-serif; */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
+    transform: translateX(100%);
+    /* Startposition rechts außerhalb */
+    transition: transform 0.3s ease-out;
+    /* Slide-In Animation */
 }
 
 .close {
@@ -350,12 +353,22 @@ h1 {
     gap: 8px;
 }
 
+.modal-delete:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-edit:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .action-separator {
-  height: 25px;
-  width: 2px;
-  background-color: #b5b5b5;
-  margin-left: 5px;
-  margin-right: 5px;
+    height: 25px;
+    width: 2px;
+    background-color: #b5b5b5;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 /* Responsive */

@@ -209,12 +209,12 @@ function openModal(id) {
         </div>
       </div>
       <div class="modal-actions">
-        <div>
+        <div class="modal-delete">
           <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${id})">
           <span>Delete</span>
         </div>
         <div class="action-separator"></div>
-        <div>
+        <div class="modal-edit">
           <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${id})">
           <span>Edit</span>
         </div>
@@ -223,6 +223,11 @@ function openModal(id) {
   `;
   modal.style.display = "flex";
   document.body.appendChild(modal);
+
+  setTimeout(() => {
+  const modalContent = modal.querySelector(".modal-content");
+  modalContent.style.transform = "translateX(0)";
+}, 10);
 }
 
 /** Modal schließen */
