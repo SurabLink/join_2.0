@@ -133,6 +133,9 @@
     background: var(--ac-brand);
     padding: var(--ac-pad);
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Logo links oben */
@@ -176,9 +179,8 @@
 
 /* rechter Inhalt: Avatar + Formular */
 .ac__formwrap {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    align-items: start;
+    display: flex;
+    align-items: center;
     column-gap: var(--ac-gap);
     row-gap: 24px;
     padding: var(--ac-pad);
@@ -209,7 +211,7 @@
     flex-direction: column;
     align-items: center;
     height: 400px;
-
+    justify-content: center
 }
 
 /* Input mit Icon rechts */
