@@ -54,7 +54,7 @@ function getDialogAddContact() {
                             <span>Cancel</span>
                             <span class="btn__x">×</span>
                         </button>
-                        <button type="submit" class="btn btn--primary" data-ac-submit aria-label="Create contact">
+                        <button onclick="addContact()" type="submit" class="btn btn--primary" data-ac-submit aria-label="Create contact">
                             <span>Create contact</span>
                             <span class="btn__check" aria-hidden="true">
                                 <svg width="18" height="14" viewBox="0 0 18 14">
@@ -71,3 +71,4 @@ function getDialogAddContact() {
 `
 
 }
+

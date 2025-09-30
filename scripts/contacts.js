@@ -4,23 +4,23 @@ let contacts = [
     { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
 ];
 
-function loadContacts() {
-    const list = document.getElementById("contacts-list");
-    list.innerHTML = "";
-    contacts.forEach(contact => {
-        const item = document.createElement("div");
-        item.classList.add("contact-item");
-        item.innerHTML = `
-            <img class="avatar" src="${contact.avatar}" alt="${contact.name}">
-            <div class="contact-info">
-                <h4>${contact.name}</h4>
-                <p>${contact.email}</p>
-            </div>
-        `;
-        item.addEventListener("click", () => showContactDetails(contact.id));
-        list.appendChild(item);
-    });
-}
+// function loadContacts() {
+//     const list = document.getElementById("contacts-list");
+//     list.innerHTML = "";
+//     contacts.forEach(contact => {
+//         const item = document.createElement("div");
+//         item.classList.add("contact-item");
+//         item.innerHTML = `
+//             <img class="avatar" src="${contact.avatar}" alt="${contact.name}">
+//             <div class="contact-info">
+//                 <h4>${contact.name}</h4>
+//                 <p>${contact.email}</p>
+//             </div>
+//         `;
+//         item.addEventListener("click", () => showContactDetails(contact.id));
+//         list.appendChild(item);
+//     });
+// }
 
 function showContactDetails(id) {
     const contact = contacts.find(c => c.id === id);
@@ -117,6 +117,7 @@ function closeOverlay() {
 }
 
 document.addEventListener("DOMContentLoaded", loadContacts);
+// 
 
 // function openAddContactDialog() {
 //     openAddContact();
@@ -146,4 +147,46 @@ function openAddContactDialog() {
     if (typeof openAddContact === "function") {
         openAddContact();
     }
+}
+
+async function addContact(event) {
+    event.preventDefault();
+    const contact = generateObjFromContact();
+
+
+
+    await saveContact(contact);
+    alert("Task erfolgreich erstellt!");
+
+
+    document.getElementById('add-contact-form').reset();
+
+}
+
+function generateObjFromContact() {
+    const name = document.getElementById("ac-name").value;
+    const email = document.getElementById("ac-email").value;
+    const phone = document.getElementById("ac-phone").value;
+
+       return {
+      name,
+      email,
+      phone
+    };
+
+}
+
+async function saveContact(contact) {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts.json`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contact),
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Fehler beim Speichern des Kontakts:", error);
+  }
 }
