@@ -36,7 +36,7 @@ function getDialogAddContact() {
                 <div class="ac__avatar" aria-label="Avatar placeholder">
                     <img src="./assets/img/person.png" alt="Person Icon">
                 </div>
-                <form id="add-contact-form" class="ac-form" novalidate>
+                <form onsubmit="addContact(event)" id="add-contact-form" class="ac-form" novalidate>
                     <div class="ac-field">
                         <input class="input-focus" id="ac-name" type="text" placeholder="Name" required>
                         <img src="./assets/icons/person.svg">
@@ -54,7 +54,7 @@ function getDialogAddContact() {
                             <span>Cancel</span>
                             <span class="btn__x">×</span>
                         </button>
-                        <button onclick="addContact()" type="submit" class="btn btn--primary" data-ac-submit aria-label="Create contact">
+                        <button type="submit" class="btn btn--primary" data-ac-submit aria-label="Create contact">
                             <span>Create contact</span>
                             <span class="btn__check" aria-hidden="true">
                                 <svg width="18" height="14" viewBox="0 0 18 14">
@@ -70,5 +70,17 @@ function getDialogAddContact() {
     </dialog>
 `
 
+}
+
+function generateObjFromContact() {
+    const name = document.getElementById("ac-name").value;
+    const email = document.getElementById("ac-email").value;
+    const phone = document.getElementById("ac-phone").value;
+
+    return {
+      name,
+      email,
+      phone
+    };
 }
 
