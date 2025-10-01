@@ -172,3 +172,7 @@ async function saveContact(contact) {
     console.error("Fehler beim Speichern des Kontakts:", error);
   }
 }
+
+function resetInputFieldsFromContactDialog() {
+    document.getElementById('add-contact-form').reset();
+}
