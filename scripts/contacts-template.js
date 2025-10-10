@@ -72,15 +72,3 @@ function getDialogAddContact() {
 
 }
 
-function generateObjFromContact() {
-    const name = document.getElementById("ac-name").value;
-    const email = document.getElementById("ac-email").value;
-    const phone = document.getElementById("ac-phone").value;
-
-    return {
-      name,
-      email,
-      phone
-    };
-}
-

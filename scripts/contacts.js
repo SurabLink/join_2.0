@@ -7,33 +7,33 @@
 
 
 function closeOverlay() {
-    document.getElementById("contact-overlay").classList.add("hidden");
+  document.getElementById("contact-overlay").classList.add("hidden");
 }
 
 function openAddContactDialog() {
-    let dialog = document.getElementById("add-contact-dialog");
+  let dialog = document.getElementById("add-contact-dialog");
 
-    if (!dialog) {
-        document.body.insertAdjacentHTML("beforeend", getDialogAddContact());
-        dialog = document.getElementById("add-contact-dialog");
+  if (!dialog) {
+    document.body.insertAdjacentHTML("beforeend", getDialogAddContact());
+    dialog = document.getElementById("add-contact-dialog");
 
-        const closeBtn = dialog.querySelector(".ac__close");
-        const cancelBtn = dialog.querySelector("[data-ac-cancel]");
-        [closeBtn, cancelBtn].forEach(btn =>
-            btn.addEventListener("click", () => dialog.close())
-        );
+    const closeBtn = dialog.querySelector(".ac__close");
+    const cancelBtn = dialog.querySelector("[data-ac-cancel]");
+    [closeBtn, cancelBtn].forEach(btn =>
+      btn.addEventListener("click", () => dialog.close())
+    );
 
-        dialog.addEventListener("cancel", e => {
-            e.preventDefault();
-            dialog.close();
-        });
-    }
+    dialog.addEventListener("cancel", e => {
+      e.preventDefault();
+      dialog.close();
+    });
+  }
 
-    dialog.showModal();
+  dialog.showModal();
 
-    if (typeof openAddContact === "function") {
-        openAddContact();
-    }
+  if (typeof openAddContact === "function") {
+    openAddContact();
+  }
 }
 
 async function addContact(event) {
@@ -88,5 +88,49 @@ async function loadContacts() {
 }
 
 function resetInputFieldsFromContactDialog() {
-    document.getElementById('add-contact-form').reset();
+  document.getElementById('add-contact-form').reset();
 }
+
+function generateObjFromContact() {
+  const name = document.getElementById('ac-name').value;
+  const email = document.getElementById('ac-email').value;
+  const phone = document.getElementById('ac-phone').value;
+
+  return {
+    name,
+    email,
+    phone
+  };
+}
+
+async function renderContactGroup() {
+  const contactListRef = document.getElementById('contact-list');
+  contactListRef.innerHTML = '';
+  const contactsData = await loadContactsForContactGroup();
+
+  console.log(contactsData);
+
+  for (let i = 0; i < contactsData.length; i++) {
+    contactsData.sort((a, b) => a.name.localeCompare(b.name));
+    let contactDataName = contactsData[i].name
+    let contactDataMail = contactsData[i].email
+
+    contactListRef.innerHTML += `<div>${contactDataName}</div>
+    <a href="mailto:${contactDataMail}">${contactDataMail}</a>
+    `
+
+  };
+ 
+}
+
+async function loadContactsForContactGroup() {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts.json`);
+    const data = await response.json();
+    return Object.values(data);
+  } catch (error) {
+    console.error("Fehler beim Laden der Kontakte:", error);
+    return [];
+  }
+
+};

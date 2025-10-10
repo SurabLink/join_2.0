@@ -22,7 +22,7 @@
   <title>Contacts</title>
 </head>
 
-<body>
+<body onload="renderContactGroup()">
   <nav class="sidebar">
     <img class="logo_sidebar" src="./assets/img/join_logo_white.svg" alt="Join Logo">
 
@@ -80,7 +80,8 @@
 
     <div class="wrapper">
 
-      <section class="contact-list">
+      <section class="contact-section">
+        <div class="contact-list" id="contact-list"></div>
         <button class="add-contact-btn" onclick="openAddContactDialog()">Add new contact <img src="./assets/icons/person_add.svg"
             alt="add Person"></button>
 
@@ -100,3 +101,4 @@
 </body>
 
 </html>
+
