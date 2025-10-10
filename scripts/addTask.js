@@ -1,17 +1,25 @@
-let contacts = [
-  { id: 1, name: "Alex Johnson", email: "alex@example.com", phone: "+49 123 456789", avatar: "assets/avatar1.jpg" },
-  { id: 2, name: "Maria Gomez", email: "maria@example.com", phone: "+49 987 654321", avatar: "assets/avatar3.jpg" },
-  { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
-];
+// let contacts = [
+//   { id: 1, name: "Alex Johnson", email: "alex@example.com", phone: "+49 123 456789", avatar: "assets/avatar1.jpg" },
+//   { id: 2, name: "Maria Gomez", email: "maria@example.com", phone: "+49 987 654321", avatar: "assets/avatar3.jpg" },
+//   { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
+// ];
+
+let contacts = [];
+let selectedContacts = [];
 
 let subtasks = [];
 
-function renderAddTask() {
+/** Task rendern */
+async function renderAddTask() {
   let content = document.getElementById('addTaskContent');
-
   content.innerHTML = '';
   content.innerHTML += generateAddTask();
+
+  // Kontakte laden und Dropdown aktualisieren
+  await loadContacts();
+  selectedContacts = []; // sicherstellen, dass keine Auswahl beim Laden existiert
   selectContacts();
+  renderSelectedAvatars(); // Avatare leer beim Laden
 }
 
 async function saveToArray(event) {
@@ -41,11 +49,55 @@ async function saveTask(task) {
   }
 }
 
+/** Dropdown mit Kontakten füllen */
 function selectContacts() {
-  let select = document.getElementById('selectContacts');
-
+  let select = document.getElementById('dropdownContacts');
   select.innerHTML = '';
   select.innerHTML += generateAssignedContacts(contacts);
+}
+
+/** Dropdown öffnen/schließen */
+function toggleDropdown(event) {
+  event.stopPropagation();
+  document.getElementById("dropdownContacts").classList.toggle("show");
+}
+
+// function generateAssignedContacts(contacts) {
+//   let content = "";
+//   for (let i = 0; i < contacts.length; i++) {
+//     content += /*html*/ `
+//       <label class="dropdown-item">
+//         <input 
+//           type="checkbox" 
+//           id="contact-${i}"       
+//           value="${contacts[i].name}" 
+//           ${selectedContacts.includes(contacts[i].name) ? 'checked="checked"' : ''}
+//           onchange="toggleContactSelection(this, '${contacts[i].name}')"
+//         >
+//         <label for="contact-${i}">${contacts[i].name}</label>
+//       </label>
+//     `;
+//   }
+// }
+
+/** Checkbox Umschalten */
+function toggleContactSelection(name, checkbox) {
+  if (checkbox.checked) {
+    if (!selectedContacts.includes(name)) selectedContacts.push(name);
+  } else {
+    selectedContacts = selectedContacts.filter(c => c !== name);
+  }
+  renderSelectedAvatars();
+}
+
+/** Avatare der ausgewählten Kontakte rendern */
+function renderSelectedAvatars() {
+  const container = document.getElementById("selectedAvatars");
+  container.innerHTML = "";
+  selectedContacts.forEach(name => {
+    const initials = name.split(" ").map(n => n[0]).join("");
+    container.innerHTML += `<div class="avatar">${initials}</div>`;
+  });
 }
 
 function showSubtasks() {

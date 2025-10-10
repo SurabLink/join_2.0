@@ -1,5 +1,5 @@
 function generateAddTask() {
-    return /*html*/ `
+  return /*html*/ `
      <h1>Add Task</h1>
 
         <form class="task-form" id="addTaskForm" onsubmit="saveToArray(event)">
@@ -70,9 +70,12 @@ function generateAddTask() {
             
             <label>
               Assigned to
-              <select id="selectContacts">
-                
-              </select>
+              <div id="selectContacts" class="custom-select">
+                <span onclick="toggleDropdown(event)">Select contacts to assign</span>
+                <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
+              </div>
+
+              <div id="selectedAvatars" class="avatar-container"></div>
             </label>
 
             <label>
@@ -109,7 +112,7 @@ function generateAddTask() {
 }
 
 function generateSubtasks(i) {
-    return /*html*/ `
+  return /*html*/ `
       <li class="subtask">
         <span>${subtasks[i]}</span>
         <div class="subtask-actions">
@@ -121,35 +124,43 @@ function generateSubtasks(i) {
     `;
 }
 
+/** Kontakte für Dropdown generieren */
 function generateAssignedContacts(contacts) {
-    let content = /*html*/ `
-      <option value="" disabled selected hidden>Select contacts to assign</option>
-    `;
+  let content = "";
   for (let i = 0; i < contacts.length; i++) {
+    const isChecked = selectedContacts.includes(contacts[i].name);
     content += /*html*/ `
-      <option>${contacts[i].name}</option>
+      <label class="dropdown-item">
+        <input 
+          type="checkbox" 
+          value="${contacts[i].name}" 
+          onchange="toggleContactSelection('${contacts[i].name}', this)"
+          ${isChecked ? "checked" : ""}
+        >
+        <span>${contacts[i].name}</span>
+      </label>
     `;
   }
   return content;
 }
 
 function generateTaskFromForm() {
-    const title = document.getElementById('title').value.trim();
-    const description = document.getElementById('description').value.trim();
-    const dueDate = document.getElementById('date').value.trim();
-    const priority = document.querySelector('input[name="priority"]:checked').value;
-    const category = document.getElementById('category').value;
-    const contact = document.getElementById('selectContacts').value;
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const dueDate = document.getElementById('date').value.trim();
+  const priority = document.querySelector('input[name="priority"]:checked').value;
+  const category = document.getElementById('category').value;
+  const contact = document.getElementById('selectContacts').value;
 
-    return {
-      id: Date.now(),
-      title,
-      description,
-      dueDate,
-      priority,
-      contact,
-      category,
-      subtasks,
-      status: "To Do", // Default
-    };
+  return {
+    id: Date.now(),
+    title,
+    description,
+    dueDate,
+    priority,
+    contact,
+    category,
+    subtasks,
+    status: "To Do", // Default
+  };
 }
