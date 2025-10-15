@@ -72,3 +72,21 @@ function getDialogAddContact() {
 
 }
 
+function getHeaderLetter(firstLetter) {
+    return `
+    <h3 class="contact-group-letter">${firstLetter}</h3>
+    <hr>
+    `
+}
+
+function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
+    return `
+    <div class="contact-item">
+        <div class="contact-name-wrapper">
+            <div class="contact-initials">${contactNameInitials}</div>
+            <div>${contactDataName}</div>
+        </div>
+        <a href="mailto:${contactDataMail}">${contactDataMail}</a>
+    </div>
+    `
+}

@@ -107,20 +107,22 @@ async function renderContactGroup() {
   const contactListRef = document.getElementById('contact-list');
   contactListRef.innerHTML = '';
   const contactsData = await loadContactsForContactGroup();
-
-  console.log(contactsData);
+  let currentLetter = '';
 
   for (let i = 0; i < contactsData.length; i++) {
     contactsData.sort((a, b) => a.name.localeCompare(b.name));
-    let contactDataName = contactsData[i].name
-    let contactDataMail = contactsData[i].email
+    const contactDataName = contactsData[i].name
+    const contactDataMail = contactsData[i].email
+    const firstLetter = contactsData[i].name.charAt(0).toUpperCase();
 
-    contactListRef.innerHTML += `<div>${contactDataName}</div>
-    <a href="mailto:${contactDataMail}">${contactDataMail}</a>
-    `
-
+    if (currentLetter !== firstLetter) {
+      currentLetter = firstLetter;
+      contactListRef.innerHTML += getHeaderLetter(firstLetter);
+    }
+    const contactNameInitials = contactDataName.split(" ").map(n => n[0]).join("");
+    contactListRef.innerHTML += getContactItem(contactDataName, contactDataMail, contactNameInitials);
   };
- 
+
 }
 
 async function loadContactsForContactGroup() {
