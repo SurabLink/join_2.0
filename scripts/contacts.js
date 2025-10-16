@@ -109,6 +109,10 @@ async function renderContactGroup() {
   const contactsData = await loadContactsForContactGroup();
   let currentLetter = '';
 
+  iterateContactEntries(contactListRef, contactsData, currentLetter);
+}
+
+function iterateContactEntries(contactListRef, contactsData, currentLetter) {
   for (let i = 0; i < contactsData.length; i++) {
     contactsData.sort((a, b) => a.name.localeCompare(b.name));
     const contactDataName = contactsData[i].name
