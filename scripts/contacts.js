@@ -110,6 +110,9 @@ async function renderContactGroup() {
   let currentLetter = '';
 
   iterateContactEntries(contactListRef, contactsData, currentLetter);
+
+  // Nach dem Rendern: Initialen einfärben
+  colorizeContactInitials();
 }
 
 function iterateContactEntries(contactListRef, contactsData, currentLetter) {
@@ -139,4 +142,26 @@ async function loadContactsForContactGroup() {
     return [];
   }
 
-};
+}
+
+function colorizeContactInitials() {
+  const initialsElements = document.querySelectorAll('.contact-initials');
+  initialsElements.forEach(el => {
+    el.classList.remove('bg-blue','bg-green','bg-purple','bg-orange','bg-pink','bg-red','bg-teal','bg-brown');
+    el.classList.add(getRandomInitialsColorClass());
+  });
+}
+
+function getRandomInitialsColorClass() {
+  const colorClasses = [
+    'bg-blue',
+    'bg-green',
+    'bg-purple',
+    'bg-orange',
+    'bg-pink',
+    'bg-red',
+    'bg-teal',
+    'bg-brown'
+  ];
+  return colorClasses[Math.floor(Math.random() * colorClasses.length)];
+}

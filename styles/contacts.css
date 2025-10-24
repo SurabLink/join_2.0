@@ -1,375 +1,185 @@
 .contact-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 24px;
     width: 456px;
+    margin-left: 40px;
+    margin-top: 24px;
 }
 
 .add-contact-btn {
     border: none;
-    width: 352px;
+    width: 100%;
+    max-width: 352px;
     color: white;
     background-color: #2A3647;
-    padding: 10px 20px;
+    padding: 12px 0;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
-/* Concats Dialog */
-
-/* ============ Variablen ============ */
-:root {
-    --ac-brand: #2A3647;
-    /* dunkles Blau (Hero + Primary Button) */
-    --ac-bg: #FFFFFF;
-    /* Karten-Hintergrund */
-    --ac-ink: #2A3647;
-    /* Primärtext (rechts) */
-    --ac-muted: #A8A8A8;
-    /* Platzhalter + Icon */
-    --ac-line: #D1D1D1;
-    /* Input-Rand */
-    --ac-accent: #29A9E0;
-    /* kleine blaue Unterline links */
-    --ac-shadow: 0 12px 36px rgba(0, 0, 0, .12);
-    --ac-radius: 24px;
-    /* Außenradius Overlay */
-    --ac-field-radius: 10px;
-    /* Input/Button Radius */
-    --ac-gap: 32px;
-    --ac-pad: 48px;
-    /* Innenabstände in Figma */
-    --ac-tr: 110ms ease;
-    /* 75–125ms Vorgabe */
+.add-contact-btn img {
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
 }
 
-/* ============ Dialog-Grundlage ============ */
-#ac-title {
-    letter-spacing: 0;
+.contact-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-/* nur um UA-Stile zu neutralisieren */
-
-#ac-title,
-.ac__subtitle,
-.ac__underline {
-    margin: 0;
+.contact-group-letter {
+    font-size: 18px;
+    font-weight: 400;
+    color: #2A3647;
+    margin: 0 0 8px 0;
+    padding-left: 24px;
+    letter-spacing: 2px;
 }
 
-#ac-title {
-    /* Headline links (Add contact) */
-    font: 800 48px/1.15 "Inter", system-ui, sans-serif;
+.dividing-line {
+    width: 100%;
+    height: 1.5px;
+    background: #D1D1D1;
+    margin-bottom: 8px;
+}
+
+.contact-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.contact-area:hover {
+    background: #F6F7F9;
+    border-radius: 8px;
+}
+
+.contact-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #FFA500; /* Default orange, will be overwritten by inline style if needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
     color: #fff;
+    margin-right: 0;
 }
 
-.ac__subtitle {
-    margin-top: 12px;
-    font: 400 18px/1.5 "Inter", system-ui, sans-serif;
+.avatar-placeholder {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
-.ac__underline {
-    display: inline-block;
-    width: 96px;
-    height: 4px;
-    background: var(--ac-accent);
-    border-radius: 2px;
-    margin-top: 16px;
-}
-
-/* Dialog als sauberes Overlay ohne UA-Styling */
-#ac-title,
-#ac-title+* {
-    box-sizing: border-box;
-}
-
-#ac-title:focus {
-    outline: none;
-}
-
-#ac-title .visually-hidden {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-}
-
-#ac-title::selection {
-    background: rgba(255, 255, 255, .2);
-}
-
-#add-contact-dialog.ac-dialog {
-    border: none;
-    padding: 0;
-    background: transparent;
-    inset: 0;
-    width: 1212px;
-    height: 592px;
-    margin: auto;
-}
-
-#add-contact-dialog.ac-dialog::backdrop {
-    background: rgba(0, 0, 0, .45);
-}
-
-/* Kartenkörper */
-.ac {
-    display: grid;
-    grid-template-columns: 420px 1fr;
-    /* gemäß Figma: linke Fläche ~420px */
-    background: var(--ac-bg);
-    border-radius: var(--ac-radius);
-    box-shadow: var(--ac-shadow);
-    overflow: hidden;
-    /* für linke Rundung */
-    position: relative;
-}
-
-/* linke Hero-Seite */
-.ac__hero {
-    background: var(--ac-brand);
-    padding: var(--ac-pad);
-    color: #fff;
+.contact-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 2px;
 }
 
-/* Logo links oben */
-.ac__logo {
-    width: 55.6px;
-    height: 66.5px;
-    display: block;
-    margin-bottom: 28px;
+.contact-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2A3647;
+    margin: 0;
 }
 
-.ac__title {
-    font-size: 61px;
+.contact-email {
+    font-size: 16px;
+    color: #007CEE;
+    text-decoration: none;
+    margin-top: 2px;
+    transition: text-decoration 0.2s;
 }
 
-/* Close-X oben rechts */
-.ac__close {
-    position: absolute;
-    top: 20px;
-    right: 24px;
+.contact-email:hover {
+    text-decoration: underline;
+}
+
+/* Kontaktgruppenabstand */
+.contact-card {
+    margin-bottom: 24px;
+}
+
+/* Responsive Anpassung */
+@media (max-width: 600px) {
+    .contact-section {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 8px;
+    }
+    .add-contact-btn {
+        max-width: 100%;
+    }
+    .contact-area {
+        padding: 12px 8px;
+    }
+    .contact-group-letter {
+        padding-left: 8px;
+    }
+}
+
+/* ...existing code... */
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 24px;
+}
+
+.contact-name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Abstand zwischen Initialen und Name */
+}
+
+.contact-initials {
     width: 32px;
     height: 32px;
-    border: unset;
-    outline: none;
-    background: transparent;
-    color: #0B1020;
-    font-size: 24px;
-    line-height: 32px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background var(--ac-tr), transform var(--ac-tr), color var(--ac-tr);
-}
-
-.ac__close:hover {
-    background: rgba(0, 0, 0, .06);
-    transform: scale(1.02);
-}
-
-.ac__close:active {
-    transform: scale(.98);
-}
-
-/* rechter Inhalt: Avatar + Formular */
-.ac__formwrap {
-    display: flex;
-    align-items: center;
-    column-gap: var(--ac-gap);
-    row-gap: 24px;
-    padding: var(--ac-pad);
-    color: var(--ac-ink);
-}
-
-/* Avatar 120×120 wie Figma mit feinem Ring */
-.ac__avatar {
-    width: 120px;
-    height: 120px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
-    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .03));
-}
-
-.ac__avatar img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-}
-
-/* Formularspalte (Breite 422px in Figma) */
-.ac-form {
-    width: 422px;
-    display: flex;
-    gap: 16px;
-    flex-direction: column;
-    align-items: center;
-    height: 400px;
-    justify-content: center
-}
-
-/* Input mit Icon rechts */
-.ac-field {
-    position: relative;
-    display: flex;
-
-}
-
-.ac-field input {
-    width: 350px;
-    height: 50px;
-    padding: 0 44px 0 16px;
-    /* Platz für Icon rechts */
-    border: 1px solid var(--ac-line);
-    border-radius: var(--ac-field-radius);
-    background: #fff;
-    color: #1A1A1A;
-    font: 500 16px/1 "Inter", system-ui, sans-serif;
-    outline: none;
-    transition: border-color var(--ac-tr), box-shadow var(--ac-tr), transform var(--ac-tr);
-}
-
-.ac-field img {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-
-}
-
-.ac-field input::placeholder {
-    color: var(--ac-muted);
-    font-weight: 500;
-}
-
-.ac-field input:hover {
-    border-color: #B9B9B9;
-}
-
-input.input-focus:focus {
-    outline: none;
-    border: 1.5px solid #29ABE2;
-    box-shadow: 0 0 1.5px #29ABE2;
-}
-
-
-/* Icon rechts mittig */
-.ac-field__icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    display: inline-grid;
-    place-items: center;
-    pointer-events: none;
-}
-
-/* Actions: Cancel + Primary */
-.ac__actions {
-    margin-top: 8px;
-    display: flex;
-    gap: 16px;
-}
-
-/* Buttons – keine UA-Border, klare Hover-Transitions */
-.btn {
-    appearance: none;
-    border: unset;
-    /* kein Standard-Border */
-    outline: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    min-height: 48px;
-    border-radius: var(--ac-field-radius);
-    font: 700 16px/1 "Inter", system-ui, sans-serif;
-    cursor: pointer;
-    transition: background var(--ac-tr), color var(--ac-tr), box-shadow var(--ac-tr), transform var(--ac-tr), border-color var(--ac-tr);
-}
-
-/* Ghost (Cancel) – weißer Hintergrund, feiner Rand */
-.btn--ghost {
-    background: #fff;
-    color: var(--ac-ink);
-    border: 1.5px solid #2A2A2A1A;
-    /* sehr dezenter Rand (Figma wirkt subtil) */
-    box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
-}
-
-.btn--ghost .btn__x {
-    font-size: 18px;
-    line-height: 1;
-}
-
-.btn--ghost:hover {
-    background: #F6F7F9;
-    transform: translateY(-1px);
-}
-
-.btn--ghost:active {
-    transform: translateY(0);
-}
-
-/* Primary (Create contact) – dunkles Blau, weißer Text, Check rechts */
-.btn--primary {
-    background: var(--ac-brand);
     color: #fff;
-    box-shadow: 0 8px 14px rgba(42, 54, 71, .18);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    /* Hintergrundfarbe wird per JS-Klasse gesetzt */
 }
 
-.btn--primary:hover {
-    background: #253145;
-    /* etwas heller auf Hover */
-    transform: translateY(-1px);
-    box-shadow: 0 10px 18px rgba(42, 54, 71, .22);
-}
+/* Beispielhafte Farben für Initialen-Kreise */
+.bg-blue    { background: #1E90FF; }
+.bg-green   { background: #27AE60; }
+.bg-purple  { background: #8E44AD; }
+.bg-orange  { background: #FFA500; }
+.bg-pink    { background: #E84393; }
+.bg-red     { background: #E74C3C; }
+.bg-teal    { background: #00BFAE; }
+.bg-brown   { background: #A0522D; }
 
-.btn--primary:active {
-    transform: translateY(0);
-    box-shadow: 0 6px 12px rgba(42, 54, 71, .18);
-}
-
-/* ======= Responsive ======= */
-@media (max-width: 880px) {
-    .ac {
-        grid-template-columns: 1fr;
-        border-radius: 16px;
-    }
-
-    .ac__hero {
-        border-radius: 16px 16px 0 0;
-        padding: 32px;
-    }
-
-    .ac__formwrap {
-        grid-template-columns: 1fr;
-        padding: 24px 20px 28px;
-        row-gap: 16px;
-    }
-
-    .ac__avatar {
-        margin: 0 auto 8px;
-    }
-
-    .ac__actions {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-}
-
-/* Kleine Feinschliffe */
-@media (min-width: 881px) {
-    .ac__actions {
-        margin-top: 10px;
-    }
+.contact-name-wrapper > div:last-child {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2A3647;
 }
