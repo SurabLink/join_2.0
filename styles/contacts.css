@@ -1,3 +1,8 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start; /* Vertikale Zentrierung entfernt */
+}
+
 .contact-section {
     display: flex;
     flex-direction: column;
@@ -38,6 +43,28 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    max-height: calc(100vh - 400px); /* Höhe abzüglich Header/Buttons */
+    overflow-y: auto;
+    padding-right: 8px; /* Platz für Scrollbalken */
+}
+
+/* Optionaler Webkit Scrollbar Style für Chrome/Safari/Edge */
+.contact-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contact-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.contact-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.contact-list::-webkit-scrollbar-thumb:hover {
+    background: #666;
 }
 
 .contact-group-letter {
@@ -62,19 +89,23 @@
     gap: 18px;
     padding: 12px 24px;
     cursor: pointer;
-    transition: background 0.2s;
 }
 
-.contact-area:hover {
-    background: #F6F7F9;
+.contact-area:hover,
+.contact-item:hover {
+    background: #a7a7a796;
     border-radius: 8px;
+    box-shadow: 0 4px 16px 0 rgba(44, 62, 80, 0.08);
+    cursor: pointer;
+
 }
 
 .contact-avatar {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: #FFA500; /* Default orange, will be overwritten by inline style if needed */
+    background: #FFA500;
+    /* Default orange, will be overwritten by inline style if needed */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,15 +135,23 @@
     margin: 0;
 }
 
-.contact-email {
-    font-size: 16px;
-    color: #007CEE;
+/* Stelle sicher, dass alle Kontakt-Links nur Textbreite haben */
+.contact-email,
+.contact-item a {
+    display: inline-block;
+    width: auto;
+    flex: 0 0 auto;
     text-decoration: none;
+    color: #007CEE;
     margin-top: 2px;
     transition: text-decoration 0.2s;
+    background: none;
+    box-sizing: border-box;
+    padding: 0;
 }
 
-.contact-email:hover {
+.contact-email:hover,
+.contact-item a:hover {
     text-decoration: underline;
 }
 
@@ -128,12 +167,15 @@
         margin-left: 0;
         padding: 0 8px;
     }
+
     .add-contact-btn {
         max-width: 100%;
     }
+
     .contact-area {
         padding: 12px 8px;
     }
+
     .contact-group-letter {
         padding-left: 8px;
     }
@@ -144,6 +186,7 @@
 .contact-item {
     display: flex;
     flex-direction: column;
+    align-items: flex-start; /* Wichtig: Ausrichtung links statt stretch */
     gap: 2px;
     padding: 12px 24px;
 }
@@ -151,7 +194,8 @@
 .contact-name-wrapper {
     display: flex;
     align-items: center;
-    gap: 12px; /* Abstand zwischen Initialen und Name */
+    gap: 12px;
+    /* Abstand zwischen Initialen und Name */
 }
 
 .contact-initials {
@@ -169,17 +213,94 @@
 }
 
 /* Beispielhafte Farben für Initialen-Kreise */
-.bg-blue    { background: #1E90FF; }
-.bg-green   { background: #27AE60; }
-.bg-purple  { background: #8E44AD; }
-.bg-orange  { background: #FFA500; }
-.bg-pink    { background: #E84393; }
-.bg-red     { background: #E74C3C; }
-.bg-teal    { background: #00BFAE; }
-.bg-brown   { background: #A0522D; }
+.bg-blue {
+    background: #1E90FF;
+}
 
-.contact-name-wrapper > div:last-child {
+.bg-green {
+    background: #27AE60;
+}
+
+.bg-purple {
+    background: #8E44AD;
+}
+
+.bg-orange {
+    background: #FFA500;
+}
+
+.bg-pink {
+    background: #E84393;
+}
+
+.bg-red {
+    background: #E74C3C;
+}
+
+.bg-teal {
+    background: #00BFAE;
+}
+
+.bg-brown {
+    background: #A0522D;
+}
+
+.contact-name-wrapper>div:last-child {
     font-size: 18px;
     font-weight: 500;
     color: #2A3647;
+}
+
+.contact-email {
+    width: fit-content; /* Erzwingt die Breite basierend auf dem Inhalt */
+    display: inline;    /* Verhindert block-Verhalten */
+    flex: 0 1 auto;    /* Verhindert flex-grow */
+}
+
+.title-msg {
+    font-size: 27px;
+    font-weight: 500;
+    color: #2A3647;
+}
+
+.contact-div-right {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.title-contacts {
+    font-size: 61px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.separator {
+    font-size: 64px;
+    font-weight: 400;
+    color: #29ABE2;
+    margin: 0 8px;
+}
+
+.subtitle {
+    font-size: 27px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.contact-section-right {
+    display: flex;
+    margin: 16px;
+    justify-content: left;
+}
+
+.contact-div {
+    display: flex; /* Flexbox für saubere Ausrichtung */
+    align-items: baseline; /* Elemente entlang der Textbasis ausrichten */
+    gap: 12px; /* Abstand zwischen Elementen */
+    margin: 0; /* Standardmargin entfernt */
+    padding-top: 16px; /* Abstand nach oben hinzugefügt */
 }
