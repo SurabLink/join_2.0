@@ -96,7 +96,7 @@ function renderBoard() {
               <span>${task.description.substring(0, 50)}...</span>
               <div class="subtask-card"> 
                 <div class="subtask-progress"></div>
-                <div>${0}/${task.subtasks}</div>
+                <div>${0}/${task.subtasks ? task.subtasks.length : 0}</div>
               </div>
               <div class="task-footer">
                 <div class="avatar-container" id="avatars-${task.id}"></div>
