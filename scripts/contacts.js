@@ -103,6 +103,26 @@ function generateObjFromContact() {
   };
 }
 
+// ab hier ki agent
+function handleContactClick(event) {
+  const clickedContact = event.currentTarget;
+  
+  // Remove selected class from all contacts
+  document.querySelectorAll('.contact-area, .contact-item').forEach(contact => {
+    contact.classList.remove('selected');
+  });
+  
+  // Add selected class to clicked contact
+  clickedContact.classList.add('selected');
+}
+
+function addContactClickListeners() {
+  document.querySelectorAll('.contact-area, .contact-item').forEach(contact => {
+    contact.addEventListener('click', handleContactClick);
+  });
+}
+// ende ki agent
+
 async function renderContactGroup() {
   const contactListRef = document.getElementById('contact-list');
   contactListRef.innerHTML = '';
@@ -113,6 +133,11 @@ async function renderContactGroup() {
 
   // Nach dem Rendern: Initialen einfärben
   colorizeContactInitials();
+  
+  // ab hier ki agent
+  // Add click listeners to all contacts after rendering
+  addContactClickListeners();
+  // ende ki agent
 }
 
 function iterateContactEntries(contactListRef, contactsData, currentLetter) {
