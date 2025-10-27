@@ -7,33 +7,33 @@
 
 
 function closeOverlay() {
-    document.getElementById("contact-overlay").classList.add("hidden");
+  document.getElementById("contact-overlay").classList.add("hidden");
 }
 
 function openAddContactDialog() {
-    let dialog = document.getElementById("add-contact-dialog");
+  let dialog = document.getElementById("add-contact-dialog");
 
-    if (!dialog) {
-        document.body.insertAdjacentHTML("beforeend", getDialogAddContact());
-        dialog = document.getElementById("add-contact-dialog");
+  if (!dialog) {
+    document.body.insertAdjacentHTML("beforeend", getDialogAddContact());
+    dialog = document.getElementById("add-contact-dialog");
 
-        const closeBtn = dialog.querySelector(".ac__close");
-        const cancelBtn = dialog.querySelector("[data-ac-cancel]");
-        [closeBtn, cancelBtn].forEach(btn =>
-            btn.addEventListener("click", () => dialog.close())
-        );
+    const closeBtn = dialog.querySelector(".ac__close");
+    const cancelBtn = dialog.querySelector("[data-ac-cancel]");
+    [closeBtn, cancelBtn].forEach(btn =>
+      btn.addEventListener("click", () => dialog.close())
+    );
 
-        dialog.addEventListener("cancel", e => {
-            e.preventDefault();
-            dialog.close();
-        });
-    }
+    dialog.addEventListener("cancel", e => {
+      e.preventDefault();
+      dialog.close();
+    });
+  }
 
-    dialog.showModal();
+  dialog.showModal();
 
-    if (typeof openAddContact === "function") {
-        openAddContact();
-    }
+  if (typeof openAddContact === "function") {
+    openAddContact();
+  }
 }
 
 async function addContact(event) {
@@ -88,5 +88,105 @@ async function loadContacts() {
 }
 
 function resetInputFieldsFromContactDialog() {
-    document.getElementById('add-contact-form').reset();
+  document.getElementById('add-contact-form').reset();
+}
+
+function generateObjFromContact() {
+  const name = document.getElementById('ac-name').value;
+  const email = document.getElementById('ac-email').value;
+  const phone = document.getElementById('ac-phone').value;
+
+  return {
+    name,
+    email,
+    phone
+  };
+}
+
+// ab hier ki agent
+function handleContactClick(event) {
+  const clickedContact = event.currentTarget;
+  
+  // Remove selected class from all contacts
+  document.querySelectorAll('.contact-area, .contact-item').forEach(contact => {
+    contact.classList.remove('selected');
+  });
+  
+  // Add selected class to clicked contact
+  clickedContact.classList.add('selected');
+}
+
+function addContactClickListeners() {
+  document.querySelectorAll('.contact-area, .contact-item').forEach(contact => {
+    contact.addEventListener('click', handleContactClick);
+  });
+}
+// ende ki agent
+
+async function renderContactGroup() {
+  const contactListRef = document.getElementById('contact-list');
+  contactListRef.innerHTML = '';
+  const contactsData = await loadContactsForContactGroup();
+  let currentLetter = '';
+
+  iterateContactEntries(contactListRef, contactsData, currentLetter);
+
+  // Nach dem Rendern: Initialen einfärben
+  colorizeContactInitials();
+  
+  // ab hier ki agent
+  // Add click listeners to all contacts after rendering
+  addContactClickListeners();
+  // ende ki agent
+}
+
+function iterateContactEntries(contactListRef, contactsData, currentLetter) {
+  for (let i = 0; i < contactsData.length; i++) {
+    contactsData.sort((a, b) => a.name.localeCompare(b.name));
+    const contactDataName = contactsData[i].name
+    const contactDataMail = contactsData[i].email
+    const firstLetter = contactsData[i].name.charAt(0).toUpperCase();
+
+    if (currentLetter !== firstLetter) {
+      currentLetter = firstLetter;
+      contactListRef.innerHTML += getHeaderLetter(firstLetter);
+    }
+    const contactNameInitials = contactDataName.split(" ").map(n => n[0]).join("");
+    contactListRef.innerHTML += getContactItem(contactDataName, contactDataMail, contactNameInitials);
+  };
+
+}
+
+async function loadContactsForContactGroup() {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts.json`);
+    const data = await response.json();
+    return Object.values(data);
+  } catch (error) {
+    console.error("Fehler beim Laden der Kontakte:", error);
+    return [];
+  }
+
+}
+
+function colorizeContactInitials() {
+  const initialsElements = document.querySelectorAll('.contact-initials');
+  initialsElements.forEach(el => {
+    el.classList.remove('bg-blue','bg-green','bg-purple','bg-orange','bg-pink','bg-red','bg-teal','bg-brown');
+    el.classList.add(getRandomInitialsColorClass());
+  });
+}
+
+function getRandomInitialsColorClass() {
+  const colorClasses = [
+    'bg-blue',
+    'bg-green',
+    'bg-purple',
+    'bg-orange',
+    'bg-pink',
+    'bg-red',
+    'bg-teal',
+    'bg-brown'
+  ];
+  return colorClasses[Math.floor(Math.random() * colorClasses.length)];
 }

@@ -11,9 +11,9 @@
 
   <script src="./scripts/summary.js" defer></script>
   <script src="./scripts/sidebar.js" defer></script>
-    <script src="./scripts/contacts.js" defer></script>
+  <script src="./scripts/contacts.js" defer></script>
   <script src="./scripts/contacts-template.js" defer></script>
-    <script src="./script.js" defer></script>
+  <script src="./script.js" defer></script>
 
 
 
@@ -22,7 +22,7 @@
   <title>Contacts</title>
 </head>
 
-<body>
+<body onload="renderContactGroup()">
   <nav class="sidebar">
     <img class="logo_sidebar" src="./assets/img/join_logo_white.svg" alt="Join Logo">
 
@@ -80,18 +80,31 @@
 
     <div class="wrapper">
 
-      <section class="contact-list">
-        <button class="add-contact-btn" onclick="openAddContactDialog()">Add new contact <img src="./assets/icons/person_add.svg"
-            alt="add Person"></button>
+
+      <section class="contact-section-left">
+        <div class="contact-section">
+          <button class="add-contact-btn" onclick="openAddContactDialog()">
+            Add new contact
+            <img src="./assets/icons/person_add.svg" alt="add Person">
+          </button>
+
+          <div class="contact-list" id="contact-list"></div>
+
+        </div>
+
 
       </section>
 
-      <section>
-        <div class="welcome-msg-box" id="welcome-msg-box">
-          <span class="welcome-msg" id="welcome-msg">Welcome, </span>
-          <span class="username-field" id="username-field">User</span>
+      <section class="contact-section-right">
+        <div class="contact-div-right">
+          <div class="contact-maintitle-container">
+            <h1 class="title-contacts">Contacts</h1>
+            <span class="separator">|</span>
+            <span class="subtitle">Better with a team</span>
+          </div>
         </div>
       </section>
+
 
     </div>
 
