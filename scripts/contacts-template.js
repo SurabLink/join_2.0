@@ -81,12 +81,32 @@ function getHeaderLetter(firstLetter) {
 
 function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
     return `
-    <div class="contact-item">
-        <div class="contact-name-wrapper">
-            <div class="contact-initials">${contactNameInitials}</div>
-            <div>${contactDataName}</div>
-        </div>
-        <a href="mailto:${contactDataMail}">${contactDataMail}</a>
+    <div class="contact-name-wrapper">
+        <div class="contact-initials">${contactNameInitials}</div>
+        <div>${contactDataName}</div>
     </div>
+    <a href="mailto:${contactDataMail}">${contactDataMail}</a>
     `
 }
+
+// ki start: Neue Template-Funktion für Kontakt-Details
+function getContactDetailsTemplate(initials, name, email, phone) {
+    return `
+        <div class="contact-details-container">
+            <div class="contact-header">
+                <div class="contact-initials-large" style="background-color: inherit;">${initials}</div>
+                <h2 class="contact-name-large">${name}</h2>
+            </div>
+            <div class="contact-actions">
+                <button class="contact-action-btn">Edit</button>
+                <button class="contact-action-btn">Delete</button>
+            </div>
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                <p><strong>Phone:</strong> ${phone}</p>
+            </div>
+        </div>
+    `;
+}
+// ki ende

@@ -1,6 +1,7 @@
 main {
     gap: 0px;
     height: 100vh;
+    background-color: white
 }
 
 .wrapper {
@@ -303,6 +304,7 @@ main {
 .contact-maintitle-container {
     display: flex;
     align-items: center;
+    height: 100px;
 }
 .title-contacts {
     font-size: 61px;
@@ -348,4 +350,12 @@ main {
     /* Standardmargin entfernt */
     padding-top: 16px;
     /* Abstand nach oben hinzugefügt */
+}
+
+.contact-section-left {
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+hr {
+    color: #d1d1d1d2;
 }
