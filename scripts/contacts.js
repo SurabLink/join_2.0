@@ -121,20 +121,13 @@ async function handleContactClick(event) {
   }
 
   // Render contact details
-  const contactDetailsContainer = document.querySelector('.contact-section-right');
+  const contactDetailsContainer = document.getElementById('contact-details');
   const initials = contactData.name.split(" ").map(n => n[0]).join("");
   const name = contactData.name;
   const email = contactData.email;
   const phone = contactData.phone || 'N/A'; // Fallback für Telefonnummer
 
-  contactDetailsContainer.innerHTML = `
-        <div class="contact-maintitle-container">
-            <h1 class="title-contacts">Contacts</h1>
-            <span class="separator">|</span>
-            <span class="subtitle">Better with a team</span>
-        </div>
-        ${getContactDetailsTemplate(initials, name, email, phone)}
-    `;
+  contactDetailsContainer.innerHTML = getContactDetailsTemplate(initials, name, email, phone);
 }
 
 async function fetchContactDetails(contactId) {
