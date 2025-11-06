@@ -15,7 +15,7 @@ main {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-    width: 456px;
+    /* width: 456px; */
     margin-left: 40px;
     margin-top: 24px;
 }
@@ -52,7 +52,6 @@ main {
     gap: 0;
     max-height: calc(100vh - 400px);
     /* Höhe abzüglich Header/Buttons */
-    overflow-y: auto;
     padding-right: 8px;
     /* Platz für Scrollbalken */
 }
@@ -312,6 +311,7 @@ main {
     align-items: center;
     height: 100px;
 }
+
 .title-contacts {
     font-size: 61px;
     font-weight: 700;
@@ -334,6 +334,11 @@ main {
 
 .contact-section-left {
     height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; /* Verhindert horizontales Überlaufen */
+    width: 456px;
+    min-width: 456px; /* Verhindert Schrumpfen */
+    max-width: 456px; /* Verhindert Wachsen */
 }
 
 .contact-section-right {
@@ -348,19 +353,14 @@ main {
 
 .contact-div {
     display: flex;
-    /* Flexbox für saubere Ausrichtung */
     align-items: baseline;
-    /* Elemente entlang der Textbasis ausrichten */
     gap: 12px;
-    /* Abstand zwischen Elementen */
     margin: 0;
-    /* Standardmargin entfernt */
     padding-top: 16px;
-    /* Abstand nach oben hinzugefügt */
 }
 
 .contact-section-left {
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
 }
 
 hr {
@@ -372,7 +372,6 @@ hr {
     height: 120px;
     border-radius: 50%;
     background: #FFA500;
-    /* Standardfarbe, kann per JS überschrieben werden */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -380,7 +379,6 @@ hr {
     font-size: 47px;
     color: #fff;
     margin-right: 16px;
-    /* Optional: weitere Styles nach Bedarf */
 }
 
 .contact-header-large {
@@ -399,12 +397,12 @@ hr {
 }
 
 .edit-svg-path {
-  fill: #2A3647;
-  transition: fill 0.15s ease;
+    fill: #2A3647;
+    transition: fill 0.15s ease;
 }
 
 .edit-svg-path:hover {
-  fill: #29ABE2;
+    fill: #29ABE2;
 }
 
 /* === Contact Actions (Details View) === */
@@ -466,6 +464,7 @@ hr {
 .contact-action-btn:hover .delete-svg-path {
     fill: #29ABE2;
 }
+
 .contact-action-btn:hover .delete-label,
 .contact-action-btn:focus .delete-label {
     color: #29ABE2;
@@ -477,7 +476,7 @@ hr {
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     margin-top: 16px;
 }
 
@@ -491,4 +490,23 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.contact-information-h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 32px;
+}
+
+.contact-info-phone {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.contact-info-email {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
 }

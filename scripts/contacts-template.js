@@ -128,10 +128,13 @@ function getContactDetailsTemplate(initials, name, email, phone) {
         </div>
 
             <div class="contact-info">
-                <h3>Contact Information</h3>
+                <h3 class="contact-information-h3">Contact Information</h3>
                 <div class="contact-info-details">
-                    <p><strong>Email</strong><br><a href="mailto:${email}">${email}</a></p>
-                    <div class="contact-phone">
+                    <div class="contact-info-email">
+                        <p><strong>Email</strong></p>
+                        <a class="contact-email" href="mailto:${email}">${email}</a>
+                    </div>
+                    <div class="contact-info-phone">
                         <p><strong>Phone</strong></p>
                         <p>${phone}</p>
                     </div>
