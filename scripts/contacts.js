@@ -18,15 +18,22 @@ function openAddContactDialog() {
     dialog = document.getElementById("add-contact-dialog");
 
     const closeBtn = dialog.querySelector(".ac__close");
-    const cancelBtn = dialog.querySelector("[data-ac-cancel]");
-    [closeBtn, cancelBtn].forEach(btn =>
-      btn.addEventListener("click", () => dialog.close())
-    );
+    closeBtn.addEventListener("click", () => dialog.close());
 
-    dialog.addEventListener("cancel", e => {
-      e.preventDefault();
-      dialog.close();
+    // Dialog schließen bei Klick außerhalb des Inhalts
+    dialog.addEventListener("click", function (e) {
+      if (e.target === dialog) {
+        dialog.close();
+      }
     });
+
+    // Verhindere Event-Bubbling im Dialog-Inhalt
+    const dialogContent = dialog.querySelector(".ac-dialog-content");
+    if (dialogContent) {
+      dialogContent.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
   }
 
   dialog.showModal();
@@ -39,6 +46,12 @@ function openAddContactDialog() {
 async function addContact(event) {
   event.preventDefault();
   const contact = generateObjFromContact();
+
+  // Validierung: Alle Felder müssen ausgefüllt sein
+  if (!contact.name || !contact.email || !contact.phone) {
+    alert("Bitte alle Felder ausfüllen!");
+    return;
+  }
 
   await saveContact(contact);
   alert("Task erfolgreich erstellt!");
@@ -79,9 +92,10 @@ async function loadContacts() {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
 }
-
 function resetInputFieldsFromContactDialog() {
   document.getElementById('add-contact-form').reset();
+  const dialog = document.getElementById("add-contact-dialog");
+  dialog.close();
 }
 
 function generateObjFromContact() {

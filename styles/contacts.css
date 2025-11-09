@@ -535,6 +535,10 @@ hr {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
+    display: none;
+}
+
+.ac-dialog[open] {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -605,6 +609,12 @@ hr {
     cursor: pointer;
     z-index: 2;
     transition: background 0.2s;
+    width: 32px;         /* Feste Größe für runden Hintergrund */
+    height: 32px;
+    display: flex;       /* Zentriert das Icon */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;  /* Immer rund, auch ohne Hover */
 }
 
 .ac__close:hover {
@@ -717,6 +727,11 @@ hr {
 .btn--primary {
     background: #2A3647;
     color: #fff;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .btn--primary:hover {
