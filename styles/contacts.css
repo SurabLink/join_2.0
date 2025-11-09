@@ -244,7 +244,8 @@ main {
     justify-content: center;
     margin-right: 0;
     /* Hintergrundfarbe wird per JS-Klasse gesetzt */
-    border: 1px solid #fff; /* weißer Rand hinzugefügt */
+    border: 1px solid #fff;
+    /* weißer Rand hinzugefügt */
 }
 
 /* Beispielhafte Farben für Initialen-Kreise */
@@ -337,10 +338,13 @@ main {
 .contact-section-left {
     height: 100%;
     overflow-y: auto;
-    overflow-x: hidden; /* Verhindert horizontales Überlaufen */
+    overflow-x: hidden;
+    /* Verhindert horizontales Überlaufen */
     width: 456px;
-    min-width: 456px; /* Verhindert Schrumpfen */
-    max-width: 456px; /* Verhindert Wachsen */
+    min-width: 456px;
+    /* Verhindert Schrumpfen */
+    max-width: 456px;
+    /* Verhindert Wachsen */
 }
 
 .contact-section-right {
@@ -382,7 +386,8 @@ hr {
     font-size: 47px;
     color: #fff;
     margin-right: 16px;
-    border: 3px solid #fff; /* weißer Rand hinzugefügt */
+    border: 3px solid #fff;
+    /* weißer Rand hinzugefügt */
 }
 
 .contact-header-large {
@@ -516,7 +521,8 @@ hr {
 }
 
 /* === Add Contact Dialog Styles === */
-#ac-contact-dialog, .ac-dialog {
+#ac-contact-dialog,
+.ac-dialog {
     border: none;
     border-radius: 24px;
     padding: 0;
@@ -524,10 +530,14 @@ hr {
     max-width: 98vw;
     background: transparent;
     box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .ac {
@@ -559,6 +569,7 @@ hr {
 .ac__logo {
     width: 48px;
     height: auto;
+    margin-top: 50px;
 }
 
 .ac__title {
@@ -605,28 +616,27 @@ hr {
     flex: 1;
     background: #fff;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 32px;
     padding: 56px 40px 40px 40px;
     position: relative;
 }
 
 .ac__avatar {
-    width: 96px;
-    height: 96px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    background: #F5F5F5;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 32px;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.08);
 }
 
 .ac__avatar img {
-    width: 56px;
-    height: 56px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
     opacity: 0.7;
 }
@@ -693,11 +703,15 @@ hr {
 .btn--ghost {
     background: #fff;
     color: #2A3647;
-    border: 1px solid #2A3647;
+    border: 1.5px solid #2A3647;
+    transition: border-color 0.2s, color 0.2s;
 }
 
 .btn--ghost:hover {
-    background: #F5F5F5;
+    background: #fff;
+    color: #29ABE2;
+    border: 1.5px solid #29ABE2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btn--primary {
@@ -708,6 +722,8 @@ hr {
 .btn--primary:hover {
     background: #29ABE2;
     color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
 }
 
 .btn__x {
@@ -728,10 +744,13 @@ hr {
         width: 98vw;
         min-width: 0;
     }
-    .ac__hero, .ac__formwrap {
+
+    .ac__hero,
+    .ac__formwrap {
         width: 100%;
         padding: 32px 16px;
     }
+
     .ac-form {
         max-width: 100%;
     }
