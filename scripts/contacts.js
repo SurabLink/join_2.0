@@ -216,6 +216,12 @@ async function loadContactsForContactGroup() {
 
 }
 
+function refreshContactDetails() {
+  const contactDetailsContainerRef = document.getElementById('contact-details');
+  contactDetailsContainerRef.innerHTML = '';
+
+}
+
 function colorizeContactInitials() {
   const initialsElements = document.querySelectorAll('.contact-initials');
   initialsElements.forEach(el => {
@@ -252,4 +258,5 @@ async function deleteContact(contactId) {
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }
+    refreshContactDetails();
 }
