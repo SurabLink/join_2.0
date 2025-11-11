@@ -2,7 +2,7 @@
 //     { id: 1, name: "Alex Johnson", email: "alex@example.com", phone: "+49 123 456789", avatar: "assets/avatar1.jpg" },
 //     { id: 2, name: "Maria Gomez", email: "maria@example.com", phone: "+49 987 654321", avatar: "assets/avatar3.jpg" },
 //     { id: 3, name: "Chris Müller", email: "chris@example.com", phone: "+49 555 123456", avatar: "assets/avatar4.jpg" }
-// ];
+// };
 
 
 
@@ -140,8 +140,9 @@ async function handleContactClick(event) {
   const name = contactData.name;
   const email = contactData.email;
   const phone = contactData.phone || 'N/A'; // Fallback für Telefonnummer
+  const id = contactId; // Die ID kommt aus dem Dataset
 
-  contactDetailsContainer.innerHTML = getContactDetailsTemplate(initials, name, email, phone);
+  contactDetailsContainer.innerHTML = getContactDetailsTemplate(initials, name, email, phone, id);
 }
 
 async function fetchContactDetails(contactId) {
@@ -235,4 +236,20 @@ function getRandomInitialsColorClass() {
     'bg-brown'
   ];
   return colorClasses[Math.floor(Math.random() * colorClasses.length)];
+}
+
+// delete contact
+async function deleteContact(contactId) {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+      method: "DELETE"
+    });
+    if (response.ok) {
+      await renderContactGroup();
+    } else {
+      console.error("Fehler beim Löschen des Kontakts.");
+    }
+  } catch (error) {
+    console.error("Fehler beim Löschen des Kontakts:", error);
+  }
 }

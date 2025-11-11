@@ -417,7 +417,7 @@ hr {
 /* === Contact Actions (Details View) === */
 .contact-actions {
     display: flex;
-    gap: 16px;
+    gap: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     color: #000;
