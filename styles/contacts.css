@@ -454,17 +454,11 @@ hr {
     vertical-align: middle;
 }
 
-.contact-action-btn:focus {
-    outline: 1px dashed #29ABE2;
-    outline-offset: 2px;
-}
-
 .contact-action-btn:hover .edit-svg-path {
     fill: #29ABE2;
 }
 
-.contact-action-btn:hover .edit-label,
-.contact-action-btn:focus .edit-label {
+.contact-action-btn:hover .edit-label {
     color: #29ABE2;
     font-weight: 700;
 }
@@ -474,8 +468,7 @@ hr {
     fill: #29ABE2;
 }
 
-.contact-action-btn:hover .delete-label,
-.contact-action-btn:focus .delete-label {
+.contact-action-btn:hover .delete-label {
     color: #29ABE2;
     font-weight: 700;
 }
