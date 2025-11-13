@@ -89,7 +89,6 @@ function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
     `
 }
 
-// ki start: Neue Template-Funktion für Kontakt-Details
 function getContactDetailsTemplate(initials, name, email, phone, id) {
     return `
         <div class="contact-details-container">
@@ -103,7 +102,7 @@ function getContactDetailsTemplate(initials, name, email, phone, id) {
                 <h2 class="contact-name-large">${name}</h2>
 
                 <div class="contact-actions">
-                    <button class="contact-action-btn">
+                    <button class="contact-action-btn" onclick="openEditContactDialog('${id}', '${name}', '${email}', '${phone}')">
                         <svg width="24" height="24" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_357207_6165" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="32">
                                 <rect x="0.5" width="32" height="32" fill="#D9D9D9" />
@@ -141,6 +140,58 @@ function getContactDetailsTemplate(initials, name, email, phone, id) {
                 </div>
             </div>
         </div>
+        <div id="edit-contact-dialog-container"></div>
     `;
 }
-// ki ende
+
+// Extra: Dialog-Template für Edit
+function getEditContactDialog(id, name, email, phone) {
+    return `
+    <dialog id="edit-contact-dialog" class="ac-dialog">
+        <div class="ac ac-dialog-content">
+            <div class="ac__hero">
+                <div class="ac__brand">
+                    <img class="ac__logo" src="./assets/img/join_logo_white.svg" alt="Join Logo">
+                </div>
+                <h2 class="ac__title">Edit contact</h2>
+                <span class="ac__underline" aria-hidden="true"></span>
+            </div>
+            <button type="button" class="ac__close" aria-label="Close" onclick="closeEditContactDialog()">×</button>
+            <div class="ac__formwrap">
+                <div class="ac__avatar" aria-label="Avatar placeholder">
+                    <img src="./assets/img/person.png" alt="Person Icon">
+                </div>
+                <form onsubmit="updateContact(event, '${id}')" id="edit-contact-form" class="ac-form" novalidate>
+                    <div class="ac-field">
+                        <input class="input-focus" id="edit-name" type="text" placeholder="Name" value="${name}" required>
+                        <img src="./assets/icons/person.svg">
+                    </div>
+                    <div class="ac-field">
+                        <input class="input-focus" id="edit-email" type="email" placeholder="Email" value="${email}" required>
+                        <img src="./assets/icons/mail.svg">
+                    </div>
+                    <div class="ac-field">
+                        <input class="input-focus" id="edit-phone" name="phone" type="tel" placeholder="Phone" value="${phone || ''}">
+                        <img src="./assets/img/call.png">
+                    </div>
+                    <div class="ac__actions">
+                        <button type="button" class="btn btn--ghost" onclick="closeEditContactDialog()" aria-label="Cancel">
+                            <span>Cancel</span>
+                            <span class="btn__x">×</span>
+                        </button>
+                        <button type="submit" class="btn btn--primary" aria-label="Save contact">
+                            <span>Save</span>
+                            <span class="btn__check" aria-hidden="true">
+                                <svg width="18" height="14" viewBox="0 0 18 14">
+                                    <path d="M1 7l5 5L17 1" stroke="#fff" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    `;
+}

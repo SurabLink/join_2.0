@@ -39,6 +39,10 @@ main {
     margin-bottom: 16px;
 }
 
+.add-contact-btn:hover {
+    background-color: #29ABE2;
+}
+
 .add-contact-btn img {
     width: 32px;
     height: 32px;
@@ -102,7 +106,7 @@ main {
 
 .contact-area:hover,
 .contact-item:hover {
-    background: #a7a7a796;
+    background: rgba(224, 224, 224, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 16px 0 rgba(44, 62, 80, 0.08);
     cursor: pointer;
@@ -602,12 +606,15 @@ hr {
     cursor: pointer;
     z-index: 2;
     transition: background 0.2s;
-    width: 32px;         /* Feste Größe für runden Hintergrund */
+    width: 32px;
+    /* Feste Größe für runden Hintergrund */
     height: 32px;
-    display: flex;       /* Zentriert das Icon */
+    display: flex;
+    /* Zentriert das Icon */
     align-items: center;
     justify-content: center;
-    border-radius: 50%;  /* Immer rund, auch ohne Hover */
+    border-radius: 50%;
+    /* Immer rund, auch ohne Hover */
 }
 
 .ac__close:hover {
@@ -664,6 +671,10 @@ hr {
     padding-right: 16px;
 }
 
+.ac-field:focus-within {
+    border-color: #29ABE2;
+}
+
 .ac-field input.input-focus {
     flex: 1;
     border: none;
@@ -674,6 +685,8 @@ hr {
     height: 48px;
     border-radius: 8px;
     color: #2A3647;
+    border-color: #29ABE2;
+
 }
 
 .ac-field img {

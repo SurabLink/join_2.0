@@ -258,5 +258,78 @@ async function deleteContact(contactId) {
   } catch (error) {
     console.error("Fehler beim Löschen des Kontakts:", error);
   }
-    refreshContactDetails();
+  refreshContactDetails();
+}
+
+// update contact
+async function updateContact(event, contactId) {
+  event.preventDefault();
+  const name = document.getElementById('edit-name').value;
+  const email = document.getElementById('edit-email').value;
+  const phone = document.getElementById('edit-phone').value;
+
+  const updatedContact = { name, email, phone };
+
+  try {
+    const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedContact),
+    });
+    if (response.ok) {
+      await renderContactGroup();
+      closeEditContactDialog();
+      refreshContactDetails();
+    } else {
+      console.error("Fehler beim Aktualisieren des Kontakts.");
+    }
+  } catch (error) {
+    console.error("Fehler beim Aktualisieren des Kontakts:", error);
+  }
+}
+
+
+// Öffnet den Edit-Dialog mit vorausgefüllten Daten
+function openEditContactDialog(id, name, email, phone) {
+  const container = document.getElementById('edit-contact-dialog-container');
+  if (!container) return;
+
+  container.innerHTML = getEditContactDialog(id, name, email, phone);
+  const dialog = document.getElementById('edit-contact-dialog');
+  if (!dialog) return;
+
+  // Dialog schließen bei Klick außerhalb des Inhalts (Backdrop) und aus dem DOM entfernen
+  dialog.addEventListener('click', function (e) {
+    if (e.target === dialog) {
+      dialog.close();
+      dialog.remove();
+    }
+  });
+
+  // Event-Bubbling im Content verhindern
+  const dialogContent = dialog.querySelector('.ac-dialog-content');
+  if (dialogContent) {
+    dialogContent.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  }
+
+
+  // Zeige Dialog modal an
+  if (typeof dialog.showModal === 'function') {
+    dialog.showModal();
+  } else {
+    dialog.setAttribute('open', '');
+  }
+}
+
+// Schließt den Edit-Dialog
+function closeEditContactDialog() {
+  const dialog = document.getElementById('edit-contact-dialog');
+  if (dialog) {
+    dialog.close();
+    dialog.remove();
+  }
 }
