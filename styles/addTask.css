@@ -209,6 +209,11 @@ textarea {
   padding: 6px;
 }
 
+.dropdown-item input,
+.dropdown-item span {
+  pointer-events: auto;
+}
+
 .avatar-container {
   margin-top: 10px;
   display: flex;

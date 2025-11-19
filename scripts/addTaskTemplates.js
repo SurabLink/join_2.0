@@ -68,7 +68,7 @@ function generateAddTask() {
               </div>
             </div>
             
-            <label>
+            <div class="assigned-to-label">
               Assigned to
               <div id="selectContacts" class="custom-select">
                 <span onclick="toggleDropdown(event)">Select contacts to assign</span>
@@ -76,7 +76,7 @@ function generateAddTask() {
               </div>
 
               <div id="selectedAvatars" class="avatar-container"></div>
-            </label>
+            </div>
 
             <label>
               <span>
@@ -125,20 +125,45 @@ function generateSubtasks(i) {
 }
 
 /** Kontakte für Dropdown generieren */
+// function generateAssignedContacts(contacts) {
+//   let content = "";
+//   for (let i = 0; i < contacts.length; i++) {
+//     const isChecked = selectedContacts.includes(contacts[i].name);
+//     content += /*html*/ `
+//       <div class="dropdown-item">
+//         <input 
+//           type="checkbox" 
+//           value="${contacts[i].name}" 
+//           onchange="toggleContactSelection('${contacts[i].name}', this)"
+//           ${isChecked ? "checked" : ""}
+//         >
+//         <span>${contacts[i].name}</span>
+//       </div>
+//     `;
+//   }
+//   return content;
+// }
+
 function generateAssignedContacts(contacts) {
   let content = "";
   for (let i = 0; i < contacts.length; i++) {
-    const isChecked = selectedContacts.includes(contacts[i].name);
+    const contact = contacts[i];
+    const isChecked = selectedContacts.includes(contact.name);
+
+    // eindeutige ID für jede Checkbox
+    const checkboxId = `contact_${i}`;
+
     content += /*html*/ `
-      <label class="dropdown-item">
+      <div class="dropdown-item">
         <input 
           type="checkbox" 
-          value="${contacts[i].name}" 
-          onchange="toggleContactSelection('${contacts[i].name}', this)"
+          id="${checkboxId}"
+          value="${contact.name}" 
+          onchange="toggleContactSelection('${contact.name}', this)"
           ${isChecked ? "checked" : ""}
         >
-        <span>${contacts[i].name}</span>
-      </label>
+        <label for="${checkboxId}">${contact.name}</label>
+      </div>
     `;
   }
   return content;
