@@ -776,3 +776,19 @@ hr {
         max-width: 100%;
     }
 }
+
+/* Contact Details Animation */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.contact-details-container {
+    animation: slideInFromRight 0.3s ease-out;
+}
