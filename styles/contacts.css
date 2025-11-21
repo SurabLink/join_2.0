@@ -14,9 +14,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
-    /* width: 456px; */
-    margin-left: 40px;
+    width: 456px;
+    margin-left: 16px;
     margin-top: 24px;
 }
 
@@ -37,6 +36,7 @@ main {
     justify-content: center;
     gap: 12px;
     margin-bottom: 16px;
+    margin-left: 24px;
 }
 
 .add-contact-btn:hover {
@@ -54,10 +54,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0;
-    max-height: calc(100vh - 400px);
-    /* Höhe abzüglich Header/Buttons */
+    max-height: calc(100vh - 275px);
     padding-right: 8px;
-    /* Platz für Scrollbalken */
 }
 
 /* Optionaler Webkit Scrollbar Style für Chrome/Safari/Edge */
@@ -341,14 +339,19 @@ main {
 
 .contact-section-left {
     height: 100%;
+    /* width: 456px; */
+    /* min-width: 456px; */
+    /* max-width: 456px; */
+}
+
+.scroll {
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     /* Verhindert horizontales Überlaufen */
-    width: 456px;
-    min-width: 456px;
-    /* Verhindert Schrumpfen */
-    max-width: 456px;
-    /* Verhindert Wachsen */
+    width: 432px !important;
+    /* min-width: 456px; */
+    /* max-width: 456px; */
 }
 
 .contact-section-right {
@@ -783,6 +786,7 @@ hr {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
