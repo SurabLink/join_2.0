@@ -155,6 +155,7 @@ function generateAssignedContacts(contacts) {
 
     content += /*html*/ `
       <div class="dropdown-item">
+        <label for="${checkboxId}">${contact.name}</label>
         <input 
           type="checkbox" 
           id="${checkboxId}"
@@ -162,7 +163,6 @@ function generateAssignedContacts(contacts) {
           onchange="toggleContactSelection('${contact.name}', this)"
           ${isChecked ? "checked" : ""}
         >
-        <label for="${checkboxId}">${contact.name}</label>
       </div>
     `;
   }

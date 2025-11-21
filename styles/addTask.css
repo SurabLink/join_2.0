@@ -205,8 +205,13 @@ textarea {
 
 .dropdown-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 6px;
+}
+
+.dropdown-item input {
+  justify-self: flex-end;
 }
 
 .dropdown-item input,
