@@ -101,8 +101,8 @@ function generateAddTask() {
             </label>
 
             <div class="actions">
-              <button type="reset" class="clear">Clear ✕</button>
-              <button type="submit" class="create">Create Task ▾</button>
+              <button type="reset" class="clear" onclick="clearForm()">Clear ✕</button>
+              <button type="submit" class="create" onclick="clearForm()">Create Task ▾</button>
             </div>
           </div>
         </form>
@@ -149,13 +149,16 @@ function generateAssignedContacts(contacts) {
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
     const isChecked = selectedContacts.includes(contact.name);
-
     // eindeutige ID für jede Checkbox
     const checkboxId = `contact_${i}`;
+    // Initialen erzeugen (z. B. "Max Mustermann" → "MM")
+    const initials = contact.name.split(" ").map(part => part.charAt(0)).join("").toUpperCase();
+
 
     content += /*html*/ `
       <div class="dropdown-item">
-        <label for="${checkboxId}">${contact.name}</label>
+        <div class="dropdown-avatar">${initials}</div>
+        <label for="${checkboxId}" class="dropdown-name">${contact.name}</label>
         <input 
           type="checkbox" 
           id="${checkboxId}"
