@@ -7,9 +7,6 @@ body {
     height: 100%;
     margin: 0;
     background-color: #F6F7F8;
-}
-
-body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
