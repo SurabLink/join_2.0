@@ -209,6 +209,11 @@ textarea {
   align-items: center;
   gap: 12px;
   padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
 }
 
 .dropdown-item input {
@@ -353,6 +358,10 @@ textarea {
 .create {
   background: var(--sidebar-bg);
   color: #fff;
+}
+
+.category-options:hover {
+  background-color: #f0f0f0 !important;
 }
 
 /* ================= RESPONSIVE ================= */
