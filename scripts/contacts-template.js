@@ -46,11 +46,11 @@ function getDialogAddContact() {
                         <img src="./assets/icons/mail.svg">
                     </div>
                     <div class="ac-field">
-                        <input class="input-focus" id="ac-phone" name="phone" type="tel" placeholder="Phone">
+                        <input class="input-focus" id="ac-phone" name="phone" type="tel" placeholder="Phone" required>
                         <img src="./assets/img/call.png">
                     </div>
                     <div class="ac__actions">
-                        <button onclick="resetInputFieldsFromContactDialog()" type="button" class="btn btn--ghost" data-ac-cancel aria-label="Cancel">
+                        <button onclick="closeAddContactDialogWithAnimation()" type="button" class="btn btn--ghost" data-ac-cancel aria-label="Cancel">
                             <span>Cancel</span>
                             <span class="btn__x">×</span>
                         </button>
@@ -177,9 +177,9 @@ function getEditContactDialog(id, name, email, phone, initials) {
                         <img src="./assets/img/call.png">
                     </div>
                     <div class="ac__actions">
-                        <button type="button" class="btn btn--ghost" onclick="closeEditContactDialog()" aria-label="Cancel">
-                            <span>Cancel</span>
-                            <span class="btn__x">×</span>
+                        <button type="button" class="btn btn--ghost" onclick="closeEditContactDialog(); deleteContact('${id}')" aria-label="Delete contact">
+                            <span>Delete</span>
+                            <span class="btn__x"></span>
                         </button>
                         <button type="submit" class="btn btn--primary" aria-label="Save contact">
                             <span>Save</span>
@@ -196,4 +196,19 @@ function getEditContactDialog(id, name, email, phone, initials) {
         </div>
     </dialog>
     `;
+}
+
+/**
+ * Toast-Template (optisch wie im Screenshot: dunkle, runde Pill)
+ * @param {string} message
+ */
+function getContactsToastTemplate(message) {
+  return /*html*/ `
+    <div
+      id="contacts-toast"
+      class="contacts-toast"
+      role="status"
+      aria-live="polite"
+    >${message}</div>
+  `;
 }

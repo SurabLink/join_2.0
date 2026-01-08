@@ -26,11 +26,17 @@ async function saveToArray(event) {
   event.preventDefault();
   const task = generateTaskFromForm();
 
-  await saveTask(task);
-  alert("Task erfolgreich erstellt!");
-  subtasks.length = 0;
-  showSubtasks();
-  document.getElementById('addTaskForm').reset();
+  const result = await saveTask(task);
+  if (result) {
+    showMessage("Task added to board", "success");
+    subtasks.length = 0;
+    showSubtasks();
+    document.getElementById('addTaskForm').reset();
+    // Neu: nach dem Toast zur Board-Seite weiterleiten
+    setTimeout(() => { window.location.href = "board.html"; }, 3000);
+  } else {
+    showMessage("Task could not be saved", "error");
+  }
 }
 
 /** Task in Firebase speichern */

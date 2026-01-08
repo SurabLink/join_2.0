@@ -621,7 +621,7 @@ hr {
 }
 
 .ac__close:hover {
-    background: #f5f5f5;
+    background: rgb(228, 228, 228);
     border-radius: 50%;
 }
 
@@ -744,11 +744,27 @@ hr {
     white-space: nowrap;
 }
 
-.btn--primary:hover {
+/* NEU: Disabled-Zustand (visuell + kein Hover-Cursor) */
+.btn--primary:disabled,
+.btn--primary[aria-disabled="true"] {
+    background: #9aa3ad;
+    /* "disabled" grauton */
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ÄNDERN: Hover nur wenn NICHT disabled */
+.btn--primary:not(:disabled):hover {
     background: #29ABE2;
     color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
+/* Optional: verhindert Hover/Click-Feeling komplett, falls aria-disabled genutzt wird */
+.btn--primary[aria-disabled="true"] {
+    pointer-events: none;
 }
 
 .btn__x {
@@ -796,4 +812,71 @@ hr {
 
 .contact-details-container {
     animation: slideInFromRight 0.3s ease-out;
+}
+
+/* Dialog Animation (von rechts nach links beim Öffnen) */
+@keyframes slideInDialogFromRight {
+    from {
+        transform: translate(calc(-50% + 100%), -50%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+/* NEU: Dialog Animation (von links nach rechts beim Schließen) */
+@keyframes slideOutDialogToRight {
+    from {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    to {
+        transform: translate(calc(-50% + 100%), -50%);
+        opacity: 0;
+    }
+}
+
+.ac-dialog {
+    animation: slideInDialogFromRight 0.3s ease-out;
+}
+
+/* NEU: Closing-State für Schließ-Animation */
+.ac-dialog.closing {
+    animation: slideOutDialogToRight 0.3s ease-out forwards;
+}
+
+.contacts-toast {
+  position: fixed;
+  right: -100%;              /* Start außerhalb des Bildschirms rechts */
+  bottom: 150px;
+  top: auto;
+  transform: translateX(0);
+  opacity: 0;
+
+  background: #2A3647;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  z-index: 9999;
+  pointer-events: none;
+
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  transition: opacity 180ms ease, right 180ms ease;
+  will-change: opacity, right;
+}
+
+.contacts-toast--visible {
+  opacity: 1;
+  right: 50%;              /* Slide in zur finalen Position */
 }

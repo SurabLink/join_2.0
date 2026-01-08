@@ -10,6 +10,58 @@ function closeOverlay() {
   document.getElementById("contact-overlay").classList.add("hidden");
 }
 
+function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function updateAddContactSubmitState(dialog) {
+  if (!dialog) return;
+
+  const nameInput = dialog.querySelector('#ac-name');
+  const emailInput = dialog.querySelector('#ac-email');
+  const phoneInput = dialog.querySelector('#ac-phone');
+  const submitBtn = dialog.querySelector('[data-ac-submit]');
+
+  if (!submitBtn) return;
+
+  const isValid =
+    isNonEmptyString(nameInput?.value ?? '') &&
+    isNonEmptyString(emailInput?.value ?? '') &&
+    isNonEmptyString(phoneInput?.value ?? '');
+
+  submitBtn.disabled = !isValid;
+  submitBtn.setAttribute('aria-disabled', String(!isValid));
+}
+
+function initAddContactDialogValidation(dialog) {
+  if (!dialog || dialog.dataset.acValidationInit === '1') return;
+
+  const fields = [
+    dialog.querySelector('#ac-name'),
+    dialog.querySelector('#ac-email'),
+    dialog.querySelector('#ac-phone'),
+  ].filter(Boolean);
+
+  const form = dialog.querySelector('#add-contact-form');
+  const handler = () => updateAddContactSubmitState(dialog);
+
+  fields.forEach((field) => {
+    field.addEventListener('input', handler);
+    field.addEventListener('change', handler);
+    field.addEventListener('blur', handler);
+  });
+
+  if (form) {
+    form.addEventListener('reset', () => {
+      // Wait for the browser to clear values
+      setTimeout(handler, 0);
+    });
+  }
+
+  dialog.dataset.acValidationInit = '1';
+  handler();
+}
+
 function openAddContactDialog() {
   let dialog = document.getElementById("add-contact-dialog");
 
@@ -18,12 +70,12 @@ function openAddContactDialog() {
     dialog = document.getElementById("add-contact-dialog");
 
     const closeBtn = dialog.querySelector(".ac__close");
-    closeBtn.addEventListener("click", () => dialog.close());
+    closeBtn.addEventListener("click", () => closeAddContactDialogWithAnimation());
 
     // Dialog schließen bei Klick außerhalb des Inhalts
     dialog.addEventListener("click", function (e) {
       if (e.target === dialog) {
-        dialog.close();
+        closeAddContactDialogWithAnimation();
       }
     });
 
@@ -36,10 +88,27 @@ function openAddContactDialog() {
     }
   }
 
+  // Entferne closing-Klasse falls noch vorhanden
+  dialog.classList.remove('closing');
   dialog.showModal();
+
+  initAddContactDialogValidation(dialog);
+  updateAddContactSubmitState(dialog);
 
   if (typeof openAddContact === "function") {
     openAddContact();
+  }
+}
+
+// NEU: Schließt Add Contact Dialog mit Animation
+function closeAddContactDialogWithAnimation() {
+  const dialog = document.getElementById("add-contact-dialog");
+  if (dialog) {
+    dialog.classList.add('closing');
+    
+    setTimeout(() => {
+      dialog.close();
+    }, 300);
   }
 }
 
@@ -53,9 +122,15 @@ async function addContact(event) {
     return;
   }
 
-  await saveContact(contact);
-  alert("Task erfolgreich erstellt!");
-  document.getElementById('add-contact-form').reset();
+  const saved = await saveContact(contact);
+  if (saved) {
+    await renderContactGroup(); // Liste direkt aktualisieren
+    const dialog = document.getElementById("add-contact-dialog");
+    const form = document.getElementById('add-contact-form');
+    dialog.close();
+    form.reset();
+    setTimeout(() => showContactsToast('Contact successfully created'), 0);
+  }
 }
 
 async function saveContact(contact) {
@@ -92,10 +167,29 @@ async function loadContacts() {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
 }
+function showContactsToast(message, durationMs = 2200) {
+  const old = document.getElementById('contacts-toast');
+  if (old) old.remove();
+
+  document.body.insertAdjacentHTML('beforeend', getContactsToastTemplate(message));
+
+  const toast = document.getElementById('contacts-toast');
+  if (!toast) return;
+
+  // Animate in (CSS übernimmt Transition)
+  requestAnimationFrame(() => {
+    toast.classList.add('contacts-toast--visible');
+  });
+
+  // Auto-hide + remove
+  window.setTimeout(() => {
+    toast.classList.remove('contacts-toast--visible');
+    window.setTimeout(() => toast.remove(), 220);
+  }, durationMs);
+}
+
 function resetInputFieldsFromContactDialog() {
-  document.getElementById('add-contact-form').reset();
-  const dialog = document.getElementById("add-contact-dialog");
-  dialog.close();
+  closeAddContactDialogWithAnimation(); // Nutze die Animation statt sofort zu schließen
 }
 
 function generateObjFromContact() {
@@ -290,7 +384,6 @@ async function updateContact(event, contactId) {
   }
 }
 
-
 // Öffnet den Edit-Dialog mit vorausgefüllten Daten
 function openEditContactDialog(id, name, email, phone, initials) {
   const container = document.getElementById('edit-contact-dialog-container');
@@ -303,8 +396,7 @@ function openEditContactDialog(id, name, email, phone, initials) {
   // Dialog schließen bei Klick außerhalb des Inhalts (Backdrop) und aus dem DOM entfernen
   dialog.addEventListener('click', function (e) {
     if (e.target === dialog) {
-      dialog.close();
-      dialog.remove();
+      closeEditContactDialog();
     }
   });
 
@@ -316,8 +408,8 @@ function openEditContactDialog(id, name, email, phone, initials) {
     });
   }
 
-
-  // Zeige Dialog modal an
+  // Entferne closing-Klasse falls noch vorhanden
+  dialog.classList.remove('closing');
   if (typeof dialog.showModal === 'function') {
     dialog.showModal();
   } else {
@@ -325,11 +417,17 @@ function openEditContactDialog(id, name, email, phone, initials) {
   }
 }
 
-// Schließt den Edit-Dialog
+// NEU: Schließt den Edit-Dialog mit Animation
 function closeEditContactDialog() {
   const dialog = document.getElementById('edit-contact-dialog');
   if (dialog) {
-    dialog.close();
-    dialog.remove();
+    // Closing-Animation abspielen
+    dialog.classList.add('closing');
+    
+    // Nach der Animation Dialog schließen und aus DOM entfernen
+    setTimeout(() => {
+      dialog.close();
+      dialog.remove();
+    }, 300); // 300ms = Dauer der Animation
   }
 }
