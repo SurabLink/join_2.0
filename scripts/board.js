@@ -26,10 +26,12 @@ async function loadTasks() {
 /** Task in Firebase updaten */
 async function updateTask(task) {
   try {
-    await fetch(`${BASE_URL}/tasks/${task.firebaseId}.json`, {
+    const { firebaseId, ...taskData } = task;
+
+    await fetch(`${BASE_URL}/tasks/${firebaseId}.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(task),
+      body: JSON.stringify(taskData),
     });
   } catch (error) {
     console.error("Fehler beim Updaten des Tasks:", error);
@@ -96,7 +98,9 @@ function renderBoard() {
               <span>${task.description.substring(0, 50)}...</span>
               <div class="subtask-card"> 
                 <div class="subtask-progress"></div>
-                <div>${0}/${task.subtasks ? task.subtasks.length : 0}</div>
+                <div class="subtask-card">
+                  ${renderSubtaskProgress(task)}
+                </div>
               </div>
               <div class="task-footer">
                 <div class="avatar-container" id="avatars-${task.id}"></div>
@@ -125,21 +129,44 @@ function renderBoard() {
 //Funktion um Avatare zu rendern
 function renderAvatar(task) {
   let container = document.getElementById(`avatars-${task.id}`);
-
   if (!container) return;
-  container.innerHTML = ""; // leeren, falls schon Inhalte drin sind
-  // immer in Array verwandeln
-  let contacts = Array.isArray(task.contact) ? task.contact : [task.contact];
+
+  container.innerHTML = "";
+
+  // Array aus Firebase
+  let contacts = Array.isArray(task.contacts) ? task.contacts : [];
 
   for (let i = 0; i < contacts.length; i++) {
     const name = contacts[i];
+    if (!name) continue;
+
     const initials = name.split(" ").map(n => n[0]).join("");
-    if (!name) continue; // überspringen, falls leer
+
     container.innerHTML += /*html*/`
-      <div class="avatar" style="background-color: ${getRandomColor()};">${initials}</div>
+      <div class="avatar" style="background-color: ${getRandomColor()};">
+        ${initials}
+      </div>
     `;
   }
 }
+
+function renderSubtaskProgress(task) {
+  if (!task.subtasks || task.subtasks.length === 0) {
+    return `<div>0/0</div>`;
+  }
+
+  const done = task.subtasks.filter(st => st.done).length;
+  const total = task.subtasks.length;
+  const percent = Math.round((done / total) * 100);
+
+  return `
+    <div class="subtask-progress-bar">
+      <div class="subtask-progress-fill" style="width:${percent}%"></div>
+    </div>
+    <div>${done}/${total}</div>
+  `;
+}
+
 
 // Hilfsfunktion: Zufällige Farbe zurückgeben
 function getRandomColor() {
@@ -201,13 +228,27 @@ function openModal(id) {
               ? '<img src="./assets/icons/medium_orange.svg" alt="Medium" color="orange">'
               : '<img src="./assets/img/Category_Low.svg" alt="Low">'
           }</div>
-      <div class="modal-contacts"><strong>Assigned To:</strong> <div>${task.contact}</div></div>
-      <div class="modal-subtasks-area">
-        <span>Subtasks</span>
-        <div class="modal-subtasks">
-          <div> ${task.subtasks}</div>
+      <div class="modal-contacts">
+        <strong>Assigned To:</strong>
+        <div>
+          ${task.contacts && task.contacts.length
+          ? task.contacts.join(", ")
+          : "—"}
         </div>
       </div>
+      <div class="modal-subtasks-area">
+        <span>Subtasks</span>
+        <div class="modal-progress-wrapper">
+          <div class="subtask-progress-bar">
+            <div class="subtask-progress-fill modal-subtask-progress-fill"></div>
+          </div>
+          <span class="modal-subtask-progress-text"></span>
+        </div>
+        <div class="modal-subtasks">
+          ${generateModalSubtasks(task)}
+        </div>
+      </div>
+
       <div class="modal-actions">
         <div class="modal-delete" onclick="deleteTask()">
           <img src="./assets/icons/delete.svg" alt="Delete">
@@ -224,10 +265,61 @@ function openModal(id) {
   modal.style.display = "flex";
   document.body.appendChild(modal);
 
+  setTimeout(() => updateModalSubtasks(task), 0);
+
   setTimeout(() => {
   const modalContent = modal.querySelector(".modal-content");
   modalContent.style.transform = "translateX(0)";
 }, 10);
+}
+
+function generateModalSubtasks(task) {
+  if (!task.subtasks || task.subtasks.length === 0) {
+    return "<span>No subtasks</span>";
+  }
+
+  return task.subtasks.map((st, i) => `
+    <label class="modal-subtask">
+      <input type="checkbox"
+             ${st.done ? "checked" : ""}
+             onchange="toggleSubtaskDone(${task.id}, ${i}, this)">
+      <span>${st.title}</span>
+    </label>
+  `).join("");
+}
+
+async function toggleSubtaskDone(taskId, subIndex, checkbox) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  task.subtasks[subIndex].done = checkbox.checked;
+
+  await updateTask(task);  
+  renderBoard();            
+  updateModalSubtasks(task);
+}
+
+function updateModalSubtasks(task) {
+  const modal = document.getElementById("taskModal");
+  if (!modal) return;
+
+  const subtaskContainer = modal.querySelector(".modal-subtasks");
+  if (!subtaskContainer) return;
+
+  subtaskContainer.innerHTML = generateModalSubtasks(task);
+
+  // optional: Fortschrittsanzeige im Modal, falls vorhanden
+  const progressText = modal.querySelector(".modal-subtask-progress-text");
+  const progressBar = modal.querySelector(".modal-subtask-progress-fill");
+
+  if (progressText && progressBar) {
+    const done = task.subtasks.filter(st => st.done).length;
+    const total = task.subtasks.length;
+    const percent = total ? Math.round((done / total) * 100) : 0;
+
+    progressText.innerText = `${done}/${total}`;
+    progressBar.style.width = `${percent}%`;
+  }
 }
 
 function editSubtask(id) {
@@ -291,7 +383,7 @@ function editSubtask(id) {
 
         <label>
           <span>Assigned to</span>
-          <input type="text" id="contact" value="${task.contact}">
+          <input type="text" disabled value="${task.contacts.join(", ")}">
         </label>
 
         <label>
