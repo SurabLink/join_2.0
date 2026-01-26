@@ -255,7 +255,7 @@ function openModal(id) {
           <span>Delete</span>
         </div>
         <div class="action-separator"></div>
-        <div class="modal-edit" onclick="editSubtask(${id})">
+        <div class="modal-edit" onclick="openEditTaskModal(${id})">
           <img src="./assets/icons/edit.svg" alt="Edit">
           <span>Edit</span>
         </div>
@@ -419,10 +419,170 @@ function editSubtask(id) {
   `;
 }
 
+function openEditTaskModal(id) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+
+  activeTask = task;
+
+  const modal = document.getElementById("taskModal");
+  const modalContent = modal.querySelector(".modal-content");
+
+  // lokale Kopien für Edit
+  editSubtasks = task.subtasks.map(st => ({ ...st }));
+  selectedContacts = [...task.contacts];
+
+  modalContent.innerHTML = generateEditTaskTemplate(task);
+
+  renderEditAssignedContacts(); 
+  renderEditSubtasks();
+}
+
+
 
 /** Modal schließen */
 function closeModal() {
   const modal = document.getElementById("taskModal");
   if (modal) modal.remove();
   activeTask = null;
+}
+
+function generateEditTaskTemplate(task) {
+  return /*html*/`
+    <h1>Edit Task</h1>
+
+    <form class="edit-task-form" onsubmit="saveEditedTask(event, ${task.id})">
+
+  <div class="edit-form-scroll">
+
+    <label class="edit-label">
+      <span>Title<span class="req">*</span></span>
+      <input class="edit-input" type="text" id="edit-title" value="${task.title}" required>
+    </label>
+
+    <label class="edit-label">
+      Description
+      <textarea class="edit-textarea" id="edit-description">${task.description}</textarea>
+    </label>
+
+    <label class="edit-label">
+      <span>Due date<span class="req">*</span></span>
+      <input class="edit-input" type="date" id="edit-date" value="${task.dueDate}" required>
+    </label>
+
+    <!-- Priority -->
+    <div class="edit-priority">
+      <span>Priority</span>
+      <div class="edit-priority-options">
+        <label><input type="radio" name="edit-priority" value="urgent" ${task.priority==="urgent"?"checked":""}> Urgent</label>
+        <label><input type="radio" name="edit-priority" value="medium" ${task.priority==="medium"?"checked":""}> Medium</label>
+        <label><input type="radio" name="edit-priority" value="low" ${task.priority==="low"?"checked":""}> Low</label>
+      </div>
+    </div>
+
+    <!-- Assigned -->
+    <div class="edit-assigned">
+      <span>Assigned to</span>
+
+      <div id="selectContacts" class="edit-custom-select">
+        <span onclick="toggleDropdown(event)">Select contacts</span>
+        <div id="dropdownContacts" class="edit-dropdown"></div>
+      </div>
+
+      <div id="selectedAvatars" class="edit-avatar-container"></div>
+    </div>
+
+    <!-- Category -->
+    <label class="edit-label">
+      <span>Category<span class="req">*</span></span>
+      <select class="edit-select" id="edit-category" required>
+        <option value="Technical Task" ${task.category==="Technical Task"?"selected":""}>Technical Task</option>
+        <option value="User Story" ${task.category==="User Story"?"selected":""}>User Story</option>
+      </select>
+    </label>
+
+    <!-- Subtasks -->
+    <div class="edit-subtasks">
+      <span>Subtasks</span>
+
+      <div class="edit-subtask-input-row">
+        <input id="edit-subtask-input" placeholder="Add new subtask">
+        <button type="button" onclick="addEditSubtask()">+</button>
+      </div>
+
+      <ul id="editSubtaskArea" class="edit-subtask-list"></ul>
+    </div>
+
+  </div>
+
+  <div class="edit-actions">
+    <button type="button" class="edit-cancel" onclick="openModal(${task.id})">Cancel</button>
+    <button type="submit" class="edit-save">Save</button>
+  </div>
+
+</form>
+
+  `;
+}
+
+function renderEditAssignedContacts() {
+  const dropdown = document.getElementById("dropdownContacts");
+  if (!dropdown) return;
+
+  dropdown.innerHTML = generateAssignedContacts(contacts);
+  renderSelectedAvatars();
+}
+
+function renderEditSubtasks() {
+  const area = document.getElementById("editSubtaskArea");
+  if (!area) return;
+
+  area.innerHTML = "";
+
+  editSubtasks.forEach((st, i) => {
+    area.innerHTML += `
+      <li class="subtask">
+        <input value="${st.title}" oninput="editSubtasks[${i}].title=this.value">
+        <div class="subtask-actions">
+          <img src="./assets/icons/delete.svg" onclick="deleteEditSubtask(${i})">
+        </div>
+      </li>
+    `;
+  });
+}
+
+function addEditSubtask() {
+  const input = document.getElementById("edit-subtask-input");
+  if (!input.value.trim()) return;
+
+  editSubtasks.push({ title: input.value.trim(), done: false });
+  input.value = "";
+  renderEditSubtasks();
+}
+
+function deleteEditSubtask(i) {
+  editSubtasks.splice(i,1);
+  renderEditSubtasks();
+}
+
+async function saveEditedTask(event, id) {
+  event.preventDefault();
+
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+
+  task.title = document.getElementById("edit-title").value.trim();
+  task.description = document.getElementById("edit-description").value.trim();
+  task.dueDate = document.getElementById("edit-date").value;
+  task.category = document.getElementById("edit-category").value;
+
+  task.priority = document.querySelector('input[name="edit-priority"]:checked').value;
+
+  task.contacts = [...selectedContacts];
+  task.subtasks = editSubtasks.map(st => ({ ...st }));
+
+  await updateTask(task);
+
+  renderBoard();
+  openModal(id);
 }
