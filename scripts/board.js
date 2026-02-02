@@ -562,3 +562,19 @@ async function saveEditedTask(event, id) {
   renderBoard();
   openModal(id);
 }
+
+async function showAddTaskDialog() {
+  const modalContent = document.getElementById('addTask-dialog-message');
+
+  document.getElementById('addTask-dialog').classList.remove('d-none');
+
+  modalContent.innerHTML = '';
+  modalContent.innerHTML = generateAddTask();
+
+  // Kontakte laden und Dropdown aktualisieren
+  await loadContacts();
+  selectedContacts = [];
+  selectContacts();
+  renderSelectedAvatars();
+}
+
