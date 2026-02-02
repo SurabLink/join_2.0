@@ -1,11 +1,4 @@
 function getBoardTemplate() {
-  return `
-    ${getBoardHeaderTemplate()}
-    ${getBoardColumnsTemplate()}
-  `;
-}
-
-function getBoardHeaderTemplate() {
   return /*html*/`
     <div class="board-header">
       <h1>Board</h1>
@@ -20,31 +13,55 @@ function getBoardHeaderTemplate() {
         <button class="add-task-btn" onclick="showAddTaskDialog()">Add Task +</button>
       </div>
     </div>
-  `;
-}
-
-function getBoardColumnsTemplate() {
-  return `
     <div class="board-columns">
-      ${getSingleColumnTemplate("To Do", "todo-column")}
-      ${getSingleColumnTemplate("In Progress", "inprogress-column")}
-      ${getSingleColumnTemplate("Await Feedback", "awaiting-column")}
-      ${getSingleColumnTemplate("Done", "done-column")}
-    </div>
-  `;
-}
-
-function getSingleColumnTemplate(title, id) {
-  return /*html*/` 
-    <div class="board-column"
-        id="${id}"
-        ondragover="allowDrop(event)"
-        ondrop="dropTask(event, '${title}')">
-        <div class="column-header">
-        <h2>${title}</h2>
-        <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
-        </div>
-    </div>  
+        <div class="board-column"
+            id="todo-column"
+            ondragover="allowDrop(event)"
+            ondrop="dropTask(event, 'To Do')">
+            <div class="column-header">
+                <h2>To Do</h2>
+                <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
+            </div>
+            <div class="no-tasks">
+                <span>No tasks to do</span>
+            </div>
+        </div> 
+        <div class="board-column"
+            id="inprogress-column"
+            ondragover="allowDrop(event)"
+            ondrop="dropTask(event, 'In Progress')">
+            <div class="column-header">
+                <h2>In Progress</h2>
+                <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
+            </div>
+            <div class="no-tasks">
+                <span>No tasks to do</span>
+            </div>
+        </div> 
+        <div class="board-column"
+            id="awaiting-column"
+            ondragover="allowDrop(event)"
+            ondrop="dropTask(event, 'Await Feedback')">
+            <div class="column-header">
+                <h2>Await Feedback</h2>
+                <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
+            </div>
+            <div class="no-tasks">
+                <span>No tasks to do</span>
+            </div>
+        </div> 
+        <div class="board-column"
+            id="done-column"
+            ondragover="allowDrop(event)"
+            ondrop="dropTask(event, 'Done')">
+            <div class="column-header">
+                <h2>Done</h2>
+            </div>
+            <div class="no-tasks">
+                <span>No tasks to do</span>
+            </div>
+        </div> 
+    </div> 
   `;
 }
 
