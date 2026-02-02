@@ -12,8 +12,10 @@ function renderBoard() {
   content.innerHTML = getBoardTemplate();
 
   renderTasksIntoColumns();
+  updateNoTaskPlaceholders();
   renderAllAvatars();
 }
+
 
 function renderTasksIntoColumns() {
   for (let i = 0; i < tasks.length; i++) {
@@ -577,4 +579,23 @@ async function showAddTaskDialog() {
   selectContacts();
   renderSelectedAvatars();
 }
+
+function updateNoTaskPlaceholders() {
+  const columns = [
+    { id: "todo-column", status: "To Do" },
+    { id: "inprogress-column", status: "In Progress" },
+    { id: "awaiting-column", status: "Await Feedback" },
+    { id: "done-column", status: "Done" }
+  ];
+  for (let i = 0; i < columns.length; i++) {
+    const col = columns[i];
+    const columnElement = document.getElementById(col.id);
+    if (!columnElement) continue;
+    const placeholder = columnElement.querySelector(".no-tasks");
+    if (!placeholder) continue;
+    const hasTasks = tasks.some(task => task.status === col.status);
+    placeholder.style.display = hasTasks ? "none" : "flex";
+  }
+}
+
 
