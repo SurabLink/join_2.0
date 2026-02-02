@@ -1,0 +1,364 @@
+:root {
+  --sidebar-bg: #2a3647;
+  --sidebar-text: #fff;
+  --main-bg: #f6f7f9;
+  --panel-bg: #fff;
+  --border: #d1d5db;
+  --urgent: #ff3d00;
+  --medium: #ffa800;
+  --low: #7ae229;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  /* font-family: "Segoe UI", Arial, sans-serif; */
+}
+
+body {
+  background: var(--main-bg);
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Content */
+.content {
+  padding: 24px 40px;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.task-form {
+  display: flex;
+  gap: 40px;
+}
+
+.form-left,
+.form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.req {
+  color: #ff8190;
+}
+
+input,
+textarea,
+select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.note {
+  font-size: 20px;
+}
+
+/* Priority */
+
+.priority {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.priority-options {
+  display: flex;
+  gap: 8px;
+}
+
+.priority-options input {
+  display: none;
+  /* Radio Buttons ausblenden */
+}
+
+.priority-options label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 100px;
+  padding: 8px 16px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  cursor: pointer;
+  background: white;
+  color: #000;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.priority-options .icon {
+  width: 10px;
+  height: 10px;
+}
+
+.priority-btn {
+  flex-direction: row;
+}
+
+.priority-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Aktive Auswahl färben */
+.priority-options input#urgent:checked+label.urgent {
+  background: #FF3D00;
+  color: white;
+  fill: white;
+  border-color: #FF3D00;
+}
+
+.priority-options input#urgent:checked+label.urgent path {
+  fill: white;
+}
+
+.priority-options input#medium:checked+label.medium {
+  background: #FFA800;
+  color: white;
+  border-color: #FFA800;
+}
+
+.priority-options input#medium:checked+label.medium path {
+  fill: white;
+}
+
+.priority-options input#low:checked+label.low {
+  background: #7AE229;
+  color: white;
+  border-color: #7AE229;
+}
+
+.priority-options input#low:checked+label.low path {
+  fill: white;
+}
+
+/* Contacts */
+.custom-select {
+  border: 1px solid #ccc;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  position: relative;
+  width: 320px;
+  background: white;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  z-index: 10;
+  border-radius: 6px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-item input {
+  justify-self: flex-end;
+}
+
+.dropdown-item input,
+.dropdown-item span {
+  pointer-events: auto;
+}
+
+.dropdown-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #2A3647; /* oder deine Kontaktfarbe */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.dropdown-name {
+  flex: 1;
+  text-align: left;
+  cursor: pointer;
+}
+
+.avatar-container {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0038ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+/* Subtasks */
+.subtasks {
+  display: flex;
+  gap: 8px;
+}
+
+.plus {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.subtask-list li::before {
+  content: "•";
+  margin-right: 20px;
+  color: black;
+}
+
+.subtask {
+  height: 40px;
+  width: auto;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.subtask-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.subtask-actions img {
+  width: 20px;
+  height: 20px;
+}
+
+.subtask-actions img:hover {
+transform: scale(1.1);
+}
+
+.subtask:hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+}
+
+.subtask:hover .subtask-actions {
+  opacity: 1;
+}
+
+.action-separator {
+  height: 25px;
+  width: 2px;
+  background-color: #b5b5b5;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.clear,
+.create {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+
+.clear {
+  background: var(--panel-bg);
+}
+
+.create {
+  background: var(--sidebar-bg);
+  color: #fff;
+}
+
+.category-options:hover {
+  background-color: #f0f0f0 !important;
+}
