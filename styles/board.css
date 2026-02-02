@@ -175,6 +175,17 @@ h1 {
     cursor: pointer;
 }
 
+.no-tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(221, 221, 221);
+    color: rgb(168, 167, 167);
+    height: 60px;
+    border: 2px dotted #999;
+    border-radius: 10px;
+}
+
 /* Task Cards */
 .task-card {
     display: flex;
