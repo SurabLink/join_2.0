@@ -6,7 +6,7 @@ function getBoardTemplate() {
 }
 
 function getBoardHeaderTemplate() {
-  return `
+  return /*html*/`
     <div class="board-header">
       <h1>Board</h1>
       <div class="board-actions">
@@ -17,7 +17,7 @@ function getBoardHeaderTemplate() {
               d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
           </svg>
         </div>
-        <button class="add-task-btn">Add Task +</button>
+        <button class="add-task-btn" onclick="showAddTaskDialog()">Add Task +</button>
       </div>
     </div>
   `;
@@ -35,14 +35,14 @@ function getBoardColumnsTemplate() {
 }
 
 function getSingleColumnTemplate(title, id) {
-  return ` 
+  return /*html*/` 
     <div class="board-column"
         id="${id}"
         ondragover="allowDrop(event)"
         ondrop="dropTask(event, '${title}')">
         <div class="column-header">
         <h2>${title}</h2>
-        <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30">
+        <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
         </div>
     </div>  
   `;
