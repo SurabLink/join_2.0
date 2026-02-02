@@ -6,6 +6,29 @@ let activeTask = null;
 let users = [
     {'email': 'erik@test.de', 'password': 'test1234'}
 ];
+let contacts = [];
+let selectedContacts = [];
+let subtasks = [];
+
+async function loadContacts() {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts.json`);
+    const data = await response.json();
+
+    if (!data) {
+      contacts = [];
+      return;
+    }
+
+    contacts = Object.entries(data).map(([key, value]) => ({
+      id: key,
+      ...value
+    }));
+
+  } catch (error) {
+    console.error("Fehler beim Laden der Kontakte:", error);
+  }
+}
 
 // Seite sofort schützen (BEVOR irgendwas anderes passiert)
 // ABER NUR auf geschützten Seiten (nicht auf index.html / signup.html)
