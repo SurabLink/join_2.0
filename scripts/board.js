@@ -6,11 +6,104 @@ let colors = [
   "#f97316"  // Orange
 ];
 
+function renderBoard() {
+  const content = document.getElementById("board-content");
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadTasks();
-  renderBoard();
-});
+  // 1️⃣ Grundstruktur direkt setzen
+  content.innerHTML = `
+    <div class="board-header">
+      <h1>Board</h1>
+      <div class="board-actions">
+        <div class="board-search">
+          <input type="text" placeholder="Find Task">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+          </svg>
+        </div>
+        <button class="add-task-btn">Add Task +</button>
+      </div>
+    </div>
+
+    <div class="board-columns">
+      <div class="board-column" id="todo-column" ondragover="allowDrop(event)" ondrop="dropTask(event, 'To Do')">
+        <h2>To Do</h2>
+      </div>
+
+      <div class="board-column" id="inprogress-column" ondragover="allowDrop(event)" ondrop="dropTask(event, 'In Progress')">
+        <h2>In Progress</h2>
+      </div>
+
+      <div class="board-column" id="awaiting-column" ondragover="allowDrop(event)" ondrop="dropTask(event, 'Await Feedback')">
+        <h2>Await Feedback</h2>
+      </div>
+
+      <div class="board-column" id="done-column" ondragover="allowDrop(event)" ondrop="dropTask(event, 'Done')">
+        <h2>Done</h2>
+      </div>
+    </div>
+  `;
+
+  // 2️⃣ Tasks den Columns zuordnen
+  tasks.forEach(task => {
+    const column = getColumnElement(task.status);
+    if (!column) return;
+
+    column.innerHTML += createTaskCard(task);
+  });
+
+  // 3️⃣ Avatare nachträglich rendern
+  tasks.forEach(task => renderAvatar(task));
+}
+
+function getColumnElement(status) {
+  switch (status) {
+    case "To Do":
+      return document.getElementById("todo-column");
+    case "In Progress":
+      return document.getElementById("inprogress-column");
+    case "Await Feedback":
+      return document.getElementById("awaiting-column");
+    case "Done":
+      return document.getElementById("done-column");
+    default:
+      return null;
+  }
+}
+
+function createTaskCard(task) {
+  return /*html*/`
+    <div class="task-card"
+      draggable="true"
+      ondragstart="startDrag(${task.id})"
+      onclick="openModal(${task.id})">
+
+      <h2 class="task-category" style="background-color: ${
+        task.category === "User Story" ? "#0038FF" : "#1FD7C1"
+      }">${task.category}</h2>
+
+      <h3>${task.title}</h3>
+      <span>${task.description.substring(0, 50)}...</span>
+
+      <div class="subtask-card">
+        ${renderSubtaskProgress(task)}
+      </div>
+
+      <div class="task-footer">
+        <div class="avatar-container" id="avatars-${task.id}"></div>
+        <div>
+          ${
+            task.priority === "urgent"
+              ? '<img src="./assets/img/Category_Urgent.svg">'
+              : task.priority === "medium"
+                ? '<img src="./assets/icons/medium_orange.svg">'
+                : '<img src="./assets/img/Category_Low.svg">'
+          }
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 /** Tasks aus Firebase laden */
 async function loadTasks() {
@@ -21,6 +114,8 @@ async function loadTasks() {
   } catch (error) {
     console.error("Fehler beim Laden der Tasks:", error);
   }
+
+  renderBoard();
 }
 
 /** Task in Firebase updaten */
@@ -51,78 +146,6 @@ async function deleteTask() {
     renderBoard();
   } catch (error) {
     console.error("Fehler beim Löschen des Tasks:", error);
-  }
-}
-
-/** Board rendern */
-function renderBoard() {
-  const content = document.getElementById("board-content");
-  let html = `
-    <div class="board-header">
-      <h1>Board</h1>
-      <div class="board-actions">
-        <div class="board-search">
-          <input type="text" placeholder="Find Task">
-          <!-- Lupe als Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-          </svg>
-        </div>
-        <button class="add-task-btn">Add Task +</button>
-      </div>
-    </div>
-    
-    <div class="board-columns">
-  `;
-
-  columns.forEach(col => {
-    html += `
-      <div class="board-column" 
-           ondragover="allowDrop(event)" 
-           ondrop="dropTask(event, '${col}')">
-        <h2>${col}</h2>
-        ${tasks
-        .filter(t => t.status === col)
-        .map(task => `
-            <div class="task-card" 
-                 draggable="true" 
-                 ondragstart="startDrag(${task.id})"
-                 onclick="openModal(${task.id})">
-              <h2 class="task-category" style="background-color: ${task.category === "User Story"
-            ? "#0038FF" // blau für User Story
-            : "#1FD7C1" // Türkis für Technical Task
-          }">${task.category}</h2>
-              <h3>${task.title}</h3>
-              <span>${task.description.substring(0, 50)}...</span>
-              <div class="subtask-card"> 
-                <div class="subtask-progress"></div>
-                <div class="subtask-card">
-                  ${renderSubtaskProgress(task)}
-                </div>
-              </div>
-              <div class="task-footer">
-                <div class="avatar-container" id="avatars-${task.id}"></div>
-                <div>${task.priority === "urgent"
-            ? '<img src="./assets/img/Category_Urgent.svg" alt="Urgent">'
-            : task.priority === "medium"
-              ? '<img src="./assets/icons/medium_orange.svg" alt="Medium" color="orange">'
-              : '<img src="./assets/img/Category_Low.svg" alt="Low">'
-          }
-                </div>
-              </div>
-            </div>
-          `).join('')}
-      </div>
-    `;
-  });
-
-  html += `</div>`;
-  content.innerHTML = html;
-  // nach dem Rendern: für alle Tasks Avatare setzen
-  for (let i = 0; i < tasks.length; i++) {
-    renderAvatar(tasks[i]);
   }
 }
 
