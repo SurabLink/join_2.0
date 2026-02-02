@@ -78,7 +78,7 @@ function generateAddTask() {
               <div id="selectedAvatars" class="avatar-container"></div>
             </div>
 
-            <label>
+            <label class="category">
               <span>
                 Category<span class="req">*</span>
               </span>
