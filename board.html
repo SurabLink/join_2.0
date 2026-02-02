@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/modal.css">
 
 
 
@@ -17,6 +18,7 @@
     <script src="./scripts/boardTemplate.js"></script>
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/addTaskTemplates.js"></script>
+    <script src="./scripts/modal.js"></script>
 </head>
 
 <body onload="loadTasks()">
@@ -95,6 +97,11 @@
             </div>
 
         </main>
+    </div>
+    <div id="addTask-dialog" class="addTask-dialog-bg d-none" onclick="closeDialog()">
+        <div id="addTask-dialog-message" class="addTask-dialog">
+
+        </div>
     </div>
 </body>
 
