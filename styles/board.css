@@ -159,14 +159,19 @@ h1 {
     transition: background 0.2s;
 }
 
-.board-column h2 {
-    margin-bottom: 20px;
-}
-
-
 .board-column.drag-over {
     background: #e1e4ea;
     /* Spalte heben hervor */
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.column-header img {
+    cursor: pointer;
 }
 
 /* Task Cards */
