@@ -40,8 +40,10 @@ function getSingleColumnTemplate(title, id) {
         id="${id}"
         ondragover="allowDrop(event)"
         ondrop="dropTask(event, '${title}')">
+        <div class="column-header">
         <h2>${title}</h2>
         <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30">
+        </div>
     </div>  
   `;
 }
