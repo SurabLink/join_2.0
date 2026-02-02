@@ -280,6 +280,11 @@ textarea {
   cursor: pointer;
 }
 
+.subtask-list {
+  height: 150px;
+  overflow-y: auto;
+}
+
 .subtask-list li::before {
   content: "•";
   margin-right: 20px;
