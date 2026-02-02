@@ -140,25 +140,6 @@ async function saveContact(contact) {
   }
 }
 
-async function loadContacts() {
-  try {
-    const response = await fetch(`${BASE_URL}/contacts.json`);
-    const data = await response.json();
-
-    if (!data) {
-      contacts = [];
-      return;
-    }
-
-    contacts = Object.entries(data).map(([key, value]) => ({
-      id: key,
-      ...value
-    }));
-
-  } catch (error) {
-    console.error("Fehler beim Laden der Kontakte:", error);
-  }
-}
 function showContactsToast(message, durationMs = 2200) {
   const old = document.getElementById('contacts-toast');
   if (old) old.remove();
