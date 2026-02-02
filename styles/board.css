@@ -133,14 +133,6 @@ h1 {
     gap: 12px;
 }
 
-.column-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
 .add-col {
     border: none;
     background: var(--panel-bg);
@@ -166,6 +158,11 @@ h1 {
     min-height: 400px;
     transition: background 0.2s;
 }
+
+.board-column h2 {
+    margin-bottom: 20px;
+}
+
 
 .board-column.drag-over {
     background: #e1e4ea;
