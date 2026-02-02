@@ -1,7 +1,3 @@
-let contacts = [];
-let selectedContacts = [];
-let subtasks = [];
-
 /** Task rendern */
 async function renderAddTask() {
   let content = document.getElementById('addTaskContent');
