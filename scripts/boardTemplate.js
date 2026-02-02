@@ -23,7 +23,7 @@ function getBoardTemplate() {
                 <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
             </div>
             <div class="no-tasks">
-                <span>No tasks to do</span>
+                <span>No tasks To do</span>
             </div>
         </div> 
         <div class="board-column"
@@ -35,7 +35,7 @@ function getBoardTemplate() {
                 <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
             </div>
             <div class="no-tasks">
-                <span>No tasks to do</span>
+                <span>No tasks To do</span>
             </div>
         </div> 
         <div class="board-column"
@@ -47,7 +47,7 @@ function getBoardTemplate() {
                 <img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">
             </div>
             <div class="no-tasks">
-                <span>No tasks to do</span>
+                <span>No tasks To do</span>
             </div>
         </div> 
         <div class="board-column"
@@ -58,7 +58,7 @@ function getBoardTemplate() {
                 <h2>Done</h2>
             </div>
             <div class="no-tasks">
-                <span>No tasks to do</span>
+                <span>No tasks To do</span>
             </div>
         </div> 
     </div> 
