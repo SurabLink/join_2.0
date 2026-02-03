@@ -189,10 +189,8 @@ function openModal(id) {
           }</div>
       <div class="modal-contacts">
         <strong>Assigned To:</strong>
-        <div>
-          ${task.contacts && task.contacts.length
-          ? task.contacts.join(", ")
-          : "—"}
+        <div class="modal-contacts-list">
+          ${generateModalAssignedContacts(task)}
         </div>
       </div>
       <div class="modal-subtasks-area">
@@ -230,6 +228,25 @@ function openModal(id) {
   const modalContent = modal.querySelector(".modal-content");
   modalContent.style.transform = "translateX(0)";
 }, 10);
+}
+
+function generateModalAssignedContacts(task) {
+  if (!task.contacts || task.contacts.length === 0) {
+    return "—";
+  }
+
+  return task.contacts.map((name) => {
+    if (!name) return "";
+    const initials = name.split(" ").map(n => n[0]).join("");
+    return /*html*/`
+      <div class="modal-contact">
+        <div class="avatar" style="background-color: ${getRandomColor()};">
+          ${initials}
+        </div>
+        <span>${name}</span>
+      </div>
+    `;
+  }).join("");
 }
 
 function generateModalSubtasks(task) {
@@ -580,6 +597,10 @@ async function showAddTaskDialog() {
   renderSelectedAvatars();
 }
 
+function closeAddTaskDialog() {
+  document.getElementById('addTask-dialog').classList.add('d-none');
+}
+
 function updateNoTaskPlaceholders() {
   const columns = [
     { id: "todo-column", status: "To Do" },
@@ -597,5 +618,4 @@ function updateNoTaskPlaceholders() {
     placeholder.style.display = hasTasks ? "none" : "flex";
   }
 }
-
 
