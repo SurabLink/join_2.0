@@ -6,20 +6,65 @@ let colors = [
   "#f97316"  // Orange
 ];
 
+let boardSearchTerm = "";
+
 function renderBoard() {
   const content = document.getElementById("board-content");
 
   content.innerHTML = getBoardTemplate();
+
+  initBoardSearch();
 
   renderTasksIntoColumns();
   updateNoTaskPlaceholders();
   renderAllAvatars();
 }
 
+function initBoardSearch() {
+  const input = document.getElementById("search-task");
+  const clearBtn = document.getElementById("search-clear");
+  if (!input) return;
+
+  input.value = boardSearchTerm;
+  input.oninput = () => {
+    boardSearchTerm = input.value.trim();
+    applySearchFilter();
+    updateSearchClearButton(clearBtn);
+  };
+
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      boardSearchTerm = "";
+      input.value = "";
+      applySearchFilter();
+      updateSearchClearButton(clearBtn);
+      input.focus();
+    };
+    updateSearchClearButton(clearBtn);
+  }
+}
+
+function updateSearchClearButton(button) {
+  if (!button) return;
+  button.style.visibility = boardSearchTerm ? "visible" : "hidden";
+}
+
+function applySearchFilter() {
+  clearTaskCards();
+  renderTasksIntoColumns();
+  updateNoTaskPlaceholders();
+  renderAllAvatars();
+}
+
+function clearTaskCards() {
+  const cards = document.querySelectorAll(".task-card");
+  cards.forEach((card) => card.remove());
+}
 
 function renderTasksIntoColumns() {
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
+  const filteredTasks = getFilteredTasks();
+  for (let i = 0; i < filteredTasks.length; i++) {
+    const task = filteredTasks[i];
     const column = getColumnByStatus(task.status);
     if (!column) continue;
 
@@ -36,9 +81,48 @@ function getColumnByStatus(status) {
 }
 
 function renderAllAvatars() {
-  for (let i = 0; i < tasks.length; i++) {
-    renderAvatar(tasks[i]);
+  const filteredTasks = getFilteredTasks();
+  for (let i = 0; i < filteredTasks.length; i++) {
+    renderAvatar(filteredTasks[i]);
   }
+}
+
+function getFilteredTasks() {
+  const term = boardSearchTerm.toLowerCase();
+  if (!term) return tasks;
+
+  return tasks.filter((task) => {
+    const contactsText = Array.isArray(task.contacts) ? task.contacts.join(" ") : "";
+    const subtasksText = Array.isArray(task.subtasks)
+      ? task.subtasks.map(st => st.title || "").join(" ")
+      : "";
+
+    const haystack = [
+      task.title,
+      task.description,
+      task.category,
+      task.priority,
+      task.status,
+      task.dueDate,
+      contactsText,
+      subtasksText
+    ].join(" ").toLowerCase();
+
+    return haystack.includes(term);
+  });
+}
+
+function highlightText(text) {
+  if (!boardSearchTerm) return text;
+  if (!text) return "";
+
+  const escaped = escapeRegExp(boardSearchTerm);
+  const regex = new RegExp(escaped, "gi");
+  return text.replace(regex, (match) => `<mark class="search-highlight">${match}</mark>`);
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /** Tasks aus Firebase laden */
@@ -602,6 +686,7 @@ function closeAddTaskDialog() {
 }
 
 function updateNoTaskPlaceholders() {
+  const filteredTasks = getFilteredTasks();
   const columns = [
     { id: "todo-column", status: "To Do" },
     { id: "inprogress-column", status: "In Progress" },
@@ -614,8 +699,7 @@ function updateNoTaskPlaceholders() {
     if (!columnElement) continue;
     const placeholder = columnElement.querySelector(".no-tasks");
     if (!placeholder) continue;
-    const hasTasks = tasks.some(task => task.status === col.status);
+    const hasTasks = filteredTasks.some(task => task.status === col.status);
     placeholder.style.display = hasTasks ? "none" : "flex";
   }
 }
-
