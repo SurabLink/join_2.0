@@ -348,8 +348,17 @@ h1 {
     margin-bottom: 12px;
 }
 
-.modal-contacts div {
+.modal-contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     margin: 4px 0 0 12px;
+}
+
+.modal-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .modal-subtasks div {
