@@ -12,6 +12,7 @@ function getBoardTemplate() {
           </svg>
         </div>
         <button class="add-task-btn" onclick="showAddTaskDialog()">Add Task +</button>
+        <img src="./assets/icons/plus add task mobile.svg" alt="Add Task Button" class="add-task-mobile-btn" onclick="showAddTaskDialog()">
       </div>
     </div>
     <div class="board-columns">
