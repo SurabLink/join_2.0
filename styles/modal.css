@@ -33,6 +33,15 @@ body {
   flex-direction: column;
 }
 
+.add-task-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-task-header img {
+  cursor: pointer;
+}
+
 .avatar {
   width: 36px;
   height: 36px;
