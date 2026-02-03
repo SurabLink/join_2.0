@@ -78,6 +78,7 @@ body {
     border-radius: 8px;
     padding: 8px 12px;
     background: white;
+    gap: 8px;
 }
 
 .board-search input {
@@ -87,10 +88,30 @@ body {
     font-size: 16px;
 }
 
+.search-clear {
+    border: none;
+    background: transparent;
+    color: #888;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.search-clear:hover {
+    color: #333;
+}
+
 .board-search svg {
     width: 20px;
     height: 20px;
     color: #666;
+}
+
+.search-highlight {
+    background: #FFE08A;
+    padding: 0 2px;
+    border-radius: 3px;
 }
 
 .add-task-btn {
