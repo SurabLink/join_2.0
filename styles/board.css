@@ -129,6 +129,13 @@ body {
     background: #091931;
 }
 
+.add-task-mobile-btn {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: none;
+}
+
 /* Board */
 .content {
     padding: 24px 40px;
@@ -312,7 +319,9 @@ h1 {
     border-radius: 12px;
     width: 400px;
     height: auto;
-    max-width: 90%;
+    max-width: 560px;
+    max-height: 85vh;
+    overflow-y: auto;
     /* font-family: Arial, sans-serif; */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     transform: translateX(100%);
@@ -341,6 +350,12 @@ h1 {
     font-size: 40px;
     font-weight: bold;
     margin: 12px 0 10px 0;
+}
+
+.modal-titles-task {
+    color: rgb(108, 108, 108);
+    font-size: 20px;
+    margin-right: 30px;
 }
 
 .modal-description {
@@ -373,17 +388,18 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin: 4px 0 0 12px;
+    margin: 14px 0 0 12px;
 }
 
 .modal-contact {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 10px;
 }
 
-.modal-subtasks div {
-    margin: 4px 0 0 12px;
+.modal-subtasks {
+    padding: 4px 0 0 14px;
 }
 
 .modal-actions {
@@ -416,28 +432,160 @@ h1 {
     margin-right: 5px;
 }
 
+/* Responsive */
+@media (max-width: 1250px) {
+    .app {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .main {
+        order: 1;
+    }
+
+    .content {
+        padding: 20px 24px 120px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .content {
+        padding: 16px;
+    }
+
+    .board-search {
+        width: 160px;
+    }
+
+    .board-search input {
+        width: 100%;
+    }
+
+    .board-columns {
+        flex-direction: column;
+        padding: 0;
+        gap: 12px;
+    }
+
+    .board-column {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .content {
+        padding: 20px 20px 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board-header h1 {
+        font-size: 24px;
+    }
+
+    .board-search {
+        padding: 6px 10px;
+    }
+
+    .add-task-btn {
+        padding: 10px 14px;
+    }
+
+    .task-card {
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 92%;
+        padding: 16px 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .board-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .board-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .board-search {
+        width: 100%;
+    }
+
+    .board-search input {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+    .board-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .board-actions {
+        position: relative;
+        width: 300px;
+    }
+
+    .board-search {
+        width: 300px;
+    }
+
+    .add-task-btn {
+        display: none;
+    }
+
+    .add-task-mobile-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 360px) {
+    .board-search input {
+        font-size: 14px;
+    }
+
+    .board-header h1 {
+        font-size: 22px;
+    }
+}
+
 /*Edit*/
-#editTaskForm {
+.edit-task-form {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
 
-#editTaskForm label {
+.edit-task-form label {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-#editTaskForm input,
-#editTaskForm textarea,
-#editTaskForm select {
+.edit-task-form input,
+.edit-task-form textarea,
+.edit-task-form select {
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 6px;
 }
 
-#editTaskForm textarea {
+.edit-task-form textarea {
   min-height: 80px;
   resize: vertical;
 }
@@ -446,22 +594,22 @@ h1 {
    PRIORITY BUTTONS (100% wie Original)
    =========================================== */
 
-#editTaskForm .priority {
+.edit-task-form .priority {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-#editTaskForm .priority-options {
+.edit-task-form .priority-options {
   display: flex;
   gap: 8px;
 }
 
-#editTaskForm .priority-options input {
+.edit-task-form .priority-options input {
   display: none;
 }
 
-#editTaskForm .priority-options label {
+.edit-task-form .priority-options label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -474,42 +622,65 @@ h1 {
   background: white;
   color: #000;
   font-weight: 500;
+  font-size: 14px;
   transition: all 0.2s;
 }
 
-#editTaskForm .priority-btn:hover {
+.edit-task-form .priority-btn {
+  flex-direction: row;
+}
+
+.edit-task-form .priority-options label.urgent svg,
+.edit-task-form .priority-options label.medium svg {
+  width: 24px;
+  height: 18px;
+}
+
+.edit-task-form .priority-btn:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Checked states */
-#editTaskForm input#urgent:checked + label.urgent {
-  background: var(--urgent);
+.edit-task-form input#edit-urgent:checked + label.urgent {
+  background: #FF3D00;
   color: white;
-  border-color: var(--urgent);
+  border-color: #FF3D00;
 }
 
-#editTaskForm input#medium:checked + label.medium {
-  background: var(--medium);
-  color: white;
-  border-color: var(--medium);
+.edit-task-form input#edit-urgent:checked + label.urgent path {
+  fill: white;
 }
 
-#editTaskForm input#low:checked + label.low {
-  background: var(--low);
+.edit-task-form input#edit-medium:checked + label.medium {
+  background: #FFA800;
   color: white;
-  border-color: var(--low);
+  border-color: #FFA800;
+}
+
+.edit-task-form input#edit-medium:checked + label.medium path {
+  fill: white;
+}
+
+.edit-task-form input#edit-low:checked + label.low {
+  background: #7AE229;
+  color: white;
+  border-color: #7AE229;
+}
+
+.edit-task-form input#edit-low:checked + label.low path {
+  fill: white;
 }
 
 /* ===========================================
    SUBTASKS
    =========================================== */
 
-#editTaskForm .subtasks {
+.edit-task-form .subtasks {
   display: flex;
   gap: 8px;
 }
 
-#editTaskForm .plus {
+.edit-task-form .plus {
   padding: 8px 14px;
   border: 1px solid var(--border);
   background: var(--panel-bg);
@@ -517,13 +688,13 @@ h1 {
   cursor: pointer;
 }
 
-#editTaskForm #subtaskArea {
+.edit-task-form #subtaskArea {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-#editTaskForm #subtaskArea li {
+.edit-task-form #subtaskArea li {
   list-style: none;
   padding: 10px 12px;
   background: #f1f1f1;
@@ -635,26 +806,6 @@ h1 {
   min-height: 80px;
 }
 
-/* Priority */
-
-.edit-priority {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.edit-priority-options {
-  display: flex;
-  gap: 12px;
-}
-
-.edit-priority-options label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
 /* Assigned */
 
 .edit-assigned {
@@ -663,36 +814,15 @@ h1 {
   gap: 8px;
 }
 
-.edit-custom-select {
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.edit-dropdown {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 110%;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  max-height: 180px;
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
-}
-
-.edit-custom-select.open .edit-dropdown {
-  display: block;
-}
-
 .edit-avatar-container {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+.edit-avatar-container .avatar {
+  margin-left: 0;
 }
 
 /* Subtasks */
@@ -745,12 +875,14 @@ h1 {
 }
 
 .edit-cancel {
+  cursor: pointer;
   background: transparent;
   border: none;
   color: #555;
 }
 
 .edit-save {
+  cursor: pointer;
   background: #2a7cff;
   color: white;
   border: none;
