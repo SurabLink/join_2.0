@@ -33,6 +33,15 @@ body {
   flex-direction: column;
 }
 
+.add-task-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-task-header img {
+  display: none;
+}
+
 .avatar {
   width: 36px;
   height: 36px;
@@ -229,7 +238,7 @@ textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #2A3647; /* oder deine Kontaktfarbe */
+  background-color: #03e3f8; /* oder deine Kontaktfarbe */
   color: white;
   display: flex;
   align-items: center;
@@ -255,7 +264,7 @@ textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #0038ff;
+  background: #03e3f8;
   color: white;
   display: flex;
   align-items: center;
