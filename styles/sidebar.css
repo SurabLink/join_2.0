@@ -16,6 +16,7 @@
     background-color: #2a3647;
     padding: 64px 0 64px 0;
     width: 232px;
+    position: relative;
 }
 
 .sidebar ul {
@@ -163,6 +164,39 @@ ul img {
 
     .sidebar-footer a {
         width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        padding: 8px 0;
+    }
+
+    .sidebar ul {
+        justify-content: space-around;
+        gap: 6px;
+        padding: 0 8px;
+    }
+
+    .sidebar li {
+        flex: 1;
+        padding: 6px 4px;
+    }
+
+    .sidebar ul div {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .sidebar ul a {
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    ul img {
+        width: 24px;
+        height: 24px;
     }
 }
 
