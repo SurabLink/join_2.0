@@ -16,6 +16,23 @@ body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 232px;
+    right: 0;
+    z-index: 10;
 }
 
 main {
@@ -24,6 +41,10 @@ main {
     align-items: stretch;
     flex: 1 1 auto;
     gap: 75px;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 96px;
+    padding-bottom: 24px;
 }
 
 .wrapper {
@@ -39,7 +60,8 @@ main {
     align-items: center;
     justify-content: center;
     gap: 32px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 h1 {
