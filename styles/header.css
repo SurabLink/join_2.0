@@ -43,8 +43,9 @@ header {
     cursor: pointer;
     vertical-align: middle;
 }
+
 .help-icon:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .user-profile-container {
