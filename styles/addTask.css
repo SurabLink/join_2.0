@@ -92,6 +92,18 @@ textarea {
   font-size: 20px;
 }
 
+/* Validierung - Fehler */
+.input-error {
+  border-color: #ff6b6b !important;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 14px;
+  display: block;
+  min-height: 16px;
+}
+
 /* Priority */
 
 .priority {
