@@ -102,6 +102,10 @@ textarea {
   font-size: 20px;
 }
 
+.note-inline {
+  display: none;
+}
+
 /* Validierung - Fehler */
 .input-error {
   border-color: #ff6b6b !important;
@@ -548,6 +552,22 @@ transform: scale(1.1);
     padding: 8px 14px;
     font-size: 14px;
   }
+}
+
+@media (max-width: 500px) {
+  .note-inline {
+    display: block;
+    margin-bottom: 24px;
+    font-size: 16px;
+  }
+
+  .note-outside {
+    display: none;
+  }
+
+  .subtask-list {
+  height: 70px;
+}
 }
 
 @media (max-width: 480px) {
