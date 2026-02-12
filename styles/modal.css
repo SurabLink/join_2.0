@@ -188,6 +188,10 @@ textarea {
   background: white;
 }
 
+#selectContacts {
+  margin-top: 8px;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
