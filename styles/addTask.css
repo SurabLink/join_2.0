@@ -197,12 +197,33 @@ select:focus,
 /* Contacts */
 .custom-select {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 0 10px;
   cursor: pointer;
   border-radius: 6px;
   position: relative;
   width: 320px;
   background: white;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+#selectContacts {
+  margin-top: 8px;
+}
+
+.custom-select span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.custom-select .dropdown-arrow {
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
 }
 
 .dropdown-content {
@@ -218,6 +239,11 @@ select:focus,
   z-index: 10;
   border-radius: 6px;
   box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+.dropdown-content,
+.dropdown-name {
+  font-size: 20px;
 }
 
 .dropdown-content.show {
