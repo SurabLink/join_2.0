@@ -114,14 +114,14 @@ function generateAddTask() {
               </ul>
             </label>
 
+            <p class="note note-inline"><span class="req">*</span>This field is required</p>
             <div class="actions">
               <button type="reset" class="clear" onclick="clearForm()">Clear ✕</button>
               <button type="submit" class="create">Create Task ▾</button>
             </div>
           </div>
         </form>
-
-        <p class="note"><span class="req">*</span>This field is required</p>
+        <p class="note note-outside"><span class="req">*</span>This field is required</p>
   `;
 }
 
