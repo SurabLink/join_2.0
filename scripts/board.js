@@ -510,6 +510,7 @@ async function openEditTaskModal(id) {
   await loadContacts();
   renderEditAssignedContacts(); 
   renderEditSubtasks();
+  initEditDropdownClose();
 }
 
 
@@ -590,7 +591,9 @@ function generateEditTaskTemplate(task) {
       <span>Assigned to</span>
 
       <div id="selectContacts" class="custom-select">
-        <span onclick="toggleDropdown(event)">Select contacts</span>
+        <span onclick="toggleDropdown(event)">Select contacts
+          <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+        </span>
         <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
       </div>
 
@@ -598,13 +601,19 @@ function generateEditTaskTemplate(task) {
     </div>
 
     <!-- Category -->
-    <label class="edit-label">
+    <div class="edit-label">
       <span>Category<span class="req">*</span></span>
-      <select class="edit-select" id="edit-category" required>
-        <option value="Technical Task" ${task.category==="Technical Task"?"selected":""}>Technical Task</option>
-        <option value="User Story" ${task.category==="User Story"?"selected":""}>User Story</option>
-      </select>
-    </label>
+      <div id="editCategorySelect" class="custom-select">
+        <span onclick="toggleEditCategoryDropdown(event)">
+          ${task.category ? task.category + " " : "Select task category "}
+          <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+        </span>
+        <div id="editCategoryDropdown" class="dropdown-content" onclick="event.stopPropagation()">
+          ${generateEditCategoryOptions(task.category)}
+        </div>
+      </div>
+      <input type="hidden" id="edit-category" value="${task.category || ''}">
+    </div>
 
     <!-- Subtasks -->
     <div class="edit-subtasks">
@@ -636,6 +645,49 @@ function renderEditAssignedContacts() {
 
   dropdown.innerHTML = generateAssignedContacts(contacts);
   renderSelectedAvatars();
+}
+
+function generateEditCategoryOptions(current) {
+  const categories = ["Technical Task", "User Story"];
+  return categories.map((cat) => `
+    <div class="dropdown-item" onclick="setEditCategory('${cat}')">
+      <span class="dropdown-name">${cat}</span>
+    </div>
+  `).join("");
+}
+
+function toggleEditCategoryDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById("editCategoryDropdown");
+  if (!dropdown) return;
+  dropdown.classList.toggle("show");
+}
+
+function setEditCategory(value) {
+  const input = document.getElementById("edit-category");
+  const select = document.getElementById("editCategorySelect");
+  if (!input || !select) return;
+
+  input.value = value;
+  const label = select.querySelector("span");
+  if (label) {
+    label.childNodes[0].textContent = value + " ";
+  }
+
+  const dropdown = document.getElementById("editCategoryDropdown");
+  if (dropdown) dropdown.classList.remove("show");
+}
+
+function initEditDropdownClose() {
+  if (window.editDropdownHandlerAdded) return;
+  window.editDropdownHandlerAdded = true;
+
+  document.addEventListener("click", () => {
+    const contactsDropdown = document.getElementById("dropdownContacts");
+    if (contactsDropdown) contactsDropdown.classList.remove("show");
+    const categoryDropdown = document.getElementById("editCategoryDropdown");
+    if (categoryDropdown) categoryDropdown.classList.remove("show");
+  });
 }
 
 function renderEditSubtasks() {
@@ -705,6 +757,9 @@ async function showAddTaskDialog() {
   selectedContacts = [];
   selectContacts();
   renderSelectedAvatars();
+  if (typeof initAddDropdownClose === "function") {
+    initAddDropdownClose();
+  }
 }
 
 function closeAddTaskDialog() {
