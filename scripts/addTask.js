@@ -141,24 +141,6 @@ function initAddDropdownClose() {
   });
 }
 
-// function generateAssignedContacts(contacts) {
-//   let content = "";
-//   for (let i = 0; i < contacts.length; i++) {
-//     content += /*html*/ `
-//       <label class="dropdown-item">
-//         <input 
-//           type="checkbox" 
-//           id="contact-${i}"       
-//           value="${contacts[i].name}" 
-//           ${selectedContacts.includes(contacts[i].name) ? 'checked="checked"' : ''}
-//           onchange="toggleContactSelection(this, '${contacts[i].name}')"
-//         >
-//         <label for="contact-${i}">${contacts[i].name}</label>
-//       </label>
-//     `;
-//   }
-// }
-
 /** Checkbox Umschalten */
 function toggleContactSelection(name, checkbox) {
   if (checkbox.checked) {
@@ -203,12 +185,23 @@ function addSubtask() {
 
 }
 
-function editSubtask(i) {
+function clearSubtaskInput() {
+  const input = document.getElementById('subtask');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+}
 
+function editSubtask(i) {
+  setEditingSubtask(i);
 }
 
 function deleteSubtask(i) {
   subtasks.splice(i, 1);
+  if (window.editingSubtaskIndex === i) {
+    window.editingSubtaskIndex = null;
+  }
   showSubtasks();
 }
 
@@ -217,5 +210,30 @@ function clearForm() {
   renderSelectedAvatars();
 }
 
+function setEditingSubtask(i) {
+  window.editingSubtaskIndex = i;
+  showSubtasks();
+  const input = document.getElementById(`subtask-edit-${i}`);
+  if (input) {
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  }
+}
 
+function cancelEditSubtask() {
+  window.editingSubtaskIndex = null;
+  showSubtasks();
+}
 
+function saveEditedSubtask(i) {
+  const input = document.getElementById(`subtask-edit-${i}`);
+  if (!input) return;
+  const value = input.value.trim();
+  if (!value) {
+    alert("Bitte eine Subtask beschreiben!");
+    return;
+  }
+  subtasks[i].title = value;
+  window.editingSubtaskIndex = null;
+  showSubtasks();
+}
