@@ -336,15 +336,86 @@ select:focus,
 /* Subtasks */
 .subtasks {
   display: flex;
-  gap: 8px;
+  position: relative;
+  width: 100%;
 }
 
-.plus {
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  background: var(--panel-bg);
-  border-radius: 6px;
+.subtasks input {
+  width: 100%;
+  padding-right: 72px;
+}
+
+.subtask-input-actions {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.subtasks input:not(:placeholder-shown) ~ .subtask-input-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.subtask-edit {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin-left: 0;
+  background: transparent;
+}
+
+.subtask-edit-input {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #29ABE2;
+}
+
+.subtask-edit .subtask-input-actions {
+  right: 24px;
+}
+
+.subtask.subtask-edit:hover {
+  background-color: transparent !important;
+  cursor: default;
+}
+
+.subtask-edit-input:not(:placeholder-shown) ~ .subtask-input-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.subtask-icon-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.subtask-icon-btn img {
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) saturate(100%);
+}
+
+.subtask-icon-btn:hover img {
+  transform: scale(1.1);
+}
+
+.subtask-input-separator {
+  width: 1px;
+  height: 18px;
+  background-color: #b5b5b5;
 }
 
 .subtask-list {
@@ -356,6 +427,11 @@ select:focus,
   content: "•";
   margin-right: 20px;
   color: black;
+}
+
+.subtask-list .subtask-edit::before {
+  content: "";
+  margin-right: 0;
 }
 
 .subtask {
