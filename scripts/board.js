@@ -504,6 +504,7 @@ async function openEditTaskModal(id) {
   // lokale Kopien für Edit
   editSubtasks = task.subtasks.map(st => ({ ...st }));
   selectedContacts = [...task.contacts];
+  window.editingEditSubtaskIndex = null;
 
   modalContent.innerHTML = generateEditTaskTemplate(task);
 
@@ -619,12 +620,20 @@ function generateEditTaskTemplate(task) {
     <div class="edit-subtasks">
       <span>Subtasks</span>
 
-      <div class="edit-subtask-input-row">
-        <input id="edit-subtask-input" placeholder="Add new subtask">
-        <button type="button" onclick="addEditSubtask()">+</button>
+      <div class="subtasks">
+        <input type="text" id="edit-subtask-input" placeholder="Add new subtask">
+        <div class="subtask-input-actions">
+          <button type="button" class="subtask-icon-btn" onclick="clearEditSubtaskInput()" aria-label="Clear subtask">
+            <img src="./assets/icons/iconoir_cancel.svg" alt="">
+          </button>
+          <div class="subtask-input-separator"></div>
+          <button type="button" class="subtask-icon-btn" onclick="addEditSubtask()" aria-label="Add subtask">
+            <img src="./assets/icons/checkmark.svg" alt="">
+          </button>
+        </div>
       </div>
 
-      <ul id="editSubtaskArea" class="edit-subtask-list"></ul>
+      <ul id="editSubtaskArea" class="subtask-list"></ul>
     </div>
 
   </div>
@@ -697,11 +706,38 @@ function renderEditSubtasks() {
   area.innerHTML = "";
 
   editSubtasks.forEach((st, i) => {
+    const isEditing = window.editingEditSubtaskIndex === i;
+    if (isEditing) {
+      area.innerHTML += `
+        <li class="subtask subtask-edit">
+          <input
+            type="text"
+            id="edit-subtask-edit-${i}"
+            class="subtask-edit-input"
+            value="${st.title}"
+            placeholder="Edit subtask"
+          >
+          <div class="subtask-input-actions">
+            <button type="button" class="subtask-icon-btn" onclick="deleteEditSubtask(${i})" aria-label="Delete subtask">
+              <img src="./assets/icons/delete.svg" alt="">
+            </button>
+            <div class="subtask-input-separator"></div>
+            <button type="button" class="subtask-icon-btn" onclick="saveEditedEditSubtask(${i})" aria-label="Save subtask">
+              <img src="./assets/icons/checkmark.svg" alt="">
+            </button>
+          </div>
+        </li>
+      `;
+      return;
+    }
+
     area.innerHTML += `
       <li class="subtask">
-        <input value="${st.title}" oninput="editSubtasks[${i}].title=this.value">
+        <span>${st.title}</span>
         <div class="subtask-actions">
-          <img src="./assets/icons/delete.svg" onclick="deleteEditSubtask(${i})">
+          <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteEditSubtask(${i})">
+          <div class="action-separator"></div>
+          <img src="./assets/icons/edit.svg" alt="Edit" onclick="editEditSubtask(${i})">
         </div>
       </li>
     `;
@@ -719,6 +755,46 @@ function addEditSubtask() {
 
 function deleteEditSubtask(i) {
   editSubtasks.splice(i,1);
+  if (window.editingEditSubtaskIndex === i) {
+    window.editingEditSubtaskIndex = null;
+  } else if (typeof window.editingEditSubtaskIndex === "number" && i < window.editingEditSubtaskIndex) {
+    window.editingEditSubtaskIndex -= 1;
+  }
+  renderEditSubtasks();
+}
+
+function clearEditSubtaskInput() {
+  const input = document.getElementById("edit-subtask-input");
+  if (input) {
+    input.value = "";
+    input.focus();
+  }
+}
+
+function editEditSubtask(i) {
+  setEditingEditSubtask(i);
+}
+
+function setEditingEditSubtask(i) {
+  window.editingEditSubtaskIndex = i;
+  renderEditSubtasks();
+  const input = document.getElementById(`edit-subtask-edit-${i}`);
+  if (input) {
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  }
+}
+
+function saveEditedEditSubtask(i) {
+  const input = document.getElementById(`edit-subtask-edit-${i}`);
+  if (!input) return;
+  const value = input.value.trim();
+  if (!value) {
+    alert("Bitte eine Subtask beschreiben!");
+    return;
+  }
+  editSubtasks[i].title = value;
+  window.editingEditSubtaskIndex = null;
   renderEditSubtasks();
 }
 
