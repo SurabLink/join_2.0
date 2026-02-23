@@ -249,7 +249,7 @@ async function handleContactClick(event) {
   initContactMoreMenuAutoClose();
 
   // Mobile: Verstecke Kontaktliste und zeige Details
-  if (window.innerWidth <= 600) {
+  if (window.innerWidth <= 780) {
     document.querySelector('.wrapper').classList.add('show-contact-details');
   }
 }
@@ -330,7 +330,7 @@ function refreshContactDetails() {
   contactDetailsContainerRef.innerHTML = '';
 
   // Mobile: Zeige Kontaktliste wieder und verstecke Details
-  if (window.innerWidth <= 600) {
+  if (window.innerWidth <= 780) {
     document.querySelector('.wrapper').classList.remove('show-contact-details');
   }
 }
