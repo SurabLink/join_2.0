@@ -337,17 +337,19 @@ select:focus,
 .subtasks {
   display: flex;
   position: relative;
-  width: 100%;
+  width: fit-content;
+  margin-bottom: 10px;
 }
 
 .subtasks input {
-  width: 100%;
+  width: 320px;
+  height: 40px;
   padding-right: 72px;
 }
 
 .subtask-input-actions {
   position: absolute;
-  right: 16px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -682,6 +684,10 @@ transform: scale(1.1);
     padding: 5px 10px;
     font-size: 12px;
   }
+
+  .subtasks input {
+    width: 280px;
+  } 
 }
 
 @media (max-width: 320px) {
