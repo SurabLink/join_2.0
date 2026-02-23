@@ -90,7 +90,15 @@ function generateEditTask() {
               Subtasks
               <div class="subtasks">
                 <input type="text" id="subtask" placeholder="Add new subtask">
-                <button type="button" class="plus" onclick="addSubtask()">+</button>
+                <div class="subtask-input-actions">
+                  <button type="button" class="subtask-icon-btn" onclick="clearSubtaskInput()" aria-label="Clear subtask">
+                    <img src="./assets/icons/iconoir_cancel.svg" alt="">
+                  </button>
+                  <div class="subtask-input-separator"></div>
+                  <button type="button" class="subtask-icon-btn" onclick="addSubtask()" aria-label="Add subtask">
+                    <img src="./assets/icons/checkmark.svg" alt="">
+                  </button>
+                </div>
               </div>
               <ul id="subtaskArea" class="subtask-list">
 
