@@ -107,7 +107,15 @@ function generateAddTask() {
               Subtasks
               <div class="subtasks">
                 <input type="text" id="subtask" placeholder="Add new subtask">
-                <button type="button" class="plus" onclick="addSubtask()">+</button>
+                <div class="subtask-input-actions">
+                  <button type="button" class="subtask-icon-btn" onclick="clearSubtaskInput()" aria-label="Clear subtask">
+                    <img src="./assets/icons/iconoir_cancel.svg" alt="">
+                  </button>
+                  <div class="subtask-input-separator"></div>
+                  <button type="button" class="subtask-icon-btn" onclick="addSubtask()" aria-label="Add subtask">
+                    <img src="./assets/icons/checkmark.svg" alt="">
+                  </button>
+                </div>
               </div>
               <ul id="subtaskArea" class="subtask-list">
 
@@ -135,16 +143,40 @@ function generateAddCategoryOptions() {
 }
 
 function generateSubtasks(i) {
-  return /*html*/ `
-      <li class="subtask">
-        <span>${subtasks[i].title}</span>
-        <div class="subtask-actions">
-          <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
-          <div class="action-separator"></div>
-          <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
+  const isEditing = window.editingSubtaskIndex === i;
+  if (isEditing) {
+    return /*html*/ `
+      <li class="subtask subtask-edit">
+        <input
+          type="text"
+          id="subtask-edit-${i}"
+          class="subtask-edit-input"
+          value="${subtasks[i].title}"
+          placeholder="Edit subtask"
+        >
+        <div class="subtask-input-actions">
+          <button type="button" class="subtask-icon-btn" onclick="deleteSubtask(${i})" aria-label="Delete subtask">
+            <img src="./assets/icons/delete.svg" alt="">
+          </button>
+          <div class="subtask-input-separator"></div>
+          <button type="button" class="subtask-icon-btn" onclick="saveEditedSubtask(${i})" aria-label="Save subtask">
+            <img src="./assets/icons/checkmark.svg" alt="">
+          </button>
         </div>
       </li>
     `;
+  }
+
+  return /*html*/ `
+    <li class="subtask">
+      <span>${subtasks[i].title}</span>
+      <div class="subtask-actions">
+        <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
+        <div class="action-separator"></div>
+        <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
+      </div>
+    </li>
+  `;
 }
 
 /** Kontakte für Dropdown generieren */
