@@ -706,36 +706,146 @@ h1 {
 
 .edit-task-form .subtasks {
   display: flex;
+  position: relative;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.edit-task-form .subtasks input {
+  width: 320px;
+  height: 40px;
+  padding-right: 72px;
+}
+
+.edit-task-form .subtask-input-actions {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
   gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
-.edit-task-form .plus {
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  background: var(--panel-bg);
-  border-radius: 6px;
+.edit-task-form .subtasks input:not(:placeholder-shown) ~ .subtask-input-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edit-task-form .subtask-edit {
+  position: relative;
+  width: fit-content;
+  min-width: 320px;
+  padding: 0;
+  margin-left: 0;
+  background: transparent;
+}
+
+.edit-task-form .subtask-edit-input {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #29ABE2;
+}
+
+.edit-task-form .subtask-edit .subtask-input-actions {
+  right: 24px;
+}
+
+.edit-task-form .subtask-edit-input:not(:placeholder-shown) ~ .subtask-input-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edit-task-form .subtask-icon-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
 }
 
-.edit-task-form #subtaskArea {
+.edit-task-form .subtask-icon-btn img {
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) saturate(100%);
+}
+
+.edit-task-form .subtask-icon-btn:hover img {
+  transform: scale(1.1);
+}
+
+.edit-task-form .subtask-input-separator {
+  width: 1px;
+  height: 18px;
+  background-color: #b5b5b5;
+}
+
+.edit-task-form .subtask-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.edit-task-form #subtaskArea li {
-  list-style: none;
-  padding: 10px 12px;
-  background: #f1f1f1;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-}
-
-#editTaskForm #subtaskArea li::before {
+.edit-task-form .subtask-list li::before {
   content: "•";
   margin-right: 14px;
   color: black;
+}
+
+.edit-task-form .subtask-list .subtask-edit::before {
+  content: "";
+  margin-right: 0;
+}
+
+.edit-task-form .subtask {
+  height: 40px;
+  width: fit-content;
+  min-width: 320px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+
+.edit-task-form .subtask-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.edit-task-form .subtask-actions img {
+  width: 20px;
+  height: 20px;
+}
+
+.edit-task-form .subtask-actions img:hover {
+  transform: scale(1.1);
+}
+
+.edit-task-form .subtask:hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+}
+
+.edit-task-form .subtask.subtask-edit:hover {
+  background-color: transparent !important;
+  cursor: default;
+}
+
+.edit-task-form .subtask:hover .subtask-actions {
+  opacity: 1;
 }
 
 .subtask-progress-bar {
