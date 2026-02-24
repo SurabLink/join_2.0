@@ -1,9 +1,5 @@
 /**
- * Handles navigateToHelp.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to help.
+ * Executes navigate to help logic.
  * @returns {void} Result.
  */
 function navigateToHelp() {
@@ -11,11 +7,7 @@ function navigateToHelp() {
 }
 
 /**
- * Handles navigateToBoard.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to board.
+ * Executes navigate to board logic.
  * @returns {void} Result.
  */
 function navigateToBoard() {
@@ -23,12 +15,6 @@ function navigateToBoard() {
 }
 
 // kleines Hilfs-Utility, damit wir nicht dauernd getElementById + innerText schreiben
-/**
- * Handles setText.
- * @param {*} id - Parameter.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets text.
  * @param {string} id - Identifier.
@@ -41,11 +27,6 @@ function setText(id, value) {
 }
 
 // ---- NEW: Welcome + Username ----
-/**
- * Handles getGreetingByTime.
- * @param {*} withComma - Parameter.
- * @returns {*} Result.
- */
 /**
  * Returns greeting by time.
  * @param {*} withComma - Parameter.
@@ -61,10 +42,6 @@ function getGreetingByTime(withComma) {
 }
 
 /**
- * Handles getStoredSession.
- * @returns {*} Result.
- */
-/**
  * Returns stored session.
  * @returns {*} Result.
  */
@@ -77,11 +54,6 @@ function getStoredSession() {
     }
 }
 
-/**
- * Handles fetchUserNameByEmail.
- * @param {*} email - Parameter.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Fetches user name by email.
  * @param {string} email - Email address.
@@ -102,10 +74,6 @@ async function fetchUserNameByEmail(email) {
 }
 
 /**
- * Handles renderWelcome.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Renders welcome.
  * @returns {Promise<*>} Result.
  */
@@ -121,11 +89,6 @@ async function renderWelcome() {
 }
 
 /**
- * Handles isGuestSession.
- * @param {*} session - Parameter.
- * @returns {*} Result.
- */
-/**
  * Checks whether guest session.
  * @param {*} session - Parameter.
  * @returns {boolean} Result.
@@ -134,10 +97,6 @@ function isGuestSession(session) {
     return !session || session.mode === "guest";
 }
 
-/**
- * Handles renderGuestWelcome.
- * @returns {*} Result.
- */
 /**
  * Renders guest welcome.
  * @returns {void} Result.
@@ -148,12 +107,7 @@ function renderGuestWelcome() {
 }
 
 /**
- * Handles resolveUserName.
- * @param {*} session - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
- * Handles resolve user name.
+ * Executes resolve user name logic.
  * @param {*} session - Parameter.
  * @returns {Promise<*>} Result.
  */
@@ -165,10 +119,6 @@ async function resolveUserName(session) {
 // ---- /NEW ----
 
 // Tasks aus Firebase holen
-/**
- * Handles fetchTasks.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Fetches tasks.
  * @returns {Promise<*>} Result.
@@ -185,10 +135,6 @@ async function fetchTasks() {
 
 // Dashboard-Werte aktualisieren
 /**
- * Handles updateDashboard.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Updates dashboard.
  * @returns {Promise<*>} Result.
  */
@@ -202,12 +148,7 @@ async function updateDashboard() {
 }
 
 /**
- * Handles applyDashboardStats.
- * @param {*} tasks - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles apply dashboard stats.
+ * Executes apply dashboard stats logic.
  * @param {*} tasks - Parameter.
  * @returns {void} Result.
  */
@@ -221,11 +162,6 @@ function applyDashboardStats(tasks) {
     setText("total-tasks-board", stats.totalTasks);
 }
 
-/**
- * Handles getDashboardStats.
- * @param {*} tasks - Parameter.
- * @returns {*} Result.
- */
 /**
  * Returns dashboard stats.
  * @param {*} tasks - Parameter.
