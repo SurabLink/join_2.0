@@ -1,9 +1,5 @@
 /**
- * Handles sidebarHighlightingSummary.
- * @returns {*} Result.
- */
-/**
- * Handles sidebar highlighting summary.
+ * Executes sidebar highlighting summary logic.
  * @returns {void} Result.
  */
 function sidebarHighlightingSummary() {
@@ -11,11 +7,7 @@ function sidebarHighlightingSummary() {
 }
 
 /**
- * Handles sidebarHighlightingAddTask.
- * @returns {*} Result.
- */
-/**
- * Handles sidebar highlighting add task.
+ * Executes sidebar highlighting add task logic.
  * @returns {void} Result.
  */
 function sidebarHighlightingAddTask() {
@@ -23,11 +15,7 @@ function sidebarHighlightingAddTask() {
 }
 
 /**
- * Handles sidebarHighlightingBoard.
- * @returns {*} Result.
- */
-/**
- * Handles sidebar highlighting board.
+ * Executes sidebar highlighting board logic.
  * @returns {void} Result.
  */
 function sidebarHighlightingBoard() {
@@ -35,11 +23,7 @@ function sidebarHighlightingBoard() {
 }
 
 /**
- * Handles sidebarHighlightingContacts.
- * @returns {*} Result.
- */
-/**
- * Handles sidebar highlighting contacts.
+ * Executes sidebar highlighting contacts logic.
  * @returns {void} Result.
  */
 function sidebarHighlightingContacts() {
@@ -47,10 +31,6 @@ function sidebarHighlightingContacts() {
 
 }
 
-/**
- * Handles openLogInSide.
- * @returns {*} Result.
- */
 /**
  * Opens log in side.
  * @returns {void} Result.
@@ -60,11 +40,7 @@ function openLogInSide() {
 }
 
 /**
- * Handles navigateToLegalNotice.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to legal notice.
+ * Executes navigate to legal notice logic.
  * @returns {void} Result.
  */
 function navigateToLegalNotice() {
@@ -72,11 +48,7 @@ function navigateToLegalNotice() {
 }
 
 /**
- * Handles navigateToPrivacyPolicy.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to privacy policy.
+ * Executes navigate to privacy policy logic.
  * @returns {void} Result.
  */
 function navigateToPrivacyPolicy() {
