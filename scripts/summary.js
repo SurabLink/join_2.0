@@ -1,18 +1,56 @@
+/**
+ * Handles navigateToHelp.
+ * @returns {*} Result.
+ */
+/**
+ * Handles navigate to help.
+ * @returns {void} Result.
+ */
 function navigateToHelp() {
     window.location.href = "help.html";
 }
 
+/**
+ * Handles navigateToBoard.
+ * @returns {*} Result.
+ */
+/**
+ * Handles navigate to board.
+ * @returns {void} Result.
+ */
 function navigateToBoard() {
     window.location.href = "board.html";
 }
 
 // kleines Hilfs-Utility, damit wir nicht dauernd getElementById + innerText schreiben
+/**
+ * Handles setText.
+ * @param {*} id - Parameter.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets text.
+ * @param {string} id - Identifier.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function setText(id, value) {
     const el = document.getElementById(id);
     if (el) el.textContent = value;
 }
 
 // ---- NEW: Welcome + Username ----
+/**
+ * Handles getGreetingByTime.
+ * @param {*} withComma - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns greeting by time.
+ * @param {*} withComma - Parameter.
+ * @returns {*} Result.
+ */
 function getGreetingByTime(withComma) {
     const hour = new Date().getHours();
     const suffix = withComma ? "," : "!";
@@ -22,6 +60,14 @@ function getGreetingByTime(withComma) {
     return `Good evening${suffix}`;
 }
 
+/**
+ * Handles getStoredSession.
+ * @returns {*} Result.
+ */
+/**
+ * Returns stored session.
+ * @returns {*} Result.
+ */
 function getStoredSession() {
     try {
         const raw = localStorage.getItem("user");
@@ -31,6 +77,16 @@ function getStoredSession() {
     }
 }
 
+/**
+ * Handles fetchUserNameByEmail.
+ * @param {*} email - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Fetches user name by email.
+ * @param {string} email - Email address.
+ * @returns {Promise<*>} Result.
+ */
 async function fetchUserNameByEmail(email) {
     if (!email) return "";
     try {
@@ -45,6 +101,14 @@ async function fetchUserNameByEmail(email) {
     }
 }
 
+/**
+ * Handles renderWelcome.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Renders welcome.
+ * @returns {Promise<*>} Result.
+ */
 async function renderWelcome() {
     const session = getStoredSession();
     if (isGuestSession(session)) {
@@ -56,15 +120,43 @@ async function renderWelcome() {
     setText("username-field", name);
 }
 
+/**
+ * Handles isGuestSession.
+ * @param {*} session - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Checks whether guest session.
+ * @param {*} session - Parameter.
+ * @returns {boolean} Result.
+ */
 function isGuestSession(session) {
     return !session || session.mode === "guest";
 }
 
+/**
+ * Handles renderGuestWelcome.
+ * @returns {*} Result.
+ */
+/**
+ * Renders guest welcome.
+ * @returns {void} Result.
+ */
 function renderGuestWelcome() {
     setText("welcome-msg", getGreetingByTime(false));
     setText("username-field", "");
 }
 
+/**
+ * Handles resolveUserName.
+ * @param {*} session - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Handles resolve user name.
+ * @param {*} session - Parameter.
+ * @returns {Promise<*>} Result.
+ */
 async function resolveUserName(session) {
     const nameFromDb = await fetchUserNameByEmail(session.email);
     return nameFromDb || session.displayName || "User";
@@ -73,6 +165,14 @@ async function resolveUserName(session) {
 // ---- /NEW ----
 
 // Tasks aus Firebase holen
+/**
+ * Handles fetchTasks.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Fetches tasks.
+ * @returns {Promise<*>} Result.
+ */
 async function fetchTasks() {
     const response = await fetch(`${BASE_URL}/tasks.json`);
     if (!response.ok) {
@@ -84,6 +184,14 @@ async function fetchTasks() {
 }
 
 // Dashboard-Werte aktualisieren
+/**
+ * Handles updateDashboard.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Updates dashboard.
+ * @returns {Promise<*>} Result.
+ */
 async function updateDashboard() {
     try {
         const tasks = await fetchTasks();
@@ -93,6 +201,16 @@ async function updateDashboard() {
     }
 }
 
+/**
+ * Handles applyDashboardStats.
+ * @param {*} tasks - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles apply dashboard stats.
+ * @param {*} tasks - Parameter.
+ * @returns {void} Result.
+ */
 function applyDashboardStats(tasks) {
     const stats = getDashboardStats(tasks);
     setText("total-to-do", stats.todoCount);
@@ -103,6 +221,16 @@ function applyDashboardStats(tasks) {
     setText("total-tasks-board", stats.totalTasks);
 }
 
+/**
+ * Handles getDashboardStats.
+ * @param {*} tasks - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns dashboard stats.
+ * @param {*} tasks - Parameter.
+ * @returns {*} Result.
+ */
 function getDashboardStats(tasks) {
     return {
         todoCount: tasks.filter(t => t.status === "To Do").length,
