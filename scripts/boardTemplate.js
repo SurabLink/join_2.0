@@ -100,16 +100,11 @@ function getNoTasksPlaceholder() {
 
 function createTaskCard(task) {
   return /*html*/ `
-    <div class="task-card"
-      draggable="true"
-      ondragstart="startDrag(${task.id})"
-      onclick="openModal(${task.id})">
+    <div class="task-card" draggable="true" ondragstart="startDrag(${task.id})" onclick="openModal(${task.id})">
       ${getTaskCategoryLabel(task)}
-      <h3>${highlightText(task.title)}</h3>
-      <span>${highlightText(task.description.substring(0, 50))}...</span>
-      <div class="subtask-card">
-        ${renderSubtaskProgress(task)}
-      </div>
+      ${getTaskTitle(task)}
+      ${getTaskDescription(task)}
+      ${getTaskSubtasks(task)}
       ${getTaskFooter(task)}
     </div>
   `;
@@ -122,13 +117,28 @@ function getTaskCategoryLabel(task) {
   `;
 }
 
+function getTaskTitle(task) {
+  return `<h3>${highlightText(task.title)}</h3>`;
+}
+
+function getTaskDescription(task) {
+  const text = task.description.substring(0, 50);
+  return `<span>${highlightText(text)}...</span>`;
+}
+
+function getTaskSubtasks(task) {
+  return /*html*/ `
+    <div class="subtask-card">
+      ${renderSubtaskProgress(task)}
+    </div>
+  `;
+}
+
 function getTaskFooter(task) {
   return /*html*/ `
     <div class="task-footer">
       <div class="avatar-container" id="avatars-${task.id}"></div>
-      <div>
-        ${getPriorityIcon(task.priority)}
-      </div>
+      <div>${getPriorityIcon(task.priority)}</div>
     </div>
   `;
 }
@@ -137,4 +147,31 @@ function getPriorityIcon(priority) {
   if (priority === "urgent") return '<img src="./assets/img/Category_Urgent.svg">';
   if (priority === "medium") return '<img src="./assets/icons/medium_orange.svg">';
   return '<img src="./assets/img/Category_Low.svg">';
+}
+
+function renderSubtaskProgress(task) {
+  if (!task.subtasks || task.subtasks.length === 0) {
+    return `<div>0/0</div>`;
+  }
+  const done = task.subtasks.filter(st => st.done).length;
+  const total = task.subtasks.length;
+  const percent = Math.round((done / total) * 100);
+  return getSubtaskProgressMarkup(percent, done, total);
+}
+
+function getSubtaskProgressMarkup(percent, done, total) {
+  return /*html*/ `
+    <div class="subtask-progress-bar">
+      <div class="subtask-progress-fill" style="width:${percent}%"></div>
+    </div>
+    <div>${done}/${total}</div>
+  `;
+}
+
+function getAvatarMarkup(initials, color) {
+  return /*html*/ `
+    <div class="avatar" style="background-color: ${color};">
+      ${initials}
+    </div>
+  `;
 }
