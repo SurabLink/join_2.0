@@ -11,10 +11,6 @@ let selectedContacts = [];
 let subtasks = [];
 
 /**
- * Handles loadContacts.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Loads contacts.
  * @returns {Promise<*>} Result.
  */
@@ -28,10 +24,6 @@ async function loadContacts() {
 }
 
 /**
- * Handles fetchContactsData.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Fetches contacts data.
  * @returns {Promise<*>} Result.
  */
@@ -41,12 +33,7 @@ async function fetchContactsData() {
 }
 
 /**
- * Handles mapContactsData.
- * @param {*} data - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles map contacts data.
+ * Executes map contacts data logic.
  * @param {*} data - Parameter.
  * @returns {void} Result.
  */
@@ -57,11 +44,7 @@ function mapContactsData(data) {
 // Seite sofort schützen (BEVOR irgendwas anderes passiert)
 // ABER NUR auf geschützten Seiten (nicht auf index.html / signup.html)
 /**
- * Handles protectThisPage.
- * @returns {*} Result.
- */
-/**
- * Handles protect this page.
+ * Executes protect this page logic.
  * @returns {void} Result.
  */
 function protectThisPage() {
@@ -75,11 +58,6 @@ function protectThisPage() {
 }
 
 /**
- * Handles isPublicPage.
- * @param {*} pathname - Parameter.
- * @returns {*} Result.
- */
-/**
  * Checks whether public page.
  * @param {*} pathname - Parameter.
  * @returns {boolean} Result.
@@ -91,12 +69,6 @@ function isPublicPage(pathname) {
 // Sofort aufrufen
 protectThisPage();
 
-/**
- * Handles showMessage.
- * @param {*} message - Parameter.
- * @param {*} type - Parameter.
- * @returns {*} Result.
- */
 /**
  * Shows message.
  * @param {string} message - Message text.
@@ -114,10 +86,6 @@ function showMessage(message, type = "success") {
 }
 
 /**
- * Handles getOrCreateMessageBox.
- * @returns {*} Result.
- */
-/**
  * Returns or create message box.
  * @returns {*} Result.
  */
@@ -134,12 +102,6 @@ function getOrCreateMessageBox() {
 }
 
 /**
- * Handles setMessageBoxContent.
- * @param {*} box - Parameter.
- * @param {*} message - Parameter.
- * @returns {*} Result.
- */
-/**
  * Sets message box content.
  * @param {*} box - Parameter.
  * @param {string} message - Message text.
@@ -153,12 +115,6 @@ function setMessageBoxContent(box, message) {
 }
 
 /**
- * Handles setMessageBoxType.
- * @param {*} box - Parameter.
- * @param {*} type - Parameter.
- * @returns {*} Result.
- */
-/**
  * Sets message box type.
  * @param {*} box - Parameter.
  * @param {string} type - Message type.
@@ -168,11 +124,6 @@ function setMessageBoxType(box, type) {
   box.className = `msgBox ${type}`;
 }
 
-/**
- * Handles setMessageBoxBaseStyles.
- * @param {*} box - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets message box base styles.
  * @param {*} box - Parameter.
@@ -186,11 +137,6 @@ function setMessageBoxBaseStyles(box) {
   box.style.zIndex = "9999";
 }
 
-/**
- * Handles setMessageBoxLayoutStyles.
- * @param {*} box - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets message box layout styles.
  * @param {*} box - Parameter.
@@ -213,12 +159,6 @@ function setMessageBoxLayoutStyles(box) {
 }
 
 /**
- * Handles setMessageBoxColors.
- * @param {*} box - Parameter.
- * @param {*} type - Parameter.
- * @returns {*} Result.
- */
-/**
  * Sets message box colors.
  * @param {*} box - Parameter.
  * @param {string} type - Message type.
@@ -233,12 +173,7 @@ function setMessageBoxColors(box, type) {
 }
 
 /**
- * Handles scheduleMessageHide.
- * @param {*} box - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles schedule message hide.
+ * Executes schedule message hide logic.
  * @param {*} box - Parameter.
  * @returns {void} Result.
  */
@@ -250,13 +185,8 @@ function scheduleMessageHide(box) {
 }
 
 /**
- * Handles toggleProfileMenu.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
  * Toggles profile menu.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function toggleProfileMenu(event) {
@@ -277,13 +207,8 @@ document.addEventListener('click', (event) => {
 });
 
 /**
- * Handles logout.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles logout.
- * @param {Event} event - DOM event.
+ * Executes logout logic.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function logout(event) {
@@ -297,10 +222,6 @@ function logout(event) {
 }
 
 /**
- * Handles clearUserSession.
- * @returns {*} Result.
- */
-/**
  * Clears user session.
  * @returns {void} Result.
  */
@@ -309,11 +230,7 @@ function clearUserSession() {
 }
 
 /**
- * Handles safeFirebaseLogout.
- * @returns {*} Result.
- */
-/**
- * Handles safe firebase logout.
+ * Executes safe firebase logout logic.
  * @returns {void} Result.
  */
 function safeFirebaseLogout() {
@@ -327,11 +244,7 @@ function safeFirebaseLogout() {
 }
 
 /**
- * Handles redirectToLogin.
- * @returns {*} Result.
- */
-/**
- * Handles redirect to login.
+ * Executes redirect to login logic.
  * @returns {void} Result.
  */
 function redirectToLogin() {
