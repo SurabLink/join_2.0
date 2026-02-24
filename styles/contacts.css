@@ -1,10 +1,10 @@
-main {
+main{
     gap: 0px;
     height: 100vh;
     background-color: white;
 }
 
-.wrapper {
+.wrapper{
     display: flex;
     align-items: flex-start;
     height: 100%;
@@ -12,7 +12,7 @@ main {
     gap: 0px !important;
 }
 
-.contact-section {
+.contact-section{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -21,7 +21,7 @@ main {
     margin-top: 24px;
 }
 
-.add-contact-btn {
+.add-contact-btn{
     border: none;
     width: 100%;
     max-width: 352px;
@@ -41,17 +41,17 @@ main {
     margin-left: 24px;
 }
 
-.add-contact-btn:hover {
+.add-contact-btn:hover{
     background-color: #29ABE2;
 }
 
-.add-contact-btn img {
+.add-contact-btn img{
     width: 32px;
     height: 32px;
     margin-left: 8px;
 }
 
-.contact-list {
+.contact-list{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -61,25 +61,25 @@ main {
 }
 
 /* Optionaler Webkit Scrollbar Style für Chrome/Safari/Edge */
-.contact-list::-webkit-scrollbar {
+.contact-list::-webkit-scrollbar{
     width: 8px;
 }
 
-.contact-list::-webkit-scrollbar-track {
+.contact-list::-webkit-scrollbar-track{
     background: #f1f1f1;
     border-radius: 4px;
 }
 
-.contact-list::-webkit-scrollbar-thumb {
+.contact-list::-webkit-scrollbar-thumb{
     background: #888;
     border-radius: 4px;
 }
 
-.contact-list::-webkit-scrollbar-thumb:hover {
+.contact-list::-webkit-scrollbar-thumb:hover{
     background: #666;
 }
 
-.contact-group-letter {
+.contact-group-letter{
     font-size: 20px;
     font-weight: 400;
     color: #2A3647;
@@ -90,14 +90,14 @@ main {
     margin-left: 24px;
 }
 
-.dividing-line {
+.dividing-line{
     width: 100%;
     height: 1.5px;
     background: #D1D1D1;
     margin-bottom: 8px;
 }
 
-.contact-area {
+.contact-area{
     display: flex;
     align-items: center;
     gap: 18px;
@@ -106,8 +106,7 @@ main {
     transition: background-color 0.2s ease;
 }
 
-.contact-area:hover,
-.contact-item:hover {
+.contact-area:hover, .contact-item:hover{
     background: rgba(224, 224, 224, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 16px 0 rgba(44, 62, 80, 0.08);
@@ -115,24 +114,21 @@ main {
 }
 
 /* Selected state style */
-.contact-area.selected,
-.contact-item.selected {
+.contact-area.selected, .contact-item.selected{
     background: #2A3647;
     border-radius: 8px;
     box-shadow: 0 4px 16px 0 rgba(44, 62, 80, 0.15);
 }
 
-.contact-area.selected .contact-name,
-.contact-item.selected .contact-name-wrapper>div:last-child {
+.contact-area.selected .contact-name, .contact-item.selected .contact-name-wrapper>div:last-child{
     color: white;
 }
 
-.contact-area.selected .contact-email,
-.contact-item.selected .contact-email {
+.contact-area.selected .contact-email, .contact-item.selected .contact-email{
     color: #29ABE2;
 }
 
-.contact-avatar {
+.contact-avatar{
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -148,27 +144,27 @@ main {
 }
 
 /* Avatar-Bereich für großes Kontakt-Detail */
-.contact-avatar-large {
+.contact-avatar-large{
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 16px;
 }
 
-.avatar-placeholder {
+.avatar-placeholder{
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 1px;
 }
 
-.contact-details {
+.contact-details{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 2px;
 }
 
-.contact-name {
+.contact-name{
     font-size: 18px;
     font-weight: 500;
     color: #2A3647;
@@ -176,8 +172,7 @@ main {
 }
 
 /* Stelle sicher, dass alle Kontakt-Links nur Textbreite haben */
-.contact-email,
-.contact-item a {
+.contact-email, .contact-item a{
     display: inline-block;
     width: auto;
     flex: 0 0 auto;
@@ -190,17 +185,16 @@ main {
     padding: 0;
 }
 
-.contact-email:hover,
-.contact-item a:hover {
+.contact-email:hover, .contact-item a:hover{
     text-decoration: underline;
 }
 
 /* Kontaktgruppenabstand */
-.contact-card {
+.contact-card{
     margin-bottom: 24px;
 }
 
-.contact-item {
+.contact-item{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -210,14 +204,14 @@ main {
     width: 352px;
 }
 
-.contact-name-wrapper {
+.contact-name-wrapper{
     display: flex;
     align-items: center;
     gap: 12px;
     /* Abstand zwischen Initialen und Name */
 }
 
-.contact-initials {
+.contact-initials{
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -234,45 +228,45 @@ main {
 }
 
 /* Beispielhafte Farben für Initialen-Kreise */
-.bg-blue {
+.bg-blue{
     background: #1E90FF;
 }
 
-.bg-green {
+.bg-green{
     background: #27AE60;
 }
 
-.bg-purple {
+.bg-purple{
     background: #8E44AD;
 }
 
-.bg-orange {
+.bg-orange{
     background: #FFA500;
 }
 
-.bg-pink {
+.bg-pink{
     background: #E84393;
 }
 
-.bg-red {
+.bg-red{
     background: #E74C3C;
 }
 
-.bg-teal {
+.bg-teal{
     background: #00BFAE;
 }
 
-.bg-brown {
+.bg-brown{
     background: #A0522D;
 }
 
-.contact-name-wrapper>div:last-child {
+.contact-name-wrapper>div:last-child{
     font-size: 18px;
     font-weight: 500;
     color: #2A3647;
 }
 
-.contact-email {
+.contact-email{
     width: fit-content;
     /* Erzwingt die Breite basierend auf dem Inhalt */
     display: inline;
@@ -281,62 +275,58 @@ main {
     /* Verhindert flex-grow */
 }
 
-.title-msg {
-    font-size: 27px;
-    font-weight: 500;
-    color: #2A3647;
-}
 
-.contact-div-right {
+
+.contact-div-right{
     display: flex;
     flex-direction: column;
     gap: 32px;
     margin: 40px 0 0 40px;
 }
 
-.contact-maintitle-container {
+.contact-maintitle-container{
     display: flex;
     align-items: center;
     height: 100px;
 }
 
-.title-contacts {
+.title-contacts{
     font-size: 61px;
     font-weight: 700;
     color: #000000;
     margin: 0;
 }
 
-.separator {
+.separator{
     font-size: 64px;
     font-weight: 400;
     color: #29ABE2;
     margin: 0 16px;
 }
 
-.subtitle {
+.subtitle{
     font-size: 27px;
     font-weight: 400;
     color: #2A3647;
 }
 
 /* Back-Button: Auf Desktop versteckt, auf Mobile sichtbar */
-.contact-back-btn {
+.contact-back-btn{
     display: none;
 }
 
-.contact-more {
+.contact-more{
     display: none;
 }
 
-.contact-section-left {
+.contact-section-left{
     height: 100%;
     /* width: 456px; */
     /* min-width: 456px; */
     /* max-width: 456px; */
 }
 
-.scroll {
+.scroll{
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -346,7 +336,7 @@ main {
     /* max-width: 456px; */
 }
 
-.contact-section-right {
+.contact-section-right{
     display: flex;
     padding: 0 16px 0 16px;
     width: 100%;
@@ -356,24 +346,18 @@ main {
     flex-direction: column;
 }
 
-.contact-div {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin: 0;
-    padding-top: 16px;
-}
 
-.contact-section-left {
+
+.contact-section-left{
     box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
 }
 
-hr {
+hr{
     color: #d1d1d1d2;
     width: 352px;
 }
 
-.contact-initials-large {
+.contact-initials-large{
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -389,7 +373,7 @@ hr {
     /* weißer Rand hinzugefügt */
 }
 
-.contact-header-large {
+.contact-header-large{
     display: flex;
     align-items: center;
     gap: 32px;
@@ -397,24 +381,24 @@ hr {
     padding-bottom: 16px;
 }
 
-.contact-info p {
+.contact-info p{
     margin-block-start: 0 !important;
     margin-block-end: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.edit-svg-path {
+.edit-svg-path{
     fill: #2A3647;
     transition: fill 0.15s ease;
 }
 
-.edit-svg-path:hover {
+.edit-svg-path:hover{
     fill: #29ABE2;
 }
 
 /* === Contact Actions (Details View) === */
-.contact-actions {
+.contact-actions{
     display: flex;
     gap: 8px;
     font-family: 'Inter', sans-serif;
@@ -429,7 +413,7 @@ hr {
     /* No transform, no background-position needed */
 }
 
-.contact-action-btn {
+.contact-action-btn{
     display: flex;
     align-items: center;
     gap: 6px;
@@ -448,31 +432,31 @@ hr {
     transition: all 0.2s;
 }
 
-.contact-action-btn svg {
+.contact-action-btn svg{
     display: inline-block;
     vertical-align: middle;
 }
 
-.contact-action-btn:hover .edit-svg-path {
+.contact-action-btn:hover .edit-svg-path{
     fill: #29ABE2;
 }
 
-.contact-action-btn:hover .edit-label {
+.contact-action-btn:hover .edit-label{
     color: #29ABE2;
     font-weight: 700;
 }
 
 /* Delete Hover (neu) */
-.contact-action-btn:hover .delete-svg-path {
+.contact-action-btn:hover .delete-svg-path{
     fill: #29ABE2;
 }
 
-.contact-action-btn:hover .delete-label {
+.contact-action-btn:hover .delete-label{
     color: #29ABE2;
     font-weight: 700;
 }
 
-.contact-info-details {
+.contact-info-details{
     font-size: 16px;
     display: flex;
     box-sizing: border-box;
@@ -481,40 +465,39 @@ hr {
     margin-top: 16px;
 }
 
-.contact-name-large {
+.contact-name-large{
     font-size: 47px;
     font-weight: 700;
     margin: 0;
 }
 
-.contact-main-info {
+.contact-main-info{
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.contact-information-h3 {
+.contact-information-h3{
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 32px;
 }
 
-.contact-info-phone {
+.contact-info-phone{
     gap: 16px;
     display: flex;
     flex-direction: column;
     margin-top: 24px;
 }
 
-.contact-info-email {
+.contact-info-email{
     gap: 16px;
     display: flex;
     flex-direction: column;
 }
 
 /* === Add Contact Dialog Styles === */
-#ac-contact-dialog,
-.ac-dialog {
+.ac-dialog{
     border: none;
     border-radius: 24px;
     padding: 0;
@@ -530,13 +513,13 @@ hr {
     display: none;
 }
 
-.ac-dialog[open] {
+.ac-dialog[open]{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.ac {
+.ac{
     display: flex;
     width: 900px;
     min-height: 480px;
@@ -546,7 +529,7 @@ hr {
     position: relative;
 }
 
-.ac__hero {
+.ac__hero{
     background: #2A3647;
     color: #fff;
     width: 340px;
@@ -558,30 +541,30 @@ hr {
     min-height: 100%;
 }
 
-.ac__brand {
+.ac__brand{
     margin-bottom: 32px;
 }
 
-.ac__logo {
+.ac__logo{
     width: 48px;
     height: auto;
     margin-top: 50px;
 }
 
-.ac__title {
+.ac__title{
     font-size: 40px;
     font-weight: 700;
     margin: 0 0 16px 0;
     letter-spacing: -1px;
 }
 
-.ac__subtitle {
+.ac__subtitle{
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 24px;
 }
 
-.ac__underline {
+.ac__underline{
     display: block;
     width: 56px;
     height: 3px;
@@ -590,7 +573,7 @@ hr {
     margin-top: 8px;
 }
 
-.ac__close {
+.ac__close{
     position: absolute;
     top: 32px;
     right: 32px;
@@ -612,13 +595,13 @@ hr {
     /* Immer rund, auch ohne Hover */
 }
 
-.ac__close:hover {
+.ac__close:hover{
     color: #29ABE2;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
 }
 
-.ac__formwrap {
+.ac__formwrap{
     flex: 1;
     background: rgb(246, 247, 248);
     display: flex;
@@ -630,7 +613,7 @@ hr {
     position: relative;
 }
 
-.ac__avatar {
+.ac__avatar{
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -640,14 +623,14 @@ hr {
     margin-bottom: 32px;
 }
 
-.ac__avatar img {
+.ac__avatar img{
     width: 120px;
     height: 120px;
     object-fit: contain;
     opacity: 0.7;
 }
 
-.ac-form {
+.ac-form{
     width: 100%;
     max-width: 340px;
     display: flex;
@@ -655,7 +638,7 @@ hr {
     gap: 20px;
 }
 
-.ac-field {
+.ac-field{
     position: relative;
     display: flex;
     align-items: center;
@@ -668,11 +651,11 @@ hr {
     padding-right: 16px;
 }
 
-.ac-field:focus-within {
+.ac-field:focus-within{
     border-color: #29ABE2;
 }
 
-.ac-field input.input-focus {
+.ac-field input.input-focus{
     flex: 1;
     border: none;
     outline: none;
@@ -686,20 +669,20 @@ hr {
 
 }
 
-.ac-field img {
+.ac-field img{
     width: 24px;
     height: 24px;
     opacity: 0.6;
 }
 
-.ac__actions {
+.ac__actions{
     display: flex;
     gap: 16px;
     margin-top: 24px;
     justify-content: flex-start;
 }
 
-.btn {
+.btn{
     display: flex;
     align-items: center;
     gap: 8px;
@@ -713,21 +696,21 @@ hr {
     transition: background 0.2s, color 0.2s;
 }
 
-.btn--ghost {
+.btn--ghost{
     background: rgb(246, 247, 248);
     color: #2A3647;
     border: 1.5px solid #2A3647;
     transition: border-color 0.2s, color 0.2s;
 }
 
-.btn--ghost:hover {
+.btn--ghost:hover{
     background: #fff;
     color: #29ABE2;
     border: 1.5px solid #29ABE2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.btn--primary {
+.btn--primary{
     background: #2A3647;
     color: #fff;
     min-width: 200px;
@@ -738,8 +721,7 @@ hr {
 }
 
 /* NEU: Disabled-Zustand (visuell + kein Hover-Cursor) */
-.btn--primary:disabled,
-.btn--primary[aria-disabled="true"] {
+.btn--primary:disabled, .btn--primary[aria-disabled="true"]{
     background: #9aa3ad;
     /* "disabled" grauton */
     color: rgba(255, 255, 255, 0.9);
@@ -749,23 +731,23 @@ hr {
 }
 
 /* ÄNDERN: Hover nur wenn NICHT disabled */
-.btn--primary:not(:disabled):hover {
+.btn--primary:not(:disabled):hover{
     background: #29ABE2;
     color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Optional: verhindert Hover/Click-Feeling komplett, falls aria-disabled genutzt wird */
-.btn--primary[aria-disabled="true"] {
+.btn--primary[aria-disabled="true"]{
     pointer-events: none;
 }
 
-.btn__x {
+.btn__x{
     font-size: 22px;
     margin-left: 4px;
 }
 
-.btn__check {
+.btn__check{
     display: flex;
     align-items: center;
     margin-left: 4px;
@@ -775,30 +757,30 @@ hr {
 /* Responsive */
 
 @media (max-width: 1000px) {
-    .title-contacts {
+    .title-contacts{
         font-size: 48px;
     }
 
-    .subtitle {
+    .subtitle{
         font-size: 24px;
     }
 
-    .contact-name-large {
+    .contact-name-large{
         font-size: 24px;
     }
 
-    .contact-header-large {
+    .contact-header-large{
         gap: 16px;
         margin-bottom: 24px;
     }
 
-    .contact-div-right {
+    .contact-div-right{
         margin: 40px 24px 0px 16px;
         gap: 8px;
     }
 
 
-    .contact-maintitle-container {
+    .contact-maintitle-container{
         height: auto;
         flex-direction: column;
         gap: 6px;
@@ -806,7 +788,7 @@ hr {
         margin-bottom: 16px;
     }
 
-    .separator {
+    .separator{
         order: 3;
         display: block;
         width: 64px;
@@ -817,7 +799,7 @@ hr {
         color: transparent;
     }
 
-    .contact-initials-large {
+    .contact-initials-large{
         width: 90px;
         height: 90px;
         font-size: 32px;
@@ -826,34 +808,33 @@ hr {
 }
 
 @media (max-width: 900px) {
-    .ac {
+    .ac{
         flex-direction: column;
         width: 98vw;
         min-width: 0;
     }
 
-    .ac__hero,
-    .ac__formwrap {
+    .ac__hero, .ac__formwrap{
         width: 100%;
         padding: 32px 16px;
     }
 
-    .ac-form {
+    .ac-form{
         max-width: 75%;
         gap: 16px;
     }
 
-    .ac__formwrap {
+    .ac__formwrap{
         padding-top: 40px;
     }
 
-    .ac__close {
+    .ac__close{
         top: 16px;
         right: 16px;
         color: rgb(246, 247, 248)
     }
 
-    .ac__actions {
+    .ac__actions{
         justify-content: center;
     }
 }
@@ -871,7 +852,7 @@ hr {
     }
 }
 
-.contact-details-container {
+.contact-details-container{
     animation: slideInFromRight 0.3s ease-out;
 }
 
@@ -901,16 +882,16 @@ hr {
     }
 }
 
-.ac-dialog {
+.ac-dialog{
     animation: slideInDialogFromRight 0.3s ease-out;
 }
 
 /* NEU: Closing-State für Schließ-Animation */
-.ac-dialog.closing {
+.ac-dialog.closing{
     animation: slideOutDialogToRight 0.3s ease-out forwards;
 }
 
-.contacts-toast {
+.contacts-toast{
     position: fixed;
     right: -100%;
     /* Start außerhalb des Bildschirms rechts */
@@ -940,7 +921,7 @@ hr {
     will-change: opacity, right;
 }
 
-.contacts-toast--visible {
+.contacts-toast--visible{
     opacity: 1;
     right: 50%;
     /* Slide in zur finalen Position */
@@ -950,7 +931,7 @@ hr {
    Auf Desktop: Help im Menü versteckt, nur Help-Icon sichtbar
    Auf Mobile: Help-Icon versteckt, Help im Menü sichtbar */
 
-.profile-menu-item-help {
+.profile-menu-item-help{
     display: none;
 }
 
@@ -961,87 +942,86 @@ hr {
 
 
 @media (min-width: 601px) and (max-width: 621px) {
-    main {
+    main{
         padding-top: 77px;
     }
 }
 
 @media (max-width: 780px) {
-    .contact-section {
+    .contact-section{
         width: 100%;
         margin-left: 0;
         padding: 0 8px;
     }
 
-    .add-contact-btn {
+    .add-contact-btn{
         max-width: 100%;
     }
 
-    .contact-area {
+    .contact-area{
         padding: 12px 8px;
     }
 
-    .contact-group-letter {
+    .contact-group-letter{
         margin-left: 16px;
     }
 
 
     /* Help-Icon auf Mobile ausblenden */
-    .help-icon {
+    .help-icon{
         display: none !important;
     }
 
     /* Help im Profil-Menü auf Mobile anzeigen */
-    .profile-menu-item-help {
+    .profile-menu-item-help{
         display: block;
     }
 
-    main {
+    main{
         height: auto;
         min-height: 100vh;
         padding-top: 70px;
     }
 
-    .wrapper {
+    .wrapper{
         flex-direction: column;
         align-items: stretch;
         height: auto;
     }
 
-    .contact-section-left,
-    .contact-section-right {
+    .contact-section-left, .contact-section-right{
         width: 100%;
         height: auto;
     }
 
-    .contact-section-right {
+    .contact-section-right{
         padding: 0;
         display: none;
         height: calc(100vh - 145px);
     }
 
-    .contact-div-right {
+    .contact-div-right{
         margin: 24px 24px 0px 8px;
         gap: 32px;
         position: relative;
     }
 
-    .contact-maintitle-container {
+    .contact-maintitle-container{
         height: auto;
         flex-direction: column;
         gap: 6px;
         align-items: flex-start;
     }
 
-    .title-contacts {
+    .title-contacts{
         order: 1;
     }
 
-    .subtitle {
+    .subtitle{
         order: 2;
     }
 
-    .separator {
+    .separator{
         order: 3;
         display: block;
         width: 64px;
@@ -1052,7 +1032,7 @@ hr {
         color: transparent;
     }
 
-    .add-contact-btn {
+    .add-contact-btn{
         width: 56px;
         height: 56px;
         max-width: none;
@@ -1067,57 +1047,57 @@ hr {
         z-index: 200;
     }
 
-    .add-contact-btn__label {
+    .add-contact-btn__label{
         display: none;
     }
 
-    .add-contact-btn img {
+    .add-contact-btn img{
         margin-left: 0;
         width: 28px;
         height: 28px;
     }
 
-    .scroll {
+    .scroll{
         width: 100% !important;
     }
 
-    .contact-list {
+    .contact-list{
         max-height: none;
         padding-right: 0;
     }
 
-    .contact-item {
+    .contact-item{
         width: 100%;
         box-sizing: border-box;
         padding-left: 16px;
         padding-right: 16px;
     }
 
-    hr {
+    hr{
         width: 100%;
     }
 
-    .contact-actions {
+    .contact-actions{
         width: auto;
         height: auto;
         flex-wrap: wrap;
         display: none;
     }
 
-    .contact-action-btn {
+    .contact-action-btn{
         min-width: 0;
     }
 
-    .contact-details-container {
+    .contact-details-container{
         animation: none;
     }
 
     /* Toast auf kleinen Screens nicht "off-center" */
-    .contacts-toast--visible {
+    .contacts-toast--visible{
         right: 16px;
     }
 
-    .contacts-toast {
+    .contacts-toast{
         right: 16px;
         left: 16px;
         max-width: none;
@@ -1126,16 +1106,16 @@ hr {
     }
 
     /* Mobile View: Kontaktdetails anzeigen, Kontaktliste verstecken */
-    .wrapper.show-contact-details .contact-section-left {
+    .wrapper.show-contact-details .contact-section-left{
         display: none;
     }
 
-    .wrapper.show-contact-details .contact-section-right {
+    .wrapper.show-contact-details .contact-section-right{
         display: block;
     }
 
     /* Back-Button auf Mobile sichtbar */
-    .contact-back-btn {
+    .contact-back-btn{
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1152,16 +1132,16 @@ hr {
         right: 0px;
     }
 
-    .contact-back-btn:hover {
+    .contact-back-btn:hover{
         color: #29ABE2;
     }
 
-    .contact-back-btn svg {
+    .contact-back-btn svg{
         width: 24px;
         height: 24px;
     }
 
-    .contact-more {
+    .contact-more{
         position: fixed;
         right: 8px;
         bottom: 116px;
@@ -1169,7 +1149,7 @@ hr {
         z-index: 2;
     }
 
-    .contact-more-btn {
+    .contact-more-btn{
         border: none;
         color: white;
         background-color: #2A3647;
@@ -1186,16 +1166,16 @@ hr {
         height: 52px;
     }
 
-    .contact-more-btn:hover {
+    .contact-more-btn:hover{
         background-color: #29ABE2;
     }
 
-    .contact-more-btn img {
+    .contact-more-btn img{
         width: 20px;
         height: 20px;
     }
 
-    .contact-more-menu {
+    .contact-more-menu{
         display: none;
         position: absolute;
         top: -100px;
@@ -1208,11 +1188,11 @@ hr {
         z-index: 3;
     }
 
-    .contact-more-menu.is-open {
+    .contact-more-menu.is-open{
         display: block;
     }
 
-    .contact-more-menu button {
+    .contact-more-menu button{
         width: 100%;
         padding: 10px 14px;
         border: none;
@@ -1225,29 +1205,28 @@ hr {
         gap: 8px;
     }
 
-    .contact-more-menu button svg {
+    .contact-more-menu button svg{
         width: 24px;
         height: 24px;
         flex-shrink: 0;
     }
 
-    .contact-more-menu button .edit-svg-path {
+    .contact-more-menu button .edit-svg-path{
         fill: #2A3647;
     }
 
-    .contact-more-menu button .delete-svg-path {
+    .contact-more-menu button .delete-svg-path{
         fill: #2A3647;
     }
 
-    .contact-more-menu button:hover {
+    .contact-more-menu button:hover{
         background: #f4f6f8;
         color: #29ABE2;
         font-weight: 700;
 
     }
 
-    .contact-more-menu button:hover .edit-svg-path,
-    .contact-more-menu button:hover .delete-svg-path {
+    .contact-more-menu button:hover .edit-svg-path, .contact-more-menu button:hover .delete-svg-path{
         fill: #29ABE2;
     }
 
@@ -1255,60 +1234,60 @@ hr {
 
 
 
-    .contact-maintitle-container {
+    .contact-maintitle-container{
         margin-top: 40px;
     }
 
-    .contact-back-btn {
+    .contact-back-btn{
         top: 32px;
         right: 0px;
     }
 
-    .contact-div-right {
+    .contact-div-right{
         margin: 0px 24px 0px 24px;
     }
 
 
-    .contact-section {
+    .contact-section{
         padding: 0 12px;
         margin-top: 0px;
     }
 
-    .contact-section-left {
+    .contact-section-left{
         box-shadow: none;
     }
 
-    .add-contact-btn {
+    .add-contact-btn{
         width: 52px;
         height: 52px;
         right: 8px;
         bottom: 116px;
     }
 
-    .add-contact-btn img {
+    .add-contact-btn img{
         width: 26px;
         height: 26px;
     }
 
-    .title-contacts {
+    .title-contacts{
         font-size: 40px;
     }
 
-    .subtitle {
+    .subtitle{
         font-size: 18px;
     }
 
-    .contact-header-large {
+    .contact-header-large{
         gap: 16px;
         margin-bottom: 16px;
         padding-bottom: 0px;
     }
 
-    .contact-avatar-large {
+    .contact-avatar-large{
         margin-bottom: 0px;
     }
 
-    .contact-initials-large {
+    .contact-initials-large{
         width: 80px;
         height: 80px;
         font-size: 32px;
@@ -1316,132 +1295,131 @@ hr {
         margin-right: 0px;
     }
 
-    .contact-name-large {
+    .contact-name-large{
         font-size: 24px;
     }
 
-    .contact-actions {
+    .contact-actions{
         display: none;
     }
 
-    .contact-action-btn {
+    .contact-action-btn{
         font-size: 14px;
         padding: 0 6px;
     }
 
-    .contact-action-btn svg {
+    .contact-action-btn svg{
         width: 20px;
         height: 20px;
     }
 
-    .contact-information-h3 {
+    .contact-information-h3{
         margin-bottom: 24px;
     }
 
-    .contact-info-email {
+    .contact-info-email{
         gap: 8px;
     }
 
-    .contact-info-details {
+    .contact-info-details{
         gap: 0px;
     }
 
-    .contact-info-phone {
+    .contact-info-phone{
         gap: 10px;
     }
 
     /* Dialog (Add/Edit) auf sehr schmalen Geräten kompakter */
-    .ac__title {
+    .ac__title{
         font-size: 30px;
     }
 
-    .ac__subtitle {
+    .ac__subtitle{
         font-size: 16px;
         margin-bottom: 0px;
     }
 
-    .btn {
+    .btn{
         font-size: 16px;
         padding: 0 16px;
     }
 
-    .ac__close {
+    .ac__close{
         top: 16px;
         right: 16px;
         font-size: 24px;
         color: rgb(246, 247, 248);
     }
 
-    .ac__brand {
+    .ac__brand{
         display: none;
     }
 
-    .ac__title {
+    .ac__title{
         margin: 0;
     }
 
-    .ac__formwrap {
+    .ac__formwrap{
         flex-direction: column;
         padding: 0;
     }
 
-    .ac__avatar {
+    .ac__avatar{
         margin-bottom: 0px;
         position: absolute;
         bottom: 79%;
         z-index: 5;
     }
 
-    .ac-form {
+    .ac-form{
         gap: 16px;
         align-items: center;
         margin-top: 32px;
     }
 
-    .ac__formwrap {
+    .ac__formwrap{
         gap: 0px;
     }
 
-    .ac-field {
+    .ac-field{
         width: 280px;
         padding-right: 8px;
         height: 40px;
     }
 
-    .ac-field input.input-focus {
+    .ac-field input.input-focus{
         padding: 0 8px;
         font-size: 16px;
     }
 
-    .ac__actions {
+    .ac__actions{
         margin-top: 0px;
     }
 
-    .ac__hero {
+    .ac__hero{
         height: 192px;
         justify-content: center;
     }
 
-    .btn--primary {
+    .btn--primary{
         min-width: 0px;
     }
 
-    .btn {
+    .btn{
         height: 40px;
     }
 
-    #ac-contact-dialog,
-    .ac-dialog {
+    .ac-dialog{
         width: 305px;
     }
 
-    .ac__avatar img {
+    .ac__avatar img{
         width: 80px;
         height: 80px;
         opacity: 1;
     }
 
-    .responsiveCloseBtn {
+    .responsiveCloseBtn{
         display: none;
     }
 
@@ -1450,68 +1428,68 @@ hr {
 /* testweise, danach 440px */
 
 @media (max-width: 600px) {
-    * {
+    *{
         font-size: 16px;
     }
 
-    main {
+    main{
         background-color: rgb(246, 247, 248);
     }
 
-    .contact-maintitle-container {
+    .contact-maintitle-container{
         margin-top: 24px;
     }
 
-    .contact-back-btn {
+    .contact-back-btn{
         top: 16px;
         right: -16px;
     }
 
-    .contact-div-right {
+    .contact-div-right{
         margin: 0px 24px 0px 8px;
     }
 
 
-    .contact-section {
+    .contact-section{
         padding: 0 12px;
         margin-top: 0px;
     }
 
-    .contact-section-left {
+    .contact-section-left{
         box-shadow: none;
     }
 
-    .add-contact-btn {
+    .add-contact-btn{
         width: 52px;
         height: 52px;
         right: 8px;
         bottom: 116px;
     }
 
-    .add-contact-btn img {
+    .add-contact-btn img{
         width: 26px;
         height: 26px;
     }
 
-    .title-contacts {
+    .title-contacts{
         font-size: 40px;
     }
 
-    .subtitle {
+    .subtitle{
         font-size: 18px;
     }
 
-    .contact-header-large {
+    .contact-header-large{
         gap: 16px;
         margin-bottom: 16px;
         padding-bottom: 0px;
     }
 
-    .contact-avatar-large {
+    .contact-avatar-large{
         margin-bottom: 0px;
     }
 
-    .contact-initials-large {
+    .contact-initials-large{
         width: 80px;
         height: 80px;
         font-size: 32px;
@@ -1519,132 +1497,131 @@ hr {
         margin-right: 0px;
     }
 
-    .contact-name-large {
+    .contact-name-large{
         font-size: 24px;
     }
 
-    .contact-actions {
+    .contact-actions{
         display: none;
     }
 
-    .contact-action-btn {
+    .contact-action-btn{
         font-size: 14px;
         padding: 0 6px;
     }
 
-    .contact-action-btn svg {
+    .contact-action-btn svg{
         width: 20px;
         height: 20px;
     }
 
-    .contact-information-h3 {
+    .contact-information-h3{
         margin-bottom: 24px;
     }
 
-    .contact-info-email {
+    .contact-info-email{
         gap: 8px;
     }
 
-    .contact-info-details {
+    .contact-info-details{
         gap: 0px;
     }
 
-    .contact-info-phone {
+    .contact-info-phone{
         gap: 10px;
     }
 
     /* Dialog (Add/Edit) auf sehr schmalen Geräten kompakter */
-    .ac__title {
+    .ac__title{
         font-size: 30px;
     }
 
-    .ac__subtitle {
+    .ac__subtitle{
         font-size: 16px;
         margin-bottom: 0px;
     }
 
-    .btn {
+    .btn{
         font-size: 16px;
         padding: 0 16px;
     }
 
-    .ac__close {
+    .ac__close{
         top: 16px;
         right: 16px;
         font-size: 24px;
         color: rgb(246, 247, 248);
     }
 
-    .ac__brand {
+    .ac__brand{
         display: none;
     }
 
-    .ac__title {
+    .ac__title{
         margin: 0;
     }
 
-    .ac__formwrap {
+    .ac__formwrap{
         flex-direction: column;
         padding: 0;
     }
 
-    .ac__avatar {
+    .ac__avatar{
         margin-bottom: 0px;
         position: absolute;
         bottom: 79%;
         z-index: 5;
     }
 
-    .ac-form {
+    .ac-form{
         gap: 16px;
         align-items: center;
         margin-top: 32px;
     }
 
-    .ac__formwrap {
+    .ac__formwrap{
         gap: 0px;
     }
 
-    .ac-field {
+    .ac-field{
         width: 280px;
         padding-right: 8px;
         height: 40px;
     }
 
-    .ac-field input.input-focus {
+    .ac-field input.input-focus{
         padding: 0 8px;
         font-size: 16px;
     }
 
-    .ac__actions {
+    .ac__actions{
         margin-top: 0px;
     }
 
-    .ac__hero {
+    .ac__hero{
         height: 192px;
         justify-content: center;
     }
 
-    .btn--primary {
+    .btn--primary{
         min-width: 0px;
     }
 
-    .btn {
+    .btn{
         height: 40px;
     }
 
-    #ac-contact-dialog,
-    .ac-dialog {
+    .ac-dialog{
         width: 305px;
     }
 
-    .ac__avatar img {
+    .ac__avatar img{
         width: 80px;
         height: 80px;
         opacity: 1;
     }
 
-    .responsiveCloseBtn {
+    .responsiveCloseBtn{
         display: none;
     }
 
