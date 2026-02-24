@@ -8,10 +8,6 @@ let colors = [
 let boardSearchTerm = "";
 
 /**
- * Handles renderBoard.
- * @returns {*} Result.
- */
-/**
  * Renders board.
  * @returns {void} Result.
  */
@@ -24,10 +20,6 @@ function renderBoard() {
   renderAllAvatars();
 }
 
-/**
- * Handles initBoardSearch.
- * @returns {*} Result.
- */
 /**
  * Initializes board search.
  * @returns {void} Result.
@@ -45,12 +37,6 @@ function initBoardSearch() {
 }
 
 /**
- * Handles updateBoardSearch.
- * @param {*} input - Parameter.
- * @param {*} clearBtn - Parameter.
- * @returns {*} Result.
- */
-/**
  * Updates board search.
  * @param {HTMLElement} input - Input element.
  * @param {*} clearBtn - Parameter.
@@ -65,12 +51,6 @@ function updateBoardSearch(input, clearBtn) {
   if (clearBtn) clearBtn.style.visibility = boardSearchTerm ? "visible" : "hidden";
 }
 
-/**
- * Handles clearBoardSearch.
- * @param {*} input - Parameter.
- * @param {*} clearBtn - Parameter.
- * @returns {*} Result.
- */
 /**
  * Clears board search.
  * @param {HTMLElement} input - Input element.
@@ -89,10 +69,6 @@ function clearBoardSearch(input, clearBtn) {
 }
 
 /**
- * Handles clearTaskCards.
- * @returns {*} Result.
- */
-/**
  * Clears task cards.
  * @returns {void} Result.
  */
@@ -101,10 +77,6 @@ function clearTaskCards() {
   cards.forEach((card) => card.remove());
 }
 
-/**
- * Handles renderTasksIntoColumns.
- * @returns {*} Result.
- */
 /**
  * Renders tasks into columns.
  * @returns {void} Result.
@@ -120,11 +92,6 @@ function renderTasksIntoColumns() {
 }
 
 /**
- * Handles getColumnByStatus.
- * @param {*} status - Parameter.
- * @returns {*} Result.
- */
-/**
  * Returns column by status.
  * @param {string} status - Status value.
  * @returns {*} Result.
@@ -138,10 +105,6 @@ function getColumnByStatus(status) {
 }
 
 /**
- * Handles renderAllAvatars.
- * @returns {*} Result.
- */
-/**
  * Renders all avatars.
  * @returns {void} Result.
  */
@@ -152,10 +115,6 @@ function renderAllAvatars() {
   }
 }
 
-/**
- * Handles getFilteredTasks.
- * @returns {*} Result.
- */
 /**
  * Returns filtered tasks.
  * @returns {*} Result.
@@ -172,12 +131,7 @@ function getFilteredTasks() {
 }
 
 /**
- * Handles highlightText.
- * @param {*} text - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles highlight text.
+ * Executes highlight text logic.
  * @param {*} text - Parameter.
  * @returns {void} Result.
  */
@@ -190,12 +144,7 @@ function highlightText(text) {
 }
 
 /**
- * Handles escapeRegExp.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles escape reg exp.
+ * Executes escape reg exp logic.
  * @param {string} value - Value.
  * @returns {void} Result.
  */
@@ -203,10 +152,6 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/**
- * Handles loadTasks.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Loads tasks.
  * @returns {Promise<*>} Result.
@@ -222,11 +167,6 @@ async function loadTasks() {
   renderBoard();
 }
 
-/**
- * Handles updateTask.
- * @param {*} task - Parameter.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Updates task.
  * @param {Object} task - Task object.
@@ -246,10 +186,6 @@ async function updateTask(task) {
 }
 
 /**
- * Handles deleteTask.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Deletes task.
  * @returns {Promise<*>} Result.
  */
@@ -265,11 +201,6 @@ async function deleteTask() {
   }
 }
 
-/**
- * Handles renderAvatar.
- * @param {*} task - Parameter.
- * @returns {*} Result.
- */
 /**
  * Renders avatar.
  * @param {Object} task - Task object.
@@ -289,10 +220,6 @@ function renderAvatar(task) {
 }
 
 /**
- * Handles getRandomColor.
- * @returns {*} Result.
- */
-/**
  * Returns random color.
  * @returns {*} Result.
  */
@@ -301,12 +228,7 @@ function getRandomColor() {
 }
 
 /**
- * Handles startDrag.
- * @param {*} id - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles start drag.
+ * Executes start drag logic.
  * @param {string} id - Identifier.
  * @returns {void} Result.
  */
@@ -315,13 +237,8 @@ function startDrag(id) {
 }
 
 /**
- * Handles allowDrop.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles allow drop.
- * @param {Event} event - DOM event.
+ * Executes allow drop logic.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function allowDrop(event) {
@@ -329,14 +246,8 @@ function allowDrop(event) {
 }
 
 /**
- * Handles dropTask.
- * @param {*} event - Parameter.
- * @param {*} newStatus - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles drop task.
- * @param {Event} event - DOM event.
+ * Executes drop task logic.
+ * @param {Event} event - Browser event.
  * @param {*} newStatus - Parameter.
  * @returns {void} Result.
  */
@@ -349,11 +260,6 @@ function dropTask(event, newStatus) {
   renderBoard();
 }
 
-/**
- * Handles openModal.
- * @param {*} id - Parameter.
- * @returns {*} Result.
- */
 /**
  * Opens modal.
  * @param {string} id - Identifier.
@@ -377,13 +283,6 @@ function openModal(id) {
 }
 
 /**
- * Handles toggleSubtaskDone.
- * @param {*} taskId - Parameter.
- * @param {*} subIndex - Parameter.
- * @param {*} checkbox - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Toggles subtask done.
  * @param {number} taskId - Task identifier.
  * @param {number} subIndex - Subtask index.
@@ -400,11 +299,6 @@ async function toggleSubtaskDone(taskId, subIndex, checkbox) {
 }
 
 /**
- * Handles updateModalSubtasks.
- * @param {*} task - Parameter.
- * @returns {*} Result.
- */
-/**
  * Updates modal subtasks.
  * @param {Object} task - Task object.
  * @returns {void} Result.
@@ -417,11 +311,6 @@ function updateModalSubtasks(task) {
   subtaskContainer.innerHTML = generateModalSubtasks(task);
 }
 
-/**
- * Handles openEditTaskModal.
- * @param {*} id - Parameter.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Opens edit task modal.
  * @param {string} id - Identifier.
@@ -444,10 +333,6 @@ async function openEditTaskModal(id) {
 }
 
 /**
- * Handles renderEditAssignedContacts.
- * @returns {*} Result.
- */
-/**
  * Renders edit assigned contacts.
  * @returns {void} Result.
  */
@@ -459,13 +344,8 @@ function renderEditAssignedContacts() {
 }
 
 /**
- * Handles toggleEditCategoryDropdown.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
  * Toggles edit category dropdown.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function toggleEditCategoryDropdown(event) {
@@ -475,11 +355,6 @@ function toggleEditCategoryDropdown(event) {
   dropdown.classList.toggle("show");
 }
 
-/**
- * Handles setEditCategory.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets edit category.
  * @param {string} value - Value.
@@ -499,10 +374,6 @@ function setEditCategory(value) {
 }
 
 /**
- * Handles initEditDropdownClose.
- * @returns {*} Result.
- */
-/**
  * Initializes edit dropdown close.
  * @returns {void} Result.
  */
@@ -518,10 +389,6 @@ function initEditDropdownClose() {
 }
 
 /**
- * Handles renderEditSubtasks.
- * @returns {*} Result.
- */
-/**
  * Renders edit subtasks.
  * @returns {void} Result.
  */
@@ -533,14 +400,7 @@ function renderEditSubtasks() {
 }
 
 /**
- * Handles appendEditSubtask.
- * @param {*} area - Parameter.
- * @param {*} subtask - Parameter.
- * @param {*} index - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles append edit subtask.
+ * Executes append edit subtask logic.
  * @param {*} area - Parameter.
  * @param {Object} subtask - Subtask object.
  * @param {number} index - Index.
@@ -555,10 +415,6 @@ function appendEditSubtask(area, subtask, index) {
 }
 
 /**
- * Handles addEditSubtask.
- * @returns {*} Result.
- */
-/**
  * Adds edit subtask.
  * @returns {void} Result.
  */
@@ -572,11 +428,6 @@ function addEditSubtask() {
   renderEditSubtasks();
 }
 
-/**
- * Handles deleteEditSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
 /**
  * Deletes edit subtask.
  * @param {number} i - Index.
@@ -593,10 +444,6 @@ function deleteEditSubtask(i) {
 }
 
 /**
- * Handles clearEditSubtaskInput.
- * @returns {*} Result.
- */
-/**
  * Clears edit subtask input.
  * @returns {void} Result.
  */
@@ -608,12 +455,7 @@ function clearEditSubtaskInput() {
 }
 
 /**
- * Handles editEditSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles edit edit subtask.
+ * Executes edit edit subtask logic.
  * @param {number} i - Index.
  * @returns {void} Result.
  */
@@ -627,11 +469,6 @@ function editEditSubtask(i) {
   }
 }
 
-/**
- * Handles saveEditedEditSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
 /**
  * Saves edited edit subtask.
  * @param {number} i - Index.
@@ -651,14 +488,8 @@ function saveEditedEditSubtask(i) {
 }
 
 /**
- * Handles saveEditedTask.
- * @param {*} event - Parameter.
- * @param {*} id - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Saves edited task.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @param {string} id - Identifier.
  * @returns {Promise<*>} Result.
  */
@@ -672,11 +503,6 @@ async function saveEditedTask(event, id) {
   openModal(id);
 }
 
-/**
- * Handles updateTaskFromEditForm.
- * @param {*} task - Parameter.
- * @returns {*} Result.
- */
 /**
  * Updates task from edit form.
  * @param {Object} task - Task object.
@@ -695,10 +521,6 @@ function updateTaskFromEditForm(task) {
 }
 
 /**
- * Handles showAddTaskDialog.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Shows add task dialog.
  * @returns {Promise<*>} Result.
  */
@@ -714,10 +536,6 @@ async function showAddTaskDialog() {
 }
 
 /**
- * Handles closeAddTaskDialog.
- * @returns {*} Result.
- */
-/**
  * Closes add task dialog.
  * @returns {void} Result.
  */
@@ -725,10 +543,6 @@ function closeAddTaskDialog() {
   document.getElementById("addTask-dialog").classList.add("d-none");
 }
 
-/**
- * Handles updateNoTaskPlaceholders.
- * @returns {*} Result.
- */
 /**
  * Updates no task placeholders.
  * @returns {void} Result.
@@ -750,10 +564,6 @@ function updateNoTaskPlaceholders() {
   }
 }
 
-/**
- * Handles closeModal.
- * @returns {*} Result.
- */
 /**
  * Closes modal.
  * @returns {void} Result.
