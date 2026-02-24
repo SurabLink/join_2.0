@@ -1,3 +1,13 @@
+/**
+ * Handles getTaskModalTemplate.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task modal template.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskModalTemplate(task) {
   return /*html*/ `
     <div class="modal-content">
@@ -14,10 +24,28 @@ function getTaskModalTemplate(task) {
   `;
 }
 
+/**
+ * Handles getModalCloseButton.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal close button.
+ * @returns {string} Result.
+ */
 function getModalCloseButton() {
   return /*html*/ `<span class="close" onclick="closeModal()">&times;</span>`;
 }
 
+/**
+ * Handles getModalCategory.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal category.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalCategory(task) {
   const color = task.category === "User Story" ? "#0038FF" : "#1FD7C1";
   return /*html*/ `
@@ -27,14 +55,44 @@ function getModalCategory(task) {
   `;
 }
 
+/**
+ * Handles getModalTitle.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal title.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalTitle(task) {
   return /*html*/ `<div class="modal-title"><h2>${task.title}</h2></div>`;
 }
 
+/**
+ * Handles getModalDescription.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal description.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalDescription(task) {
   return /*html*/ `<div class="modal-description">${task.description}</div>`;
 }
 
+/**
+ * Handles getModalDate.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal date.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalDate(task) {
   return /*html*/ `
     <div class="modal-date">
@@ -43,6 +101,16 @@ function getModalDate(task) {
   `;
 }
 
+/**
+ * Handles getModalPriority.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal priority.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalPriority(task) {
   return /*html*/ `
     <div class="modal-priority">
@@ -53,12 +121,32 @@ function getModalPriority(task) {
   `;
 }
 
+/**
+ * Handles getModalPriorityIcon.
+ * @param {*} priority - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal priority icon.
+ * @param {*} priority - Parameter.
+ * @returns {string} Result.
+ */
 function getModalPriorityIcon(priority) {
   if (priority === "urgent") return '<img src="./assets/img/Category_Urgent.svg" alt="Urgent">';
   if (priority === "medium") return '<img src="./assets/icons/medium_orange.svg" alt="Medium">';
   return '<img src="./assets/img/Category_Low.svg" alt="Low">';
 }
 
+/**
+ * Handles getModalAssignedSection.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal assigned section.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalAssignedSection(task) {
   return /*html*/ `
     <div class="modal-contacts">
@@ -68,6 +156,16 @@ function getModalAssignedSection(task) {
   `;
 }
 
+/**
+ * Handles generateModalAssignedContacts.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates modal assigned contacts.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateModalAssignedContacts(task) {
   if (!task.contacts || task.contacts.length === 0) {
     return "—";
@@ -75,6 +173,16 @@ function generateModalAssignedContacts(task) {
   return task.contacts.map((name) => getModalAssignedContact(name)).join("");
 }
 
+/**
+ * Handles getModalAssignedContact.
+ * @param {*} name - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal assigned contact.
+ * @param {string} name - Name.
+ * @returns {string} Result.
+ */
 function getModalAssignedContact(name) {
   if (!name) return "";
   const initials = name.split(" ").map(n => n[0]).join("");
@@ -86,6 +194,16 @@ function getModalAssignedContact(name) {
   `;
 }
 
+/**
+ * Handles getModalSubtasksSection.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal subtasks section.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalSubtasksSection(task) {
   return /*html*/ `
     <div class="modal-subtasks-area">
@@ -95,6 +213,16 @@ function getModalSubtasksSection(task) {
   `;
 }
 
+/**
+ * Handles generateModalSubtasks.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates modal subtasks.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateModalSubtasks(task) {
   if (!task.subtasks || task.subtasks.length === 0) {
     return "<span>No subtasks</span>";
@@ -102,6 +230,20 @@ function generateModalSubtasks(task) {
   return task.subtasks.map((st, i) => getModalSubtaskItem(task, st, i)).join("");
 }
 
+/**
+ * Handles getModalSubtaskItem.
+ * @param {*} task - Parameter.
+ * @param {*} subtask - Parameter.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal subtask item.
+ * @param {Object} task - Task object.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getModalSubtaskItem(task, subtask, index) {
   return /*html*/ `
     <label class="modal-subtask">
@@ -113,6 +255,16 @@ function getModalSubtaskItem(task, subtask, index) {
   `;
 }
 
+/**
+ * Handles getModalActions.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns modal actions.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getModalActions(task) {
   return /*html*/ `
     <div class="modal-actions">
@@ -129,6 +281,16 @@ function getModalActions(task) {
   `;
 }
 
+/**
+ * Handles generateEditTaskTemplate.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates edit task template.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateEditTaskTemplate(task) {
   return /*html*/ `
     <form class="edit-task-form" id="editTaskForm" onsubmit="saveEditedTask(event, ${task.id})">
@@ -138,6 +300,16 @@ function generateEditTaskTemplate(task) {
   `;
 }
 
+/**
+ * Handles getEditFormScroll.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit form scroll.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditFormScroll(task) {
   return /*html*/ `
     <div class="edit-form-scroll">
@@ -152,6 +324,16 @@ function getEditFormScroll(task) {
   `;
 }
 
+/**
+ * Handles getEditTitleField.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit title field.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditTitleField(task) {
   return /*html*/ `
     <label class="edit-label">
@@ -161,6 +343,16 @@ function getEditTitleField(task) {
   `;
 }
 
+/**
+ * Handles getEditDescriptionField.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit description field.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditDescriptionField(task) {
   return /*html*/ `
     <label class="edit-label">
@@ -170,6 +362,16 @@ function getEditDescriptionField(task) {
   `;
 }
 
+/**
+ * Handles getEditDateField.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit date field.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditDateField(task) {
   return /*html*/ `
     <label class="edit-label">
@@ -179,6 +381,16 @@ function getEditDateField(task) {
   `;
 }
 
+/**
+ * Handles getEditPrioritySection.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit priority section.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditPrioritySection(task) {
   return /*html*/ `
     <div class="priority">
@@ -192,6 +404,20 @@ function getEditPrioritySection(task) {
   `;
 }
 
+/**
+ * Handles getEditPriorityOption.
+ * @param {*} value - Parameter.
+ * @param {*} checked - Parameter.
+ * @param {*} icon - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit priority option.
+ * @param {string} value - Value.
+ * @param {*} checked - Parameter.
+ * @param {*} icon - Parameter.
+ * @returns {string} Result.
+ */
 function getEditPriorityOption(value, checked, icon) {
   const id = `edit-${value}`;
   const labelClass = value === "low" ? "low" : value;
@@ -203,10 +429,28 @@ function getEditPriorityOption(value, checked, icon) {
   `;
 }
 
+/**
+ * Handles capitalize.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles capitalize.
+ * @param {string} value - Value.
+ * @returns {string} Result.
+ */
 function capitalize(value) {
   return value ? value.charAt(0).toUpperCase() + value.slice(1) : "";
 }
 
+/**
+ * Handles getEditAssignedSection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit assigned section.
+ * @returns {string} Result.
+ */
 function getEditAssignedSection() {
   return /*html*/ `
     <div class="edit-assigned">
@@ -217,6 +461,14 @@ function getEditAssignedSection() {
   `;
 }
 
+/**
+ * Handles getEditAssignedSelect.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit assigned select.
+ * @returns {string} Result.
+ */
 function getEditAssignedSelect() {
   return /*html*/ `
     <div id="selectContacts" class="custom-select">
@@ -228,6 +480,16 @@ function getEditAssignedSelect() {
   `;
 }
 
+/**
+ * Handles getEditCategorySection.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit category section.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditCategorySection(task) {
   return /*html*/ `
     <div class="edit-label">
@@ -238,6 +500,16 @@ function getEditCategorySection(task) {
   `;
 }
 
+/**
+ * Handles getEditCategorySelect.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit category select.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditCategorySelect(task) {
   return /*html*/ `
     <div id="editCategorySelect" class="custom-select">
@@ -252,11 +524,31 @@ function getEditCategorySelect(task) {
   `;
 }
 
+/**
+ * Handles generateEditCategoryOptions.
+ * @param {*} current - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates edit category options.
+ * @param {*} current - Parameter.
+ * @returns {string} Result.
+ */
 function generateEditCategoryOptions(current) {
   const categories = ["Technical Task", "User Story"];
   return categories.map((cat) => getEditCategoryOption(cat)).join("");
 }
 
+/**
+ * Handles getEditCategoryOption.
+ * @param {*} cat - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit category option.
+ * @param {*} cat - Parameter.
+ * @returns {string} Result.
+ */
 function getEditCategoryOption(cat) {
   return /*html*/ `
     <div class="dropdown-item" onclick="setEditCategory('${cat}')">
@@ -265,6 +557,14 @@ function getEditCategoryOption(cat) {
   `;
 }
 
+/**
+ * Handles getEditSubtasksSection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtasks section.
+ * @returns {string} Result.
+ */
 function getEditSubtasksSection() {
   return /*html*/ `
     <div class="edit-subtasks">
@@ -275,6 +575,14 @@ function getEditSubtasksSection() {
   `;
 }
 
+/**
+ * Handles getEditSubtaskInput.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask input.
+ * @returns {string} Result.
+ */
 function getEditSubtaskInput() {
   return /*html*/ `
     <div class="subtasks">
@@ -284,6 +592,14 @@ function getEditSubtaskInput() {
   `;
 }
 
+/**
+ * Handles getEditSubtaskInputActions.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask input actions.
+ * @returns {string} Result.
+ */
 function getEditSubtaskInputActions() {
   return /*html*/ `
     <div class="subtask-input-actions">
@@ -298,6 +614,16 @@ function getEditSubtaskInputActions() {
   `;
 }
 
+/**
+ * Handles getEditFormActions.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit form actions.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getEditFormActions(task) {
   return /*html*/ `
     <div class="edit-actions">
@@ -307,6 +633,18 @@ function getEditFormActions(task) {
   `;
 }
 
+/**
+ * Handles getEditSubtaskItemMarkup.
+ * @param {*} subtask - Parameter.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask item markup.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskItemMarkup(subtask, index) {
   return /*html*/ `
     <li class="subtask">
@@ -316,6 +654,16 @@ function getEditSubtaskItemMarkup(subtask, index) {
   `;
 }
 
+/**
+ * Handles getEditSubtaskActions.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask actions.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskActions(index) {
   return /*html*/ `
     <div class="subtask-actions">
@@ -326,6 +674,18 @@ function getEditSubtaskActions(index) {
   `;
 }
 
+/**
+ * Handles getEditSubtaskEditMarkup.
+ * @param {*} subtask - Parameter.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask edit markup.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskEditMarkup(subtask, index) {
   return /*html*/ `
     <li class="subtask subtask-edit">
@@ -341,6 +701,16 @@ function getEditSubtaskEditMarkup(subtask, index) {
   `;
 }
 
+/**
+ * Handles getEditSubtaskEditActions.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit subtask edit actions.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskEditActions(index) {
   return /*html*/ `
     <div class="subtask-input-actions">
