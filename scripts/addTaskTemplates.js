@@ -31,10 +31,26 @@ const LOW_ICON = `
   </svg>
 `;
 
+/**
+ * Handles generateAddTask.
+ * @returns {*} Result.
+ */
+/**
+ * Generates add task.
+ * @returns {string} Result.
+ */
 function generateAddTask() {
   return getAddTaskHeader() + getAddTaskForm() + getAddTaskNoteOutside();
 }
 
+/**
+ * Handles getAddTaskHeader.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add task header.
+ * @returns {string} Result.
+ */
 function getAddTaskHeader() {
   return /*html*/ `
     <div class="add-task-header">
@@ -44,6 +60,14 @@ function getAddTaskHeader() {
   `;
 }
 
+/**
+ * Handles getAddTaskForm.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add task form.
+ * @returns {string} Result.
+ */
 function getAddTaskForm() {
   return /*html*/ `
     <form class="task-form" id="addTaskForm" onsubmit="saveToArray(event)">
@@ -53,6 +77,14 @@ function getAddTaskForm() {
   `;
 }
 
+/**
+ * Handles getAddTaskFormLeft.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add task form left.
+ * @returns {string} Result.
+ */
 function getAddTaskFormLeft() {
   return /*html*/ `
     <div class="form-left">
@@ -63,6 +95,14 @@ function getAddTaskFormLeft() {
   `;
 }
 
+/**
+ * Handles getTitleField.
+ * @returns {*} Result.
+ */
+/**
+ * Returns title field.
+ * @returns {string} Result.
+ */
 function getTitleField() {
   return /*html*/ `
     <label>
@@ -75,6 +115,14 @@ function getTitleField() {
   `;
 }
 
+/**
+ * Handles getDescriptionField.
+ * @returns {*} Result.
+ */
+/**
+ * Returns description field.
+ * @returns {string} Result.
+ */
 function getDescriptionField() {
   return /*html*/ `
     <label>
@@ -84,6 +132,14 @@ function getDescriptionField() {
   `;
 }
 
+/**
+ * Handles getDateField.
+ * @returns {*} Result.
+ */
+/**
+ * Returns date field.
+ * @returns {string} Result.
+ */
 function getDateField() {
   return /*html*/ `
     <label>
@@ -96,6 +152,14 @@ function getDateField() {
   `;
 }
 
+/**
+ * Handles getAddTaskFormRight.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add task form right.
+ * @returns {string} Result.
+ */
 function getAddTaskFormRight() {
   return /*html*/ `
     <div class="form-right">
@@ -109,6 +173,14 @@ function getAddTaskFormRight() {
   `;
 }
 
+/**
+ * Handles getPrioritySection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns priority section.
+ * @returns {string} Result.
+ */
 function getPrioritySection() {
   return /*html*/ `
     <div class="priority">
@@ -122,6 +194,14 @@ function getPrioritySection() {
   `;
 }
 
+/**
+ * Handles getPriorityUrgent.
+ * @returns {*} Result.
+ */
+/**
+ * Returns priority urgent.
+ * @returns {string} Result.
+ */
 function getPriorityUrgent() {
   return /*html*/ `
     <input type="radio" id="urgent" name="priority" value="urgent">
@@ -131,6 +211,14 @@ function getPriorityUrgent() {
   `;
 }
 
+/**
+ * Handles getPriorityMedium.
+ * @returns {*} Result.
+ */
+/**
+ * Returns priority medium.
+ * @returns {string} Result.
+ */
 function getPriorityMedium() {
   return /*html*/ `
     <input type="radio" id="medium" name="priority" value="medium" checked>
@@ -140,6 +228,14 @@ function getPriorityMedium() {
   `;
 }
 
+/**
+ * Handles getPriorityLow.
+ * @returns {*} Result.
+ */
+/**
+ * Returns priority low.
+ * @returns {string} Result.
+ */
 function getPriorityLow() {
   return /*html*/ `
     <input type="radio" id="low" name="priority" value="low">
@@ -149,6 +245,14 @@ function getPriorityLow() {
   `;
 }
 
+/**
+ * Handles getAssignedToSection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns assigned to section.
+ * @returns {string} Result.
+ */
 function getAssignedToSection() {
   return /*html*/ `
     <div class="assigned-to-label">
@@ -159,6 +263,14 @@ function getAssignedToSection() {
   `;
 }
 
+/**
+ * Handles getAssignedSelect.
+ * @returns {*} Result.
+ */
+/**
+ * Returns assigned select.
+ * @returns {string} Result.
+ */
 function getAssignedSelect() {
   return /*html*/ `
     <div id="selectContacts" class="custom-select" tabindex="0">
@@ -171,6 +283,14 @@ function getAssignedSelect() {
   `;
 }
 
+/**
+ * Handles getCategorySection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns category section.
+ * @returns {string} Result.
+ */
 function getCategorySection() {
   return /*html*/ `
     <label class="category">
@@ -184,6 +304,14 @@ function getCategorySection() {
   `;
 }
 
+/**
+ * Handles getCategorySelect.
+ * @returns {*} Result.
+ */
+/**
+ * Returns category select.
+ * @returns {string} Result.
+ */
 function getCategorySelect() {
   return /*html*/ `
     <div id="categorySelect" class="custom-select">
@@ -198,14 +326,38 @@ function getCategorySelect() {
   `;
 }
 
+/**
+ * Handles getCategoryHiddenInput.
+ * @returns {*} Result.
+ */
+/**
+ * Returns category hidden input.
+ * @returns {string} Result.
+ */
 function getCategoryHiddenInput() {
   return `<input type="hidden" id="category" required>`;
 }
 
+/**
+ * Handles getCategoryError.
+ * @returns {*} Result.
+ */
+/**
+ * Returns category error.
+ * @returns {string} Result.
+ */
 function getCategoryError() {
   return `<div class="error-message" id="categoryError"></div>`;
 }
 
+/**
+ * Handles getSubtaskSection.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask section.
+ * @returns {string} Result.
+ */
 function getSubtaskSection() {
   return /*html*/ `
     <label>
@@ -219,6 +371,14 @@ function getSubtaskSection() {
   `;
 }
 
+/**
+ * Handles getSubtaskInputActions.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask input actions.
+ * @returns {string} Result.
+ */
 function getSubtaskInputActions() {
   return /*html*/ `
     <div class="subtask-input-actions">
@@ -233,12 +393,28 @@ function getSubtaskInputActions() {
   `;
 }
 
+/**
+ * Handles getInlineNote.
+ * @returns {*} Result.
+ */
+/**
+ * Returns inline note.
+ * @returns {string} Result.
+ */
 function getInlineNote() {
   return /*html*/ `
     <p class="note note-inline"><span class="req">*</span>This field is required</p>
   `;
 }
 
+/**
+ * Handles getFormActions.
+ * @returns {*} Result.
+ */
+/**
+ * Returns form actions.
+ * @returns {string} Result.
+ */
 function getFormActions() {
   return /*html*/ `
     <div class="actions">
@@ -248,17 +424,43 @@ function getFormActions() {
   `;
 }
 
+/**
+ * Handles getAddTaskNoteOutside.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add task note outside.
+ * @returns {string} Result.
+ */
 function getAddTaskNoteOutside() {
   return /*html*/ `
     <p class="note note-outside"><span class="req">*</span>This field is required</p>
   `;
 }
 
+/**
+ * Handles generateAddCategoryOptions.
+ * @returns {*} Result.
+ */
+/**
+ * Generates add category options.
+ * @returns {string} Result.
+ */
 function generateAddCategoryOptions() {
   const categories = ["Technical Task", "User Story"];
   return categories.map((cat) => getAddCategoryOption(cat)).join("");
 }
 
+/**
+ * Handles getAddCategoryOption.
+ * @param {*} cat - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add category option.
+ * @param {*} cat - Parameter.
+ * @returns {string} Result.
+ */
 function getAddCategoryOption(cat) {
   return /*html*/ `
     <div class="dropdown-item" onclick="setAddCategory('${cat}')">
@@ -267,14 +469,44 @@ function getAddCategoryOption(cat) {
   `;
 }
 
+/**
+ * Handles generateSubtasks.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates subtasks.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function generateSubtasks(i) {
   return isEditingSubtask(i) ? getSubtaskEditItem(i) : getSubtaskItem(i);
 }
 
+/**
+ * Handles isEditingSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Checks whether editing subtask.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function isEditingSubtask(i) {
   return window.editingSubtaskIndex === i;
 }
 
+/**
+ * Handles getSubtaskEditItem.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask edit item.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskEditItem(i) {
   return /*html*/ `
     <li class="subtask subtask-edit">
@@ -290,6 +522,16 @@ function getSubtaskEditItem(i) {
   `;
 }
 
+/**
+ * Handles getSubtaskEditActions.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask edit actions.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskEditActions(i) {
   return /*html*/ `
     <div class="subtask-input-actions">
@@ -304,6 +546,16 @@ function getSubtaskEditActions(i) {
   `;
 }
 
+/**
+ * Handles getSubtaskItem.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask item.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskItem(i) {
   return /*html*/ `
     <li class="subtask">
@@ -313,6 +565,16 @@ function getSubtaskItem(i) {
   `;
 }
 
+/**
+ * Handles getSubtaskActions.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask actions.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskActions(i) {
   return /*html*/ `
     <div class="subtask-actions">
@@ -323,10 +585,32 @@ function getSubtaskActions(i) {
   `;
 }
 
+/**
+ * Handles generateAssignedContacts.
+ * @param {*} contacts - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Generates assigned contacts.
+ * @param {*} contacts - Parameter.
+ * @returns {string} Result.
+ */
 function generateAssignedContacts(contacts) {
   return contacts.map((contact, i) => getAssignedContactItem(contact, i)).join("");
 }
 
+/**
+ * Handles getAssignedContactItem.
+ * @param {*} contact - Parameter.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns assigned contact item.
+ * @param {Object} contact - Contact object.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getAssignedContactItem(contact, i) {
   const isChecked = selectedContacts.includes(contact.name);
   const checkboxId = getContactCheckboxId(i);
@@ -334,14 +618,50 @@ function getAssignedContactItem(contact, i) {
   return getAssignedContactMarkup(contact, isChecked, checkboxId, initials);
 }
 
+/**
+ * Handles getContactCheckboxId.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact checkbox id.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getContactCheckboxId(i) {
   return `contact_${i}`;
 }
 
+/**
+ * Handles getContactInitials.
+ * @param {*} name - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact initials.
+ * @param {string} name - Name.
+ * @returns {string} Result.
+ */
 function getContactInitials(name) {
   return name.split(" ").map(part => part.charAt(0)).join("").toUpperCase();
 }
 
+/**
+ * Handles getAssignedContactMarkup.
+ * @param {*} contact - Parameter.
+ * @param {*} isChecked - Parameter.
+ * @param {*} checkboxId - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns assigned contact markup.
+ * @param {Object} contact - Contact object.
+ * @param {*} isChecked - Parameter.
+ * @param {*} checkboxId - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getAssignedContactMarkup(contact, isChecked, checkboxId, initials) {
   return /*html*/ `
     <div class="dropdown-item">
@@ -358,6 +678,14 @@ function getAssignedContactMarkup(contact, isChecked, checkboxId, initials) {
   `;
 }
 
+/**
+ * Handles generateTaskFromForm.
+ * @returns {*} Result.
+ */
+/**
+ * Generates task from form.
+ * @returns {string} Result.
+ */
 function generateTaskFromForm() {
   const title = getInputTrimmedValue('title');
   const description = getInputTrimmedValue('description');
@@ -367,14 +695,50 @@ function generateTaskFromForm() {
   return buildTaskObject(title, description, dueDate, priority, category);
 }
 
+/**
+ * Handles getInputTrimmedValue.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns input trimmed value.
+ * @param {string} id - Identifier.
+ * @returns {string} Result.
+ */
 function getInputTrimmedValue(id) {
   return document.getElementById(id).value.trim();
 }
 
+/**
+ * Handles getCheckedPriority.
+ * @returns {*} Result.
+ */
+/**
+ * Returns checked priority.
+ * @returns {string} Result.
+ */
 function getCheckedPriority() {
   return document.querySelector('input[name="priority"]:checked').value;
 }
 
+/**
+ * Handles buildTaskObject.
+ * @param {*} title - Parameter.
+ * @param {*} description - Parameter.
+ * @param {*} dueDate - Parameter.
+ * @param {*} priority - Parameter.
+ * @param {*} category - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Builds task object.
+ * @param {*} title - Parameter.
+ * @param {*} description - Parameter.
+ * @param {*} dueDate - Parameter.
+ * @param {*} priority - Parameter.
+ * @param {*} category - Parameter.
+ * @returns {string} Result.
+ */
 function buildTaskObject(title, description, dueDate, priority, category) {
   return {
     id: Date.now(),
@@ -389,6 +753,16 @@ function buildTaskObject(title, description, dueDate, priority, category) {
   };
 }
 
+/**
+ * Handles getSelectedAvatarMarkup.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns selected avatar markup.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getSelectedAvatarMarkup(initials) {
   return `<div class="avatar">${initials}</div>`;
 }
