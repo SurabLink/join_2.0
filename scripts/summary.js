@@ -36,7 +36,6 @@ async function fetchUserNameByEmail(email) {
     try {
         const response = await fetch(`${BASE_URL}/users.json`);
         if (!response.ok) return "";
-
         const data = await response.json();
         const user = Object.values(data || {}).find(u => u.email === email);
         return (user && user.name) ? String(user.name) : "";
@@ -48,22 +47,29 @@ async function fetchUserNameByEmail(email) {
 
 async function renderWelcome() {
     const session = getStoredSession();
-    const isGuest = !session || session.mode === "guest";
-
-    // Guest: "Good ...!" + Username leer
-    if (isGuest) {
-        setText("welcome-msg", getGreetingByTime(false));
-        setText("username-field", "");
+    if (isGuestSession(session)) {
+        renderGuestWelcome();
         return;
     }
-
-    // User: "Good ...," + Username aus DB
     setText("welcome-msg", getGreetingByTime(true));
-
-    const nameFromDb = await fetchUserNameByEmail(session.email);
-    const name = nameFromDb || session.displayName || "User";
+    const name = await resolveUserName(session);
     setText("username-field", name);
 }
+
+function isGuestSession(session) {
+    return !session || session.mode === "guest";
+}
+
+function renderGuestWelcome() {
+    setText("welcome-msg", getGreetingByTime(false));
+    setText("username-field", "");
+}
+
+async function resolveUserName(session) {
+    const nameFromDb = await fetchUserNameByEmail(session.email);
+    return nameFromDb || session.displayName || "User";
+}
+
 // ---- /NEW ----
 
 // Tasks aus Firebase holen
@@ -81,23 +87,31 @@ async function fetchTasks() {
 async function updateDashboard() {
     try {
         const tasks = await fetchTasks();
-
-        const todoCount = tasks.filter(t => t.status === "To Do").length;
-        const doneCount = tasks.filter(t => t.status === "Done").length;
-        const inProgressCount = tasks.filter(t => t.status === "In Progress").length;
-        const awaitingFeedbackCount = tasks.filter(t => t.status === "Await Feedback").length;
-        const urgentCount = tasks.filter(t => t.priority === "urgent").length;
-        const totalTasks = tasks.length;
-
-        setText("total-to-do", todoCount);
-        setText("total-done", doneCount);
-        setText("total-tasks-progress", inProgressCount);
-        setText("total-awaiting-feedback", awaitingFeedbackCount);
-        setText("total-urgent", urgentCount);
-        setText("total-tasks-board", totalTasks);
+        applyDashboardStats(tasks);
     } catch (error) {
         console.error("Fehler beim Abrufen der Dashboard-Daten:", error);
     }
+}
+
+function applyDashboardStats(tasks) {
+    const stats = getDashboardStats(tasks);
+    setText("total-to-do", stats.todoCount);
+    setText("total-done", stats.doneCount);
+    setText("total-tasks-progress", stats.inProgressCount);
+    setText("total-awaiting-feedback", stats.awaitingFeedbackCount);
+    setText("total-urgent", stats.urgentCount);
+    setText("total-tasks-board", stats.totalTasks);
+}
+
+function getDashboardStats(tasks) {
+    return {
+        todoCount: tasks.filter(t => t.status === "To Do").length,
+        doneCount: tasks.filter(t => t.status === "Done").length,
+        inProgressCount: tasks.filter(t => t.status === "In Progress").length,
+        awaitingFeedbackCount: tasks.filter(t => t.status === "Await Feedback").length,
+        urgentCount: tasks.filter(t => t.priority === "urgent").length,
+        totalTasks: tasks.length
+    };
 }
 
 // Beim Laden der Seite aufrufen
@@ -111,4 +125,3 @@ document.addEventListener("click", (e) => {
     const card = e.target.closest(".kpi-card, .deadline-card, .task-summary-card");
     if (card) navigateToBoard();
 });
-
