@@ -14,11 +14,7 @@ async function renderAddTask() {
 }
 
 /**
- * Handles resetSelectedContacts.
- * @returns {*} Result.
- */
-/**
- * Handles reset selected contacts.
+ * Executes reset selected contacts logic.
  * @returns {void} Result.
  */
 function resetSelectedContacts() {
@@ -39,10 +35,6 @@ function validateForm() {
 }
 
 /**
- * Handles clearValidationErrors.
- * @returns {*} Result.
- */
-/**
  * Clears validation errors.
  * @returns {void} Result.
  */
@@ -52,12 +44,6 @@ function clearValidationErrors() {
   setErrorText('categoryError', '');
 }
 
-/**
- * Handles setErrorText.
- * @param {*} id - Parameter.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets error text.
  * @param {string} id - Identifier.
@@ -70,10 +56,6 @@ function setErrorText(id, value) {
 }
 
 /**
- * Handles validateTitleField.
- * @returns {*} Result.
- */
-/**
  * Validates title field.
  * @returns {void} Result.
  */
@@ -82,10 +64,6 @@ function validateTitleField() {
   return validateRequiredInput(input, 'titleError');
 }
 
-/**
- * Handles validateDateField.
- * @returns {*} Result.
- */
 /**
  * Validates date field.
  * @returns {void} Result.
@@ -96,10 +74,6 @@ function validateDateField() {
 }
 
 /**
- * Handles validateCategoryField.
- * @returns {*} Result.
- */
-/**
  * Validates category field.
  * @returns {void} Result.
  */
@@ -108,12 +82,6 @@ function validateCategoryField() {
   return validateRequiredInput(input, 'categoryError');
 }
 
-/**
- * Handles validateRequiredInput.
- * @param {*} input - Parameter.
- * @param {*} errorId - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates required input.
  * @param {HTMLElement} input - Input element.
@@ -131,13 +99,8 @@ function validateRequiredInput(input, errorId) {
 }
 
 /**
- * Handles saveToArray.
- * @param {*} event - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Saves to array.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @returns {Promise<*>} Result.
  */
 async function saveToArray(event) {
@@ -153,11 +116,7 @@ async function saveToArray(event) {
 }
 
 /**
- * Handles handleSaveSuccess.
- * @returns {*} Result.
- */
-/**
- * Handles save success.
+ * Executes handle save success logic.
  * @returns {void} Result.
  */
 function handleSaveSuccess() {
@@ -170,11 +129,7 @@ function handleSaveSuccess() {
 }
 
 /**
- * Handles handleSaveFailure.
- * @returns {*} Result.
- */
-/**
- * Handles save failure.
+ * Executes handle save failure logic.
  * @returns {void} Result.
  */
 function handleSaveFailure() {
@@ -202,7 +157,7 @@ async function saveTask(task) {
 }
 
 /**
- * Handles select contacts.
+ * Executes select contacts logic.
  * @returns {void} Result.
  */
 function selectContacts() {
@@ -212,7 +167,7 @@ function selectContacts() {
 
 /**
  * Toggles dropdown.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function toggleDropdown(event) {
@@ -221,13 +176,8 @@ function toggleDropdown(event) {
 }
 
 /**
- * Handles toggleAddCategoryDropdown.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
  * Toggles add category dropdown.
- * @param {Event} event - DOM event.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function toggleAddCategoryDropdown(event) {
@@ -237,11 +187,6 @@ function toggleAddCategoryDropdown(event) {
   dropdown.classList.toggle("show");
 }
 
-/**
- * Handles setAddCategory.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets add category.
  * @param {string} value - Value.
@@ -257,12 +202,6 @@ function setAddCategory(value) {
 }
 
 /**
- * Handles updateAddCategoryLabel.
- * @param {*} select - Parameter.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
-/**
  * Updates add category label.
  * @param {*} select - Parameter.
  * @param {string} value - Value.
@@ -276,10 +215,6 @@ function updateAddCategoryLabel(select, value) {
 }
 
 /**
- * Handles closeAddCategoryDropdown.
- * @returns {*} Result.
- */
-/**
  * Closes add category dropdown.
  * @returns {void} Result.
  */
@@ -288,10 +223,6 @@ function closeAddCategoryDropdown() {
   if (dropdown) dropdown.classList.remove("show");
 }
 
-/**
- * Handles initAddDropdownClose.
- * @returns {*} Result.
- */
 /**
  * Initializes add dropdown close.
  * @returns {void} Result.
@@ -302,10 +233,6 @@ function initAddDropdownClose() {
   document.addEventListener("click", () => closeAddDropdowns());
 }
 
-/**
- * Handles closeAddDropdowns.
- * @returns {*} Result.
- */
 /**
  * Closes add dropdowns.
  * @returns {void} Result.
@@ -343,13 +270,7 @@ function renderSelectedAvatars() {
 }
 
 /**
- * Handles appendSelectedAvatar.
- * @param {*} container - Parameter.
- * @param {*} name - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles append selected avatar.
+ * Executes append selected avatar logic.
  * @param {HTMLElement} container - Container element.
  * @param {string} name - Name.
  * @returns {void} Result.
@@ -359,10 +280,6 @@ function appendSelectedAvatar(container, name) {
   container.innerHTML += getSelectedAvatarMarkup(initials);
 }
 
-/**
- * Handles showSubtasks.
- * @returns {*} Result.
- */
 /**
  * Shows subtasks.
  * @returns {void} Result.
@@ -375,10 +292,6 @@ function showSubtasks() {
   }
 }
 
-/**
- * Handles addSubtask.
- * @returns {*} Result.
- */
 /**
  * Adds subtask.
  * @returns {void} Result.
@@ -395,10 +308,6 @@ function addSubtask() {
 }
 
 /**
- * Handles clearSubtaskInput.
- * @returns {*} Result.
- */
-/**
  * Clears subtask input.
  * @returns {void} Result.
  */
@@ -411,12 +320,7 @@ function clearSubtaskInput() {
 }
 
 /**
- * Handles editSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles edit subtask.
+ * Executes edit subtask logic.
  * @param {number} i - Index.
  * @returns {void} Result.
  */
@@ -424,11 +328,6 @@ function editSubtask(i) {
   setEditingSubtask(i);
 }
 
-/**
- * Handles deleteSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
 /**
  * Deletes subtask.
  * @param {number} i - Index.
@@ -443,10 +342,6 @@ function deleteSubtask(i) {
 }
 
 /**
- * Handles clearForm.
- * @returns {*} Result.
- */
-/**
  * Clears form.
  * @returns {void} Result.
  */
@@ -455,11 +350,6 @@ function clearForm() {
   renderSelectedAvatars();
 }
 
-/**
- * Handles setEditingSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets editing subtask.
  * @param {number} i - Index.
@@ -472,12 +362,7 @@ function setEditingSubtask(i) {
 }
 
 /**
- * Handles focusSubtaskEditInput.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles focus subtask edit input.
+ * Executes focus subtask edit input logic.
  * @param {number} i - Index.
  * @returns {void} Result.
  */
@@ -490,11 +375,7 @@ function focusSubtaskEditInput(i) {
 }
 
 /**
- * Handles cancelEditSubtask.
- * @returns {*} Result.
- */
-/**
- * Handles cancel edit subtask.
+ * Executes cancel edit subtask logic.
  * @returns {void} Result.
  */
 function cancelEditSubtask() {
@@ -502,11 +383,6 @@ function cancelEditSubtask() {
   showSubtasks();
 }
 
-/**
- * Handles saveEditedSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
 /**
  * Saves edited subtask.
  * @param {number} i - Index.
