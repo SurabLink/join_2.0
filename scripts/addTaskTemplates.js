@@ -1,4 +1,3 @@
-
 const URGENT_ICON = `
   <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -31,6 +30,7 @@ const LOW_ICON = `
       fill="#7AE229" />
   </svg>
 `;
+
 function generateAddTask() {
   return getAddTaskHeader() + getAddTaskForm() + getAddTaskNoteOutside();
 }
@@ -126,7 +126,7 @@ function getPriorityUrgent() {
   return /*html*/ `
     <input type="radio" id="urgent" name="priority" value="urgent">
     <label for="urgent" class="urgent priority-btn">Urgent
-      ${getUrgentIcon()}
+      ${URGENT_ICON}
     </label>
   `;
 }
@@ -135,7 +135,7 @@ function getPriorityMedium() {
   return /*html*/ `
     <input type="radio" id="medium" name="priority" value="medium" checked>
     <label for="medium" class="medium priority-btn">Medium
-      ${getMediumIcon()}
+      ${MEDIUM_ICON}
     </label>
   `;
 }
@@ -144,36 +144,29 @@ function getPriorityLow() {
   return /*html*/ `
     <input type="radio" id="low" name="priority" value="low">
     <label for="low" class="low priority-btn">Low
-      ${getLowIcon()}
+      ${LOW_ICON}
     </label>
   `;
-}
-
-function getUrgentIcon() {
-  return URGENT_ICON;
-}
-
-function getMediumIcon() {
-  return MEDIUM_ICON;
-}
-
-function getLowIcon() {
-  return LOW_ICON;
 }
 
 function getAssignedToSection() {
   return /*html*/ `
     <div class="assigned-to-label">
       Assigned to
-      <div id="selectContacts" class="custom-select" tabindex="0">
-        <span onclick="toggleDropdown(event)">
-          Select contacts to assign
-          <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
-        </span>
-        <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
-      </div>
-
+      ${getAssignedSelect()}
       <div id="selectedAvatars" class="avatar-container"></div>
+    </div>
+  `;
+}
+
+function getAssignedSelect() {
+  return /*html*/ `
+    <div id="selectContacts" class="custom-select" tabindex="0">
+      <span onclick="toggleDropdown(event)">
+        Select contacts to assign
+        <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+      </span>
+      <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
     </div>
   `;
 }
@@ -184,19 +177,33 @@ function getCategorySection() {
       <span>
         Category<span class="req">*</span>
       </span>
-      <div id="categorySelect" class="custom-select">
-        <span onclick="toggleAddCategoryDropdown(event)">
-          Select task category
-          <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
-        </span>
-        <div id="categoryDropdown" class="dropdown-content" onclick="event.stopPropagation()">
-          ${generateAddCategoryOptions()}
-        </div>
-      </div>
-      <input type="hidden" id="category" required>
-      <div class="error-message" id="categoryError"></div>
+      ${getCategorySelect()}
+      ${getCategoryHiddenInput()}
+      ${getCategoryError()}
     </label>
   `;
+}
+
+function getCategorySelect() {
+  return /*html*/ `
+    <div id="categorySelect" class="custom-select">
+      <span onclick="toggleAddCategoryDropdown(event)">
+        Select task category
+        <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+      </span>
+      <div id="categoryDropdown" class="dropdown-content" onclick="event.stopPropagation()">
+        ${generateAddCategoryOptions()}
+      </div>
+    </div>
+  `;
+}
+
+function getCategoryHiddenInput() {
+  return `<input type="hidden" id="category" required>`;
+}
+
+function getCategoryError() {
+  return `<div class="error-message" id="categoryError"></div>`;
 }
 
 function getSubtaskSection() {
@@ -380,4 +387,8 @@ function buildTaskObject(title, description, dueDate, priority, category) {
     subtasks: [...subtasks],
     status: "To Do",
   };
+}
+
+function getSelectedAvatarMarkup(initials) {
+  return `<div class="avatar">${initials}</div>`;
 }
