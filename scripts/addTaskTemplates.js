@@ -31,482 +31,110 @@ const LOW_ICON = `
   </svg>
 `;
 
-/**
- * Handles generateAddTask.
- * @returns {*} Result.
- */
-/**
- * Generates add task.
- * @returns {string} Result.
- */
 function generateAddTask() {
-  return getAddTaskHeader() + getAddTaskForm() + getAddTaskNoteOutside();
-}
-
-/**
- * Handles getAddTaskHeader.
- * @returns {*} Result.
- */
-/**
- * Returns add task header.
- * @returns {string} Result.
- */
-function getAddTaskHeader() {
   return /*html*/ `
     <div class="add-task-header">
       <h1>Add Task</h1>
       <img src="./assets/icons/close.svg" alt="Close-Button" width="20" height="20" onclick="closeAddTaskDialog()">
     </div>
-  `;
-}
-
-/**
- * Handles getAddTaskForm.
- * @returns {*} Result.
- */
-/**
- * Returns add task form.
- * @returns {string} Result.
- */
-function getAddTaskForm() {
-  return /*html*/ `
     <form class="task-form" id="addTaskForm" onsubmit="saveToArray(event)">
-      ${getAddTaskFormLeft()}
-      ${getAddTaskFormRight()}
+      <div class="form-left">
+        <label>
+          <span>Title<span class="req">*</span></span>
+          <input type="text" placeholder="Enter a title" id="title">
+          <div class="error-message" id="titleError"></div>
+        </label>
+        <label>
+          Description
+          <textarea placeholder="Enter a Description" id="description"></textarea>
+        </label>
+        <label>
+          <span>Due date<span class="req">*</span></span>
+          <input type="date" id="date">
+          <div class="error-message" id="dateError"></div>
+        </label>
+      </div>
+      <div class="form-right">
+        <div class="priority">
+          <span>Priority</span>
+          <div class="priority-options">
+            <input type="radio" id="urgent" name="priority" value="urgent">
+            <label for="urgent" class="urgent priority-btn">Urgent ${URGENT_ICON}</label>
+            <input type="radio" id="medium" name="priority" value="medium" checked>
+            <label for="medium" class="medium priority-btn">Medium ${MEDIUM_ICON}</label>
+            <input type="radio" id="low" name="priority" value="low">
+            <label for="low" class="low priority-btn">Low ${LOW_ICON}</label>
+          </div>
+        </div>
+        <div class="assigned-to-label">
+          Assigned to
+          <div id="selectContacts" class="custom-select" tabindex="0">
+            <span onclick="toggleDropdown(event)">
+              Select contacts to assign
+              <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+            </span>
+            <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
+          </div>
+          <div id="selectedAvatars" class="avatar-container"></div>
+        </div>
+        <label class="category">
+          <span>Category<span class="req">*</span></span>
+          <div id="categorySelect" class="custom-select">
+            <span onclick="toggleAddCategoryDropdown(event)">
+              Select task category
+              <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
+            </span>
+            <div id="categoryDropdown" class="dropdown-content" onclick="event.stopPropagation()">
+              ${generateAddCategoryOptions()}
+            </div>
+          </div>
+          <input type="hidden" id="category" required>
+          <div class="error-message" id="categoryError"></div>
+        </label>
+        <label>
+          Subtasks
+          <div class="subtasks">
+            <input type="text" id="subtask" placeholder="Add new subtask">
+            <div class="subtask-input-actions">
+              <button type="button" class="subtask-icon-btn" onclick="clearSubtaskInput()" aria-label="Clear subtask">
+                <img src="./assets/icons/iconoir_cancel.svg" alt="">
+              </button>
+              <div class="subtask-input-separator"></div>
+              <button type="button" class="subtask-icon-btn" onclick="addSubtask()" aria-label="Add subtask">
+                <img src="./assets/icons/checkmark.svg" alt="">
+              </button>
+            </div>
+          </div>
+          <ul id="subtaskArea" class="subtask-list"></ul>
+        </label>
+        <p class="note note-inline"><span class="req">*</span>This field is required</p>
+        <div class="actions">
+          <button type="reset" class="clear" onclick="clearForm()">Clear ✕</button>
+          <button type="submit" class="create">Create Task ▾</button>
+        </div>
+      </div>
     </form>
-  `;
-}
-
-/**
- * Handles getAddTaskFormLeft.
- * @returns {*} Result.
- */
-/**
- * Returns add task form left.
- * @returns {string} Result.
- */
-function getAddTaskFormLeft() {
-  return /*html*/ `
-    <div class="form-left">
-      ${getTitleField()}
-      ${getDescriptionField()}
-      ${getDateField()}
-    </div>
-  `;
-}
-
-/**
- * Handles getTitleField.
- * @returns {*} Result.
- */
-/**
- * Returns title field.
- * @returns {string} Result.
- */
-function getTitleField() {
-  return /*html*/ `
-    <label>
-      <span>
-        Title<span class="req">*</span>
-      </span>
-      <input type="text" placeholder="Enter a title" id="title">
-      <div class="error-message" id="titleError"></div>
-    </label>
-  `;
-}
-
-/**
- * Handles getDescriptionField.
- * @returns {*} Result.
- */
-/**
- * Returns description field.
- * @returns {string} Result.
- */
-function getDescriptionField() {
-  return /*html*/ `
-    <label>
-      Description
-      <textarea placeholder="Enter a Description" id="description"></textarea>
-    </label>
-  `;
-}
-
-/**
- * Handles getDateField.
- * @returns {*} Result.
- */
-/**
- * Returns date field.
- * @returns {string} Result.
- */
-function getDateField() {
-  return /*html*/ `
-    <label>
-      <span>
-        Due date<span class="req">*</span>
-      </span>
-      <input type="date" id="date">
-      <div class="error-message" id="dateError"></div>
-    </label>
-  `;
-}
-
-/**
- * Handles getAddTaskFormRight.
- * @returns {*} Result.
- */
-/**
- * Returns add task form right.
- * @returns {string} Result.
- */
-function getAddTaskFormRight() {
-  return /*html*/ `
-    <div class="form-right">
-      ${getPrioritySection()}
-      ${getAssignedToSection()}
-      ${getCategorySection()}
-      ${getSubtaskSection()}
-      ${getInlineNote()}
-      ${getFormActions()}
-    </div>
-  `;
-}
-
-/**
- * Handles getPrioritySection.
- * @returns {*} Result.
- */
-/**
- * Returns priority section.
- * @returns {string} Result.
- */
-function getPrioritySection() {
-  return /*html*/ `
-    <div class="priority">
-      <span>Priority</span>
-      <div class="priority-options">
-        ${getPriorityUrgent()}
-        ${getPriorityMedium()}
-        ${getPriorityLow()}
-      </div>
-    </div>
-  `;
-}
-
-/**
- * Handles getPriorityUrgent.
- * @returns {*} Result.
- */
-/**
- * Returns priority urgent.
- * @returns {string} Result.
- */
-function getPriorityUrgent() {
-  return /*html*/ `
-    <input type="radio" id="urgent" name="priority" value="urgent">
-    <label for="urgent" class="urgent priority-btn">Urgent
-      ${URGENT_ICON}
-    </label>
-  `;
-}
-
-/**
- * Handles getPriorityMedium.
- * @returns {*} Result.
- */
-/**
- * Returns priority medium.
- * @returns {string} Result.
- */
-function getPriorityMedium() {
-  return /*html*/ `
-    <input type="radio" id="medium" name="priority" value="medium" checked>
-    <label for="medium" class="medium priority-btn">Medium
-      ${MEDIUM_ICON}
-    </label>
-  `;
-}
-
-/**
- * Handles getPriorityLow.
- * @returns {*} Result.
- */
-/**
- * Returns priority low.
- * @returns {string} Result.
- */
-function getPriorityLow() {
-  return /*html*/ `
-    <input type="radio" id="low" name="priority" value="low">
-    <label for="low" class="low priority-btn">Low
-      ${LOW_ICON}
-    </label>
-  `;
-}
-
-/**
- * Handles getAssignedToSection.
- * @returns {*} Result.
- */
-/**
- * Returns assigned to section.
- * @returns {string} Result.
- */
-function getAssignedToSection() {
-  return /*html*/ `
-    <div class="assigned-to-label">
-      Assigned to
-      ${getAssignedSelect()}
-      <div id="selectedAvatars" class="avatar-container"></div>
-    </div>
-  `;
-}
-
-/**
- * Handles getAssignedSelect.
- * @returns {*} Result.
- */
-/**
- * Returns assigned select.
- * @returns {string} Result.
- */
-function getAssignedSelect() {
-  return /*html*/ `
-    <div id="selectContacts" class="custom-select" tabindex="0">
-      <span onclick="toggleDropdown(event)">
-        Select contacts to assign
-        <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
-      </span>
-      <div id="dropdownContacts" class="dropdown-content" onclick="event.stopPropagation()"></div>
-    </div>
-  `;
-}
-
-/**
- * Handles getCategorySection.
- * @returns {*} Result.
- */
-/**
- * Returns category section.
- * @returns {string} Result.
- */
-function getCategorySection() {
-  return /*html*/ `
-    <label class="category">
-      <span>
-        Category<span class="req">*</span>
-      </span>
-      ${getCategorySelect()}
-      ${getCategoryHiddenInput()}
-      ${getCategoryError()}
-    </label>
-  `;
-}
-
-/**
- * Handles getCategorySelect.
- * @returns {*} Result.
- */
-/**
- * Returns category select.
- * @returns {string} Result.
- */
-function getCategorySelect() {
-  return /*html*/ `
-    <div id="categorySelect" class="custom-select">
-      <span onclick="toggleAddCategoryDropdown(event)">
-        Select task category
-        <img src="./assets/icons/arrow_drop_down.svg" alt="" class="dropdown-arrow">
-      </span>
-      <div id="categoryDropdown" class="dropdown-content" onclick="event.stopPropagation()">
-        ${generateAddCategoryOptions()}
-      </div>
-    </div>
-  `;
-}
-
-/**
- * Handles getCategoryHiddenInput.
- * @returns {*} Result.
- */
-/**
- * Returns category hidden input.
- * @returns {string} Result.
- */
-function getCategoryHiddenInput() {
-  return `<input type="hidden" id="category" required>`;
-}
-
-/**
- * Handles getCategoryError.
- * @returns {*} Result.
- */
-/**
- * Returns category error.
- * @returns {string} Result.
- */
-function getCategoryError() {
-  return `<div class="error-message" id="categoryError"></div>`;
-}
-
-/**
- * Handles getSubtaskSection.
- * @returns {*} Result.
- */
-/**
- * Returns subtask section.
- * @returns {string} Result.
- */
-function getSubtaskSection() {
-  return /*html*/ `
-    <label>
-      Subtasks
-      <div class="subtasks">
-        <input type="text" id="subtask" placeholder="Add new subtask">
-        ${getSubtaskInputActions()}
-      </div>
-      <ul id="subtaskArea" class="subtask-list"></ul>
-    </label>
-  `;
-}
-
-/**
- * Handles getSubtaskInputActions.
- * @returns {*} Result.
- */
-/**
- * Returns subtask input actions.
- * @returns {string} Result.
- */
-function getSubtaskInputActions() {
-  return /*html*/ `
-    <div class="subtask-input-actions">
-      <button type="button" class="subtask-icon-btn" onclick="clearSubtaskInput()" aria-label="Clear subtask">
-        <img src="./assets/icons/iconoir_cancel.svg" alt="">
-      </button>
-      <div class="subtask-input-separator"></div>
-      <button type="button" class="subtask-icon-btn" onclick="addSubtask()" aria-label="Add subtask">
-        <img src="./assets/icons/checkmark.svg" alt="">
-      </button>
-    </div>
-  `;
-}
-
-/**
- * Handles getInlineNote.
- * @returns {*} Result.
- */
-/**
- * Returns inline note.
- * @returns {string} Result.
- */
-function getInlineNote() {
-  return /*html*/ `
-    <p class="note note-inline"><span class="req">*</span>This field is required</p>
-  `;
-}
-
-/**
- * Handles getFormActions.
- * @returns {*} Result.
- */
-/**
- * Returns form actions.
- * @returns {string} Result.
- */
-function getFormActions() {
-  return /*html*/ `
-    <div class="actions">
-      <button type="reset" class="clear" onclick="clearForm()">Clear ✕</button>
-      <button type="submit" class="create">Create Task ▾</button>
-    </div>
-  `;
-}
-
-/**
- * Handles getAddTaskNoteOutside.
- * @returns {*} Result.
- */
-/**
- * Returns add task note outside.
- * @returns {string} Result.
- */
-function getAddTaskNoteOutside() {
-  return /*html*/ `
     <p class="note note-outside"><span class="req">*</span>This field is required</p>
   `;
 }
 
-/**
- * Handles generateAddCategoryOptions.
- * @returns {*} Result.
- */
-/**
- * Generates add category options.
- * @returns {string} Result.
- */
 function generateAddCategoryOptions() {
   const categories = ["Technical Task", "User Story"];
-  return categories.map((cat) => getAddCategoryOption(cat)).join("");
-}
-
-/**
- * Handles getAddCategoryOption.
- * @param {*} cat - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns add category option.
- * @param {*} cat - Parameter.
- * @returns {string} Result.
- */
-function getAddCategoryOption(cat) {
-  return /*html*/ `
+  return categories.map((cat) => /*html*/ `
     <div class="dropdown-item" onclick="setAddCategory('${cat}')">
       <span class="dropdown-name">${cat}</span>
     </div>
-  `;
+  `).join("");
 }
 
-/**
- * Handles generateSubtasks.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Generates subtasks.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
 function generateSubtasks(i) {
   return isEditingSubtask(i) ? getSubtaskEditItem(i) : getSubtaskItem(i);
 }
 
-/**
- * Handles isEditingSubtask.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Checks whether editing subtask.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
 function isEditingSubtask(i) {
   return window.editingSubtaskIndex === i;
 }
 
-/**
- * Handles getSubtaskEditItem.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns subtask edit item.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
 function getSubtaskEditItem(i) {
   return /*html*/ `
     <li class="subtask subtask-edit">
@@ -517,229 +145,59 @@ function getSubtaskEditItem(i) {
         value="${subtasks[i].title}"
         placeholder="Edit subtask"
       >
-      ${getSubtaskEditActions(i)}
+      <div class="subtask-input-actions">
+        <button type="button" class="subtask-icon-btn" onclick="deleteSubtask(${i})" aria-label="Delete subtask">
+          <img src="./assets/icons/delete.svg" alt="">
+        </button>
+        <div class="subtask-input-separator"></div>
+        <button type="button" class="subtask-icon-btn" onclick="saveEditedSubtask(${i})" aria-label="Save subtask">
+          <img src="./assets/icons/checkmark.svg" alt="">
+        </button>
+      </div>
     </li>
   `;
 }
 
-/**
- * Handles getSubtaskEditActions.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns subtask edit actions.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
-function getSubtaskEditActions(i) {
-  return /*html*/ `
-    <div class="subtask-input-actions">
-      <button type="button" class="subtask-icon-btn" onclick="deleteSubtask(${i})" aria-label="Delete subtask">
-        <img src="./assets/icons/delete.svg" alt="">
-      </button>
-      <div class="subtask-input-separator"></div>
-      <button type="button" class="subtask-icon-btn" onclick="saveEditedSubtask(${i})" aria-label="Save subtask">
-        <img src="./assets/icons/checkmark.svg" alt="">
-      </button>
-    </div>
-  `;
-}
-
-/**
- * Handles getSubtaskItem.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns subtask item.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
 function getSubtaskItem(i) {
   return /*html*/ `
     <li class="subtask">
       <span>${subtasks[i].title}</span>
-      ${getSubtaskActions(i)}
+      <div class="subtask-actions">
+        <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
+        <div class="action-separator"></div>
+        <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
+      </div>
     </li>
   `;
 }
 
-/**
- * Handles getSubtaskActions.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns subtask actions.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
-function getSubtaskActions(i) {
-  return /*html*/ `
-    <div class="subtask-actions">
-      <img src="./assets/icons/edit.svg" alt="Edit" onclick="editSubtask(${i})">
-      <div class="action-separator"></div>
-      <img src="./assets/icons/delete.svg" alt="Delete" onclick="deleteSubtask(${i})">
-    </div>
-  `;
-}
-
-/**
- * Handles generateAssignedContacts.
- * @param {*} contacts - Parameter.
- * @returns {*} Result.
- */
-/**
- * Generates assigned contacts.
- * @param {*} contacts - Parameter.
- * @returns {string} Result.
- */
 function generateAssignedContacts(contacts) {
-  return contacts.map((contact, i) => getAssignedContactItem(contact, i)).join("");
+  return contacts.map((contact, i) => {
+    const isChecked = selectedContacts.includes(contact.name);
+    const checkboxId = `contact_${i}`;
+    const initials = contact.name.split(" ").map(part => part.charAt(0)).join("").toUpperCase();
+    return /*html*/ `
+      <div class="dropdown-item">
+        <div class="dropdown-avatar">${initials}</div>
+        <label for="${checkboxId}" class="dropdown-name">${contact.name}</label>
+        <input
+          type="checkbox"
+          id="${checkboxId}"
+          value="${contact.name}"
+          onchange="toggleContactSelection('${contact.name}', this)"
+          ${isChecked ? "checked" : ""}
+        >
+      </div>
+    `;
+  }).join("");
 }
 
-/**
- * Handles getAssignedContactItem.
- * @param {*} contact - Parameter.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns assigned contact item.
- * @param {Object} contact - Contact object.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
-function getAssignedContactItem(contact, i) {
-  const isChecked = selectedContacts.includes(contact.name);
-  const checkboxId = getContactCheckboxId(i);
-  const initials = getContactInitials(contact.name);
-  return getAssignedContactMarkup(contact, isChecked, checkboxId, initials);
-}
-
-/**
- * Handles getContactCheckboxId.
- * @param {*} i - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns contact checkbox id.
- * @param {number} i - Index.
- * @returns {string} Result.
- */
-function getContactCheckboxId(i) {
-  return `contact_${i}`;
-}
-
-/**
- * Handles getContactInitials.
- * @param {*} name - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns contact initials.
- * @param {string} name - Name.
- * @returns {string} Result.
- */
-function getContactInitials(name) {
-  return name.split(" ").map(part => part.charAt(0)).join("").toUpperCase();
-}
-
-/**
- * Handles getAssignedContactMarkup.
- * @param {*} contact - Parameter.
- * @param {*} isChecked - Parameter.
- * @param {*} checkboxId - Parameter.
- * @param {*} initials - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns assigned contact markup.
- * @param {Object} contact - Contact object.
- * @param {*} isChecked - Parameter.
- * @param {*} checkboxId - Parameter.
- * @param {*} initials - Parameter.
- * @returns {string} Result.
- */
-function getAssignedContactMarkup(contact, isChecked, checkboxId, initials) {
-  return /*html*/ `
-    <div class="dropdown-item">
-      <div class="dropdown-avatar">${initials}</div>
-      <label for="${checkboxId}" class="dropdown-name">${contact.name}</label>
-      <input
-        type="checkbox"
-        id="${checkboxId}"
-        value="${contact.name}"
-        onchange="toggleContactSelection('${contact.name}', this)"
-        ${isChecked ? "checked" : ""}
-      >
-    </div>
-  `;
-}
-
-/**
- * Handles generateTaskFromForm.
- * @returns {*} Result.
- */
-/**
- * Generates task from form.
- * @returns {string} Result.
- */
 function generateTaskFromForm() {
-  const title = getInputTrimmedValue('title');
-  const description = getInputTrimmedValue('description');
-  const dueDate = getInputTrimmedValue('date');
-  const priority = getCheckedPriority();
-  const category = getInputTrimmedValue('category');
-  return buildTaskObject(title, description, dueDate, priority, category);
-}
-
-/**
- * Handles getInputTrimmedValue.
- * @param {*} id - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns input trimmed value.
- * @param {string} id - Identifier.
- * @returns {string} Result.
- */
-function getInputTrimmedValue(id) {
-  return document.getElementById(id).value.trim();
-}
-
-/**
- * Handles getCheckedPriority.
- * @returns {*} Result.
- */
-/**
- * Returns checked priority.
- * @returns {string} Result.
- */
-function getCheckedPriority() {
-  return document.querySelector('input[name="priority"]:checked').value;
-}
-
-/**
- * Handles buildTaskObject.
- * @param {*} title - Parameter.
- * @param {*} description - Parameter.
- * @param {*} dueDate - Parameter.
- * @param {*} priority - Parameter.
- * @param {*} category - Parameter.
- * @returns {*} Result.
- */
-/**
- * Builds task object.
- * @param {*} title - Parameter.
- * @param {*} description - Parameter.
- * @param {*} dueDate - Parameter.
- * @param {*} priority - Parameter.
- * @param {*} category - Parameter.
- * @returns {string} Result.
- */
-function buildTaskObject(title, description, dueDate, priority, category) {
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const dueDate = document.getElementById('date').value.trim();
+  const priority = document.querySelector('input[name="priority"]:checked').value;
+  const category = document.getElementById('category').value.trim();
   return {
     id: Date.now(),
     title,
@@ -753,16 +211,6 @@ function buildTaskObject(title, description, dueDate, priority, category) {
   };
 }
 
-/**
- * Handles getSelectedAvatarMarkup.
- * @param {*} initials - Parameter.
- * @returns {*} Result.
- */
-/**
- * Returns selected avatar markup.
- * @param {*} initials - Parameter.
- * @returns {string} Result.
- */
 function getSelectedAvatarMarkup(initials) {
   return `<div class="avatar">${initials}</div>`;
 }
