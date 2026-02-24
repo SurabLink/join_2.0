@@ -1,5 +1,15 @@
 let signupFieldErrors = {};
 
+/**
+ * Handles handleSignupSubmit.
+ * @param {*} event - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles signup submit.
+ * @param {Event} event - DOM event.
+ * @returns {void} Result.
+ */
 function handleSignupSubmit(event) {
     event.preventDefault();
     if (!validateSignupForm()) {
@@ -8,6 +18,14 @@ function handleSignupSubmit(event) {
     addUser();
 }
 
+/**
+ * Handles validateSignupForm.
+ * @returns {*} Result.
+ */
+/**
+ * Validates signup form.
+ * @returns {void} Result.
+ */
 function validateSignupForm() {
     const fields = getSignupFields();
     resetSignupErrors(fields);
@@ -20,6 +38,14 @@ function validateSignupForm() {
     return !state.firstErrorShown;
 }
 
+/**
+ * Handles getSignupFields.
+ * @returns {*} Result.
+ */
+/**
+ * Returns signup fields.
+ * @returns {*} Result.
+ */
 function getSignupFields() {
     return {
         nameInput: document.getElementById('registerName'),
@@ -30,6 +56,16 @@ function getSignupFields() {
     };
 }
 
+/**
+ * Handles resetSignupErrors.
+ * @param {*} fields - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles reset signup errors.
+ * @param {*} fields - Parameter.
+ * @returns {void} Result.
+ */
 function resetSignupErrors(fields) {
     signupFieldErrors = {};
     [fields.nameInput, fields.emailInput, fields.passwordInput, fields.confirmPasswordInput].forEach(input => {
@@ -39,6 +75,14 @@ function resetSignupErrors(fields) {
     clearPolicyError();
 }
 
+/**
+ * Handles clearSignupErrorTexts.
+ * @returns {*} Result.
+ */
+/**
+ * Clears signup error texts.
+ * @returns {void} Result.
+ */
 function clearSignupErrorTexts() {
     setSignupErrorText('registerNameError', '');
     setSignupErrorText('registerEmailError', '');
@@ -47,11 +91,31 @@ function clearSignupErrorTexts() {
     setSignupErrorText('acceptPrivacyError', '');
 }
 
+/**
+ * Handles setSignupErrorText.
+ * @param {*} id - Parameter.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets signup error text.
+ * @param {string} id - Identifier.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function setSignupErrorText(id, value) {
     const el = document.getElementById(id);
     if (el) el.textContent = value;
 }
 
+/**
+ * Handles clearPolicyError.
+ * @returns {*} Result.
+ */
+/**
+ * Clears policy error.
+ * @returns {void} Result.
+ */
 function clearPolicyError() {
     const policyContainer = document.querySelector('.accept-privacy-policy');
     if (policyContainer) {
@@ -59,6 +123,18 @@ function clearPolicyError() {
     }
 }
 
+/**
+ * Handles validateNameField.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates name field.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function validateNameField(fields, state) {
     const nameValue = fields.nameInput.value.trim();
     if (!nameValue) {
@@ -66,6 +142,18 @@ function validateNameField(fields, state) {
     }
 }
 
+/**
+ * Handles validateEmailField.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates email field.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function validateEmailField(fields, state) {
     const emailValue = fields.emailInput.value.trim();
     if (!emailValue) {
@@ -77,6 +165,18 @@ function validateEmailField(fields, state) {
     }
 }
 
+/**
+ * Handles validatePasswordField.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates password field.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function validatePasswordField(fields, state) {
     const passwordValue = fields.passwordInput.value;
     if (!passwordValue) {
@@ -84,6 +184,18 @@ function validatePasswordField(fields, state) {
     }
 }
 
+/**
+ * Handles validateConfirmPasswordField.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates confirm password field.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function validateConfirmPasswordField(fields, state) {
     const passwordValue = fields.passwordInput.value;
     const confirmValue = fields.confirmPasswordInput.value;
@@ -96,6 +208,18 @@ function validateConfirmPasswordField(fields, state) {
     }
 }
 
+/**
+ * Handles validatePolicyField.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates policy field.
+ * @param {*} fields - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function validatePolicyField(fields, state) {
     if (fields.policyCheckbox.checked) return;
     signupFieldErrors.acceptPrivacy = 'Please accept the privacy policy.';
@@ -109,6 +233,22 @@ function validatePolicyField(fields, state) {
     }
 }
 
+/**
+ * Handles setSignupFieldError.
+ * @param {*} fieldId - Parameter.
+ * @param {*} message - Parameter.
+ * @param {*} input - Parameter.
+ * @param {*} state - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets signup field error.
+ * @param {*} fieldId - Parameter.
+ * @param {string} message - Message text.
+ * @param {HTMLElement} input - Input element.
+ * @param {*} state - Parameter.
+ * @returns {void} Result.
+ */
 function setSignupFieldError(fieldId, message, input, state) {
     signupFieldErrors[fieldId] = message;
     input.classList.add('input-error');
@@ -119,6 +259,16 @@ function setSignupFieldError(fieldId, message, input, state) {
     }
 }
 
+/**
+ * Handles getSignupErrorId.
+ * @param {*} fieldId - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns signup error id.
+ * @param {*} fieldId - Parameter.
+ * @returns {*} Result.
+ */
 function getSignupErrorId(fieldId) {
     const idMap = {
         registerName: 'registerNameError',
@@ -130,6 +280,16 @@ function getSignupErrorId(fieldId) {
     return idMap[fieldId];
 }
 
+/**
+ * Handles showFieldErrorMessage.
+ * @param {*} fieldId - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Shows field error message.
+ * @param {*} fieldId - Parameter.
+ * @returns {void} Result.
+ */
 function showFieldErrorMessage(fieldId) {
     clearAllSignupErrorMessages();
     const message = signupFieldErrors[fieldId];
@@ -141,6 +301,14 @@ function showFieldErrorMessage(fieldId) {
     }
 }
 
+/**
+ * Handles clearAllSignupErrorMessages.
+ * @returns {*} Result.
+ */
+/**
+ * Clears all signup error messages.
+ * @returns {void} Result.
+ */
 function clearAllSignupErrorMessages() {
     const ids = Object.values({
         registerName: 'registerNameError',
@@ -157,6 +325,14 @@ function clearAllSignupErrorMessages() {
     });
 }
 
+/**
+ * Handles attachSignupErrorFocusHandlers.
+ * @returns {*} Result.
+ */
+/**
+ * Handles attach signup error focus handlers.
+ * @returns {void} Result.
+ */
 function attachSignupErrorFocusHandlers() {
     const pairs = [
         { fieldId: 'registerName', event: 'focus' },
@@ -173,6 +349,14 @@ function attachSignupErrorFocusHandlers() {
     });
 }
 
+/**
+ * Handles updateSignupButtonState.
+ * @returns {*} Result.
+ */
+/**
+ * Updates signup button state.
+ * @returns {void} Result.
+ */
 function updateSignupButtonState() {
     const nameValue = document.getElementById('registerName')?.value.trim();
     const emailValue = document.getElementById('registerEmail')?.value.trim();
@@ -187,6 +371,14 @@ function updateSignupButtonState() {
     }
 }
 
+/**
+ * Handles attachSignupFormStateHandlers.
+ * @returns {*} Result.
+ */
+/**
+ * Handles attach signup form state handlers.
+ * @returns {void} Result.
+ */
 function attachSignupFormStateHandlers() {
     const inputs = getSignupInputElements();
     const policyCheckbox = document.getElementById('acceptPrivacy');
@@ -196,6 +388,14 @@ function attachSignupFormStateHandlers() {
     }
 }
 
+/**
+ * Handles getSignupInputElements.
+ * @returns {*} Result.
+ */
+/**
+ * Returns signup input elements.
+ * @returns {*} Result.
+ */
 function getSignupInputElements() {
     return [
         document.getElementById('registerName'),
@@ -205,11 +405,37 @@ function getSignupInputElements() {
     ].filter(Boolean);
 }
 
+/**
+ * Handles bindSignupInputHandlers.
+ * @param {*} input - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles bind signup input handlers.
+ * @param {HTMLElement} input - Input element.
+ * @returns {void} Result.
+ */
 function bindSignupInputHandlers(input) {
     input.addEventListener('input', updateSignupButtonState);
     input.addEventListener('blur', updateSignupButtonState);
 }
 
+/**
+ * Handles initPasswordVisibilityToggle.
+ * @param {*} param - Parameter.
+ * @param {*} lockIconId - Parameter.
+ * @param {*} visibilityOffIconId - Parameter.
+ * @param {*} visibilityIconId } - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Initializes password visibility toggle.
+ * @param {*} param - Parameter.
+ * @param {*} lockIconId - Parameter.
+ * @param {*} visibilityOffIconId - Parameter.
+ * @param {*} visibilityIconId } - Parameter.
+ * @returns {void} Result.
+ */
 function initPasswordVisibilityToggle({ inputId, lockIconId, visibilityOffIconId, visibilityIconId }) {
     const elements = getPasswordVisibilityElements(inputId, lockIconId, visibilityOffIconId, visibilityIconId);
     if (!elements) return;
@@ -217,6 +443,22 @@ function initPasswordVisibilityToggle({ inputId, lockIconId, visibilityOffIconId
     syncPasswordVisibilityIcons(elements);
 }
 
+/**
+ * Handles getPasswordVisibilityElements.
+ * @param {*} inputId - Parameter.
+ * @param {*} lockIconId - Parameter.
+ * @param {*} visibilityOffIconId - Parameter.
+ * @param {*} visibilityIconId - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns password visibility elements.
+ * @param {*} inputId - Parameter.
+ * @param {*} lockIconId - Parameter.
+ * @param {*} visibilityOffIconId - Parameter.
+ * @param {*} visibilityIconId - Parameter.
+ * @returns {*} Result.
+ */
 function getPasswordVisibilityElements(inputId, lockIconId, visibilityOffIconId, visibilityIconId) {
     const passwordInput = document.getElementById(inputId);
     const lockIcon = document.getElementById(lockIconId);
@@ -226,28 +468,80 @@ function getPasswordVisibilityElements(inputId, lockIconId, visibilityOffIconId,
     return { passwordInput, lockIcon, visibilityOffIcon, visibilityIcon };
 }
 
+/**
+ * Handles bindPasswordVisibilityHandlers.
+ * @param {*} elements - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles bind password visibility handlers.
+ * @param {*} elements - Parameter.
+ * @returns {void} Result.
+ */
 function bindPasswordVisibilityHandlers(elements) {
     elements.passwordInput.addEventListener('input', () => syncPasswordVisibilityIcons(elements));
     elements.visibilityOffIcon.addEventListener('click', () => showPassword(elements));
     elements.visibilityIcon.addEventListener('click', () => hidePassword(elements));
 }
 
+/**
+ * Handles showPassword.
+ * @param {*} elements - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Shows password.
+ * @param {*} elements - Parameter.
+ * @returns {void} Result.
+ */
 function showPassword(elements) {
     if (elements.passwordInput.value.length === 0) return;
     setPasswordVisibility(elements, true);
 }
 
+/**
+ * Handles hidePassword.
+ * @param {*} elements - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Hides password.
+ * @param {*} elements - Parameter.
+ * @returns {void} Result.
+ */
 function hidePassword(elements) {
     if (elements.passwordInput.value.length === 0) return;
     setPasswordVisibility(elements, false);
 }
 
+/**
+ * Handles setPasswordVisibility.
+ * @param {*} elements - Parameter.
+ * @param {*} isVisible - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets password visibility.
+ * @param {*} elements - Parameter.
+ * @param {*} isVisible - Parameter.
+ * @returns {void} Result.
+ */
 function setPasswordVisibility(elements, isVisible) {
     elements.passwordInput.type = isVisible ? 'text' : 'password';
     elements.visibilityIcon.classList.toggle('is-hidden', !isVisible);
     elements.visibilityOffIcon.classList.toggle('is-hidden', isVisible);
 }
 
+/**
+ * Handles syncPasswordVisibilityIcons.
+ * @param {*} elements - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles sync password visibility icons.
+ * @param {*} elements - Parameter.
+ * @returns {void} Result.
+ */
 function syncPasswordVisibilityIcons(elements) {
     const hasValue = elements.passwordInput.value.length > 0;
     elements.lockIcon.classList.toggle('is-hidden', hasValue);
@@ -263,6 +557,14 @@ function syncPasswordVisibilityIcons(elements) {
     setPasswordVisibility(elements, isVisible);
 }
 
+/**
+ * Handles initSignupPasswordVisibilityToggles.
+ * @returns {*} Result.
+ */
+/**
+ * Initializes signup password visibility toggles.
+ * @returns {void} Result.
+ */
 function initSignupPasswordVisibilityToggles() {
     initPasswordVisibilityToggle({
         inputId: 'registerPassword',
@@ -286,6 +588,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSignupButtonState();
 });
 
+/**
+ * Handles addUser.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Adds user.
+ * @returns {Promise<*>} Result.
+ */
 async function addUser() {
     const values = getSignupValues();
     if (!isPasswordMatch(values)) { showPasswordMismatch(values.confirmPassword); return; }
@@ -300,6 +610,14 @@ async function addUser() {
     }
 }
 
+/**
+ * Handles getSignupValues.
+ * @returns {*} Result.
+ */
+/**
+ * Returns signup values.
+ * @returns {*} Result.
+ */
 function getSignupValues() {
     return {
         name: document.getElementById('registerName'),
@@ -309,10 +627,30 @@ function getSignupValues() {
     };
 }
 
+/**
+ * Handles isPasswordMatch.
+ * @param {*} values - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Checks whether password match.
+ * @param {*} values - Parameter.
+ * @returns {boolean} Result.
+ */
 function isPasswordMatch(values) {
     return values.password.value === values.confirmPassword.value;
 }
 
+/**
+ * Handles showPasswordMismatch.
+ * @param {*} confirmPassword - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Shows password mismatch.
+ * @param {*} confirmPassword - Parameter.
+ * @returns {void} Result.
+ */
 function showPasswordMismatch(confirmPassword) {
     if (typeof showMessage === 'function') {
         showMessage('Passwords do not match.', 'error');
@@ -322,6 +660,16 @@ function showPasswordMismatch(confirmPassword) {
     confirmPassword.focus();
 }
 
+/**
+ * Handles buildNewUser.
+ * @param {*} values - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Builds new user.
+ * @param {*} values - Parameter.
+ * @returns {*} Result.
+ */
 function buildNewUser(values) {
     return {
         name: values.name.value.trim(),
@@ -330,10 +678,30 @@ function buildNewUser(values) {
     };
 }
 
+/**
+ * Handles saveNewUser.
+ * @param {*} newUser - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Saves new user.
+ * @param {*} newUser - Parameter.
+ * @returns {Promise<*>} Result.
+ */
 async function saveNewUser(newUser) {
     await postData("users", newUser);
 }
 
+/**
+ * Handles saveNewContact.
+ * @param {*} newUser - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Saves new contact.
+ * @param {*} newUser - Parameter.
+ * @returns {Promise<*>} Result.
+ */
 async function saveNewContact(newUser) {
     const newContact = {
         name: newUser.name,
@@ -343,6 +711,14 @@ async function saveNewContact(newUser) {
     await postData("contacts", newContact);
 }
 
+/**
+ * Handles showRegistrationFailed.
+ * @returns {*} Result.
+ */
+/**
+ * Shows registration failed.
+ * @returns {void} Result.
+ */
 function showRegistrationFailed() {
     if (typeof showMessage === 'function') {
         showMessage('Registration failed. Please try again.', 'error');
@@ -351,6 +727,18 @@ function showRegistrationFailed() {
     }
 }
 
+/**
+ * Handles postData.
+ * @param {*} path - Parameter.
+ * @param {*} user - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Handles post data.
+ * @param {string} path - API path.
+ * @param {Object} user - User payload.
+ * @returns {Promise<*>} Result.
+ */
 async function postData(path = "", user = {}) {
     let response = await fetch(`${BASE_URL}/${path}.json`, {
         method: "POST",
@@ -367,6 +755,14 @@ async function postData(path = "", user = {}) {
     return await response.json();
 }
 
+/**
+ * Handles navigateToLogin.
+ * @returns {*} Result.
+ */
+/**
+ * Handles navigate to login.
+ * @returns {void} Result.
+ */
 function navigateToLogin() {
      window.location.href = "index.html";
 }
