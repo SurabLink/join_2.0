@@ -1,3 +1,7 @@
+/**
+ * Returns board template.
+ * @returns {string} Result.
+ */
 function getBoardTemplate() {
   return /*html*/ `
     <div class="board-header">
@@ -21,11 +25,17 @@ function getBoardTemplate() {
     </div>
   `;
 }
-
+/**
+ * Returns board columns markup.
+ * @returns {string} Result.
+ */
 function getBoardColumnsMarkup() {
   return getBoardColumnConfigs().map(getBoardColumn).join("");
 }
-
+/**
+ * Returns board column configs.
+ * @returns {string} Result.
+ */
 function getBoardColumnConfigs() {
   return [
     { id: "todo-column", title: "To Do", status: "To Do", showAdd: true },
@@ -34,7 +44,11 @@ function getBoardColumnConfigs() {
     { id: "done-column", title: "Done", status: "Done", showAdd: false },
   ];
 }
-
+/**
+ * Returns board column.
+ * @param {*} config - Parameter.
+ * @returns {string} Result.
+ */
 function getBoardColumn(config) {
   return /*html*/ `
     <div class="board-column"
@@ -51,7 +65,11 @@ function getBoardColumn(config) {
     </div>
   `;
 }
-
+/**
+ * Creates task card.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function createTaskCard(task) {
   return /*html*/ `
     <div class="task-card"
@@ -71,13 +89,21 @@ function createTaskCard(task) {
     </div>
   `;
 }
-
+/**
+ * Returns priority icon.
+ * @param {*} priority - Parameter.
+ * @returns {string} Result.
+ */
 function getPriorityIcon(priority) {
   if (priority === "urgent") return '<img src="./assets/img/Category_Urgent.svg">';
   if (priority === "medium") return '<img src="./assets/icons/medium_orange.svg">';
   return '<img src="./assets/img/Category_Low.svg">';
 }
-
+/**
+ * Renders subtask progress.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function renderSubtaskProgress(task) {
   if (!task.subtasks || task.subtasks.length === 0) {
     return `<div>0/0</div>`;
@@ -92,7 +118,12 @@ function renderSubtaskProgress(task) {
     <div>${done}/${total}</div>
   `;
 }
-
+/**
+ * Returns avatar markup.
+ * @param {*} initials - Parameter.
+ * @param {*} color - Parameter.
+ * @returns {string} Result.
+ */
 function getAvatarMarkup(initials, color) {
   return /*html*/ `
     <div class="avatar" style="background-color: ${color};">
