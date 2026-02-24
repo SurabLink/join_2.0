@@ -1,3 +1,8 @@
+/**
+ * Returns task modal template.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskModalTemplate(task) {
   return /*html*/ `
     <div class="modal-content">
@@ -39,7 +44,11 @@ function getTaskModalTemplate(task) {
     </div>
   `;
 }
-
+/**
+ * Generates modal assigned contacts.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateModalAssignedContacts(task) {
   if (!task.contacts || task.contacts.length === 0) {
     return "—";
@@ -57,7 +66,11 @@ function generateModalAssignedContacts(task) {
     `;
   }).join("");
 }
-
+/**
+ * Generates modal subtasks.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateModalSubtasks(task) {
   if (!task.subtasks || task.subtasks.length === 0) {
     return "<span>No subtasks</span>";
@@ -71,7 +84,11 @@ function generateModalSubtasks(task) {
     </label>
   `).join("");
 }
-
+/**
+ * Generates edit task template.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function generateEditTaskTemplate(task) {
   return /*html*/ `
     <form class="edit-task-form" id="editTaskForm" onsubmit="saveEditedTask(event, ${task.id})">
@@ -146,7 +163,11 @@ function generateEditTaskTemplate(task) {
     </form>
   `;
 }
-
+/**
+ * Generates edit category options.
+ * @param {*} current - Parameter.
+ * @returns {string} Result.
+ */
 function generateEditCategoryOptions(current) {
   const categories = ["Technical Task", "User Story"];
   return categories.map((cat) => /*html*/ `
@@ -155,7 +176,12 @@ function generateEditCategoryOptions(current) {
     </div>
   `).join("");
 }
-
+/**
+ * Returns edit subtask item markup.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskItemMarkup(subtask, index) {
   return /*html*/ `
     <li class="subtask">
@@ -168,7 +194,12 @@ function getEditSubtaskItemMarkup(subtask, index) {
     </li>
   `;
 }
-
+/**
+ * Returns edit subtask edit markup.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {string} Result.
+ */
 function getEditSubtaskEditMarkup(subtask, index) {
   return /*html*/ `
     <li class="subtask subtask-edit">
