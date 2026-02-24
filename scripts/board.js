@@ -7,6 +7,14 @@ let colors = [
 
 let boardSearchTerm = "";
 
+/**
+ * Handles renderBoard.
+ * @returns {*} Result.
+ */
+/**
+ * Renders board.
+ * @returns {void} Result.
+ */
 function renderBoard() {
   const content = document.getElementById("board-content");
   content.innerHTML = getBoardTemplate();
@@ -16,6 +24,14 @@ function renderBoard() {
   renderAllAvatars();
 }
 
+/**
+ * Handles initBoardSearch.
+ * @returns {*} Result.
+ */
+/**
+ * Initializes board search.
+ * @returns {void} Result.
+ */
 function initBoardSearch() {
   const input = document.getElementById("search-task");
   const clearBtn = document.getElementById("search-clear");
@@ -28,6 +44,18 @@ function initBoardSearch() {
   }
 }
 
+/**
+ * Handles updateBoardSearch.
+ * @param {*} input - Parameter.
+ * @param {*} clearBtn - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Updates board search.
+ * @param {HTMLElement} input - Input element.
+ * @param {*} clearBtn - Parameter.
+ * @returns {void} Result.
+ */
 function updateBoardSearch(input, clearBtn) {
   boardSearchTerm = input.value.trim();
   clearTaskCards();
@@ -37,6 +65,18 @@ function updateBoardSearch(input, clearBtn) {
   if (clearBtn) clearBtn.style.visibility = boardSearchTerm ? "visible" : "hidden";
 }
 
+/**
+ * Handles clearBoardSearch.
+ * @param {*} input - Parameter.
+ * @param {*} clearBtn - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Clears board search.
+ * @param {HTMLElement} input - Input element.
+ * @param {*} clearBtn - Parameter.
+ * @returns {void} Result.
+ */
 function clearBoardSearch(input, clearBtn) {
   boardSearchTerm = "";
   input.value = "";
@@ -48,11 +88,27 @@ function clearBoardSearch(input, clearBtn) {
   input.focus();
 }
 
+/**
+ * Handles clearTaskCards.
+ * @returns {*} Result.
+ */
+/**
+ * Clears task cards.
+ * @returns {void} Result.
+ */
 function clearTaskCards() {
   const cards = document.querySelectorAll(".task-card");
   cards.forEach((card) => card.remove());
 }
 
+/**
+ * Handles renderTasksIntoColumns.
+ * @returns {*} Result.
+ */
+/**
+ * Renders tasks into columns.
+ * @returns {void} Result.
+ */
 function renderTasksIntoColumns() {
   const filteredTasks = getFilteredTasks();
   for (let i = 0; i < filteredTasks.length; i++) {
@@ -63,6 +119,16 @@ function renderTasksIntoColumns() {
   }
 }
 
+/**
+ * Handles getColumnByStatus.
+ * @param {*} status - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns column by status.
+ * @param {string} status - Status value.
+ * @returns {*} Result.
+ */
 function getColumnByStatus(status) {
   if (status === "To Do") return document.getElementById("todo-column");
   if (status === "In Progress") return document.getElementById("inprogress-column");
@@ -71,6 +137,14 @@ function getColumnByStatus(status) {
   return null;
 }
 
+/**
+ * Handles renderAllAvatars.
+ * @returns {*} Result.
+ */
+/**
+ * Renders all avatars.
+ * @returns {void} Result.
+ */
 function renderAllAvatars() {
   const filteredTasks = getFilteredTasks();
   for (let i = 0; i < filteredTasks.length; i++) {
@@ -78,6 +152,14 @@ function renderAllAvatars() {
   }
 }
 
+/**
+ * Handles getFilteredTasks.
+ * @returns {*} Result.
+ */
+/**
+ * Returns filtered tasks.
+ * @returns {*} Result.
+ */
 function getFilteredTasks() {
   const term = boardSearchTerm.toLowerCase();
   if (!term) return tasks;
@@ -89,6 +171,16 @@ function getFilteredTasks() {
   });
 }
 
+/**
+ * Handles highlightText.
+ * @param {*} text - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles highlight text.
+ * @param {*} text - Parameter.
+ * @returns {void} Result.
+ */
 function highlightText(text) {
   if (!boardSearchTerm) return text;
   if (!text) return "";
@@ -97,10 +189,28 @@ function highlightText(text) {
   return text.replace(regex, (match) => `<mark class="search-highlight">${match}</mark>`);
 }
 
+/**
+ * Handles escapeRegExp.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles escape reg exp.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/**
+ * Handles loadTasks.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Loads tasks.
+ * @returns {Promise<*>} Result.
+ */
 async function loadTasks() {
   try {
     const response = await fetch(`${BASE_URL}/tasks.json`);
@@ -112,6 +222,16 @@ async function loadTasks() {
   renderBoard();
 }
 
+/**
+ * Handles updateTask.
+ * @param {*} task - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Updates task.
+ * @param {Object} task - Task object.
+ * @returns {Promise<*>} Result.
+ */
 async function updateTask(task) {
   try {
     const { firebaseId, ...taskData } = task;
@@ -125,6 +245,14 @@ async function updateTask(task) {
   }
 }
 
+/**
+ * Handles deleteTask.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Deletes task.
+ * @returns {Promise<*>} Result.
+ */
 async function deleteTask() {
   if (!activeTask) return;
   try {
@@ -137,6 +265,16 @@ async function deleteTask() {
   }
 }
 
+/**
+ * Handles renderAvatar.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Renders avatar.
+ * @param {Object} task - Task object.
+ * @returns {void} Result.
+ */
 function renderAvatar(task) {
   let container = document.getElementById(`avatars-${task.id}`);
   if (!container) return;
@@ -150,18 +288,58 @@ function renderAvatar(task) {
   }
 }
 
+/**
+ * Handles getRandomColor.
+ * @returns {*} Result.
+ */
+/**
+ * Returns random color.
+ * @returns {*} Result.
+ */
 function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
+/**
+ * Handles startDrag.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles start drag.
+ * @param {string} id - Identifier.
+ * @returns {void} Result.
+ */
 function startDrag(id) {
   draggedTaskId = id;
 }
 
+/**
+ * Handles allowDrop.
+ * @param {*} event - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles allow drop.
+ * @param {Event} event - DOM event.
+ * @returns {void} Result.
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
 
+/**
+ * Handles dropTask.
+ * @param {*} event - Parameter.
+ * @param {*} newStatus - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles drop task.
+ * @param {Event} event - DOM event.
+ * @param {*} newStatus - Parameter.
+ * @returns {void} Result.
+ */
 function dropTask(event, newStatus) {
   event.preventDefault();
   const task = tasks.find(t => t.id === draggedTaskId);
@@ -171,6 +349,16 @@ function dropTask(event, newStatus) {
   renderBoard();
 }
 
+/**
+ * Handles openModal.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Opens modal.
+ * @param {string} id - Identifier.
+ * @returns {void} Result.
+ */
 function openModal(id) {
   const task = tasks.find(t => t.id === id);
   if (!task) return;
@@ -188,6 +376,20 @@ function openModal(id) {
   }, 10);
 }
 
+/**
+ * Handles toggleSubtaskDone.
+ * @param {*} taskId - Parameter.
+ * @param {*} subIndex - Parameter.
+ * @param {*} checkbox - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Toggles subtask done.
+ * @param {number} taskId - Task identifier.
+ * @param {number} subIndex - Subtask index.
+ * @param {HTMLInputElement} checkbox - Checkbox element.
+ * @returns {Promise<*>} Result.
+ */
 async function toggleSubtaskDone(taskId, subIndex, checkbox) {
   const task = tasks.find(t => t.id === taskId);
   if (!task) return;
@@ -197,6 +399,16 @@ async function toggleSubtaskDone(taskId, subIndex, checkbox) {
   updateModalSubtasks(task);
 }
 
+/**
+ * Handles updateModalSubtasks.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Updates modal subtasks.
+ * @param {Object} task - Task object.
+ * @returns {void} Result.
+ */
 function updateModalSubtasks(task) {
   const modal = document.getElementById("taskModal");
   if (!modal) return;
@@ -205,6 +417,16 @@ function updateModalSubtasks(task) {
   subtaskContainer.innerHTML = generateModalSubtasks(task);
 }
 
+/**
+ * Handles openEditTaskModal.
+ * @param {*} id - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Opens edit task modal.
+ * @param {string} id - Identifier.
+ * @returns {Promise<*>} Result.
+ */
 async function openEditTaskModal(id) {
   const task = tasks.find(t => t.id === id);
   if (!task) return;
@@ -221,6 +443,14 @@ async function openEditTaskModal(id) {
   initEditDropdownClose();
 }
 
+/**
+ * Handles renderEditAssignedContacts.
+ * @returns {*} Result.
+ */
+/**
+ * Renders edit assigned contacts.
+ * @returns {void} Result.
+ */
 function renderEditAssignedContacts() {
   const dropdown = document.getElementById("dropdownContacts");
   if (!dropdown) return;
@@ -228,6 +458,16 @@ function renderEditAssignedContacts() {
   renderSelectedAvatars();
 }
 
+/**
+ * Handles toggleEditCategoryDropdown.
+ * @param {*} event - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Toggles edit category dropdown.
+ * @param {Event} event - DOM event.
+ * @returns {void} Result.
+ */
 function toggleEditCategoryDropdown(event) {
   event.stopPropagation();
   const dropdown = document.getElementById("editCategoryDropdown");
@@ -235,6 +475,16 @@ function toggleEditCategoryDropdown(event) {
   dropdown.classList.toggle("show");
 }
 
+/**
+ * Handles setEditCategory.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets edit category.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function setEditCategory(value) {
   const input = document.getElementById("edit-category");
   const select = document.getElementById("editCategorySelect");
@@ -248,6 +498,14 @@ function setEditCategory(value) {
   if (dropdown) dropdown.classList.remove("show");
 }
 
+/**
+ * Handles initEditDropdownClose.
+ * @returns {*} Result.
+ */
+/**
+ * Initializes edit dropdown close.
+ * @returns {void} Result.
+ */
 function initEditDropdownClose() {
   if (window.editDropdownHandlerAdded) return;
   window.editDropdownHandlerAdded = true;
@@ -259,6 +517,14 @@ function initEditDropdownClose() {
   });
 }
 
+/**
+ * Handles renderEditSubtasks.
+ * @returns {*} Result.
+ */
+/**
+ * Renders edit subtasks.
+ * @returns {void} Result.
+ */
 function renderEditSubtasks() {
   const area = document.getElementById("editSubtaskArea");
   if (!area) return;
@@ -266,6 +532,20 @@ function renderEditSubtasks() {
   editSubtasks.forEach((st, i) => appendEditSubtask(area, st, i));
 }
 
+/**
+ * Handles appendEditSubtask.
+ * @param {*} area - Parameter.
+ * @param {*} subtask - Parameter.
+ * @param {*} index - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles append edit subtask.
+ * @param {*} area - Parameter.
+ * @param {Object} subtask - Subtask object.
+ * @param {number} index - Index.
+ * @returns {void} Result.
+ */
 function appendEditSubtask(area, subtask, index) {
   const isEditing = window.editingEditSubtaskIndex === index;
   const markup = isEditing
@@ -274,6 +554,14 @@ function appendEditSubtask(area, subtask, index) {
   area.innerHTML += markup;
 }
 
+/**
+ * Handles addEditSubtask.
+ * @returns {*} Result.
+ */
+/**
+ * Adds edit subtask.
+ * @returns {void} Result.
+ */
 function addEditSubtask() {
   const input = document.getElementById("edit-subtask-input");
   if (!input) return;
@@ -284,6 +572,16 @@ function addEditSubtask() {
   renderEditSubtasks();
 }
 
+/**
+ * Handles deleteEditSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Deletes edit subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function deleteEditSubtask(i) {
   editSubtasks.splice(i, 1);
   if (window.editingEditSubtaskIndex === i) {
@@ -294,6 +592,14 @@ function deleteEditSubtask(i) {
   renderEditSubtasks();
 }
 
+/**
+ * Handles clearEditSubtaskInput.
+ * @returns {*} Result.
+ */
+/**
+ * Clears edit subtask input.
+ * @returns {void} Result.
+ */
 function clearEditSubtaskInput() {
   const input = document.getElementById("edit-subtask-input");
   if (!input) return;
@@ -301,6 +607,16 @@ function clearEditSubtaskInput() {
   input.focus();
 }
 
+/**
+ * Handles editEditSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles edit edit subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function editEditSubtask(i) {
   window.editingEditSubtaskIndex = i;
   renderEditSubtasks();
@@ -311,6 +627,16 @@ function editEditSubtask(i) {
   }
 }
 
+/**
+ * Handles saveEditedEditSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Saves edited edit subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function saveEditedEditSubtask(i) {
   const input = document.getElementById(`edit-subtask-edit-${i}`);
   if (!input) return;
@@ -324,6 +650,18 @@ function saveEditedEditSubtask(i) {
   renderEditSubtasks();
 }
 
+/**
+ * Handles saveEditedTask.
+ * @param {*} event - Parameter.
+ * @param {*} id - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Saves edited task.
+ * @param {Event} event - DOM event.
+ * @param {string} id - Identifier.
+ * @returns {Promise<*>} Result.
+ */
 async function saveEditedTask(event, id) {
   event.preventDefault();
   const task = tasks.find(t => t.id === id);
@@ -334,6 +672,16 @@ async function saveEditedTask(event, id) {
   openModal(id);
 }
 
+/**
+ * Handles updateTaskFromEditForm.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Updates task from edit form.
+ * @param {Object} task - Task object.
+ * @returns {void} Result.
+ */
 function updateTaskFromEditForm(task) {
   const titleEl = document.getElementById("edit-title");
   const descEl = document.getElementById("edit-description");
@@ -346,6 +694,14 @@ function updateTaskFromEditForm(task) {
   task.subtasks = editSubtasks.map(st => ({ ...st }));
 }
 
+/**
+ * Handles showAddTaskDialog.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Shows add task dialog.
+ * @returns {Promise<*>} Result.
+ */
 async function showAddTaskDialog() {
   const modalContent = document.getElementById("addTask-dialog-message");
   document.getElementById("addTask-dialog").classList.remove("d-none");
@@ -357,10 +713,26 @@ async function showAddTaskDialog() {
   if (typeof initAddDropdownClose === "function") initAddDropdownClose();
 }
 
+/**
+ * Handles closeAddTaskDialog.
+ * @returns {*} Result.
+ */
+/**
+ * Closes add task dialog.
+ * @returns {void} Result.
+ */
 function closeAddTaskDialog() {
   document.getElementById("addTask-dialog").classList.add("d-none");
 }
 
+/**
+ * Handles updateNoTaskPlaceholders.
+ * @returns {*} Result.
+ */
+/**
+ * Updates no task placeholders.
+ * @returns {void} Result.
+ */
 function updateNoTaskPlaceholders() {
   const filteredTasks = getFilteredTasks();
   const columns = [
@@ -378,6 +750,14 @@ function updateNoTaskPlaceholders() {
   }
 }
 
+/**
+ * Handles closeModal.
+ * @returns {*} Result.
+ */
+/**
+ * Closes modal.
+ * @returns {void} Result.
+ */
 function closeModal() {
   const modal = document.getElementById("taskModal");
   if (modal) modal.remove();
