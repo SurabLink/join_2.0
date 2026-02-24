@@ -13,11 +13,7 @@ if (typeof firebase !== "undefined") {
 
   // Firebase Logout (optional)
   /**
-   * Handles firebaseLogout.
-   * @returns {*} Result.
-   */
-  /**
-   * Handles firebase logout.
+   * Executes firebase logout logic.
    * @returns {void} Result.
    */
   function firebaseLogout() {
@@ -34,10 +30,6 @@ if (typeof firebase !== "undefined") {
 
 // Optional: User-Profil aktualisieren
 /**
- * Handles updateUserProfile.
- * @returns {*} Result.
- */
-/**
  * Updates user profile.
  * @returns {void} Result.
  */
@@ -51,10 +43,6 @@ function updateUserProfile() {
 }
 
 /**
- * Handles getStoredUser.
- * @returns {*} Result.
- */
-/**
  * Returns stored user.
  * @returns {*} Result.
  */
@@ -63,13 +51,7 @@ function getStoredUser() {
 }
 
 /**
- * Handles applyUserProfile.
- * @param {*} profile - Parameter.
- * @param {*} userData - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles apply user profile.
+ * Executes apply user profile logic.
  * @param {*} profile - Parameter.
  * @param {*} userData - Parameter.
  * @returns {void} Result.
@@ -88,11 +70,6 @@ function applyUserProfile(profile, userData) {
 }
 
 /**
- * Handles getUserInitials.
- * @param {*} userData - Parameter.
- * @returns {*} Result.
- */
-/**
  * Returns user initials.
  * @param {*} userData - Parameter.
  * @returns {*} Result.
@@ -104,13 +81,7 @@ function getUserInitials(userData) {
 }
 
 /**
- * Handles applyEmailInitial.
- * @param {*} profile - Parameter.
- * @param {*} userData - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles apply email initial.
+ * Executes apply email initial logic.
  * @param {*} profile - Parameter.
  * @param {*} userData - Parameter.
  * @returns {void} Result.
