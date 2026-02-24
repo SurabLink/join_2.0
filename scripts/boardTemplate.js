@@ -1,7 +1,23 @@
+/**
+ * Handles getBoardTemplate.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board template.
+ * @returns {string} Result.
+ */
 function getBoardTemplate() {
   return getBoardHeader() + getBoardColumns();
 }
 
+/**
+ * Handles getBoardHeader.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board header.
+ * @returns {string} Result.
+ */
 function getBoardHeader() {
   return /*html*/ `
     <div class="board-header">
@@ -12,6 +28,14 @@ function getBoardHeader() {
   `;
 }
 
+/**
+ * Handles getBoardActions.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board actions.
+ * @returns {string} Result.
+ */
 function getBoardActions() {
   return /*html*/ `
     <div class="board-actions">
@@ -21,6 +45,14 @@ function getBoardActions() {
   `;
 }
 
+/**
+ * Handles getBoardSearch.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board search.
+ * @returns {string} Result.
+ */
 function getBoardSearch() {
   return /*html*/ `
     <div class="board-search">
@@ -32,6 +64,14 @@ function getBoardSearch() {
   `;
 }
 
+/**
+ * Handles getSearchIcon.
+ * @returns {*} Result.
+ */
+/**
+ * Returns search icon.
+ * @returns {string} Result.
+ */
 function getSearchIcon() {
   return /*html*/ `
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,6 +81,14 @@ function getSearchIcon() {
   `;
 }
 
+/**
+ * Handles getBoardColumns.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board columns.
+ * @returns {string} Result.
+ */
 function getBoardColumns() {
   return /*html*/ `
     <div class="board-columns">
@@ -49,10 +97,26 @@ function getBoardColumns() {
   `;
 }
 
+/**
+ * Handles getBoardColumnsMarkup.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board columns markup.
+ * @returns {string} Result.
+ */
 function getBoardColumnsMarkup() {
   return getBoardColumnConfigs().map(getBoardColumn).join("");
 }
 
+/**
+ * Handles getBoardColumnConfigs.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board column configs.
+ * @returns {string} Result.
+ */
 function getBoardColumnConfigs() {
   return [
     { id: "todo-column", title: "To Do", status: "To Do", showAdd: true },
@@ -62,6 +126,16 @@ function getBoardColumnConfigs() {
   ];
 }
 
+/**
+ * Handles getBoardColumn.
+ * @param {*} config - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns board column.
+ * @param {*} config - Parameter.
+ * @returns {string} Result.
+ */
 function getBoardColumn(config) {
   return /*html*/ `
     <div class="board-column"
@@ -74,6 +148,16 @@ function getBoardColumn(config) {
   `;
 }
 
+/**
+ * Handles getColumnHeader.
+ * @param {*} config - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns column header.
+ * @param {*} config - Parameter.
+ * @returns {string} Result.
+ */
 function getColumnHeader(config) {
   return /*html*/ `
     <div class="column-header">
@@ -83,6 +167,16 @@ function getColumnHeader(config) {
   `;
 }
 
+/**
+ * Handles getColumnAddButton.
+ * @param {*} showAdd - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns column add button.
+ * @param {*} showAdd - Parameter.
+ * @returns {string} Result.
+ */
 function getColumnAddButton(showAdd) {
   if (!showAdd) return "";
   return /*html*/ `
@@ -90,6 +184,14 @@ function getColumnAddButton(showAdd) {
   `;
 }
 
+/**
+ * Handles getNoTasksPlaceholder.
+ * @returns {*} Result.
+ */
+/**
+ * Returns no tasks placeholder.
+ * @returns {string} Result.
+ */
 function getNoTasksPlaceholder() {
   return /*html*/ `
     <div class="no-tasks">
@@ -98,6 +200,16 @@ function getNoTasksPlaceholder() {
   `;
 }
 
+/**
+ * Handles createTaskCard.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Creates task card.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function createTaskCard(task) {
   return /*html*/ `
     <div class="task-card" draggable="true" ondragstart="startDrag(${task.id})" onclick="openModal(${task.id})">
@@ -110,6 +222,16 @@ function createTaskCard(task) {
   `;
 }
 
+/**
+ * Handles getTaskCategoryLabel.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task category label.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskCategoryLabel(task) {
   const color = task.category === "User Story" ? "#0038FF" : "#1FD7C1";
   return /*html*/ `
@@ -117,15 +239,45 @@ function getTaskCategoryLabel(task) {
   `;
 }
 
+/**
+ * Handles getTaskTitle.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task title.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskTitle(task) {
   return `<h3>${highlightText(task.title)}</h3>`;
 }
 
+/**
+ * Handles getTaskDescription.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task description.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskDescription(task) {
   const text = task.description.substring(0, 50);
   return `<span>${highlightText(text)}...</span>`;
 }
 
+/**
+ * Handles getTaskSubtasks.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task subtasks.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskSubtasks(task) {
   return /*html*/ `
     <div class="subtask-card">
@@ -134,6 +286,16 @@ function getTaskSubtasks(task) {
   `;
 }
 
+/**
+ * Handles getTaskFooter.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns task footer.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function getTaskFooter(task) {
   return /*html*/ `
     <div class="task-footer">
@@ -143,12 +305,32 @@ function getTaskFooter(task) {
   `;
 }
 
+/**
+ * Handles getPriorityIcon.
+ * @param {*} priority - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns priority icon.
+ * @param {*} priority - Parameter.
+ * @returns {string} Result.
+ */
 function getPriorityIcon(priority) {
   if (priority === "urgent") return '<img src="./assets/img/Category_Urgent.svg">';
   if (priority === "medium") return '<img src="./assets/icons/medium_orange.svg">';
   return '<img src="./assets/img/Category_Low.svg">';
 }
 
+/**
+ * Handles renderSubtaskProgress.
+ * @param {*} task - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Renders subtask progress.
+ * @param {Object} task - Task object.
+ * @returns {string} Result.
+ */
 function renderSubtaskProgress(task) {
   if (!task.subtasks || task.subtasks.length === 0) {
     return `<div>0/0</div>`;
@@ -159,6 +341,20 @@ function renderSubtaskProgress(task) {
   return getSubtaskProgressMarkup(percent, done, total);
 }
 
+/**
+ * Handles getSubtaskProgressMarkup.
+ * @param {*} percent - Parameter.
+ * @param {*} done - Parameter.
+ * @param {*} total - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns subtask progress markup.
+ * @param {*} percent - Parameter.
+ * @param {*} done - Parameter.
+ * @param {*} total - Parameter.
+ * @returns {string} Result.
+ */
 function getSubtaskProgressMarkup(percent, done, total) {
   return /*html*/ `
     <div class="subtask-progress-bar">
@@ -168,6 +364,18 @@ function getSubtaskProgressMarkup(percent, done, total) {
   `;
 }
 
+/**
+ * Handles getAvatarMarkup.
+ * @param {*} initials - Parameter.
+ * @param {*} color - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns avatar markup.
+ * @param {*} initials - Parameter.
+ * @param {*} color - Parameter.
+ * @returns {string} Result.
+ */
 function getAvatarMarkup(initials, color) {
   return /*html*/ `
     <div class="avatar" style="background-color: ${color};">
