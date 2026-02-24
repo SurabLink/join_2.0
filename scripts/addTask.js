@@ -3,80 +3,86 @@ async function renderAddTask() {
   let content = document.getElementById('addTaskContent');
   content.innerHTML = '';
   content.innerHTML += generateAddTask();
-
-  // Kontakte laden und Dropdown aktualisieren
   await loadContacts();
-  selectedContacts = []; // sicherstellen, dass keine Auswahl beim Laden existiert
+  resetSelectedContacts();
   selectContacts();
-  renderSelectedAvatars(); // Avatare leer beim Laden
-
+  renderSelectedAvatars();
   initAddDropdownClose();
+}
+
+function resetSelectedContacts() {
+  selectedContacts = [];
 }
 
 /** Validierung des Formulars durchführen */
 function validateForm() {
-  // Error Container leeren
-  document.getElementById('titleError').textContent = '';
-  document.getElementById('dateError').textContent = '';
-  document.getElementById('categoryError').textContent = '';
-
+  clearValidationErrors();
   let isValid = true;
-
-  // Titel validieren
-  const titleInput = document.getElementById('title');
-  if (!titleInput.value.trim()) {
-    document.getElementById('titleError').textContent = 'This field is required';
-    titleInput.classList.add('input-error');
-    isValid = false;
-  } else {
-    titleInput.classList.remove('input-error');
-  }
-
-  // Datum validieren
-  const dateInput = document.getElementById('date');
-  if (!dateInput.value.trim()) {
-    document.getElementById('dateError').textContent = 'This field is required';
-    dateInput.classList.add('input-error');
-    isValid = false;
-  } else {
-    dateInput.classList.remove('input-error');
-  }
-
-  // Kategorie validieren
-  const categorySelect = document.getElementById('category');
-  if (!categorySelect.value.trim()) {
-    document.getElementById('categoryError').textContent = 'This field is required';
-    categorySelect.classList.add('input-error');
-    isValid = false;
-  } else {
-    categorySelect.classList.remove('input-error');
-  }
-
+  isValid = validateTitleField() && isValid;
+  isValid = validateDateField() && isValid;
+  isValid = validateCategoryField() && isValid;
   return isValid;
+}
+
+function clearValidationErrors() {
+  setErrorText('titleError', '');
+  setErrorText('dateError', '');
+  setErrorText('categoryError', '');
+}
+
+function setErrorText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function validateTitleField() {
+  const input = document.getElementById('title');
+  return validateRequiredInput(input, 'titleError');
+}
+
+function validateDateField() {
+  const input = document.getElementById('date');
+  return validateRequiredInput(input, 'dateError');
+}
+
+function validateCategoryField() {
+  const input = document.getElementById('category');
+  return validateRequiredInput(input, 'categoryError');
+}
+
+function validateRequiredInput(input, errorId) {
+  if (!input || !input.value.trim()) {
+    setErrorText(errorId, 'This field is required');
+    input?.classList.add('input-error');
+    return false;
+  }
+  input.classList.remove('input-error');
+  return true;
 }
 
 async function saveToArray(event) {
   event.preventDefault();
-
-  // Validierung durchführen
-  if (!validateForm()) {
-    return; // Formulareintrag stoppen, wenn Validierung fehlschlägt
-  }
-
+  if (!validateForm()) return;
   const task = generateTaskFromForm();
-
   const result = await saveTask(task);
   if (result) {
-    showMessage("Task added to board", "success");
-    subtasks.length = 0;
-    selectedContacts.length = 0;
-    showSubtasks();
-    document.getElementById('addTaskForm').reset();
-    // Neu: nach dem Toast zur Board-Seite weiterleiten
-    setTimeout(() => { window.location.href = "board.html"; }, 1500);
-  } else {
-    showMessage("Task could not be saved", "error");
+    handleSaveSuccess();
+    return;
   }
+  handleSaveFailure();
+}
+
+function handleSaveSuccess() {
+  showMessage("Task added to board", "success");
+  subtasks.length = 0;
+  selectedContacts.length = 0;
+  showSubtasks();
+  document.getElementById('addTaskForm').reset();
+  setTimeout(() => { window.location.href = "board.html"; }, 1500);
+}
+
+function handleSaveFailure() {
+  showMessage("Task could not be saved", "error");
 }
 
 /** Task in Firebase speichern */
@@ -118,13 +124,19 @@ function setAddCategory(value) {
   const input = document.getElementById("category");
   const select = document.getElementById("categorySelect");
   if (!input || !select) return;
-
   input.value = value;
+  updateAddCategoryLabel(select, value);
+  closeAddCategoryDropdown();
+}
+
+function updateAddCategoryLabel(select, value) {
   const label = select.querySelector("span");
   if (label) {
     label.childNodes[0].textContent = value + " ";
   }
+}
 
+function closeAddCategoryDropdown() {
   const dropdown = document.getElementById("categoryDropdown");
   if (dropdown) dropdown.classList.remove("show");
 }
@@ -132,13 +144,14 @@ function setAddCategory(value) {
 function initAddDropdownClose() {
   if (window.addDropdownHandlerAdded) return;
   window.addDropdownHandlerAdded = true;
+  document.addEventListener("click", () => closeAddDropdowns());
+}
 
-  document.addEventListener("click", () => {
-    const contactsDropdown = document.getElementById("dropdownContacts");
-    if (contactsDropdown) contactsDropdown.classList.remove("show");
-    const categoryDropdown = document.getElementById("categoryDropdown");
-    if (categoryDropdown) categoryDropdown.classList.remove("show");
-  });
+function closeAddDropdowns() {
+  const contactsDropdown = document.getElementById("dropdownContacts");
+  if (contactsDropdown) contactsDropdown.classList.remove("show");
+  const categoryDropdown = document.getElementById("categoryDropdown");
+  if (categoryDropdown) categoryDropdown.classList.remove("show");
 }
 
 /** Checkbox Umschalten */
@@ -155,15 +168,16 @@ function toggleContactSelection(name, checkbox) {
 function renderSelectedAvatars() {
   const container = document.getElementById("selectedAvatars");
   container.innerHTML = "";
-  selectedContacts.forEach(name => {
-    const initials = name.split(" ").map(n => n[0]).join("");
-    container.innerHTML += `<div class="avatar">${initials}</div>`;
-  });
+  selectedContacts.forEach(name => appendSelectedAvatar(container, name));
+}
+
+function appendSelectedAvatar(container, name) {
+  const initials = name.split(" ").map(n => n[0]).join("");
+  container.innerHTML += getSelectedAvatarMarkup(initials);
 }
 
 function showSubtasks() {
   let subtaskArea = document.getElementById('subtaskArea');
-
   subtaskArea.innerHTML = '';
   for (let i = 0; i < subtasks.length; i++) {
     subtaskArea.innerHTML += generateSubtasks(i);
@@ -173,16 +187,12 @@ function showSubtasks() {
 function addSubtask() {
   let subtask = document.getElementById('subtask').value;
   if (subtask) {
-    subtasks.push({
-      title: subtask,
-      done: false
-    });
+    subtasks.push({ title: subtask, done: false });
     showSubtasks();
     document.getElementById('subtask').value = '';
   } else {
-    alert("Bitte eine Subtask beschreiben!")
+    alert("Bitte eine Subtask beschreiben!");
   }
-
 }
 
 function clearSubtaskInput() {
@@ -213,6 +223,10 @@ function clearForm() {
 function setEditingSubtask(i) {
   window.editingSubtaskIndex = i;
   showSubtasks();
+  focusSubtaskEditInput(i);
+}
+
+function focusSubtaskEditInput(i) {
   const input = document.getElementById(`subtask-edit-${i}`);
   if (input) {
     input.focus();
