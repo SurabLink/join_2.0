@@ -26,29 +26,38 @@ if (typeof firebase !== "undefined") {
 
 // Optional: User-Profil aktualisieren
 function updateUserProfile() {
-  const userData = JSON.parse(localStorage.getItem("user") || "null");
+  const userData = getStoredUser();
   const profile = document.getElementById("user-profile");
   if (!profile) return;
-
-  // Default leer
   profile.textContent = "";
-
   if (!userData) return;
+  applyUserProfile(profile, userData);
+}
 
-  // Guest: immer "G"
+function getStoredUser() {
+  return JSON.parse(localStorage.getItem("user") || "null");
+}
+
+function applyUserProfile(profile, userData) {
   if (userData.mode === "guest") {
     profile.textContent = "G";
     return;
   }
-
-  // Eingeloggt: Initialen wie bei Contacts
-  const name = (userData.displayName || userData.name || "").trim();
-  if (name) {
-    const initials = name.split(" ").map(n => n[0]).join("");
+  const initials = getUserInitials(userData);
+  if (initials) {
     profile.textContent = initials;
     return;
   }
+  applyEmailInitial(profile, userData);
+}
 
+function getUserInitials(userData) {
+  const name = (userData.displayName || userData.name || "").trim();
+  if (!name) return "";
+  return name.split(" ").map(n => n[0]).join("");
+}
+
+function applyEmailInitial(profile, userData) {
   if (userData.email) {
     profile.textContent = userData.email[0].toUpperCase();
   }
