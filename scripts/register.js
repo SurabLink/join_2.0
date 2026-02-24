@@ -1,13 +1,8 @@
 let signupFieldErrors = {};
 
 /**
- * Handles handleSignupSubmit.
- * @param {*} event - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles signup submit.
- * @param {Event} event - DOM event.
+ * Executes handle signup submit logic.
+ * @param {Event} event - Browser event.
  * @returns {void} Result.
  */
 function handleSignupSubmit(event) {
@@ -18,10 +13,6 @@ function handleSignupSubmit(event) {
     addUser();
 }
 
-/**
- * Handles validateSignupForm.
- * @returns {*} Result.
- */
 /**
  * Validates signup form.
  * @returns {void} Result.
@@ -39,10 +30,6 @@ function validateSignupForm() {
 }
 
 /**
- * Handles getSignupFields.
- * @returns {*} Result.
- */
-/**
  * Returns signup fields.
  * @returns {*} Result.
  */
@@ -57,12 +44,7 @@ function getSignupFields() {
 }
 
 /**
- * Handles resetSignupErrors.
- * @param {*} fields - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles reset signup errors.
+ * Executes reset signup errors logic.
  * @param {*} fields - Parameter.
  * @returns {void} Result.
  */
@@ -76,10 +58,6 @@ function resetSignupErrors(fields) {
 }
 
 /**
- * Handles clearSignupErrorTexts.
- * @returns {*} Result.
- */
-/**
  * Clears signup error texts.
  * @returns {void} Result.
  */
@@ -92,12 +70,6 @@ function clearSignupErrorTexts() {
 }
 
 /**
- * Handles setSignupErrorText.
- * @param {*} id - Parameter.
- * @param {*} value - Parameter.
- * @returns {*} Result.
- */
-/**
  * Sets signup error text.
  * @param {string} id - Identifier.
  * @param {string} value - Value.
@@ -109,10 +81,6 @@ function setSignupErrorText(id, value) {
 }
 
 /**
- * Handles clearPolicyError.
- * @returns {*} Result.
- */
-/**
  * Clears policy error.
  * @returns {void} Result.
  */
@@ -123,12 +91,6 @@ function clearPolicyError() {
     }
 }
 
-/**
- * Handles validateNameField.
- * @param {*} fields - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates name field.
  * @param {*} fields - Parameter.
@@ -142,12 +104,6 @@ function validateNameField(fields, state) {
     }
 }
 
-/**
- * Handles validateEmailField.
- * @param {*} fields - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates email field.
  * @param {*} fields - Parameter.
@@ -166,12 +122,6 @@ function validateEmailField(fields, state) {
 }
 
 /**
- * Handles validatePasswordField.
- * @param {*} fields - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
-/**
  * Validates password field.
  * @param {*} fields - Parameter.
  * @param {*} state - Parameter.
@@ -184,12 +134,6 @@ function validatePasswordField(fields, state) {
     }
 }
 
-/**
- * Handles validateConfirmPasswordField.
- * @param {*} fields - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates confirm password field.
  * @param {*} fields - Parameter.
@@ -208,12 +152,6 @@ function validateConfirmPasswordField(fields, state) {
     }
 }
 
-/**
- * Handles validatePolicyField.
- * @param {*} fields - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates policy field.
  * @param {*} fields - Parameter.
@@ -234,14 +172,6 @@ function validatePolicyField(fields, state) {
 }
 
 /**
- * Handles setSignupFieldError.
- * @param {*} fieldId - Parameter.
- * @param {*} message - Parameter.
- * @param {*} input - Parameter.
- * @param {*} state - Parameter.
- * @returns {*} Result.
- */
-/**
  * Sets signup field error.
  * @param {*} fieldId - Parameter.
  * @param {string} message - Message text.
@@ -260,11 +190,6 @@ function setSignupFieldError(fieldId, message, input, state) {
 }
 
 /**
- * Handles getSignupErrorId.
- * @param {*} fieldId - Parameter.
- * @returns {*} Result.
- */
-/**
  * Returns signup error id.
  * @param {*} fieldId - Parameter.
  * @returns {*} Result.
@@ -281,11 +206,6 @@ function getSignupErrorId(fieldId) {
 }
 
 /**
- * Handles showFieldErrorMessage.
- * @param {*} fieldId - Parameter.
- * @returns {*} Result.
- */
-/**
  * Shows field error message.
  * @param {*} fieldId - Parameter.
  * @returns {void} Result.
@@ -301,10 +221,6 @@ function showFieldErrorMessage(fieldId) {
     }
 }
 
-/**
- * Handles clearAllSignupErrorMessages.
- * @returns {*} Result.
- */
 /**
  * Clears all signup error messages.
  * @returns {void} Result.
@@ -326,11 +242,7 @@ function clearAllSignupErrorMessages() {
 }
 
 /**
- * Handles attachSignupErrorFocusHandlers.
- * @returns {*} Result.
- */
-/**
- * Handles attach signup error focus handlers.
+ * Executes attach signup error focus handlers logic.
  * @returns {void} Result.
  */
 function attachSignupErrorFocusHandlers() {
@@ -350,10 +262,6 @@ function attachSignupErrorFocusHandlers() {
 }
 
 /**
- * Handles updateSignupButtonState.
- * @returns {*} Result.
- */
-/**
  * Updates signup button state.
  * @returns {void} Result.
  */
@@ -372,11 +280,7 @@ function updateSignupButtonState() {
 }
 
 /**
- * Handles attachSignupFormStateHandlers.
- * @returns {*} Result.
- */
-/**
- * Handles attach signup form state handlers.
+ * Executes attach signup form state handlers logic.
  * @returns {void} Result.
  */
 function attachSignupFormStateHandlers() {
@@ -388,10 +292,6 @@ function attachSignupFormStateHandlers() {
     }
 }
 
-/**
- * Handles getSignupInputElements.
- * @returns {*} Result.
- */
 /**
  * Returns signup input elements.
  * @returns {*} Result.
@@ -406,12 +306,7 @@ function getSignupInputElements() {
 }
 
 /**
- * Handles bindSignupInputHandlers.
- * @param {*} input - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles bind signup input handlers.
+ * Executes bind signup input handlers logic.
  * @param {HTMLElement} input - Input element.
  * @returns {void} Result.
  */
@@ -420,14 +315,6 @@ function bindSignupInputHandlers(input) {
     input.addEventListener('blur', updateSignupButtonState);
 }
 
-/**
- * Handles initPasswordVisibilityToggle.
- * @param {*} param - Parameter.
- * @param {*} lockIconId - Parameter.
- * @param {*} visibilityOffIconId - Parameter.
- * @param {*} visibilityIconId } - Parameter.
- * @returns {*} Result.
- */
 /**
  * Initializes password visibility toggle.
  * @param {*} param - Parameter.
@@ -443,14 +330,6 @@ function initPasswordVisibilityToggle({ inputId, lockIconId, visibilityOffIconId
     syncPasswordVisibilityIcons(elements);
 }
 
-/**
- * Handles getPasswordVisibilityElements.
- * @param {*} inputId - Parameter.
- * @param {*} lockIconId - Parameter.
- * @param {*} visibilityOffIconId - Parameter.
- * @param {*} visibilityIconId - Parameter.
- * @returns {*} Result.
- */
 /**
  * Returns password visibility elements.
  * @param {*} inputId - Parameter.
@@ -469,12 +348,7 @@ function getPasswordVisibilityElements(inputId, lockIconId, visibilityOffIconId,
 }
 
 /**
- * Handles bindPasswordVisibilityHandlers.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles bind password visibility handlers.
+ * Executes bind password visibility handlers logic.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
  */
@@ -484,11 +358,6 @@ function bindPasswordVisibilityHandlers(elements) {
     elements.visibilityIcon.addEventListener('click', () => hidePassword(elements));
 }
 
-/**
- * Handles showPassword.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
 /**
  * Shows password.
  * @param {*} elements - Parameter.
@@ -500,11 +369,6 @@ function showPassword(elements) {
 }
 
 /**
- * Handles hidePassword.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
  * Hides password.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
@@ -514,12 +378,6 @@ function hidePassword(elements) {
     setPasswordVisibility(elements, false);
 }
 
-/**
- * Handles setPasswordVisibility.
- * @param {*} elements - Parameter.
- * @param {*} isVisible - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets password visibility.
  * @param {*} elements - Parameter.
@@ -533,12 +391,7 @@ function setPasswordVisibility(elements, isVisible) {
 }
 
 /**
- * Handles syncPasswordVisibilityIcons.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles sync password visibility icons.
+ * Executes sync password visibility icons logic.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
  */
@@ -557,10 +410,6 @@ function syncPasswordVisibilityIcons(elements) {
     setPasswordVisibility(elements, isVisible);
 }
 
-/**
- * Handles initSignupPasswordVisibilityToggles.
- * @returns {*} Result.
- */
 /**
  * Initializes signup password visibility toggles.
  * @returns {void} Result.
@@ -589,10 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Handles addUser.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Adds user.
  * @returns {Promise<*>} Result.
  */
@@ -611,10 +456,6 @@ async function addUser() {
 }
 
 /**
- * Handles getSignupValues.
- * @returns {*} Result.
- */
-/**
  * Returns signup values.
  * @returns {*} Result.
  */
@@ -628,11 +469,6 @@ function getSignupValues() {
 }
 
 /**
- * Handles isPasswordMatch.
- * @param {*} values - Parameter.
- * @returns {*} Result.
- */
-/**
  * Checks whether password match.
  * @param {*} values - Parameter.
  * @returns {boolean} Result.
@@ -641,11 +477,6 @@ function isPasswordMatch(values) {
     return values.password.value === values.confirmPassword.value;
 }
 
-/**
- * Handles showPasswordMismatch.
- * @param {*} confirmPassword - Parameter.
- * @returns {*} Result.
- */
 /**
  * Shows password mismatch.
  * @param {*} confirmPassword - Parameter.
@@ -661,11 +492,6 @@ function showPasswordMismatch(confirmPassword) {
 }
 
 /**
- * Handles buildNewUser.
- * @param {*} values - Parameter.
- * @returns {*} Result.
- */
-/**
  * Builds new user.
  * @param {*} values - Parameter.
  * @returns {*} Result.
@@ -679,11 +505,6 @@ function buildNewUser(values) {
 }
 
 /**
- * Handles saveNewUser.
- * @param {*} newUser - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
  * Saves new user.
  * @param {*} newUser - Parameter.
  * @returns {Promise<*>} Result.
@@ -692,11 +513,6 @@ async function saveNewUser(newUser) {
     await postData("users", newUser);
 }
 
-/**
- * Handles saveNewContact.
- * @param {*} newUser - Parameter.
- * @returns {Promise<*>} Result promise.
- */
 /**
  * Saves new contact.
  * @param {*} newUser - Parameter.
@@ -712,10 +528,6 @@ async function saveNewContact(newUser) {
 }
 
 /**
- * Handles showRegistrationFailed.
- * @returns {*} Result.
- */
-/**
  * Shows registration failed.
  * @returns {void} Result.
  */
@@ -728,13 +540,7 @@ function showRegistrationFailed() {
 }
 
 /**
- * Handles postData.
- * @param {*} path - Parameter.
- * @param {*} user - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
- * Handles post data.
+ * Executes post data logic.
  * @param {string} path - API path.
  * @param {Object} user - User payload.
  * @returns {Promise<*>} Result.
@@ -756,11 +562,7 @@ async function postData(path = "", user = {}) {
 }
 
 /**
- * Handles navigateToLogin.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to login.
+ * Executes navigate to login logic.
  * @returns {void} Result.
  */
 function navigateToLogin() {
