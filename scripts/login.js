@@ -6,10 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Handles initIntroAlignment.
- * @returns {*} Result.
- */
-/**
  * Initializes intro alignment.
  * @returns {void} Result.
  */
@@ -18,11 +14,7 @@ function initIntroAlignment() {
 }
 
 /**
- * Handles alignIntroLogo.
- * @returns {*} Result.
- */
-/**
- * Handles align intro logo.
+ * Executes align intro logo logic.
  * @returns {void} Result.
  */
 function alignIntroLogo() {
@@ -38,12 +30,6 @@ function alignIntroLogo() {
 }
 
 /**
- * Handles getCenterDeltaX.
- * @param {*} introRect - Parameter.
- * @param {*} headerRect - Parameter.
- * @returns {*} Result.
- */
-/**
  * Returns center delta x.
  * @param {*} introRect - Parameter.
  * @param {*} headerRect - Parameter.
@@ -55,12 +41,6 @@ function getCenterDeltaX(introRect, headerRect) {
     return headerCenterX - introCenterX;
 }
 
-/**
- * Handles getCenterDeltaY.
- * @param {*} introRect - Parameter.
- * @param {*} headerRect - Parameter.
- * @returns {*} Result.
- */
 /**
  * Returns center delta y.
  * @param {*} introRect - Parameter.
@@ -74,11 +54,7 @@ function getCenterDeltaY(introRect, headerRect) {
 }
 
 /**
- * Handles scheduleIntroOverlayRemoval.
- * @returns {*} Result.
- */
-/**
- * Handles schedule intro overlay removal.
+ * Executes schedule intro overlay removal logic.
  * @returns {void} Result.
  */
 function scheduleIntroOverlayRemoval() {
@@ -86,11 +62,7 @@ function scheduleIntroOverlayRemoval() {
 }
 
 /**
- * Handles removeIntroOverlay.
- * @returns {*} Result.
- */
-/**
- * Handles remove intro overlay.
+ * Executes remove intro overlay logic.
  * @returns {void} Result.
  */
 function removeIntroOverlay() {
@@ -100,10 +72,6 @@ function removeIntroOverlay() {
     }
 }
 
-/**
- * Handles initLoginPasswordToggle.
- * @returns {*} Result.
- */
 /**
  * Initializes login password toggle.
  * @returns {void} Result.
@@ -115,10 +83,6 @@ function initLoginPasswordToggle() {
     syncLoginPasswordIcons(elements);
 }
 
-/**
- * Handles getLoginPasswordElements.
- * @returns {*} Result.
- */
 /**
  * Returns login password elements.
  * @returns {*} Result.
@@ -133,11 +97,6 @@ function getLoginPasswordElements() {
 }
 
 /**
- * Handles initLoginPasswordHandlers.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
  * Initializes login password handlers.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
@@ -149,11 +108,6 @@ function initLoginPasswordHandlers(elements) {
 }
 
 /**
- * Handles showLoginPassword.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
  * Shows login password.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
@@ -164,11 +118,6 @@ function showLoginPassword(elements) {
 }
 
 /**
- * Handles hideLoginPassword.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
  * Hides login password.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
@@ -178,12 +127,6 @@ function hideLoginPassword(elements) {
     setLoginPasswordVisibility(elements, false);
 }
 
-/**
- * Handles setLoginPasswordVisibility.
- * @param {*} elements - Parameter.
- * @param {*} isVisible - Parameter.
- * @returns {*} Result.
- */
 /**
  * Sets login password visibility.
  * @param {*} elements - Parameter.
@@ -197,12 +140,7 @@ function setLoginPasswordVisibility(elements, isVisible) {
 }
 
 /**
- * Handles syncLoginPasswordIcons.
- * @param {*} elements - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles sync login password icons.
+ * Executes sync login password icons logic.
  * @param {*} elements - Parameter.
  * @returns {void} Result.
  */
@@ -220,11 +158,7 @@ function syncLoginPasswordIcons(elements) {
 }
 
 /**
- * Handles login.
- * @returns {Promise<*>} Result promise.
- */
-/**
- * Handles login.
+ * Executes login logic.
  * @returns {Promise<*>} Result.
  */
 async function login() {
@@ -239,12 +173,6 @@ async function login() {
     }
 }
 
-/**
- * Handles validateLoginCredentials.
- * @param {*} param - Parameter.
- * @param {*} password } - Parameter.
- * @returns {*} Result.
- */
 /**
  * Validates login credentials.
  * @param {*} param - Parameter.
@@ -264,13 +192,7 @@ function validateLoginCredentials({ email, password }) {
 }
 
 /**
- * Handles handleLoginResult.
- * @param {*} credentials - Parameter.
- * @param {*} signedUpUser - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles login result.
+ * Executes handle login result logic.
  * @param {*} credentials - Parameter.
  * @param {*} signedUpUser - Parameter.
  * @returns {void} Result.
@@ -285,10 +207,6 @@ function handleLoginResult(credentials, signedUpUser) {
 }
 
 /**
- * Handles clearLoginErrors.
- * @returns {*} Result.
- */
-/**
  * Clears login errors.
  * @returns {void} Result.
  */
@@ -299,10 +217,6 @@ function clearLoginErrors() {
     passwordInput.classList.remove('input-error');
 }
 
-/**
- * Handles getLoginCredentials.
- * @returns {*} Result.
- */
 /**
  * Returns login credentials.
  * @returns {*} Result.
@@ -317,13 +231,7 @@ function getLoginCredentials() {
 }
 
 /**
- * Handles findSignedUpUser.
- * @param {*} email - Parameter.
- * @param {*} password - Parameter.
- * @returns {Promise<*>} Result promise.
- */
-/**
- * Handles find signed up user.
+ * Executes find signed up user logic.
  * @param {string} email - Email address.
  * @param {*} password - Parameter.
  * @returns {Promise<*>} Result.
@@ -336,13 +244,7 @@ async function findSignedUpUser(email, password) {
 }
 
 /**
- * Handles storeUserSession.
- * @param {*} email - Parameter.
- * @param {*} signedUpUser - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles store user session.
+ * Executes store user session logic.
  * @param {string} email - Email address.
  * @param {*} signedUpUser - Parameter.
  * @returns {void} Result.
@@ -356,11 +258,6 @@ function storeUserSession(email, signedUpUser) {
 }
 
 /**
- * Handles showLoginError.
- * @param {*} message - Parameter.
- * @returns {*} Result.
- */
-/**
  * Shows login error.
  * @param {string} message - Message text.
  * @returns {void} Result.
@@ -372,11 +269,7 @@ function showLoginError(message) {
 }
 
 /**
- * Handles removeLoginError.
- * @returns {*} Result.
- */
-/**
- * Handles remove login error.
+ * Executes remove login error logic.
  * @returns {void} Result.
  */
 function removeLoginError() {
@@ -385,12 +278,7 @@ function removeLoginError() {
 }
 
 /**
- * Handles appendLoginError.
- * @param {*} message - Parameter.
- * @returns {*} Result.
- */
-/**
- * Handles append login error.
+ * Executes append login error logic.
  * @param {string} message - Message text.
  * @returns {void} Result.
  */
@@ -403,11 +291,7 @@ function appendLoginError(message) {
 }
 
 /**
- * Handles markLoginInputsError.
- * @returns {*} Result.
- */
-/**
- * Handles mark login inputs error.
+ * Executes mark login inputs error logic.
  * @returns {void} Result.
  */
 function markLoginInputsError() {
@@ -417,11 +301,6 @@ function markLoginInputsError() {
     passwordInput.classList.add('input-error');
 }
 
-/**
- * Handles isValidEmail.
- * @param {*} email - Parameter.
- * @returns {*} Result.
- */
 /**
  * Checks whether valid email.
  * @param {string} email - Email address.
@@ -433,11 +312,7 @@ function isValidEmail(email) {
 }
 
 /**
- * Handles navigateToSignup.
- * @returns {*} Result.
- */
-/**
- * Handles navigate to signup.
+ * Executes navigate to signup logic.
  * @returns {void} Result.
  */
 function navigateToSignup() {
@@ -445,11 +320,7 @@ function navigateToSignup() {
 }
 
 /**
- * Handles guestLogin.
- * @returns {*} Result.
- */
-/**
- * Handles guest login.
+ * Executes guest login logic.
  * @returns {void} Result.
  */
 function guestLogin() {
