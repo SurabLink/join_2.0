@@ -12,43 +12,52 @@ let subtasks = [];
 
 async function loadContacts() {
   try {
-    const response = await fetch(`${BASE_URL}/contacts.json`);
-    const data = await response.json();
-
-    if (!data) {
-      contacts = [];
-      return;
-    }
-
-    contacts = Object.entries(data).map(([key, value]) => ({
-      id: key,
-      ...value
-    }));
-
+    const data = await fetchContactsData();
+    contacts = data ? mapContactsData(data) : [];
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
+}
+
+async function fetchContactsData() {
+  const response = await fetch(`${BASE_URL}/contacts.json`);
+  return await response.json();
+}
+
+function mapContactsData(data) {
+  return Object.entries(data).map(([key, value]) => ({ id: key, ...value }));
 }
 
 // Seite sofort schützen (BEVOR irgendwas anderes passiert)
 // ABER NUR auf geschützten Seiten (nicht auf index.html / signup.html)
 function protectThisPage() {
   const currentPage = window.location.pathname;
-
-  // Login/Signup Seiten ausnehmen
-  if (currentPage.includes('index.html') || currentPage.includes('signup.html')) {
+  if (isPublicPage(currentPage)) {
     return;
   }
-
   if (!localStorage.getItem("user")) {
     window.location.replace("index.html");
   }
+}
+
+function isPublicPage(pathname) {
+  return pathname.includes('index.html') || pathname.includes('signup.html');
 }
 
 // Sofort aufrufen
 protectThisPage();
 
 function showMessage(message, type = "success") {
+  const box = getOrCreateMessageBox();
+  setMessageBoxContent(box, message);
+  setMessageBoxType(box, type);
+  setMessageBoxBaseStyles(box);
+  setMessageBoxLayoutStyles(box);
+  setMessageBoxColors(box, type);
+  scheduleMessageHide(box);
+}
+
+function getOrCreateMessageBox() {
   let box = document.getElementById("msgBox");
   if (!box) {
     box = document.createElement("div");
@@ -57,49 +66,53 @@ function showMessage(message, type = "success") {
     box.setAttribute("aria-live", "polite");
     document.body.appendChild(box);
   }
+  return box;
+}
 
-  // Content (text left, icon right)
+function setMessageBoxContent(box, message) {
   box.innerHTML = "";
   const textEl = document.createElement("span");
   textEl.textContent = message;
   box.appendChild(textEl);
+}
 
+function setMessageBoxType(box, type) {
   box.className = `msgBox ${type}`;
+}
 
-  // Layout: centered pill like screenshot
+function setMessageBoxBaseStyles(box) {
   box.style.position = "fixed";
   box.style.left = "50%";
   box.style.top = "50%";
   box.style.transform = "translate(-50%, -50%)";
   box.style.zIndex = "9999";
+}
 
+function setMessageBoxLayoutStyles(box) {
   box.style.display = "flex";
   box.style.alignItems = "center";
   box.style.justifyContent = "space-between";
   box.style.gap = "22px";
-
   box.style.minWidth = "280px";
   box.style.maxWidth = "min(520px, calc(100vw - 32px))";
   box.style.padding = "18px 22px";
   box.style.borderRadius = "18px";
-
   box.style.color = "#fff";
   box.style.fontSize = "18px";
   box.style.fontWeight = "400";
   box.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.22)";
-
-  // Don't block UI interactions beneath the toast
   box.style.pointerEvents = "none";
+}
 
-  // Background
+function setMessageBoxColors(box, type) {
   if (type === "error") {
     box.style.background = "var(--urgent, #ff3d00)";
-  } else {
-    box.style.background = "var(--sidebar-bg, #2a3647)";
+    return;
   }
+  box.style.background = "var(--sidebar-bg, #2a3647)";
+}
 
-  box.style.display = "flex";
-
+function scheduleMessageHide(box) {
   window.clearTimeout(box._hideTimeout);
   box._hideTimeout = window.setTimeout(() => {
     box.style.display = "none";
@@ -118,7 +131,6 @@ function toggleProfileMenu(event) {
 document.addEventListener('click', (event) => {
   const menu = document.getElementById('profileMenu');
   const profileContainer = document.querySelector('.user-profile-container');
-
   if (menu && profileContainer && !profileContainer.contains(event.target)) {
     menu.classList.remove('active');
   }
@@ -129,10 +141,16 @@ function logout(event) {
     event.preventDefault();
     event.stopPropagation();
   }
+  clearUserSession();
+  safeFirebaseLogout();
+  redirectToLogin();
+}
 
+function clearUserSession() {
   localStorage.removeItem("user");
+}
 
-  // Firebase Logout: nur wenn verfügbar, Fehler werden abgefangen
+function safeFirebaseLogout() {
   try {
     if (typeof window.firebaseLogout === "function") {
       window.firebaseLogout();
@@ -140,8 +158,9 @@ function logout(event) {
   } catch (e) {
     console.warn("Firebase logout failed (not critical):", e);
   }
+}
 
-  // Redirect IMMER ausführen
+function redirectToLogin() {
   window.location.replace("index.html");
 }
 
