@@ -30,7 +30,10 @@ const LOW_ICON = `
       fill="#7AE229" />
   </svg>
 `;
-
+/**
+ * Generates add task.
+ * @returns {string} Result.
+ */
 function generateAddTask() {
   return /*html*/ `
     <div class="add-task-header">
@@ -117,7 +120,10 @@ function generateAddTask() {
     <p class="note note-outside"><span class="req">*</span>This field is required</p>
   `;
 }
-
+/**
+ * Generates add category options.
+ * @returns {string} Result.
+ */
 function generateAddCategoryOptions() {
   const categories = ["Technical Task", "User Story"];
   return categories.map((cat) => /*html*/ `
@@ -126,15 +132,27 @@ function generateAddCategoryOptions() {
     </div>
   `).join("");
 }
-
+/**
+ * Generates subtasks.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function generateSubtasks(i) {
   return isEditingSubtask(i) ? getSubtaskEditItem(i) : getSubtaskItem(i);
 }
-
+/**
+ * Checks whether editing subtask.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function isEditingSubtask(i) {
   return window.editingSubtaskIndex === i;
 }
-
+/**
+ * Returns subtask edit item.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskEditItem(i) {
   return /*html*/ `
     <li class="subtask subtask-edit">
@@ -157,7 +175,11 @@ function getSubtaskEditItem(i) {
     </li>
   `;
 }
-
+/**
+ * Returns subtask item.
+ * @param {number} i - Index.
+ * @returns {string} Result.
+ */
 function getSubtaskItem(i) {
   return /*html*/ `
     <li class="subtask">
@@ -170,7 +192,11 @@ function getSubtaskItem(i) {
     </li>
   `;
 }
-
+/**
+ * Generates assigned contacts.
+ * @param {*} contacts - Parameter.
+ * @returns {string} Result.
+ */
 function generateAssignedContacts(contacts) {
   return contacts.map((contact, i) => {
     const isChecked = selectedContacts.includes(contact.name);
@@ -191,7 +217,10 @@ function generateAssignedContacts(contacts) {
     `;
   }).join("");
 }
-
+/**
+ * Generates task from form.
+ * @returns {string} Result.
+ */
 function generateTaskFromForm() {
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
@@ -210,7 +239,11 @@ function generateTaskFromForm() {
     status: "To Do",
   };
 }
-
+/**
+ * Returns selected avatar markup.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getSelectedAvatarMarkup(initials) {
   return `<div class="avatar">${initials}</div>`;
 }
