@@ -1,3 +1,11 @@
+/**
+ * Handles getDialogAddContact.
+ * @returns {*} Result.
+ */
+/**
+ * Returns dialog add contact.
+ * @returns {string} Result.
+ */
 function getDialogAddContact() {
     return `
     <dialog id="add-contact-dialog" class="ac-dialog" role="dialog" aria-modal="true" aria-labelledby="ac-title">
@@ -6,6 +14,14 @@ function getDialogAddContact() {
 `;
 }
 
+/**
+ * Handles getAddContactDialogBody.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact dialog body.
+ * @returns {string} Result.
+ */
 function getAddContactDialogBody() {
     return `
         <div class="ac">
@@ -16,6 +32,14 @@ function getAddContactDialogBody() {
     `;
 }
 
+/**
+ * Handles getAddContactHero.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact hero.
+ * @returns {string} Result.
+ */
 function getAddContactHero() {
     return `
         <div class="ac__hero">
@@ -29,6 +53,14 @@ function getAddContactHero() {
     `;
 }
 
+/**
+ * Handles getAddContactFormWrap.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact form wrap.
+ * @returns {string} Result.
+ */
 function getAddContactFormWrap() {
     return `
             <div class="ac__formwrap">
@@ -38,6 +70,14 @@ function getAddContactFormWrap() {
     `;
 }
 
+/**
+ * Handles getAddContactAvatar.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact avatar.
+ * @returns {string} Result.
+ */
 function getAddContactAvatar() {
     return `
                 <div class="ac__avatar" aria-label="Avatar placeholder">
@@ -46,6 +86,14 @@ function getAddContactAvatar() {
     `;
 }
 
+/**
+ * Handles getAddContactForm.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact form.
+ * @returns {string} Result.
+ */
 function getAddContactForm() {
     return `
                 <form onsubmit="addContact(event)" id="add-contact-form" class="ac-form" novalidate>
@@ -55,6 +103,14 @@ function getAddContactForm() {
     `;
 }
 
+/**
+ * Handles getAddContactFields.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact fields.
+ * @returns {string} Result.
+ */
 function getAddContactFields() {
     return `
                     <div class="ac-field">
@@ -72,6 +128,14 @@ function getAddContactFields() {
     `;
 }
 
+/**
+ * Handles getAddContactActions.
+ * @returns {*} Result.
+ */
+/**
+ * Returns add contact actions.
+ * @returns {string} Result.
+ */
 function getAddContactActions() {
     return `
                     <div class="ac__actions">
@@ -87,6 +151,14 @@ function getAddContactActions() {
     `;
 }
 
+/**
+ * Handles getActionCheckIcon.
+ * @returns {*} Result.
+ */
+/**
+ * Returns action check icon.
+ * @returns {string} Result.
+ */
 function getActionCheckIcon() {
     return `
                             <span class="btn__check" aria-hidden="true">
@@ -98,6 +170,16 @@ function getActionCheckIcon() {
     `;
 }
 
+/**
+ * Handles getHeaderLetter.
+ * @param {*} firstLetter - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns header letter.
+ * @param {*} firstLetter - Parameter.
+ * @returns {string} Result.
+ */
 function getHeaderLetter(firstLetter) {
     return `
     <h3 class="contact-group-letter">${firstLetter}</h3>
@@ -105,6 +187,20 @@ function getHeaderLetter(firstLetter) {
     `;
 }
 
+/**
+ * Handles getContactItem.
+ * @param {*} contactDataName - Parameter.
+ * @param {*} contactDataMail - Parameter.
+ * @param {*} contactNameInitials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact item.
+ * @param {*} contactDataName - Parameter.
+ * @param {*} contactDataMail - Parameter.
+ * @param {*} contactNameInitials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
     return `
     <div class="contact-name-wrapper">
@@ -118,6 +214,20 @@ function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
     `;
 }
 
+/**
+ * Handles getContactItemWrapper.
+ * @param {*} contactId - Parameter.
+ * @param {*} contactDataPhone - Parameter.
+ * @param {*} content - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact item wrapper.
+ * @param {string} contactId - Contact identifier.
+ * @param {*} contactDataPhone - Parameter.
+ * @param {*} content - Parameter.
+ * @returns {string} Result.
+ */
 function getContactItemWrapper(contactId, contactDataPhone, content) {
     return `
         <div class="contact-item" data-id="${contactId}" data-phone="${contactDataPhone}">
@@ -126,6 +236,24 @@ function getContactItemWrapper(contactId, contactDataPhone, content) {
     `;
 }
 
+/**
+ * Handles getContactDetailsTemplate.
+ * @param {*} initials - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact details template.
+ * @param {*} initials - Parameter.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {string} id - Identifier.
+ * @returns {string} Result.
+ */
 function getContactDetailsTemplate(initials, name, email, phone, id) {
     const phoneSection = getContactPhoneSection(phone);
     return `
@@ -139,12 +267,38 @@ function getContactDetailsTemplate(initials, name, email, phone, id) {
     `;
 }
 
+/**
+ * Handles getContactBackButton.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact back button.
+ * @returns {string} Result.
+ */
 function getContactBackButton() {
     return `
         <img src="./assets/img/arrow-left-line.svg" alt="Back to contacts" class="contact-back-btn" onclick="document.querySelector('.wrapper').classList.remove('show-contact-details'); return false;">
     `;
 }
 
+/**
+ * Handles getContactMoreMenu.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact more menu.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactMoreMenu(id, name, email, phone, initials) {
     return `
         <div class="contact-more">
@@ -156,6 +310,24 @@ function getContactMoreMenu(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getContactMoreMenuItems.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact more menu items.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactMoreMenuItems(id, name, email, phone, initials) {
     return `
             <div class="contact-more-menu" id="contact-more-menu">
@@ -165,6 +337,24 @@ function getContactMoreMenuItems(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getMobileEditAction.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns mobile edit action.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getMobileEditAction(id, name, email, phone, initials) {
     return `
                 <button type="button" onclick="closeContactMoreMenu(); openEditContactDialog('${id}', '${name}', '${email}', '${phone}', '${initials}')">
@@ -174,6 +364,16 @@ function getMobileEditAction(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getMobileDeleteAction.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns mobile delete action.
+ * @param {string} id - Identifier.
+ * @returns {string} Result.
+ */
 function getMobileDeleteAction(id) {
     return `
                 <button type="button" onclick="closeContactMoreMenu(); deleteContact('${id}')">
@@ -183,6 +383,24 @@ function getMobileDeleteAction(id) {
     `;
 }
 
+/**
+ * Handles getContactHeaderLarge.
+ * @param {*} initials - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact header large.
+ * @param {*} initials - Parameter.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {string} id - Identifier.
+ * @returns {string} Result.
+ */
 function getContactHeaderLarge(initials, name, email, phone, id) {
     return `
         <div class="contact-header-large">
@@ -192,6 +410,16 @@ function getContactHeaderLarge(initials, name, email, phone, id) {
     `;
 }
 
+/**
+ * Handles getContactAvatarLarge.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact avatar large.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactAvatarLarge(initials) {
     return `
             <div class="contact-avatar-large">
@@ -200,6 +428,24 @@ function getContactAvatarLarge(initials) {
     `;
 }
 
+/**
+ * Handles getContactMainInfo.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} id - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact main info.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {string} id - Identifier.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactMainInfo(name, email, phone, id, initials) {
     return `
             <div class="contact-main-info">
@@ -209,6 +455,24 @@ function getContactMainInfo(name, email, phone, id, initials) {
     `;
 }
 
+/**
+ * Handles getContactActions.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact actions.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getContactActions(id, name, email, phone, initials) {
     return `
                 <div class="contact-actions">
@@ -224,6 +488,14 @@ function getContactActions(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getEditIcon.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit icon.
+ * @returns {string} Result.
+ */
 function getEditIcon() {
     return `
                     <svg width="24" height="24" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -237,6 +509,14 @@ function getEditIcon() {
     `;
 }
 
+/**
+ * Handles getDeleteIcon.
+ * @returns {*} Result.
+ */
+/**
+ * Returns delete icon.
+ * @returns {string} Result.
+ */
 function getDeleteIcon() {
     return `
                     <svg width="24" height="24" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -247,6 +527,18 @@ function getDeleteIcon() {
     `;
 }
 
+/**
+ * Handles getContactInfoSection.
+ * @param {*} email - Parameter.
+ * @param {*} phoneSection - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact info section.
+ * @param {string} email - Email address.
+ * @param {*} phoneSection - Parameter.
+ * @returns {string} Result.
+ */
 function getContactInfoSection(email, phoneSection) {
     return `
             <div class="contact-info">
@@ -262,6 +554,16 @@ function getContactInfoSection(email, phoneSection) {
     `;
 }
 
+/**
+ * Handles getContactPhoneSection.
+ * @param {*} phone - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contact phone section.
+ * @param {string} phone - Phone number.
+ * @returns {string} Result.
+ */
 function getContactPhoneSection(phone) {
     if (!phone) return '';
     return `
@@ -273,6 +575,24 @@ function getContactPhoneSection(phone) {
 }
 
 // Extra: Dialog-Template für Edit
+/**
+ * Handles getEditContactDialog.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact dialog.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getEditContactDialog(id, name, email, phone, initials) {
     return `
     <dialog id="edit-contact-dialog" class="ac-dialog">
@@ -285,6 +605,14 @@ function getEditContactDialog(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getEditContactHero.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact hero.
+ * @returns {string} Result.
+ */
 function getEditContactHero() {
     return `
             <div class="ac__hero">
@@ -297,6 +625,24 @@ function getEditContactHero() {
     `;
 }
 
+/**
+ * Handles getEditContactFormWrap.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact form wrap.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getEditContactFormWrap(id, name, email, phone, initials) {
     return `
             <div class="ac__formwrap">
@@ -306,6 +652,16 @@ function getEditContactFormWrap(id, name, email, phone, initials) {
     `;
 }
 
+/**
+ * Handles getEditContactAvatar.
+ * @param {*} initials - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact avatar.
+ * @param {*} initials - Parameter.
+ * @returns {string} Result.
+ */
 function getEditContactAvatar(initials) {
     return `
                 <div class="ac__avatar" aria-label="Avatar placeholder">
@@ -316,6 +672,22 @@ function getEditContactAvatar(initials) {
     `;
 }
 
+/**
+ * Handles getEditContactForm.
+ * @param {*} id - Parameter.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact form.
+ * @param {string} id - Identifier.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @returns {string} Result.
+ */
 function getEditContactForm(id, name, email, phone) {
     return `
                 <form onsubmit="updateContact(event, '${id}')" id="edit-contact-form" class="ac-form" novalidate>
@@ -325,6 +697,20 @@ function getEditContactForm(id, name, email, phone) {
     `;
 }
 
+/**
+ * Handles getEditContactFields.
+ * @param {*} name - Parameter.
+ * @param {*} email - Parameter.
+ * @param {*} phone - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact fields.
+ * @param {string} name - Name.
+ * @param {string} email - Email address.
+ * @param {string} phone - Phone number.
+ * @returns {string} Result.
+ */
 function getEditContactFields(name, email, phone) {
     return `
                     <div class="ac-field">
@@ -342,6 +728,16 @@ function getEditContactFields(name, email, phone) {
     `;
 }
 
+/**
+ * Handles getEditContactActions.
+ * @param {*} id - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns edit contact actions.
+ * @param {string} id - Identifier.
+ * @returns {string} Result.
+ */
 function getEditContactActions(id) {
     return `
                     <div class="ac__actions">
@@ -359,6 +755,16 @@ function getEditContactActions(id) {
 /**
  * Toast-Template (optisch wie im Screenshot: dunkle, runde Pill)
  * @param {string} message
+ */
+/**
+ * Handles getContactsToastTemplate.
+ * @param {*} message - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Returns contacts toast template.
+ * @param {string} message - Message text.
+ * @returns {string} Result.
  */
 function getContactsToastTemplate(message) {
     return /*html*/ `
