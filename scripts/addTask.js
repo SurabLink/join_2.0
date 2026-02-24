@@ -1,4 +1,7 @@
-/** Task rendern */
+/**
+ * Renders add task.
+ * @returns {Promise<*>} Result.
+ */
 async function renderAddTask() {
   let content = document.getElementById('addTaskContent');
   content.innerHTML = '';
@@ -10,11 +13,22 @@ async function renderAddTask() {
   initAddDropdownClose();
 }
 
+/**
+ * Handles resetSelectedContacts.
+ * @returns {*} Result.
+ */
+/**
+ * Handles reset selected contacts.
+ * @returns {void} Result.
+ */
 function resetSelectedContacts() {
   selectedContacts = [];
 }
 
-/** Validierung des Formulars durchführen */
+/**
+ * Validates form.
+ * @returns {void} Result.
+ */
 function validateForm() {
   clearValidationErrors();
   let isValid = true;
@@ -24,32 +38,88 @@ function validateForm() {
   return isValid;
 }
 
+/**
+ * Handles clearValidationErrors.
+ * @returns {*} Result.
+ */
+/**
+ * Clears validation errors.
+ * @returns {void} Result.
+ */
 function clearValidationErrors() {
   setErrorText('titleError', '');
   setErrorText('dateError', '');
   setErrorText('categoryError', '');
 }
 
+/**
+ * Handles setErrorText.
+ * @param {*} id - Parameter.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets error text.
+ * @param {string} id - Identifier.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function setErrorText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
 }
 
+/**
+ * Handles validateTitleField.
+ * @returns {*} Result.
+ */
+/**
+ * Validates title field.
+ * @returns {void} Result.
+ */
 function validateTitleField() {
   const input = document.getElementById('title');
   return validateRequiredInput(input, 'titleError');
 }
 
+/**
+ * Handles validateDateField.
+ * @returns {*} Result.
+ */
+/**
+ * Validates date field.
+ * @returns {void} Result.
+ */
 function validateDateField() {
   const input = document.getElementById('date');
   return validateRequiredInput(input, 'dateError');
 }
 
+/**
+ * Handles validateCategoryField.
+ * @returns {*} Result.
+ */
+/**
+ * Validates category field.
+ * @returns {void} Result.
+ */
 function validateCategoryField() {
   const input = document.getElementById('category');
   return validateRequiredInput(input, 'categoryError');
 }
 
+/**
+ * Handles validateRequiredInput.
+ * @param {*} input - Parameter.
+ * @param {*} errorId - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Validates required input.
+ * @param {HTMLElement} input - Input element.
+ * @param {*} errorId - Parameter.
+ * @returns {void} Result.
+ */
 function validateRequiredInput(input, errorId) {
   if (!input || !input.value.trim()) {
     setErrorText(errorId, 'This field is required');
@@ -60,6 +130,16 @@ function validateRequiredInput(input, errorId) {
   return true;
 }
 
+/**
+ * Handles saveToArray.
+ * @param {*} event - Parameter.
+ * @returns {Promise<*>} Result promise.
+ */
+/**
+ * Saves to array.
+ * @param {Event} event - DOM event.
+ * @returns {Promise<*>} Result.
+ */
 async function saveToArray(event) {
   event.preventDefault();
   if (!validateForm()) return;
@@ -72,6 +152,14 @@ async function saveToArray(event) {
   handleSaveFailure();
 }
 
+/**
+ * Handles handleSaveSuccess.
+ * @returns {*} Result.
+ */
+/**
+ * Handles save success.
+ * @returns {void} Result.
+ */
 function handleSaveSuccess() {
   showMessage("Task added to board", "success");
   subtasks.length = 0;
@@ -81,11 +169,23 @@ function handleSaveSuccess() {
   setTimeout(() => { window.location.href = "board.html"; }, 1500);
 }
 
+/**
+ * Handles handleSaveFailure.
+ * @returns {*} Result.
+ */
+/**
+ * Handles save failure.
+ * @returns {void} Result.
+ */
 function handleSaveFailure() {
   showMessage("Task could not be saved", "error");
 }
 
-/** Task in Firebase speichern */
+/**
+ * Saves task.
+ * @param {Object} task - Task object.
+ * @returns {Promise<*>} Result.
+ */
 async function saveTask(task) {
   try {
     const response = await fetch(`${BASE_URL}/tasks.json`, {
@@ -101,18 +201,35 @@ async function saveTask(task) {
   }
 }
 
-/** Dropdown mit Kontakten füllen */
+/**
+ * Handles select contacts.
+ * @returns {void} Result.
+ */
 function selectContacts() {
   let select = document.getElementById('dropdownContacts');
   select.innerHTML = generateAssignedContacts(contacts);
 }
 
-/** Dropdown öffnen/schließen */
+/**
+ * Toggles dropdown.
+ * @param {Event} event - DOM event.
+ * @returns {void} Result.
+ */
 function toggleDropdown(event) {
   event.stopPropagation();
   document.getElementById("dropdownContacts").classList.toggle("show");
 }
 
+/**
+ * Handles toggleAddCategoryDropdown.
+ * @param {*} event - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Toggles add category dropdown.
+ * @param {Event} event - DOM event.
+ * @returns {void} Result.
+ */
 function toggleAddCategoryDropdown(event) {
   event.stopPropagation();
   const dropdown = document.getElementById("categoryDropdown");
@@ -120,6 +237,16 @@ function toggleAddCategoryDropdown(event) {
   dropdown.classList.toggle("show");
 }
 
+/**
+ * Handles setAddCategory.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets add category.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function setAddCategory(value) {
   const input = document.getElementById("category");
   const select = document.getElementById("categorySelect");
@@ -129,6 +256,18 @@ function setAddCategory(value) {
   closeAddCategoryDropdown();
 }
 
+/**
+ * Handles updateAddCategoryLabel.
+ * @param {*} select - Parameter.
+ * @param {*} value - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Updates add category label.
+ * @param {*} select - Parameter.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
 function updateAddCategoryLabel(select, value) {
   const label = select.querySelector("span");
   if (label) {
@@ -136,17 +275,41 @@ function updateAddCategoryLabel(select, value) {
   }
 }
 
+/**
+ * Handles closeAddCategoryDropdown.
+ * @returns {*} Result.
+ */
+/**
+ * Closes add category dropdown.
+ * @returns {void} Result.
+ */
 function closeAddCategoryDropdown() {
   const dropdown = document.getElementById("categoryDropdown");
   if (dropdown) dropdown.classList.remove("show");
 }
 
+/**
+ * Handles initAddDropdownClose.
+ * @returns {*} Result.
+ */
+/**
+ * Initializes add dropdown close.
+ * @returns {void} Result.
+ */
 function initAddDropdownClose() {
   if (window.addDropdownHandlerAdded) return;
   window.addDropdownHandlerAdded = true;
   document.addEventListener("click", () => closeAddDropdowns());
 }
 
+/**
+ * Handles closeAddDropdowns.
+ * @returns {*} Result.
+ */
+/**
+ * Closes add dropdowns.
+ * @returns {void} Result.
+ */
 function closeAddDropdowns() {
   const contactsDropdown = document.getElementById("dropdownContacts");
   if (contactsDropdown) contactsDropdown.classList.remove("show");
@@ -154,7 +317,12 @@ function closeAddDropdowns() {
   if (categoryDropdown) categoryDropdown.classList.remove("show");
 }
 
-/** Checkbox Umschalten */
+/**
+ * Toggles contact selection.
+ * @param {string} name - Name.
+ * @param {HTMLInputElement} checkbox - Checkbox element.
+ * @returns {void} Result.
+ */
 function toggleContactSelection(name, checkbox) {
   if (checkbox.checked) {
     selectedContacts.push(name);
@@ -164,18 +332,41 @@ function toggleContactSelection(name, checkbox) {
   renderSelectedAvatars();
 }
 
-/** Avatare der ausgewählten Kontakte rendern */
+/**
+ * Renders selected avatars.
+ * @returns {void} Result.
+ */
 function renderSelectedAvatars() {
   const container = document.getElementById("selectedAvatars");
   container.innerHTML = "";
   selectedContacts.forEach(name => appendSelectedAvatar(container, name));
 }
 
+/**
+ * Handles appendSelectedAvatar.
+ * @param {*} container - Parameter.
+ * @param {*} name - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles append selected avatar.
+ * @param {HTMLElement} container - Container element.
+ * @param {string} name - Name.
+ * @returns {void} Result.
+ */
 function appendSelectedAvatar(container, name) {
   const initials = name.split(" ").map(n => n[0]).join("");
   container.innerHTML += getSelectedAvatarMarkup(initials);
 }
 
+/**
+ * Handles showSubtasks.
+ * @returns {*} Result.
+ */
+/**
+ * Shows subtasks.
+ * @returns {void} Result.
+ */
 function showSubtasks() {
   let subtaskArea = document.getElementById('subtaskArea');
   subtaskArea.innerHTML = '';
@@ -184,6 +375,14 @@ function showSubtasks() {
   }
 }
 
+/**
+ * Handles addSubtask.
+ * @returns {*} Result.
+ */
+/**
+ * Adds subtask.
+ * @returns {void} Result.
+ */
 function addSubtask() {
   let subtask = document.getElementById('subtask').value;
   if (subtask) {
@@ -195,6 +394,14 @@ function addSubtask() {
   }
 }
 
+/**
+ * Handles clearSubtaskInput.
+ * @returns {*} Result.
+ */
+/**
+ * Clears subtask input.
+ * @returns {void} Result.
+ */
 function clearSubtaskInput() {
   const input = document.getElementById('subtask');
   if (input) {
@@ -203,10 +410,30 @@ function clearSubtaskInput() {
   }
 }
 
+/**
+ * Handles editSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles edit subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function editSubtask(i) {
   setEditingSubtask(i);
 }
 
+/**
+ * Handles deleteSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Deletes subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function deleteSubtask(i) {
   subtasks.splice(i, 1);
   if (window.editingSubtaskIndex === i) {
@@ -215,17 +442,45 @@ function deleteSubtask(i) {
   showSubtasks();
 }
 
+/**
+ * Handles clearForm.
+ * @returns {*} Result.
+ */
+/**
+ * Clears form.
+ * @returns {void} Result.
+ */
 function clearForm() {
   selectedContacts = [];
   renderSelectedAvatars();
 }
 
+/**
+ * Handles setEditingSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Sets editing subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function setEditingSubtask(i) {
   window.editingSubtaskIndex = i;
   showSubtasks();
   focusSubtaskEditInput(i);
 }
 
+/**
+ * Handles focusSubtaskEditInput.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Handles focus subtask edit input.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function focusSubtaskEditInput(i) {
   const input = document.getElementById(`subtask-edit-${i}`);
   if (input) {
@@ -234,11 +489,29 @@ function focusSubtaskEditInput(i) {
   }
 }
 
+/**
+ * Handles cancelEditSubtask.
+ * @returns {*} Result.
+ */
+/**
+ * Handles cancel edit subtask.
+ * @returns {void} Result.
+ */
 function cancelEditSubtask() {
   window.editingSubtaskIndex = null;
   showSubtasks();
 }
 
+/**
+ * Handles saveEditedSubtask.
+ * @param {*} i - Parameter.
+ * @returns {*} Result.
+ */
+/**
+ * Saves edited subtask.
+ * @param {number} i - Index.
+ * @returns {void} Result.
+ */
 function saveEditedSubtask(i) {
   const input = document.getElementById(`subtask-edit-${i}`);
   if (!input) return;
