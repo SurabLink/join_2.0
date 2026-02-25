@@ -12,10 +12,12 @@ function getBoardTemplate() {
           <input id="search-task" type="text" placeholder="Find Task">
           <button id="search-clear" class="search-clear" type="button" aria-label="Clear search">×</button>
           <div class="search-divider"></div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-          </svg>
+          <span class="search-highlight">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+            </svg>
+          </span>
         </div>
         <button class="add-task-btn" onclick="showAddTaskDialog()">Add Task +</button>
       </div>
@@ -56,7 +58,7 @@ function getBoardColumn(config) {
       ondragover="allowDrop(event)"
       ondrop="dropTask(event, '${config.status}')">
       <div class="column-header">
-        <h2>${config.title}</h2>
+        <h2 class="column-title">${config.title}</h2>
         ${config.showAdd ? `<img src="./assets/icons/plus button.svg" alt="Add Task Button" width="30" height="30" onclick="showAddTaskDialog()">` : ""}
       </div>
       <div class="no-tasks">

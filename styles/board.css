@@ -109,16 +109,29 @@ body {
   flex-shrink: 0;
 }
 
+.search-highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.search-highlight:hover {
+  background: #d9d9d9;
+  border-radius: 50%;
+}
+
 .board-search svg {
   width: 22px;
   height: 22px;
   color: #666;
-}
-
-.search-highlight {
-  background: #FFE08A;
-  padding: 0 2px;
-  border-radius: 3px;
+  vertical-align: middle;
+  margin-top: 2px;
+  margin-right: 2px;
 }
 
 .add-task-btn {
@@ -133,7 +146,7 @@ body {
 }
 
 .add-task-btn:hover {
-  background: #091931;
+  background: #29abe2;
 }
 
 .add-task-mobile-btn {
@@ -192,6 +205,16 @@ h1 {
 
 .column-header img {
   cursor: pointer;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.column-header img:hover {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(89%) saturate(1000%) hue-rotate(162deg) brightness(95%) contrast(85%);
+  opacity: 0.9;
+}
+
+.column-title {
+  color: #2a3647;
 }
 
 .no-tasks {
