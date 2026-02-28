@@ -39,7 +39,7 @@ function getTaskModalTemplate(task) {
                 fill="#2A3647"></path>
             </g>
           </svg>
-  <span>Delete</span>
+  <span class="modal-action-delete-text">Delete</span>
 </div>
 <div class="action-separator"></div>
 <div class="modal-edit" onclick="openEditTaskModal(${task.id})">
@@ -53,7 +53,7 @@ function getTaskModalTemplate(task) {
       </path>
     </g>
   </svg>
-          <span>Edit</span>
+          <span class="modal-action-edit-text">Edit</span>
         </div>
       </div>
     </div>

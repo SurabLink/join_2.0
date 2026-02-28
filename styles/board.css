@@ -345,8 +345,9 @@ h1 {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   transform: translateX(100%);
   /* Startposition rechts außerhalb */
-  transition: transform 0.3s ease-out;
-  /* Slide-In Animation */
+  opacity: 1;
+  transition: transform 0.3s ease-out, opacity 0.15s ease-out;
+  /* Slide-In/Out Animation */
 }
 
 .close {
@@ -437,7 +438,8 @@ h1 {
 .modal-actions {
   display: flex;
   align-self: flex-end;
-  margin-top: 30px;
+  margin-top: 24px;
+  gap: 8px;
 }
 
 .modal-actions div {
@@ -446,19 +448,32 @@ h1 {
   gap: 8px;
 }
 
-.modal-delete:hover {
-  cursor: pointer;
-  font-weight: bold;
+.modal-action-delete-text, .modal-action-edit-text {
+  min-width: 55px;
 }
 
-.modal-edit:hover {
+.modal-delete:hover .modal-action-delete-text{
   cursor: pointer;
   font-weight: bold;
+  color: #29ABE2;
+}
+
+.modal-delete:hover .delete-svg-path {
+  fill: #29ABE2;
+}
+
+.modal-edit:hover .modal-action-edit-text {
+  cursor: pointer;
+  font-weight: bold;
+  color: #29ABE2;
+}
+
+.modal-edit:hover .edit-svg-path {
+  fill: #29ABE2;
 }
 
 .edit-svg-path {
   fill: #2A3647;
-  transition: fill 0.15s ease;
 }
 
 .action-separator {

@@ -275,10 +275,22 @@ function openModal(id) {
   modal.id = "taskModal"; modal.className = "modal";
   modal.innerHTML = getTaskModalTemplate(task);
   document.body.appendChild(modal); modal.style.display = "flex";
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  const modalContent = modal.querySelector(".modal-content");
+  if (modalContent) {
+    modalContent.addEventListener("click", (event) => event.stopPropagation());
+  }
+
   setTimeout(() => updateModalSubtasks(task), 0);
   setTimeout(() => {
-    const modalContent = modal.querySelector(".modal-content");
-    if (modalContent) modalContent.style.transform = "translateX(0)";
+    if (modalContent) {
+      modalContent.style.opacity = "1";
+      modalContent.style.transform = "translateX(0)";
+    }
   }, 10);
 }
 
@@ -570,6 +582,40 @@ function updateNoTaskPlaceholders() {
  */
 function closeModal() {
   const modal = document.getElementById("taskModal");
-  if (modal) modal.remove();
-  activeTask = null;
+  if (!modal) {
+    activeTask = null;
+    return;
+  }
+
+  if (modal.dataset.closing === "true") return;
+  modal.dataset.closing = "true";
+
+  const modalContent = modal.querySelector(".modal-content");
+  const cleanup = () => {
+    if (modal && modal.parentNode) modal.remove();
+    activeTask = null;
+  };
+
+  if (!modalContent) {
+    cleanup();
+    return;
+  }
+
+  const onTransitionEnd = (event) => {
+    if (event && event.target !== modalContent) return;
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  };
+
+  modalContent.addEventListener("transitionend", onTransitionEnd);
+
+  requestAnimationFrame(() => {
+    modalContent.style.opacity = "0";
+    modalContent.style.transform = "translateX(100%)";
+  });
+
+  setTimeout(() => {
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  }, 400);
 }
