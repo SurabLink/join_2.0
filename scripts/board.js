@@ -275,10 +275,22 @@ function openModal(id) {
   modal.id = "taskModal"; modal.className = "modal";
   modal.innerHTML = getTaskModalTemplate(task);
   document.body.appendChild(modal); modal.style.display = "flex";
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  const modalContent = modal.querySelector(".modal-content");
+  if (modalContent) {
+    modalContent.addEventListener("click", (event) => event.stopPropagation());
+  }
+
   setTimeout(() => updateModalSubtasks(task), 0);
   setTimeout(() => {
-    const modalContent = modal.querySelector(".modal-content");
-    if (modalContent) modalContent.style.transform = "translateX(0)";
+    if (modalContent) {
+      modalContent.style.opacity = "1";
+      modalContent.style.transform = "translateX(0)";
+    }
   }, 10);
 }
 
@@ -320,11 +332,13 @@ async function openEditTaskModal(id) {
   const task = tasks.find(t => t.id === id);
   if (!task) return;
   activeTask = task;
-  editSubtasks = task.subtasks.map(st => ({ ...st }));
-  selectedContacts = [...task.contacts];
+  editSubtasks = Array.isArray(task.subtasks) ? task.subtasks.map(st => ({ ...st })) : [];
+  selectedContacts = Array.isArray(task.contacts) ? [...task.contacts] : [];
   window.editingEditSubtaskIndex = null;
   const modal = document.getElementById("taskModal");
+  if (!modal) return;
   const modalContent = modal.querySelector(".modal-content");
+  if (!modalContent) return;
   modalContent.innerHTML = generateEditTaskTemplate(task);
   await loadContacts();
   renderEditAssignedContacts();
@@ -365,12 +379,119 @@ function setEditCategory(value) {
   const select = document.getElementById("editCategorySelect");
   if (!input || !select) return;
   input.value = value;
+  input.classList.remove('input-error');
+  select.classList.remove('input-error');
+  setEditErrorText('editCategoryError', '');
   const label = select.querySelector("span");
   if (label) {
     label.childNodes[0].textContent = value + " ";
   }
   const dropdown = document.getElementById("editCategoryDropdown");
   if (dropdown) dropdown.classList.remove("show");
+}
+
+/**
+ * Sets edit error text.
+ * @param {string} id - Identifier.
+ * @param {string} value - Value.
+ * @returns {void} Result.
+ */
+function setEditErrorText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+/**
+ * Clears edit validation errors.
+ * @returns {void} Result.
+ */
+function clearEditValidationErrors() {
+  setEditErrorText('editTitleError', '');
+  setEditErrorText('editDateError', '');
+  setEditErrorText('editCategoryError', '');
+}
+
+/**
+ * Validates required input in edit form.
+ * @param {HTMLElement} input - Input element.
+ * @param {string} errorId - Error element id.
+ * @param {HTMLElement} highlightElement - Element to highlight (defaults to input).
+ * @returns {boolean} Result.
+ */
+function validateEditRequiredInput(input, errorId, highlightElement = input) {
+  const value = input ? String(input.value ?? '').trim() : '';
+  if (!input || !value) {
+    setEditErrorText(errorId, 'This field is required');
+    input?.classList.add('input-error');
+    if (highlightElement && highlightElement !== input) {
+      highlightElement.classList.add('input-error');
+    }
+    return false;
+  }
+  input.classList.remove('input-error');
+  if (highlightElement && highlightElement !== input) {
+    highlightElement.classList.remove('input-error');
+  }
+  return true;
+}
+
+/**
+ * Scrolls edit form to the given element (inside overflow container).
+ * @param {HTMLElement|null} target - Target element.
+ * @returns {void} Result.
+ */
+function scrollEditFormTo(target) {
+  if (!target) return;
+  const scrollContainer = document.querySelector('#editTaskForm .edit-form-scroll');
+  if (!scrollContainer) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const containerRect = scrollContainer.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  const offsetTop = targetRect.top - containerRect.top + scrollContainer.scrollTop - 16;
+  scrollContainer.scrollTo({ top: offsetTop, behavior: 'smooth' });
+}
+
+/**
+ * Validates edit form.
+ * @returns {boolean} Result.
+ */
+function validateEditForm() {
+  clearEditValidationErrors();
+  const titleInput = document.getElementById('edit-title');
+  const dateInput = document.getElementById('edit-date');
+  const categoryInput = document.getElementById('edit-category');
+  const categorySelect = document.getElementById('editCategorySelect');
+
+  const invalid = [];
+
+  if (!validateEditRequiredInput(titleInput, 'editTitleError')) {
+    invalid.push({ errorId: 'editTitleError', focusEl: titleInput });
+  }
+
+  if (!validateEditRequiredInput(dateInput, 'editDateError')) {
+    invalid.push({ errorId: 'editDateError', focusEl: dateInput });
+  }
+
+  if (!validateEditRequiredInput(categoryInput, 'editCategoryError', categorySelect)) {
+    invalid.push({ errorId: 'editCategoryError', focusEl: categorySelect });
+  }
+
+  if (invalid.length > 0) {
+    const first = invalid[0];
+    const errorEl = document.getElementById(first.errorId);
+    scrollEditFormTo(errorEl || first.focusEl);
+    try {
+      first.focusEl?.focus?.();
+    } catch (e) {
+      // ignore focus errors
+    }
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -495,6 +616,7 @@ function saveEditedEditSubtask(i) {
  */
 async function saveEditedTask(event, id) {
   event.preventDefault();
+  if (!validateEditForm()) return;
   const task = tasks.find(t => t.id === id);
   if (!task) return;
   updateTaskFromEditForm(task);
@@ -526,8 +648,29 @@ function updateTaskFromEditForm(task) {
  */
 async function showAddTaskDialog() {
   const modalContent = document.getElementById("addTask-dialog-message");
-  document.getElementById("addTask-dialog").classList.remove("d-none");
-  modalContent.innerHTML = generateAddTask();
+  const dialogOverlay = document.getElementById("addTask-dialog");
+  if (!dialogOverlay || !modalContent) return;
+
+  dialogOverlay.dataset.closing = "false";
+  dialogOverlay.classList.remove("d-none");
+
+  modalContent.classList.remove("is-open");
+
+  if (!window.addTaskDialogBackdropHandlerAdded) {
+    window.addTaskDialogBackdropHandlerAdded = true;
+    dialogOverlay.addEventListener("click", (event) => {
+      // Close only on real backdrop clicks. Using contains(event.target) can break
+      // when inner click handlers re-render/remove the original target node.
+      if (event.target !== dialogOverlay) return;
+      event.stopPropagation();
+      closeAddTaskDialog();
+    });
+  }
+
+  modalContent.innerHTML = generateAddTask({ variant: "dialog" });
+  // force reflow so the transition runs every time
+  void modalContent.offsetWidth;
+  requestAnimationFrame(() => modalContent.classList.add("is-open"));
   await loadContacts();
   selectedContacts = [];
   selectContacts();
@@ -540,7 +683,39 @@ async function showAddTaskDialog() {
  * @returns {void} Result.
  */
 function closeAddTaskDialog() {
-  document.getElementById("addTask-dialog").classList.add("d-none");
+  const dialogOverlay = document.getElementById("addTask-dialog");
+  const modalContent = document.getElementById("addTask-dialog-message");
+  if (!dialogOverlay) return;
+
+  if (dialogOverlay.dataset.closing === "true") return;
+  dialogOverlay.dataset.closing = "true";
+
+  const cleanup = () => {
+    dialogOverlay.classList.add("d-none");
+    dialogOverlay.dataset.closing = "false";
+  };
+
+  if (!modalContent) {
+    cleanup();
+    return;
+  }
+
+  const onTransitionEnd = (event) => {
+    if (event && event.target !== modalContent) return;
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  };
+
+  modalContent.addEventListener("transitionend", onTransitionEnd);
+
+  requestAnimationFrame(() => {
+    modalContent.classList.remove("is-open");
+  });
+
+  setTimeout(() => {
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  }, 400);
 }
 
 /**
@@ -570,6 +745,40 @@ function updateNoTaskPlaceholders() {
  */
 function closeModal() {
   const modal = document.getElementById("taskModal");
-  if (modal) modal.remove();
-  activeTask = null;
+  if (!modal) {
+    activeTask = null;
+    return;
+  }
+
+  if (modal.dataset.closing === "true") return;
+  modal.dataset.closing = "true";
+
+  const modalContent = modal.querySelector(".modal-content");
+  const cleanup = () => {
+    if (modal && modal.parentNode) modal.remove();
+    activeTask = null;
+  };
+
+  if (!modalContent) {
+    cleanup();
+    return;
+  }
+
+  const onTransitionEnd = (event) => {
+    if (event && event.target !== modalContent) return;
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  };
+
+  modalContent.addEventListener("transitionend", onTransitionEnd);
+
+  requestAnimationFrame(() => {
+    modalContent.style.opacity = "0";
+    modalContent.style.transform = "translateX(100%)";
+  });
+
+  setTimeout(() => {
+    modalContent.removeEventListener("transitionend", onTransitionEnd);
+    cleanup();
+  }, 400);
 }

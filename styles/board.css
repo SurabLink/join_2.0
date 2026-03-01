@@ -55,7 +55,6 @@ body {
   font-weight: 700;
   margin: 0;
   margin-left: 35px;
-
 }
 
 .board-actions {
@@ -72,6 +71,12 @@ body {
   padding: 8px 12px;
   background: white;
   gap: 8px;
+}
+
+.board-search:focus-within {
+  outline: none;
+  border: 1px solid #29ABE2;
+
 }
 
 .board-search input {
@@ -109,16 +114,29 @@ body {
   flex-shrink: 0;
 }
 
+.search-highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.search-highlight:hover {
+  background: #d9d9d9;
+  border-radius: 50%;
+}
+
 .board-search svg {
   width: 22px;
   height: 22px;
   color: #666;
-}
-
-.search-highlight {
-  background: #FFE08A;
-  padding: 0 2px;
-  border-radius: 3px;
+  vertical-align: middle;
+  margin-top: 2px;
+  margin-right: 2px;
 }
 
 .add-task-btn {
@@ -133,7 +151,7 @@ body {
 }
 
 .add-task-btn:hover {
-  background: #091931;
+  background: #29abe2;
 }
 
 .add-task-mobile-btn {
@@ -192,6 +210,16 @@ h1 {
 
 .column-header img {
   cursor: pointer;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.column-header img:hover {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(89%) saturate(1000%) hue-rotate(162deg) brightness(95%) contrast(85%);
+  opacity: 0.9;
+}
+
+.column-title {
+  color: #2a3647;
 }
 
 .no-tasks {
@@ -312,29 +340,49 @@ h1 {
   height: auto;
   max-width: 560px;
   max-height: 85vh;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   /* font-family: Arial, sans-serif; */
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   transform: translateX(100%);
   /* Startposition rechts außerhalb */
-  transition: transform 0.3s ease-out;
-  /* Slide-In Animation */
+  opacity: 1;
+  transition: transform 0.3s ease-out, opacity 0.15s ease-out;
+  /* Slide-In/Out Animation */
 }
 
 .close {
   cursor: pointer;
-  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .close-btn {
   float: right;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 24px;
   cursor: pointer;
+  color: #2A3647;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .close-btn:hover {
-  color: red;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modal-title h2 {
@@ -396,7 +444,8 @@ h1 {
 .modal-actions {
   display: flex;
   align-self: flex-end;
-  margin-top: 30px;
+  margin-top: 24px;
+  gap: 8px;
 }
 
 .modal-actions div {
@@ -405,14 +454,33 @@ h1 {
   gap: 8px;
 }
 
-.modal-delete:hover {
-  cursor: pointer;
-  font-weight: bold;
+.modal-action-delete-text,
+.modal-action-edit-text {
+  min-width: 55px;
 }
 
-.modal-edit:hover {
+.modal-delete:hover .modal-action-delete-text {
   cursor: pointer;
   font-weight: bold;
+  color: #29ABE2;
+}
+
+.modal-delete:hover .delete-svg-path {
+  fill: #29ABE2;
+}
+
+.modal-edit:hover .modal-action-edit-text {
+  cursor: pointer;
+  font-weight: bold;
+  color: #29ABE2;
+}
+
+.modal-edit:hover .edit-svg-path {
+  fill: #29ABE2;
+}
+
+.edit-svg-path {
+  fill: #2A3647;
 }
 
 .action-separator {
@@ -594,6 +662,7 @@ h1 {
 .edit-task-form textarea {
   min-height: 80px;
   resize: vertical;
+  font: message-box;
 }
 
 /* ===========================================
@@ -721,6 +790,15 @@ h1 {
   background: transparent;
 }
 
+.edit-input:focus-within,
+textarea:focus-within,
+.custom-select:focus-within,
+.subtask-edit-input:focus-within,
+.subtasks input:focus-within {
+  outline: none;
+  border: 1px solid #29ABE2;
+}
+
 .edit-task-form .subtask-edit-input {
   width: 100%;
   height: 40px;
@@ -844,8 +922,14 @@ h1 {
   align-items: center;
   gap: 8px;
   margin: 6px 0;
+  padding: 0px 8px;
 }
 
+.modal-subtask:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border-radius: 8px;
+}
 
 
 /* ===========================================
@@ -857,6 +941,20 @@ h1 {
   justify-content: flex-end;
   gap: 12px;
   margin-top: 8px;
+}
+
+.clear:hover {
+  border-color: #29ABE2;
+  color: #29ABE2;
+}
+
+.create:hover {
+  background-color: #29ABE2;
+}
+
+.create img {
+  width: 16px;
+  height: 16px;
 }
 
 #editTaskForm .actions .clear,
@@ -883,6 +981,7 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 
 .edit-form-scroll {
@@ -892,15 +991,27 @@ h1 {
   flex-direction: column;
   gap: 16px;
   padding-right: 6px;
+  padding-top: 16px;
+  max-width: 560px;
+  min-width: 360px;
+  max-height: 80vh;
+
 }
 
 /* Inputs */
+
+.edit-form-scroll input,
+.edit-form-scroll label {
+  width: 320px;
+
+}
 
 .edit-label {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 14px;
+  margin-top: 24px;
 }
 
 .edit-input,
@@ -979,6 +1090,7 @@ h1 {
   flex-direction: column;
   gap: 8px;
 }
+
 
 /* ===== EDIT MODAL RESPONSIVE ===== */
 @media (max-width: 600px) {
@@ -1085,30 +1197,61 @@ h1 {
 
 
 
-
 /* Actions */
 
 .edit-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-top: 12px;
   border-top: 1px solid #eee;
+  margin-right: 8px;
 }
 
 .edit-cancel {
   cursor: pointer;
   background: transparent;
   border: none;
-  color: #555;
+  width: 24px;
+  height: 24px;
+  color: #2A3647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 50%;
+}
+
+.edit-cancel:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.edit-x-close {
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 8px;
 }
 
 .edit-save {
   cursor: pointer;
-  background: #2a7cff;
+  background: #2a3647;
   color: white;
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
+}
+
+.edit-save:hover {
+  background: #29abe2;
+}
+
+.edit-save img {
+  width: 16px;
+  height: 16px;
 }
 
 .addTask-dialog-bg {
@@ -1129,20 +1272,29 @@ h1 {
 
 .addTask-dialog {
   background-color: white;
-  width: 1200px;
+  width: 1050px;
   height: 700px;
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 36px;
   margin-top: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.15s ease-out;
+  will-change: transform, opacity;
+}
+
+.addTask-dialog.is-open {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .addTask-dialog .custom-select {
   border: 1px solid #ccc;
   padding: 0 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   position: relative;
-  width: 320px;
+  width: 100%;
   background: white;
   min-height: 40px;
   display: flex;
@@ -1163,8 +1315,25 @@ h1 {
   margin-left: auto;
 }
 
+/* Validation - error highlight (used by Add Task form) */
+.input-error {
+  border-color: #ff6b6b !important;
+}
+
+.custom-select.input-error {
+  border: 1px solid #ff6b6b !important;
+}
+
 .d-none {
   display: none;
+}
+
+/* Validation messages (used in Edit Task modal & Add Task dialog) */
+.error-message {
+  color: #ff6b6b;
+  font-size: 14px;
+  display: block;
+  min-height: 16px;
 }
 
 

@@ -79,7 +79,8 @@ function validateDateField() {
  */
 function validateCategoryField() {
   const input = document.getElementById('category');
-  return validateRequiredInput(input, 'categoryError');
+  const highlightEl = document.getElementById('categorySelect');
+  return validateRequiredInput(input, 'categoryError', highlightEl);
 }
 
 /**
@@ -88,13 +89,19 @@ function validateCategoryField() {
  * @param {*} errorId - Parameter.
  * @returns {void} Result.
  */
-function validateRequiredInput(input, errorId) {
+function validateRequiredInput(input, errorId, highlightElement = input) {
   if (!input || !input.value.trim()) {
     setErrorText(errorId, 'This field is required');
     input?.classList.add('input-error');
+    if (highlightElement && highlightElement !== input) {
+      highlightElement.classList.add('input-error');
+    }
     return false;
   }
   input.classList.remove('input-error');
+  if (highlightElement && highlightElement !== input) {
+    highlightElement.classList.remove('input-error');
+  }
   return true;
 }
 
@@ -120,7 +127,10 @@ async function saveToArray(event) {
  * @returns {void} Result.
  */
 function handleSaveSuccess() {
-  showMessage("Task added to board", "success");
+    showMessage("Task added to board", "success", {
+      iconSrc: "./assets/icons/vector_board.svg",
+      iconAlt: "Board"
+    });
   subtasks.length = 0;
   selectedContacts.length = 0;
   showSubtasks();
@@ -197,6 +207,9 @@ function setAddCategory(value) {
   const select = document.getElementById("categorySelect");
   if (!input || !select) return;
   input.value = value;
+  input.classList.remove('input-error');
+  select.classList.remove('input-error');
+  setErrorText('categoryError', '');
   updateAddCategoryLabel(select, value);
   closeAddCategoryDropdown();
 }
