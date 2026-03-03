@@ -36,7 +36,7 @@
 .edit-task-form .priority-options {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .edit-task-form .priority-options input {
