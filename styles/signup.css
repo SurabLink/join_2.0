@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--app-font-family, 'Open Sans', Arial, sans-serif);
 }
 
 button {
@@ -200,7 +200,7 @@ input.input-error:focus {
 
 .error-message {
     color: #ff3d00;
-    font-size: 12px;
+    font-size: 16px;
     margin-top: 5px;
     margin-left: 15px;
     min-height: 16px;

@@ -1,7 +1,7 @@
 main {
     gap: 0px;
     height: 100vh;
-    background-color: white;
+    background-color: rgb(246, 247, 248);
 }
 
 .wrapper {
@@ -168,7 +168,7 @@ main {
     border-radius: 50%;
     color: #fff;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -259,6 +259,7 @@ main {
 
 .contact-section-left {
     height: 100%;
+    background-color: white;
 }
 
 .contact-section-right {
@@ -322,7 +323,7 @@ hr {
 .contact-actions {
     display: flex;
     gap: 8px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--app-font-family, 'Open Sans', Arial, sans-serif);
     font-size: 16px;
     color: #000;
     height: 24px;
