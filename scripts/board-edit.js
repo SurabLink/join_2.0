@@ -15,11 +15,38 @@ async function openEditTaskModal(id) {
   const modalContent = modal.querySelector(".modal-content");
   if (!modalContent) return;
   modalContent.innerHTML = generateEditTaskTemplate(task);
+  initEditFormBlurValidation();
   await loadContacts();
   renderEditAssignedContacts();
   renderEditSubtasks();
   initEditDropdownClose();
   initEditSubtaskEnter();
+}
+
+/**
+ * Initializes blur validation handlers for the edit form.
+ * @returns {void} Result.
+ */
+function initEditFormBlurValidation() {
+  const form = document.getElementById('edit-task-form');
+  if (!form || form.dataset.blurValidationInit === '1') return;
+
+  const titleInput = document.getElementById('edit-title');
+  const dateInput = document.getElementById('edit-date');
+  const categorySelect = document.getElementById('edit-category-select');
+
+  titleInput?.addEventListener('blur', () => {
+    validateEditRequiredInput(titleInput, 'edit-title-error');
+  });
+  dateInput?.addEventListener('blur', () => {
+    validateEditRequiredInput(dateInput, 'edit-date-error');
+  });
+  categorySelect?.addEventListener('blur', () => {
+    const categoryInput = document.getElementById('edit-category');
+    validateEditRequiredInput(categoryInput, 'edit-category-error', categorySelect);
+  });
+
+  form.dataset.blurValidationInit = '1';
 }
 
 /**
@@ -32,6 +59,10 @@ function initEditSubtaskEnter() {
   if (!input) return;
   if (input.dataset && input.dataset.enterHandlerAdded === 'true') return;
   if (input.dataset) input.dataset.enterHandlerAdded = 'true';
+
+  input.addEventListener('input', () => {
+    setEditSubtaskError('');
+  });
 
   input.addEventListener('keydown', (event) => {
     if (event.isComposing) return;
@@ -256,9 +287,13 @@ function addEditSubtask() {
   const input = document.getElementById("edit-subtask-input");
   if (!input) return;
   const value = input.value.trim();
-  if (!value) return;
+  if (!value) {
+    setEditSubtaskError('Keine leeren Subtasks möglich.');
+    return;
+  }
   editSubtasks.push({ title: value, done: false });
   input.value = "";
+  setEditSubtaskError('');
   renderEditSubtasks();
 }
 
@@ -286,6 +321,7 @@ function clearEditSubtaskInput() {
   if (!input) return;
   input.value = "";
   input.focus();
+  setEditSubtaskError('');
 }
 
 /**
@@ -313,12 +349,34 @@ function saveEditedEditSubtask(i) {
   if (!input) return;
   const value = input.value.trim();
   if (!value) {
-    alert("Bitte eine Subtask beschreiben!");
+    setEditSubtaskError('Keine leeren Subtasks möglich.', input);
     return;
   }
   editSubtasks[i].title = value;
   window.editingEditSubtaskIndex = null;
   renderEditSubtasks();
+  setEditSubtaskError('');
+}
+
+/**
+ * Sets edit subtask error message.
+ * @param {string} message - Message text.
+ * @param {HTMLElement} [inputEl] - Optional input to highlight.
+ * @returns {void} Result.
+ */
+function setEditSubtaskError(message, inputEl) {
+  const errorEl = document.getElementById('edit-subtask-error');
+  if (errorEl) {
+    errorEl.textContent = message || '';
+  }
+  const input = inputEl || document.getElementById('edit-subtask-input');
+  if (input) {
+    if (message) {
+      input.classList.add('input-error');
+    } else {
+      input.classList.remove('input-error');
+    }
+  }
 }
 
 /**

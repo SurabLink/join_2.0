@@ -29,7 +29,6 @@ function getContactInitialsFromName(name) {
   if (!normalizedName) return "";
   const parts = normalizedName.split(" ").filter(Boolean);
   if (parts.length === 0) return "";
-
   const firstPart = String(parts[0] ?? "");
   const lastPart = String(parts[parts.length - 1] ?? "");
   const firstLetter = (firstPart.match(/[\p{L}]/u) || [""])[0];
@@ -52,29 +51,24 @@ function validateContactNameInput(name) {
   if (!normalizedName) {
     return { isValid: false, normalizedName, initials: "", error: "Name ist erforderlich." };
   }
-
   const parts = normalizedName.split(" ").filter(Boolean);
   if (parts.length > 3) {
     return { isValid: false, normalizedName, initials: "", error: "Maximal 3 Namen sind erlaubt." };
   }
-
   const partPattern = /^[\p{L}]+(?:-[\p{L}]+)*$/u;
   for (const part of parts) {
     if (!partPattern.test(part)) {
       return { isValid: false, normalizedName, initials: "", error: "Name darf nur Buchstaben und Bindestrich enthalten." };
     }
-
     const lettersInPart = part.replace(/-/g, "").length;
     if (lettersInPart < 2) {
       return { isValid: false, normalizedName, initials: "", error: "Jeder Namensbestandteil muss mindestens 2 Buchstaben haben." };
     }
   }
-
   const totalLetters = normalizedName.replace(/[^\p{L}]/gu, "").length;
   if (totalLetters < 2) {
     return { isValid: false, normalizedName, initials: "", error: "Name muss mindestens 2 Buchstaben enthalten." };
   }
-
   const initials = getContactInitialsFromName(normalizedName);
   return { isValid: true, normalizedName, initials, error: "" };
 }
@@ -156,7 +150,7 @@ function protectThisPage() {
     return;
   }
   if (!localStorage.getItem("user")) {
-    window.location.replace("/index.html");
+    window.location.replace(getPagePath("index.html"));
   }
 }
 
@@ -171,6 +165,8 @@ function isPublicPage(pathname) {
     normalizedPath === "/" ||
     normalizedPath.endsWith("/index.html") ||
     normalizedPath.endsWith("/signup.html") ||
+    normalizedPath.endsWith("/privacy-policy.html") ||
+    normalizedPath.endsWith("/legal-notice.html") ||
     normalizedPath.endsWith("/public/privacy-policy.html") ||
     normalizedPath.endsWith("/public/legal-notice.html")
   );
@@ -368,7 +364,7 @@ function safeFirebaseLogout() {
  * @returns {void} Result.
  */
 function redirectToLogin() {
-  window.location.replace("/index.html");
+  window.location.replace(getPagePath("index.html"));
 }
 
 /**
@@ -376,14 +372,28 @@ function redirectToLogin() {
  * @returns {void} Result.
  */
 function navigateToHelp() {
-  window.location.href = "/help.html";
+  window.location.href = getPagePath("help.html");
+}
+
+/**
+ * Builds a page path that works from root pages and /public pages.
+ * @param {string} fileName - Target HTML file.
+ * @returns {string} Context-safe relative path.
+ */
+function getPagePath(fileName) {
+  const normalizedPath = String(window.location.pathname || "").replace(/\\/g, "/");
+  const inPublicFolder = normalizedPath.includes("/public/");
+  return `${inPublicFolder ? "../" : "./"}${fileName}`;
 }
 
 window.addEventListener("pageshow", (event) => {
-  if (event.persisted && !localStorage.getItem("user")) {
-    window.location.replace("/index.html");
+  const currentPage = window.location.pathname;
+  if (!event.persisted || isPublicPage(currentPage)) {
+    return;
+  }
+  if (!localStorage.getItem("user")) {
+    window.location.replace(getPagePath("index.html"));
   }
 });
-
 window.addEventListener("beforeunload", () => {
 });

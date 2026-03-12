@@ -10,8 +10,28 @@ async function renderAddTask() {
   selectContacts();
   renderSelectedAvatars();
   initAddDropdownClose();
+  initAddTaskBlurValidation();
   initAddSubtaskEnter();
   showSubtasks();
+}
+
+/**
+ * Initializes add task blur validation handlers.
+ * @returns {void} Result.
+ */
+function initAddTaskBlurValidation() {
+  const form = document.getElementById('add-task-form');
+  if (!form || form.dataset.blurValidationInit === '1') return;
+
+  const titleInput = document.getElementById('title');
+  const dateInput = document.getElementById('date');
+  const categorySelect = document.getElementById('category-select');
+
+  titleInput?.addEventListener('blur', validateTitleField);
+  dateInput?.addEventListener('blur', validateDateField);
+  categorySelect?.addEventListener('blur', validateCategoryField);
+
+  form.dataset.blurValidationInit = '1';
 }
 
 /**
@@ -182,8 +202,20 @@ function selectContacts() {
  * @returns {void} Result.
  */
 function toggleDropdown(event) {
-  event.stopPropagation();
-  document.getElementById("dropdown-contacts").classList.toggle("show");
+  if (event) {
+    event.stopPropagation();
+  }
+  const trigger = event?.currentTarget || event?.target;
+  const select = trigger?.closest?.(".custom-select");
+  const dropdown = select?.querySelector?.(".dropdown-content");
+  if (dropdown) {
+    dropdown.classList.toggle("show");
+    return;
+  }
+  const fallback = document.getElementById("dropdown-contacts");
+  if (fallback) {
+    fallback.classList.toggle("show");
+  }
 }
 
 /**
@@ -298,8 +330,18 @@ function toggleContactSelection(name, checkbox) {
  */
 function renderSelectedAvatars() {
   const container = document.getElementById("selected-avatars");
+  const assignedBlock = document.querySelector('.assigned-to-label');
+  if (assignedBlock) {
+    assignedBlock.classList.toggle('has-avatars', selectedContacts.length > 0);
+  }
   container.innerHTML = "";
-  selectedContacts.forEach(name => appendSelectedAvatar(container, name));
+  const maxVisible = 4;
+  const total = selectedContacts.length;
+  const visible = selectedContacts.slice(0, maxVisible);
+  visible.forEach(name => appendSelectedAvatar(container, name));
+  if (total > maxVisible) {
+    container.innerHTML += getSelectedAvatarMoreMarkup(total - maxVisible);
+  }
 }
 
 /**
@@ -310,7 +352,33 @@ function renderSelectedAvatars() {
  */
 function appendSelectedAvatar(container, name) {
   const initials = getContactInitialsFromName(name);
-  container.innerHTML += getSelectedAvatarMarkup(initials);
+  const colorClass = getContactColorClass(name);
+  container.innerHTML += getSelectedAvatarMarkup(initials, colorClass);
+}
+
+/**
+ * Returns contact color class based on name.
+ * @param {string} name - Contact name.
+ * @returns {string} Result.
+ */
+function getContactColorClass(name) {
+  const classes = [
+    'bg-blue',
+    'bg-green',
+    'bg-purple',
+    'bg-orange',
+    'bg-pink',
+    'bg-red',
+    'bg-teal',
+    'bg-brown'
+  ];
+  const key = String(name || '').trim().toLowerCase();
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 31 + key.charCodeAt(i)) % 2147483647;
+  }
+  const index = key ? Math.abs(hash) % classes.length : 0;
+  return classes[index];
 }
 
 /**
@@ -318,6 +386,45 @@ function appendSelectedAvatar(container, name) {
  * @returns {void} Result.
  */
 function clearForm() {
+  const form = document.getElementById('add-task-form');
+  if (form) {
+    form.reset();
+  }
+  clearValidationErrors();
+  if (typeof setSubtaskError === 'function') {
+    setSubtaskError('');
+  }
+  const titleInput = document.getElementById('title');
+  const dateInput = document.getElementById('date');
+  const categoryInput = document.getElementById('category');
+  const categorySelect = document.getElementById('category-select');
+  titleInput?.classList.remove('input-error');
+  dateInput?.classList.remove('input-error');
+  categoryInput?.classList.remove('input-error');
+  categorySelect?.classList.remove('input-error');
+
+  if (categoryInput) {
+    categoryInput.value = '';
+  }
+  if (categorySelect) {
+    const label = categorySelect.querySelector('span');
+    if (label) {
+      label.childNodes[0].textContent = 'Select task category ';
+    }
+  }
+
+  const dropdown = document.getElementById('dropdown-contacts');
+  if (dropdown) {
+    dropdown.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
+
   selectedContacts = [];
   renderSelectedAvatars();
+
+  if (Array.isArray(subtasks)) {
+    subtasks.length = 0;
+  }
+  showSubtasks();
 }

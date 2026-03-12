@@ -6,7 +6,8 @@
 }
 
 html,
-body {
+body,
+main {
     height: 100%;
     margin: 0;
     background-color: #F6F7F8;
@@ -17,7 +18,6 @@ body {
     flex-direction: row;
     align-items: stretch;
     height: 100vh;
-    overflow: hidden;
 }
 
 .sidebar {
@@ -251,16 +251,17 @@ aside {
     justify-content: center;
     gap: 4px;
     text-align: right;
+    margin-right: 8px;
 }
 
 .welcome-msg {
-    text-align: right;
-    font-size: 47px;
+    text-align: left;
+    font-size: 42px;
     font-weight: 500;
 }
 
 .username-field {
-    text-align: right;
+    text-align: left;
     font-size: 64px;
     color: #29abe2;
     font-weight: 700;

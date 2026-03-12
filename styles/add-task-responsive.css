@@ -2,6 +2,52 @@
     .content {
         padding-bottom: 120px;
     }
+
+    .actions {
+        bottom: 96px;
+    }
+
+    .note-outside {
+        bottom: 96px;
+        left: 16px;
+    }
+
+    .clear,
+    .create {
+        padding: 8px 14px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .form-left,
+    .form-right {
+        min-width: 0;
+    }
+
+    .priority-options {
+        flex-wrap: nowrap;
+    }
+
+    .priority-options label {
+        min-width: 0;
+        flex: 1 1 0;
+    }
+}
+
+@media (max-width: 855px) {
+    .priority-options {
+        gap: 6px;
+    }
+
+    .priority-options label {
+        gap: 4px;
+        font-size: 14px;
+    }
+
+    .priority-options label svg {
+        width: 16px;
+        height: 12px;
+    }
 }
 
 @media (max-width: 900px) {
@@ -25,9 +71,46 @@
 }
 
 @media (max-width: 750px) {
+    html,
+    body,
+    .app {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .main {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-limit {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+    }
+
     .task-form {
         flex-direction: column;
         gap: 20px;
+    }
+
+    .form-separator {
+        display: none;
+    }
+
+    .note {
+        font-size: 16px;
+    }
+
+    .content {
+        min-height: 0;
+    }
+
+    .form-scroll {
+        max-height: calc(100vh - 400px);
     }
 }
 
@@ -79,6 +162,16 @@
         flex-direction: row;
         align-items: center;
     }
+
+    .actions {
+        bottom: 96px;
+        right: 16px;
+    }
+
+    .note-outside {
+        bottom: 96px;
+        left: 16px;
+    }
 }
 
 @media (max-width: 550px) {
@@ -119,12 +212,34 @@
 
     .priority-options label {
         min-width: 90px;
-        padding: 6px 12px;
+        padding: 4px 4px;
         font-size: 16px;
     }
 
     .custom-select {
         font-size: 16px;
+    }
+
+    .priority-options label svg {
+        width: 18px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 370px) {
+    .priority-options {
+        gap: 4px;
+    }
+
+    .priority-options label {
+        min-width: 80px;
+        font-size: 12px;
+    }
+
+    .priority-options label svg {
+        width: 14px;
+        height: 10px;
     }
 }
 
@@ -139,12 +254,8 @@
 
     .priority-options label {
         min-width: 80px;
-        padding: 5px 10px;
-        font-size: 16px;
-    }
-
-    .subtasks input {
-        width: 280px;
+        padding: 4px 4px;
+        font-size: 12px;
     }
 }
 
@@ -159,7 +270,11 @@
 
     .priority-options label {
         min-width: 74px;
-        padding: 4px 8px;
-        font-size: 16px;
+        padding: 4px 4px;
+        font-size: 11px;
+    }
+
+    .subtask {
+        width: 280px;
     }
 }

@@ -44,8 +44,9 @@ function generateAddTask(options = {}) {
       <h1>Add Task</h1>
       <span class="close-btn" onclick="closeAddTaskDialog()">x</span>
     </div>
-    <form class="task-form" id="add-task-form" onsubmit="saveToArray(event)">
-      <div class="form-left">
+    <div class="form-scroll">
+      <form class="task-form" id="add-task-form" onsubmit="saveToArray(event)">
+        <div class="form-left">
         <label>
           <span>Title<span class="req">*</span></span>
           <input type="text" placeholder="Enter a title" id="title">
@@ -60,8 +61,9 @@ function generateAddTask(options = {}) {
           <input type="date" id="date">
           <div class="error-message" id="date-error"></div>
         </label>
-      </div>
-      <div class="form-right">
+        </div>
+        <div class="form-separator" aria-hidden="true"></div>
+        <div class="form-right">
         <div class="priority">
           <span>Priority</span>
           <div class="priority-options">
@@ -112,14 +114,16 @@ function generateAddTask(options = {}) {
               </button>
             </div>
           </div>
+          <div class="error-message" id="subtask-error"></div>
           <ul id="subtask-area" class="subtask-list"></ul>
         </label>
         <div class="actions">
           <button type="reset" class="clear" onclick="${clearOnClick}">${clearLabel}</button>
           <button type="submit" class="create">Create Task <img src="assets/icons/vector-5.svg" alt=""></button>
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
     <p class="note note-outside"><span class="req">*</span>This field is required</p>
   `;
 }
@@ -211,14 +215,18 @@ function generateAssignedContacts(contacts) {
     const isChecked = selectedContacts.includes(contact.name);
     const checkboxId = `contact-${i}`;
     const initials = getContactInitialsFromName(contact.name);
+    const colorClass = typeof getContactColorClass === 'function'
+      ? getContactColorClass(contact.name)
+      : '';
     return /*html*/ `
       <div class="dropdown-item">
-        <div class="dropdown-avatar">${initials}</div>
+        <div class="dropdown-avatar ${colorClass}">${initials}</div>
         <label for="${checkboxId}" class="dropdown-name">${contact.name}</label>
         <input
           type="checkbox"
           id="${checkboxId}"
           value="${contact.name}"
+          class="contact-checkbox"
           onchange="toggleContactSelection('${contact.name}', this)"
           ${isChecked ? "checked" : ""}
         >
@@ -255,6 +263,16 @@ function generateTaskFromForm() {
  * @param {*} initials - Parameter.
  * @returns {string} Result.
  */
-function getSelectedAvatarMarkup(initials) {
-  return `<div class="avatar">${initials}</div>`;
+function getSelectedAvatarMarkup(initials, colorClass = '') {
+  const cls = colorClass ? `avatar ${colorClass}` : 'avatar';
+  return `<div class="${cls}">${initials}</div>`;
+}
+
+/**
+ * Returns selected avatar +x markup.
+ * @param {number} count - Remaining count.
+ * @returns {string} Result.
+ */
+function getSelectedAvatarMoreMarkup(count) {
+  return `<div class="avatar avatar-more">+${count}</div>`;
 }

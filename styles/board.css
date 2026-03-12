@@ -184,13 +184,22 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: green;
+  background-color: #03e3f8;
   color: white;
   font-weight: bold;
   font-size: 16px;
   margin-left: -10px;
   border: 2px solid white;
   flex-shrink: 0;
+}
+
+.avatar.avatar-more {
+  background: #2a3647;
+  border: 2px solid #fff;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  margin-left: -6px;
 }
 
 .avatar-container {
@@ -356,11 +365,11 @@ h1 {
 }
 
 .input-error {
-  border-color: #ff6b6b !important;
+  border-color: #8d0000 !important;
 }
 
 .custom-select.input-error {
-  border: 1px solid #ff6b6b !important;
+  border: 1px solid #8d0000 !important;
 }
 
 .d-none {
@@ -368,8 +377,24 @@ h1 {
 }
 
 .error-message {
-  color: #ff6b6b;
+  color: #8d0000;
   font-size: 16px;
   display: block;
   min-height: 16px;
+}
+
+#edit-subtask-error {
+  display: none;
+  min-height: 0;
+}
+
+#edit-subtask-error:not(:empty) {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+}
+
+#edit-subtask-error:not(:empty) + .subtask-list {
+  height: 70px;
 }
