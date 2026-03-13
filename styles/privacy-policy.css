@@ -1,28 +1,29 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 20px;
 }
 
-html, body{
+html,
+body {
     height: 100%;
     background-color: #F6F7F8;
 }
 
-body{
+body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     overflow: hidden;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     flex: 1 1 auto;
-    gap: 75px;
+    gap: 0px;
     height: 100vh;
     overflow: hidden;
     min-height: 0;
@@ -40,6 +41,7 @@ main{
 
 .wrapper h1 {
     font-size: 56px;
+    margin-top: 75px;
     margin-bottom: 30px;
 }
 
@@ -47,7 +49,7 @@ main{
     margin-bottom: 30px;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1024px) {
     main {
         padding-bottom: 80px;
     }
@@ -69,7 +71,7 @@ main{
     }
 
     .wrapper p {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -79,7 +81,7 @@ main{
     }
 
     .wrapper p {
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 

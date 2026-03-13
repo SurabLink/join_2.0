@@ -1,32 +1,33 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 20px;
 }
 
-html, body{
+html,
+body,
+main {
     height: 100%;
     margin: 0;
     background-color: #F6F7F8;
 }
 
-body{
+body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     height: 100vh;
-    overflow: hidden;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
 }
 
-header{
+header {
     position: fixed;
     top: 0;
     left: 232px;
@@ -34,7 +35,7 @@ header{
     z-index: 10;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -46,14 +47,14 @@ main{
     padding-bottom: 24px;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     align-items: center;
     justify-content: left;
     gap: 8px;
 }
 
-.headline{
+.headline {
     font-size: 61px;
     display: flex;
     align-items: center;
@@ -63,38 +64,38 @@ main{
     margin-top: 30px;
 }
 
-h1{
+h1 {
     font-size: 61px;
 }
 
-.header-separating-line-v{
+.header-separating-line-v {
     height: 59px;
     width: 3px;
     background-color: #29abe2;
 }
 
-.subheadline{
+.subheadline {
     font-size: 27px;
     display: inline-flex;
     align-items: center;
 }
 
-.dashboard{
+.dashboard {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 24px;
+    gap: 16px;
     width: 700px;
 }
 
-.kpi-container{
+.kpi-container {
     display: flex;
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
 }
 
-.kpi-card{
+.kpi-card {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,25 +108,25 @@ h1{
     cursor: pointer;
 }
 
-.kpi-card:hover{
+.kpi-card:hover {
     transform: scale(1.1);
     background-color: #2a3647;
     color: white;
 }
 
-.kpi-card:hover .card-icon{
+.kpi-card:hover .card-icon {
     background-color: white;
 }
 
-.kpi-card:hover .card-icon .edit-svg-path{
+.kpi-card:hover .card-icon .edit-svg-path {
     fill: #2a3647;
 }
 
-.kpi-card:hover .checkmark-svg-path{
+.kpi-card:hover .checkmark-svg-path {
     stroke: #2a3647;
 }
 
-.card-text{
+.card-text {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,17 +134,17 @@ h1{
     text-align: center;
 }
 
-.card-value{
+.card-value {
     text-align: center;
     font-size: 64px;
 }
 
-.card-subtitle{
+.card-subtitle {
     text-align: center;
     font-size: 20px;
 }
 
-.card-icon{
+.card-icon {
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -153,16 +154,16 @@ h1{
     justify-content: center;
 }
 
-.edit-svg-path{
+.edit-svg-path {
     fill: white;
 }
 
-.deadline-container{
+.deadline-container {
     display: flex;
     justify-content: center;
 }
 
-.deadline-card{
+.deadline-card {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,20 +177,20 @@ h1{
     height: 168px;
 }
 
-.deadline-card:hover{
+.deadline-card:hover {
     transform: scale(1.1);
     background-color: #2a3647;
     color: white;
 }
 
-.deadline-card-left{
+.deadline-card-left {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
 }
 
-.deadline-card-right{
+.deadline-card-right {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -197,20 +198,20 @@ h1{
     gap: 4px;
 }
 
-.deadline-card-separating-line-v{
+.deadline-card-separating-line-v {
     height: 102px;
     width: 2px;
     background-color: #D1D1D1;
 }
 
-.due-date{
+.due-date {
     text-align: left;
     font-size: 21px;
     font-weight: 700;
     font-style: bold;
 }
 
-.task-summary{
+.task-summary {
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -218,7 +219,7 @@ h1{
     flex-wrap: wrap;
 }
 
-.task-summary-card{
+.task-summary-card {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,276 +232,38 @@ h1{
     cursor: pointer;
 }
 
-.task-summary-card:hover{
+.task-summary-card:hover {
     transform: scale(1.1);
     background-color: #2a3647;
     color: white;
 }
 
-aside{
+aside {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.welcome-msg-box{
+.welcome-msg-box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 4px;
     text-align: right;
+    margin-right: 8px;
 }
 
-.welcome-msg{
-    text-align: right;
-    font-size: 47px;
+.welcome-msg {
+    text-align: left;
+    font-size: 42px;
     font-weight: 500;
 }
 
-.username-field{
-    text-align: right;
+.username-field {
+    text-align: left;
     font-size: 64px;
     color: #29abe2;
     font-weight: 700;
     font-style: bold;
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 1250px) {
-    header{
-        left: 0;
-    }
-
-    .wrapper{
-        padding: 0 24px;
-    }
-
-    .dashboard{
-        width: 100%;
-        max-width: 760px;
-    }
-
-    .headline {
-        justify-content: flex-start;
-    }
-
-    h1{
-        font-size: 36px;
-    }
-
-    .subheadline{
-        font-size: 18px;
-    }
-
-    .kpi-card {
-        width: 200px;
-        height: 130px;
-    }
-
-    .card-icon {
-        width: 56px;
-        height: 56px;
-    }
-
-    .card-value {
-        font-size: 56px;
-    }
-
-    .deadline-card-left img {
-        width: 56px;
-        height: 56px;
-    }
-
-    .deadline-card {
-        width: 432px;
-        height: 130px;
-    }
-
-    .task-summary-card {
-        width: 124px;
-        height: 130px;
-    }
-}
-
-@media (max-width: 900px) {
-    .headline{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 18px;
-    }
-
-    .headline h1{
-        order: 1;
-    }
-
-    .subheadline{
-        order: 2;
-    }
-
-    .header-separating-line-v{
-        display: block;
-        width: 80px;
-        height: 3px;
-        margin-top: 8px;
-        order: 3;
-    }
-
-    .subheadline{
-        font-size: 22px;
-    }
-
-    .welcome-msg-box {
-        display: none;
-    }
-}
-
-@media (max-width: 620px) {
-    h1{
-        font-size: 36px;
-    }
-
-    .subheadline{
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 600px) {
-    main{
-        gap: 40px;
-    }
-
-    .wrapper{
-        padding: 0 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1{
-        font-size: 30px;
-    }
-
-    .subheadline{
-        font-size: 16px;
-    }
-
-    .kpi-container {
-        margin-top: 48px;
-    }
-
-    .kpi-card {
-        width: 150px;
-        height: 100px;
-    }
-
-    .card-icon {
-        width: 44px;
-        height: 44px;
-    }
-
-    .card-icon svg {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card-value {
-        font-size: 38px;
-    }
-
-    .card-subtitle {
-        font-size: 16px;
-    }
-
-    .deadline-card {
-        width: 330px;
-        height: 100px;
-    }
-
-    .deadline-card-left img {
-        width: 44px;
-        height: 44px;
-    }
-
-    .deadline-card-separating-line-v {
-        height: 80px;
-    }
-
-    .due-date {
-        font-size: 16px;
-    }
-
-    .task-summary-card {
-        width: 90px;
-        height: 100px;
-    }
-}
-
-@media (max-width: 370px) {
-    .kpi-card {
-        width: 120px;
-        height: 80px;
-        gap: 20px;
-    }
-
-    .card-icon {
-        width: 38px;
-        height: 38px;
-    }
-
-    .card-icon svg {
-        width: 26px;
-        height: 26px;
-    }
-
-    .card-value {
-        font-size: 30px;
-    }
-
-    .card-subtitle {
-        font-size: 12px;
-    }
-
-    .deadline-card {
-        width: 270px;
-        height: 80px;
-    }
-
-    .deadline-card-left img {
-        width: 38px;
-        height: 38px;
-    }
-
-    .deadline-card-separating-line-v {
-        height: 58px;
-    }
-
-    .due-date {
-        font-size: 13px;
-    }
-
-    .task-summary-card {
-        width: 70px;
-        height: 80px;
-    }
-}
-
-@media (max-width: 360px) {
-    h1{
-        font-size: 26px;
-    }
-
-    .subheadline{
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 320px) {
-    h1{
-        font-size: 24px;
-    }
-
-    .subheadline{
-        font-size: 13px;
-    }
 }

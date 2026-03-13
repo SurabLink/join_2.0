@@ -4,51 +4,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/privacy-policy.css">
-  <link rel="stylesheet" href="/styles/sidebar.css">
-  <link rel="stylesheet" href="/styles/header.css">
-  <script src="/script.js" defer></script>
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/content-limit.css">
+  <link rel="stylesheet" href="../styles/privacy-policy.css">
+  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <link rel="icon" type="image/png" href="../assets/img/join-logo-white.svg">
 
-  <script src="/scripts/sidebar.js" defer></script>
-
-
+  <script src="../script.js" defer></script>
+  <script src="../scripts/sidebar.js" defer></script>
 
   <title>Privacy Policy</title>
 </head>
 
 <body>
   <nav class="sidebar">
-    <img class="logo_sidebar" src="/assets/img/join_logo_white.svg" alt="Join Logo">
+    <img class="logo-sidebar" src="../assets/img/join-logo-white.svg" alt="Join Logo">
 
     <ul>
       <li onclick="openLogInSide()" class="sidebar-li-hover-effect">
         <div>
-          <img src="/assets/icons/login-icon.svg" alt="Login-Icon">
-          <a href="/index.html" aria-current="page">Log In</a>
+          <img src="../assets/icons/login-icon.svg" alt="Login-Icon">
+          <a href="../index.html" aria-current="page">Log In</a>
         </div>
       </li>
     </ul>
 
-
     <footer class="sidebar-footer">
       <div class="footer-link-container highlighted" id="privacy-policy-div">
-        <a href="/public/privacy-policy.html" class="sidebar-footer-link-hover-effect">Privacy Policy</a>
+        <a href="privacy-policy.html" class="sidebar-footer-link-hover-effect">Privacy Policy</a>
       </div>
       <div class="footer-link-container" id="legal-notice-div">
-        <a href="/public/legal-notice.html" class="sidebar-footer-link-hover-effect">Legal notice</a>
+        <a href="legal-notice.html" class="sidebar-footer-link-hover-effect">Legal notice</a>
       </div>
     </footer>
   </nav>
   <main>
     <header>
-      <div class="center">
-        <p class="app-tagline">Kanban Project Management Tool</p>
+      <div class="content-limit content-limit--no-padding content-limit--left">
+        <div class="center">
+          <p class="app-tagline">Kanban Project Management Tool</p>
+        </div>
       </div>
     </header>
 
-
     <div class="wrapper">
-      <p>text</p>
+      <div class="content-limit content-limit--no-padding content-limit--left">
+        <h1>Privacy Policy</h1>
+        <p>
+          We take the protection of your personal data very seriously. This Privacy Policy explains how we collect,
+          use and protect your information when using the Join Kanban Project Management Tool.
+        </p>
+
+        <h2>1. Data Collection</h2>
+        <p>
+          We only collect data that is necessary for the functionality of the application. This includes task data,
+          contact information and usage-related data stored locally in your browser.
+        </p>
+
+        <h2>2. Data Storage</h2>
+        <p>
+          All data is stored locally using your browser’s local storage. No personal data is transmitted to external
+          servers.
+        </p>
+
+        <h2>3. Purpose of Data Processing</h2>
+        <p>
+          The collected data is used solely to provide and improve the functionality of the application.
+        </p>
+
+        <h2>4. Third-Party Services</h2>
+        <p>
+          This application does not use third-party tracking tools or external analytics services.
+        </p>
+
+        <h2>5. User Rights</h2>
+        <p>
+          You have the right to access, modify or delete your data at any time by clearing your browser’s local storage.
+        </p>
+
+        <h2>6. Changes to this Privacy Policy</h2>
+        <p>
+          We reserve the right to update this Privacy Policy if necessary to reflect changes in the application.
+        </p>
+
+        <h2>7. Contact</h2>
+        <p>
+          If you have any questions regarding data protection, please contact the project administrator.
+        </p>
+      </div>
     </div>
 
   </main>

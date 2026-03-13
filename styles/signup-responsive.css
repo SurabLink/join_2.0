@@ -1,0 +1,256 @@
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 900px) {
+    body {
+        overflow: hidden;
+    }
+
+    body>* {
+        pointer-events: none;
+        user-select: none;
+        visibility: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: var(--sidebar-bg, #2a3647);
+        z-index: 100;
+    }
+
+    body::after {
+        content: "Bitte Gerät drehen";
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        z-index: 105;
+    }
+}
+
+@media (max-width: 900px) {
+    .login {
+        width: 520px;
+        height: 560px;
+    }
+
+    .header {
+        margin-bottom: 30px;
+    }
+
+    .header-left img {
+        width: 84px;
+        height: 102px;
+    }
+
+    .signup-header h1 {
+        font-size: 48px;
+    }
+
+    .back-to-login {
+        top: 5%;
+    }
+
+    .login-input input {
+        width: 100%;
+        height: 35px;
+    }
+}
+
+@media (max-width: 700px) {
+    .login {
+        width: 460px;
+        height: 520px;
+    }
+
+    .header-left img {
+        width: 72px;
+        height: 88px;
+    }
+
+    .signup-header h1 {
+        font-size: 44px;
+    }
+
+    .login-separater {
+        margin-top: 8px;
+        margin-bottom: 16px;
+        width: 110px;
+    }
+
+    .back-to-login {
+        top: 7%;
+    }
+
+    .header {
+        height: 108px;
+        margin-bottom: 50px;
+    }
+
+    .header-left {
+        margin-top: 16px;
+    }
+
+    footer {
+        position: relative;
+        bottom: 28px;
+    }
+}
+
+@media (max-width: 520px) {
+    .login {
+        width: 90vw;
+        height: 500px;
+    }
+
+    .login h1 {
+        width: 100%;
+        font-size: 42px;
+    }
+
+    .login-input,
+    .input-wrapper,
+    .login-input input {
+        width: 80vw;
+        max-width: 360px;
+    }
+
+    .login-buttons {
+        width: 80vw;
+        max-width: 300px;
+        gap: 16px;
+    }
+
+    .login-separater {
+        position: absolute;
+        top: 13%;
+    }
+
+    .header-left img {
+        width: 60px;
+        height: 74px;
+    }
+
+    .back-to-login {
+        top: 5%;
+    }
+}
+
+@media (max-width: 420px) {
+    .login {
+        width: 94vw;
+        height: 480px;
+        position: absolute;
+        top: 15%;
+    }
+
+    .login h1 {
+        font-size: 36px;
+        height: 60px;
+    }
+
+    .input-wrapper {
+        margin-bottom: 6px;
+    }
+
+    .login-input,
+    .input-wrapper,
+    .login-input input {
+        width: 82vw;
+        max-width: 320px;
+    }
+
+    .login-input {
+        margin-top: 24px;
+    }
+
+    .login-buttons {
+        width: 86vw;
+        max-width: 260px;
+        height: 44px;
+    }
+
+    .btn-signup {
+        width: 100px;
+        height: 35px;
+        font-size: 16px;
+        margin-top: 12px;
+
+    }
+
+    .header-left img {
+        width: 52px;
+        height: 64px;
+    }
+
+    .back-to-login {
+        top: 3%;
+    }
+
+    .login-separater {
+        position: absolute;
+        top: 11%;
+    }
+
+    .accept-privacy-policy {
+        padding: 8px;
+    }
+
+    footer {
+        position: relative;
+        bottom: -600%;
+    }
+}
+
+@media (max-width: 380px) {
+    footer {
+        position: relative;
+        bottom: -560%;
+    }
+}
+
+@media (max-width: 360px) {
+    .login {
+        width: 96vw;
+        height: 470px;
+    }
+
+    .login h1 {
+        font-size: 32px;
+    }
+
+    .login-input,
+    .input-wrapper,
+    .login-input input {
+        width: 82vw;
+        max-width: 300px;
+    }
+
+    .login-input input {
+        height: 35px;
+    }
+
+    .login-buttons {
+        width: 88vw;
+        max-width: 240px;
+        gap: 12px;
+        margin-top: 0;
+    }
+
+    .back-to-login {
+        top: 2%;
+    }
+
+    .error-message {
+        margin-left: 8px;
+        min-width: 260px;
+    }
+
+    footer {
+        bottom: -535%;
+    }
+}

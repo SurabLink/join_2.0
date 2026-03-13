@@ -1,12 +1,4 @@
 /**
- * Executes navigate to help logic.
- * @returns {void} Result.
- */
-function navigateToHelp() {
-    window.location.href = "help.html";
-}
-
-/**
  * Executes navigate to board logic.
  * @returns {void} Result.
  */
@@ -14,7 +6,6 @@ function navigateToBoard() {
     window.location.href = "board.html";
 }
 
-// kleines Hilfs-Utility, damit wir nicht dauernd getElementById + innerText schreiben
 /**
  * Sets text.
  * @param {string} id - Identifier.
@@ -26,7 +17,6 @@ function setText(id, value) {
     if (el) el.textContent = value;
 }
 
-// ---- NEW: Welcome + Username ----
 /**
  * Returns greeting by time.
  * @param {*} withComma - Parameter.
@@ -116,9 +106,70 @@ async function resolveUserName(session) {
     return nameFromDb || session.displayName || "User";
 }
 
-// ---- /NEW ----
+/**
+ * Shows the mobile welcome overlay (<900px) for 1.5s,
+ * then fades it out and removes it from the layout.
+ * @returns {void} Result.
+ */
+function showMobileWelcomeOverlay() {
+    const mq = window.matchMedia("(max-width: 900px)");
 
-// Tasks aus Firebase holen
+    const welcomeBox = document.getElementById("welcome-msg-box");
+    if (!welcomeBox) return;
+
+    const aside = welcomeBox.closest("aside");
+    if (!aside) return;
+
+    const resetToDefault = () => {
+        aside.classList.remove("is-visible");
+        aside.classList.remove("mobile-welcome-overlay");
+        aside.style.display = "";
+        welcomeBox.style.display = "";
+    };
+
+    if (!window.mobileWelcomeOverlayMqListenerAdded) {
+        window.mobileWelcomeOverlayMqListenerAdded = true;
+        mq.addEventListener("change", (event) => {
+            if (!event.matches) resetToDefault();
+        });
+    }
+
+    if (!mq.matches) {
+        resetToDefault();
+        return;
+    }
+
+    aside.classList.add("mobile-welcome-overlay");
+    aside.style.display = "flex";
+
+    welcomeBox.style.display = "flex";
+
+    aside.classList.remove("is-visible");
+    requestAnimationFrame(() => aside.classList.add("is-visible"));
+
+    const hide = () => {
+        aside.classList.remove("is-visible");
+    };
+
+    const cleanup = () => {
+        if (aside.classList.contains("is-visible")) return;
+        aside.style.display = "none";
+        welcomeBox.style.display = "";
+        aside.classList.remove("mobile-welcome-overlay");
+        aside.removeEventListener("transitionend", onTransitionEnd);
+    };
+
+    const onTransitionEnd = (event) => {
+        if (event.propertyName !== "opacity") return;
+        cleanup();
+    };
+
+    aside.addEventListener("transitionend", onTransitionEnd);
+
+    setTimeout(hide, 1500);
+    setTimeout(cleanup, 2300);
+}
+
 /**
  * Fetches tasks.
  * @returns {Promise<*>} Result.
@@ -133,7 +184,6 @@ async function fetchTasks() {
     return Object.values(data || {});
 }
 
-// Dashboard-Werte aktualisieren
 /**
  * Updates dashboard.
  * @returns {Promise<*>} Result.
@@ -160,6 +210,7 @@ function applyDashboardStats(tasks) {
     setText("total-awaiting-feedback", stats.awaitingFeedbackCount);
     setText("total-urgent", stats.urgentCount);
     setText("total-tasks-board", stats.totalTasks);
+    setText("due-date", formatDashboardDueDate(stats.earliestUrgentDueDate));
 }
 
 /**
@@ -168,23 +219,117 @@ function applyDashboardStats(tasks) {
  * @returns {*} Result.
  */
 function getDashboardStats(tasks) {
+    const urgentTasks = tasks.filter(t => t.priority === "urgent" && t.status !== "Done");
+    const earliestUrgentDueDate = getEarliestFutureDueDate(urgentTasks);
+
     return {
         todoCount: tasks.filter(t => t.status === "To Do").length,
         doneCount: tasks.filter(t => t.status === "Done").length,
         inProgressCount: tasks.filter(t => t.status === "In Progress").length,
         awaitingFeedbackCount: tasks.filter(t => t.status === "Await Feedback").length,
-        urgentCount: tasks.filter(t => t.priority === "urgent").length,
+        urgentCount: urgentTasks.length,
+        earliestUrgentDueDate,
         totalTasks: tasks.length
     };
 }
 
-// Beim Laden der Seite aufrufen
+/**
+ * Returns whether a date is strictly in the future (after today).
+ * @param {Date} date - Date.
+ * @returns {boolean} Result.
+ */
+function isStrictlyFutureDate(date) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date.getTime() > today.getTime();
+}
+
+/**
+ * Parses a task due date string into a Date without timezone shifting.
+ * Supports the app's ISO format (YYYY-MM-DD) and a few common fallbacks.
+ * @param {string} dueDate - Due date string.
+ * @returns {Date|null} Result.
+ */
+function parseTaskDueDate(dueDate) {
+    if (!dueDate || typeof dueDate !== "string") return null;
+    const value = dueDate.trim();
+    if (!value) return null;
+
+    const isoMatch = /^\d{4}-\d{2}-\d{2}$/.exec(value);
+    if (isoMatch) {
+        const [year, month, day] = value.split("-").map(Number);
+        const date = new Date(year, month - 1, day);
+        return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    const deDotMatch = /^\d{2}\.\d{2}\.\d{4}$/.exec(value);
+    if (deDotMatch) {
+        const [day, month, year] = value.split(".").map(Number);
+        const date = new Date(year, month - 1, day);
+        return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    const slashMatch = /^\d{2}\/\d{2}\/\d{4}$/.exec(value);
+    if (slashMatch) {
+        const [day, month, year] = value.split("/").map(Number);
+        const date = new Date(year, month - 1, day);
+        return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    const fallback = new Date(value);
+    return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+/**
+ * Returns the earliest due date among a list of tasks.
+ * @param {Array<Object>} tasks - Task list.
+ * @returns {Date|null} Result.
+ */
+function getEarliestDueDate(tasks) {
+    let earliest = null;
+    for (const task of tasks) {
+        const date = parseTaskDueDate(task.dueDate);
+        if (!date) continue;
+        if (!earliest || date.getTime() < earliest.getTime()) earliest = date;
+    }
+    return earliest;
+}
+
+/**
+ * Returns the earliest due date that is strictly in the future.
+ * @param {Array<Object>} tasks - Task list.
+ * @returns {Date|null} Result.
+ */
+function getEarliestFutureDueDate(tasks) {
+    let earliest = null;
+    for (const task of tasks) {
+        const date = parseTaskDueDate(task.dueDate);
+        if (!date || !isStrictlyFutureDate(date)) continue;
+        if (!earliest || date.getTime() < earliest.getTime()) earliest = date;
+    }
+    return earliest;
+}
+
+/**
+ * Formats the dashboard due date string.
+ * @param {Date|null} date - Date.
+ * @returns {string} Result.
+ */
+function formatDashboardDueDate(date) {
+    if (!date) return "No Urgent Date";
+    return new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "2-digit",
+        year: "numeric"
+    }).format(date);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     await renderWelcome();
+    showMobileWelcomeOverlay();
     await updateDashboard();
 });
 
-// Delegate clicks, funktioniert auch bei dynamisch gerenderten Karten
 document.addEventListener("click", (e) => {
     const card = e.target.closest(".kpi-card, .deadline-card, .task-summary-card");
     if (card) navigateToBoard();

@@ -1,0 +1,422 @@
+.add-task-btn {
+    background: #2A3647;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 120ms;
+}
+
+.add-task-btn:hover {
+    background: #29abe2;
+}
+
+.add-task-mobile-btn {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: none;
+}
+
+.no-tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(221, 221, 221);
+    color: rgb(168, 167, 167);
+    height: 60px;
+    border: 2px dotted #999;
+    border-radius: 10px;
+}
+
+.task-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 120ms;
+}
+
+.task-card:hover {
+    transform: scale(1.02);
+}
+
+.task-card h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.task-card h3 {
+    font-size: 16px;
+    margin: 4px 0 10px;
+}
+
+.task-card span {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.task-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    color: white;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.subtask-card {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-titles-task {
+    color: rgb(108, 108, 108);
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.modal-subtasks {
+    padding: 4px 0 0 14px;
+}
+
+.edit-input:focus-within,
+textarea:focus-within,
+.custom-select:focus-within,
+.subtask-edit-input:focus-within,
+.subtasks input:focus-within {
+    outline: none;
+    border: 1px solid #29ABE2;
+}
+
+.subtask-progress-bar {
+    width: 100px;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.subtask-progress-fill {
+    height: 100%;
+    background: #4ade80;
+    transition: width 0.3s ease;
+}
+
+.modal-subtask {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+    padding: 0px 8px;
+}
+
+.modal-subtask:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.edit-subtasks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-task-dialog-bg {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+
+.add-task-dialog-bg.d-none {
+    display: none;
+}
+
+body.add-task-dialog-open {
+    overflow: hidden;
+}
+
+.add-task-dialog {
+    background-color: white;
+    width: 1050px;
+    height: 700px;
+    border: 1px solid white;
+    border-radius: 16px;
+    padding: 36px;
+    margin-top: 0;
+    overflow: hidden;
+    position: relative;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.15s ease-out;
+    will-change: transform, opacity;
+}
+
+.add-task-dialog.is-open {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.add-task-dialog .custom-select {
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    background: white;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.add-task-dialog .contact-checkbox {
+    width: 16px;
+    height: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #2a3647;
+    border-radius: 5px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.add-task-dialog .contact-checkbox:checked {
+    background: transparent;
+    border-color: #fff;
+}
+
+.add-task-dialog .contact-checkbox:checked::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background: #2a3647;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.add-task-dialog .contact-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(40deg);
+    left: 70%;
+    top: 24%;
+}
+
+.add-task-dialog .dropdown-item:has(.contact-checkbox:checked) .contact-checkbox {
+    border-color: #fff;
+}
+
+.add-task-dialog .dropdown-item:has(input:checked) input {
+    border-color: #fff;
+}
+
+.add-task-dialog .custom-select span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.add-task-dialog .dropdown-arrow {
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+}
+
+.add-task-dialog .task-form {
+    display: flex;
+    gap: 40px;
+}
+
+.add-task-dialog .form-left,
+.add-task-dialog .form-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.add-task-dialog .form-separator {
+    width: 1px;
+    background-color: #d1d5db;
+    align-self: flex-start;
+    height: 336px;
+    flex: 0 0 1px;
+}
+
+.add-task-dialog label,
+.add-task-dialog .assigned-to-label,
+.add-task-dialog .category {
+    width: 100%;
+}
+
+.add-task-dialog label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.add-task-dialog input,
+.add-task-dialog textarea,
+.add-task-dialog select {
+    padding: 4px;
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 6px;
+}
+
+.add-task-dialog textarea {
+    resize: vertical;
+    min-height: 120px;
+    font: message-box;
+}
+
+.add-task-dialog .priority-options label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 4px;
+}
+
+.add-task-dialog .priority-options label svg {
+    width: 20px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.add-task-dialog .custom-select {
+    width: 100%;
+    min-height: 34px;
+}
+
+.add-task-dialog .error-message {
+    display: none;
+    min-height: 0;
+    color: #ff6b6b;
+    font-size: 16px;
+}
+
+.add-task-dialog .error-message:not(:empty) {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+
+.add-task-dialog .subtasks input {
+    height: 34px;
+}
+
+.add-task-dialog .subtask-list {
+    height: 100px;
+    overflow-y: auto;
+}
+
+.add-task-dialog #subtask-error:not(:empty) + .subtask-list {
+    height: 70px;
+}
+
+.add-task-dialog .assigned-to-label:has(.dropdown-content.show) {
+    padding-bottom: 160px;
+}
+
+.add-task-dialog .category:has(.dropdown-content.show) {
+    padding-bottom: 86px;
+}
+
+.add-task-dialog .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-dialog .avatar-container {
+    margin-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.add-task-dialog .avatar-more {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    background: #2a3647;
+    border: 2px solid #fff;
+}
+
+.add-task-dialog .bg-blue { background: #1E90FF; }
+.add-task-dialog .bg-green { background: #27AE60; }
+.add-task-dialog .bg-purple { background: #8E44AD; }
+.add-task-dialog .bg-orange { background: #FFA500; }
+.add-task-dialog .bg-pink { background: #E84393; }
+.add-task-dialog .bg-red { background: #E74C3C; }
+.add-task-dialog .bg-teal { background: #00BFAE; }
+.add-task-dialog .bg-brown { background: #A0522D; }
+
+.add-task-dialog .form-scroll {
+    max-height: calc(100% - 160px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+}
+
+.add-task-dialog .actions {
+    position: absolute;
+    right: 36px;
+    bottom: 24px;
+    z-index: 5;
+}
+
+.add-task-dialog .note-outside {
+    position: absolute;
+    left: 36px;
+    bottom: 48px;
+    z-index: 5;
+}

@@ -1,0 +1,249 @@
+.modal-action-delete-text,
+.modal-action-edit-text {
+    min-width: 55px;
+}
+
+.modal-edit:hover .modal-action-edit-text {
+    cursor: pointer;
+    font-weight: bold;
+    color: #29ABE2;
+}
+
+.modal-edit:hover .edit-svg-path {
+    fill: #29ABE2;
+}
+
+.edit-svg-path {
+    fill: #2A3647;
+}
+
+.edit-form-scroll {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 6px;
+    padding-top: 16px;
+    max-width: 560px;
+    min-width: 360px;
+    max-height: 80vh;
+
+}
+
+.edit-form-scroll label:has(#edit-title) {
+    margin-top: 24px;
+}
+
+.edit-form-scroll .error-message {
+    display: none;
+    min-height: 0;
+    color: #ff6b6b;
+    font-size: 16px;
+}
+
+.edit-form-scroll .error-message:not(:empty) {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+
+.edit-form-scroll .form-separator {
+    display: none;
+}
+
+.edit-form-scroll input,
+.edit-form-scroll label {
+    width: 100%;
+}
+
+.edit-label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 16px;
+}
+
+.edit-input,
+.edit-textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.edit-input,
+.edit-assigned .custom-select {
+    height: 40px;
+    padding: 0 10px;
+    line-height: 40px;
+}
+
+.edit-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.edit-assigned {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-assigned .custom-select {
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.edit-assigned:has(.dropdown-content.show) {
+    padding-bottom: 160px;
+}
+
+.edit-label:has(.dropdown-content.show) {
+    padding-bottom: 100px;
+}
+
+.edit-assigned .custom-select span,
+.edit-label .custom-select span,
+.edit-assigned .dropdown-content,
+.edit-assigned .dropdown-name,
+.edit-label .dropdown-content,
+.edit-label .dropdown-name {
+    font-size: 16px;
+}
+
+.edit-assigned .custom-select span,
+.edit-label .custom-select span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.edit-assigned .custom-select .dropdown-arrow {
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
+}
+
+.edit-avatar-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.edit-avatar-container .avatar {
+    margin-left: 0;
+}
+
+.edit-avatar-container .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-avatar-container .avatar-more {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    background: #2a3647;
+    border: 2px solid #fff;
+}
+
+.edit-avatar-container .bg-blue { background: #1E90FF; }
+.edit-avatar-container .bg-green { background: #27AE60; }
+.edit-avatar-container .bg-purple { background: #8E44AD; }
+.edit-avatar-container .bg-orange { background: #FFA500; }
+.edit-avatar-container .bg-pink { background: #E84393; }
+.edit-avatar-container .bg-red { background: #E74C3C; }
+.edit-avatar-container .bg-teal { background: #00BFAE; }
+.edit-avatar-container .bg-brown { background: #A0522D; }
+
+.edit-avatar-container .avatar-more {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    margin-right: 8px;
+}
+
+.edit-cancel {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+    color: #2A3647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border-radius: 50%;
+}
+
+.edit-cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.edit-x-close {
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+}
+
+.edit-save {
+    cursor: pointer;
+    background: #2a3647;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+.edit-save:hover {
+    background: #29abe2;
+}
+
+.edit-save img {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 400px) {
+    .edit-form-scroll {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .edit-form-scroll input,
+    .edit-form-scroll label,
+    .edit-assigned .custom-select,
+    .edit-label .custom-select {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}

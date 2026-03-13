@@ -3,6 +3,15 @@ window.addEventListener('DOMContentLoaded', () => {
     initIntroAlignment();
     scheduleIntroOverlayRemoval();
     initLoginPasswordToggle();
+    initLoginBlurValidation();
+});
+
+window.addEventListener('load', () => {
+    alignIntroLogo();
+});
+
+window.addEventListener('resize', () => {
+    alignIntroLogo();
 });
 
 /**
@@ -18,15 +27,21 @@ function initIntroAlignment() {
  * @returns {void} Result.
  */
 function alignIntroLogo() {
-    const introLogo = document.getElementById('introLogo');
+    const introLogo = document.getElementById('intro-logo');
     const headerLogo = document.querySelector('.header-left img');
     if (!introLogo || !headerLogo) return;
+    const introOverlay = document.getElementById('intro-overlay');
     const introRect = introLogo.getBoundingClientRect();
     const headerRect = headerLogo.getBoundingClientRect();
     const dx = getCenterDeltaX(introRect, headerRect);
     const dy = getCenterDeltaY(introRect, headerRect);
     introLogo.style.setProperty('--logo-dx', `${dx}px`);
     introLogo.style.setProperty('--logo-dy', `${dy}px`);
+
+    if (introOverlay) {
+        introOverlay.style.setProperty('--logo-target-width', `${headerRect.width}px`);
+        introOverlay.style.setProperty('--logo-target-height', `${headerRect.height}px`);
+    }
 }
 
 /**
@@ -66,7 +81,7 @@ function scheduleIntroOverlayRemoval() {
  * @returns {void} Result.
  */
 function removeIntroOverlay() {
-    const introOverlay = document.getElementById('introOverlay');
+    const introOverlay = document.getElementById('intro-overlay');
     if (introOverlay) {
         introOverlay.remove();
     }
@@ -84,14 +99,80 @@ function initLoginPasswordToggle() {
 }
 
 /**
+ * Initializes login blur validation handlers.
+ * @returns {void} Result.
+ */
+function initLoginBlurValidation() {
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    if (!emailInput || !passwordInput) return;
+
+    emailInput.addEventListener('blur', () => validateLoginFieldOnBlur('email'));
+    passwordInput.addEventListener('blur', () => validateLoginFieldOnBlur('password'));
+}
+
+/**
+ * Validates a single login field on blur.
+ * @param {string} fieldName - Field name.
+ * @returns {boolean} Result.
+ */
+function validateLoginFieldOnBlur(fieldName) {
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    if (!emailInput || !passwordInput) return false;
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (fieldName === 'email') {
+        emailInput.classList.remove('input-error');
+        if (!email) {
+            showLoginBlurError('Please fill in all fields.', emailInput);
+            return false;
+        }
+        if (!isValidEmail(email)) {
+            showLoginBlurError('Please enter a valid email address.', emailInput);
+            return false;
+        }
+    }
+
+    if (fieldName === 'password') {
+        passwordInput.classList.remove('input-error');
+        if (!password) {
+            showLoginBlurError('Please fill in all fields.', passwordInput);
+            return false;
+        }
+    }
+
+    if (email && password && isValidEmail(email)) {
+        removeLoginError();
+        emailInput.classList.remove('input-error');
+        passwordInput.classList.remove('input-error');
+    }
+    return true;
+}
+
+/**
+ * Shows login field error for blur validation.
+ * @param {string} message - Message text.
+ * @param {HTMLElement} input - Input element.
+ * @returns {void} Result.
+ */
+function showLoginBlurError(message, input) {
+    removeLoginError();
+    appendLoginError(message);
+    input?.classList.add('input-error');
+}
+
+/**
  * Returns login password elements.
  * @returns {*} Result.
  */
 function getLoginPasswordElements() {
-    const passwordInput = document.getElementById('loginPassword');
-    const lockIcon = document.getElementById('lockIcon');
-    const visibilityOffIcon = document.getElementById('visibilityOffIcon');
-    const visibilityIcon = document.getElementById('visibilityIcon');
+    const passwordInput = document.getElementById('login-password');
+    const lockIcon = document.getElementById('lock-icon');
+    const visibilityOffIcon = document.getElementById('visibility-off-icon');
+    const visibilityIcon = document.getElementById('visibility-icon');
     if (!passwordInput || !lockIcon || !visibilityOffIcon || !visibilityIcon) return null;
     return { passwordInput, lockIcon, visibilityOffIcon, visibilityIcon };
 }
@@ -211,8 +292,8 @@ function handleLoginResult(credentials, signedUpUser) {
  * @returns {void} Result.
  */
 function clearLoginErrors() {
-    const emailInput = document.getElementById('loginEmail');
-    const passwordInput = document.getElementById('loginPassword');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
     emailInput.classList.remove('input-error');
     passwordInput.classList.remove('input-error');
 }
@@ -222,8 +303,8 @@ function clearLoginErrors() {
  * @returns {*} Result.
  */
 function getLoginCredentials() {
-    const emailInput = document.getElementById('loginEmail');
-    const passwordInput = document.getElementById('loginPassword');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
     return {
         email: emailInput.value.trim(),
         password: passwordInput.value.trim()
@@ -286,7 +367,7 @@ function appendLoginError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'login-error';
     errorDiv.textContent = message;
-    const errorContainer = document.getElementById('errorContainer');
+    const errorContainer = document.getElementById('error-container');
     errorContainer.appendChild(errorDiv);
 }
 
@@ -295,8 +376,8 @@ function appendLoginError(message) {
  * @returns {void} Result.
  */
 function markLoginInputsError() {
-    const emailInput = document.getElementById('loginEmail');
-    const passwordInput = document.getElementById('loginPassword');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
     emailInput.classList.add('input-error');
     passwordInput.classList.add('input-error');
 }

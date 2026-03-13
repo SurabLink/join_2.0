@@ -31,17 +31,17 @@ function getDialogAddContact() {
     return `
     <dialog id="add-contact-dialog" class="ac-dialog" role="dialog" aria-modal="true" aria-labelledby="ac-title">
         <div class="ac">
-            <div class="ac__hero">
-                <div class="ac__brand">
-                    <img class="ac__logo" src="./assets/img/join_logo_white.svg" alt="Join Logo">
+            <div class="ac-hero">
+                <div class="ac-brand">
+                    <img class="ac-logo" src="./assets/img/join-logo-white.svg" alt="Join Logo">
                 </div>
-                <h2 id="ac-title" class="ac__title">Add contact</h2>
-                <p class="ac__subtitle">Tasks are better with a team!</p>
-                <span class="ac__underline" aria-hidden="true"></span>
+                <h2 id="ac-title" class="ac-title">Add contact</h2>
+                <p class="ac-subtitle">Tasks are better with a team!</p>
+                <span class="ac-underline" aria-hidden="true"></span>
             </div>
-            <button type="button" class="ac__close" aria-label="Close">×</button>
-            <div class="ac__formwrap">
-                <div class="ac__avatar" aria-label="Avatar placeholder">
+            <button type="button" class="ac-close" aria-label="Close">×</button>
+            <div class="ac-formwrap">
+                <div class="ac-avatar" aria-label="Avatar placeholder">
                     <img src="./assets/img/person.png" alt="Person Icon">
                 </div>
                 <form onsubmit="addContact(event)" id="add-contact-form" class="ac-form" novalidate>
@@ -57,14 +57,14 @@ function getDialogAddContact() {
                         <input class="input-focus" id="ac-phone" name="phone" type="tel" placeholder="Phone" required>
                         <img src="./assets/img/call.png">
                     </div>
-                    <div class="ac__actions">
-                        <button onclick="closeAddContactDialogWithAnimation()" type="button" class="btn btn--ghost responsiveCloseBtn" data-ac-cancel aria-label="Cancel">
+                    <div class="ac-actions">
+                        <button onclick="closeAddContactDialogWithAnimation()" type="button" class="btn btn-ghost responsive-close-btn" data-ac-cancel aria-label="Cancel">
                             <span>Cancel</span>
-                            <span class="btn__x">×</span>
+                            <span class="btn-x">×</span>
                         </button>
-                        <button type="submit" class="btn btn--primary" data-ac-submit aria-label="Create contact">
+                        <button type="submit" class="btn btn-primary" data-ac-submit aria-label="Create contact">
                             <span>Create contact</span>
-                            <span class="btn__check" aria-hidden="true">
+                            <span class="btn-check" aria-hidden="true">
                                 <svg width="18" height="14" viewBox="0 0 18 14">
                                     <path d="M1 7l5 5L17 1" stroke="#fff" stroke-width="2" fill="none"
                                         stroke-linecap="round" stroke-linejoin="round" />
@@ -102,7 +102,7 @@ function getContactItem(contactDataName, contactDataMail, contactNameInitials) {
         <div class="contact-initials">${contactNameInitials}</div>
         <div>
             <div>${contactDataName}</div>
-            <a href="mailto:${contactDataMail}">${contactDataMail}</a>
+            <span class=contact-data-mail>${contactDataMail}</span>
         </div>
 
     </div>
@@ -144,15 +144,15 @@ function getContactDetailsTemplate(initials, name, email, phone, id) {
             <img src="./assets/img/arrow-left-line.svg" alt="Back to contacts" class="contact-back-btn" onclick="document.querySelector('.wrapper').classList.remove('show-contact-details'); return false;">
             <div class="contact-more">
                 <button class="contact-more-btn" onclick="toggleContactMoreMenu(event)" aria-label="More actions">
-                    <img src="./assets/icons/more_vert.svg" alt="More">
+                    <img src="./assets/icons/more-vert.svg" alt="More">
                 </button>
                 <div class="contact-more-menu" id="contact-more-menu">
                     <button type="button" onclick="closeContactMoreMenu(); openEditContactDialog('${id}', '${name}', '${email}', '${phone}', '${initials}')">
                         <svg width="24" height="24" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_edit_mobile" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="32">
+                            <mask id="mask0-edit-mobile" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="32">
                                 <rect x="0.5" width="32" height="32" fill="#D9D9D9"/>
                             </mask>
-                            <g mask="url(#mask0_edit_mobile)">
+                            <g mask="url(#mask0-edit-mobile)">
                                 <path class="edit-svg-path" d="M7.16667 25.3332H9.03333L20.5333 13.8332L18.6667 11.9665L7.16667 23.4665V25.3332ZM26.2333 11.8998L20.5667 6.29984L22.4333 4.43317C22.9444 3.92206 23.5722 3.6665 24.3167 3.6665C25.0611 3.6665 25.6889 3.92206 26.2 4.43317L28.0667 6.29984C28.5778 6.81095 28.8444 7.42761 28.8667 8.14984C28.8889 8.87206 28.6444 9.48873 28.1333 9.99984L26.2333 11.8998ZM24.3 13.8665L10.1667 27.9998H4.5V22.3332L18.6333 8.19984L24.3 13.8665Z"/>
                             </g>
                         </svg>
@@ -177,10 +177,10 @@ function getContactDetailsTemplate(initials, name, email, phone, id) {
                     <div class="contact-actions">
                         <button class="contact-action-btn" onclick="openEditContactDialog('${id}', '${name}', '${email}', '${phone}', '${initials}')">
                             <svg width="24" height="24" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <mask id="mask0_357207_6165" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="32">
+                                <mask id="mask0-357207-6165" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="32">
                                     <rect x="0.5" width="32" height="32" fill="#D9D9D9" />
                                 </mask>
-                                <g mask="url(#mask0_357207_6165)">
+                                <g mask="url(#mask0-357207-6165)">
                                     <path class="edit-svg-path"
                                         d="M7.16667 25.3332H9.03333L20.5333 13.8332L18.6667 11.9665L7.16667 23.4665V25.3332ZM26.2333 11.8998L20.5667 6.29984L22.4333 4.43317C22.9444 3.92206 23.5722 3.6665 24.3167 3.6665C25.0611 3.6665 25.6889 3.92206 26.2 4.43317L28.0667 6.29984C28.5778 6.81095 28.8444 7.42761 28.8667 8.14984C28.8889 8.87206 28.6444 9.48873 28.1333 9.99984L26.2333 11.8998ZM24.3 13.8665L10.1667 27.9998H4.5V22.3332L18.6333 8.19984L24.3 13.8665Z" />
                                 </g>
@@ -225,16 +225,16 @@ function getEditContactDialog(id, name, email, phone, initials) {
     return `
     <dialog id="edit-contact-dialog" class="ac-dialog">
         <div class="ac ac-dialog-content">
-            <div class="ac__hero">
-                <div class="ac__brand">
-                    <img class="ac__logo" src="./assets/img/join_logo_white.svg" alt="Join Logo">
+            <div class="ac-hero">
+                <div class="ac-brand">
+                    <img class="ac-logo" src="./assets/img/join-logo-white.svg" alt="Join Logo">
                 </div>
-                <h2 class="ac__title">Edit contact</h2>
-                <span class="ac__underline" aria-hidden="true"></span>
+                <h2 class="ac-title">Edit contact</h2>
+                <span class="ac-underline" aria-hidden="true"></span>
             </div>
-            <button type="button" class="ac__close" aria-label="Close" onclick="closeEditContactDialog()">×</button>
-            <div class="ac__formwrap">
-                <div class="ac__avatar" aria-label="Avatar placeholder">
+            <button type="button" class="ac-close" aria-label="Close" onclick="closeEditContactDialog()">×</button>
+            <div class="ac-formwrap">
+                <div class="ac-avatar" aria-label="Avatar placeholder">
                     <div class="contact-avatar-large">
                         <div class="contact-initials-large">${initials}</div>
                     </div>
@@ -249,16 +249,16 @@ function getEditContactDialog(id, name, email, phone, initials) {
                         <img src="./assets/icons/mail.svg">
                     </div>
                     <div class="ac-field">
-                        <input class="input-focus" id="edit-phone" name="phone" type="tel" placeholder="Phone" value="${phone || ''}">
+                        <input class="input-focus" id="edit-phone" name="phone" type="tel" placeholder="Phone" value="${phone || ''}" required>
                         <img src="./assets/img/call.png">
                     </div>
-                    <div class="ac__actions">
-                        <button type="button" class="btn btn--ghost" onclick="closeEditContactDialog(); deleteContact('${id}')" aria-label="Delete contact">
+                    <div class="ac-actions">
+                        <button type="button" class="btn btn-ghost" onclick="closeEditContactDialog(); deleteContact('${id}')" aria-label="Delete contact">
                             <span>Delete</span>
                         </button>
-                        <button type="submit" class="btn btn--primary" data-edit-submit aria-label="Save contact">
+                        <button type="submit" class="btn btn-primary" data-edit-submit aria-label="Save contact">
                             <span>Save</span>
-                            <span class="btn__check" aria-hidden="true">
+                            <span class="btn-check" aria-hidden="true">
                                 <svg width="18" height="14" viewBox="0 0 18 14">
                                     <path d="M1 7l5 5L17 1" stroke="#fff" stroke-width="2" fill="none"
                                         stroke-linecap="round" stroke-linejoin="round" />

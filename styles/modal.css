@@ -1,4 +1,4 @@
-:root{
+:root {
   --sidebar-bg: #2a3647;
   --sidebar-text: #fff;
   --main-bg: #f6f7f9;
@@ -9,111 +9,118 @@
   --low: #7ae229;
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 20px;
-  /* font-family: "Segoe UI", Arial, sans-serif; */
+  font-size: 16px;
 }
 
-body{
+body {
   background: var(--main-bg);
 }
 
-.app{
+.app {
   display: flex;
   min-height: 100vh;
 }
 
-/* Main */
-.main{
+.main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.add-task-header{
+.add-task-header {
   display: flex;
   justify-content: space-between;
 }
 
-.add-task-header img{
+.add-task-header img {
   cursor: pointer;
 }
 
-/* Content */
-.content{
+.content {
   padding: 24px 40px;
 }
 
-h1{
+h1 {
   font-size: 40px;
   margin-bottom: 20px;
 }
 
-.task-form{
+.task-form {
   display: flex;
   gap: 40px;
 }
 
-.form-left, .form-right{
+.form-left,
+.form-right {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.form-left label{
+.form-left label {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.category{
+.category {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.req{
+.req {
   color: #ff8190;
 }
 
-input, textarea, select{
+input,
+textarea,
+select {
   padding: 10px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-textarea{
+textarea {
   resize: vertical;
   min-height: 80px;
+  font: message-box;
 }
 
-.note{
+input:focus,
+textarea:focus,
+select:focus,
+.custom-select:focus-within {
+  outline: none;
+  border-color: #29abe2;
+}
+
+.note {
   font-size: 20px;
+  margin-bottom: -32px;
 }
 
-/* Priority */
-
-.priority{
+.priority {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.priority-options{
+.priority-options {
   display: flex;
   gap: 8px;
 }
 
-.priority-options input{
+.priority-options input {
   display: none;
-  /* Radio Buttons ausblenden */
 }
 
-.priority-options label{
+.priority-options label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,133 +133,205 @@ textarea{
   background: white;
   color: #000;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 120ms;
 }
 
-
-
-.priority-btn{
+.priority-btn {
   flex-direction: row;
 }
 
-.priority-btn:hover{
+.priority-btn:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Aktive Auswahl färben */
-.priority-options input#urgent:checked+label.urgent{
+.priority-options input#urgent:checked+label.urgent {
   background: #FF3D00;
   color: white;
   fill: white;
   border-color: #FF3D00;
 }
 
-.priority-options input#urgent:checked+label.urgent path{
+.priority-options input#urgent:checked+label.urgent path {
   fill: white;
 }
 
-.priority-options input#medium:checked+label.medium{
+.priority-options input#medium:checked+label.medium {
   background: #FFA800;
   color: white;
   border-color: #FFA800;
 }
 
-.priority-options input#medium:checked+label.medium path{
+.priority-options input#medium:checked+label.medium path {
   fill: white;
 }
 
-.priority-options input#low:checked+label.low{
+.priority-options input#low:checked+label.low {
   background: #7AE229;
   color: white;
   border-color: #7AE229;
 }
 
-.priority-options input#low:checked+label.low path{
+.priority-options input#low:checked+label.low path {
   fill: white;
 }
 
-/* Contacts */
-.custom-select{
+.custom-select {
   border: 1px solid #ccc;
   padding: 8px;
   cursor: pointer;
   border-radius: 6px;
   position: relative;
-  width: 320px;
   background: white;
 }
 
-#selectContacts{
+#select-contacts {
   margin-top: 8px;
 }
 
-.dropdown-content{
+.dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  max-height: 150px;
+  max-height: 180px;
   overflow-y: auto;
   border: 1px solid #ccc;
   background: #fff;
   z-index: 10;
   border-radius: 6px;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 6px;
 }
 
-.dropdown-content.show{
+.dropdown-content.show {
   display: block;
 }
 
-.dropdown-item{
+.dropdown-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
-  padding: 6px 10px;
-  border-radius: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  margin-bottom: 0;
 }
 
-.dropdown-item:hover{
-  background-color: #f0f0f0;
+.dropdown-item + .dropdown-item {
+  margin-top: 4px;
 }
 
-.dropdown-item input{
+.dropdown-item:hover {
+  background-color: #f6f7f9;
+}
+
+.dropdown-item .contact-checkbox {
   justify-self: flex-end;
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #2a3647;
+  border-radius: 5px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
 }
 
-.dropdown-item input, .dropdown-item span{
+.dropdown-item input,
+.dropdown-item span {
   pointer-events: auto;
 }
 
-.dropdown-avatar{
-  width: 32px;
-  height: 32px;
+.dropdown-avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: #03e3f8; /* oder deine Kontaktfarbe */
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   flex-shrink: 0;
 }
 
-.dropdown-name{
-  flex: 1;
-  text-align: left;
-  cursor: pointer;
+.dropdown-item .contact-checkbox:checked {
+  background: transparent;
+  border-color: #fff;
 }
 
-.avatar-container{
+.dropdown-item .contact-checkbox:checked::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: #2a3647;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.dropdown-item .contact-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(40deg);
+  left: 70%;
+  top: 24%;
+}
+
+.dropdown-item:has(.contact-checkbox:checked) {
+  background-color: #2a3647;
+}
+
+.dropdown-item:has(.contact-checkbox:checked) .dropdown-name,
+.dropdown-item:has(.contact-checkbox:checked) .dropdown-avatar {
+  color: #fff;
+}
+
+.dropdown-item:has(.contact-checkbox:checked) .dropdown-avatar {
+  border: 2px solid #fff;
+}
+
+.dropdown-item:has(.contact-checkbox:checked) .contact-checkbox {
+  border-color: #fff;
+}
+
+.bg-blue { background: #1E90FF; }
+.bg-green { background: #27AE60; }
+.bg-purple { background: #8E44AD; }
+.bg-orange { background: #FFA500; }
+.bg-pink { background: #E84393; }
+.bg-red { background: #E74C3C; }
+.bg-teal { background: #00BFAE; }
+.bg-brown { background: #A0522D; }
+
+.dropdown-name {
+  flex: 1 1 auto;
+  display: block;
+  min-width: 0;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar-container {
   margin-top: 10px;
   display: flex;
   gap: 8px;
 }
 
-.avatar{
+.avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -261,155 +340,11 @@ textarea{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 }
 
-/* Subtasks */
-.subtasks{
-  display: flex;
-  position: relative;
-  width: fit-content;
-  margin-bottom: 10px;
-}
-
-.subtasks input{
-  width: 320px;
-  height: 40px;
-  padding-right: 72px;
-}
-
-.subtask-input-actions{
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-}
-
-.subtasks input:not(:placeholder-shown) ~ .subtask-input-actions{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.subtask-edit{
-  position: relative;
-  width: fit-content;
-  min-width: 320px;
-  padding: 0;
-  margin-left: 0;
-  background: transparent;
-}
-
-.subtask-edit-input{
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #29ABE2;
-}
-
-.subtask-edit .subtask-input-actions{
-  right: 24px;
-}
-
-.subtask-edit-input:not(:placeholder-shown) ~ .subtask-input-actions{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.subtask-icon-btn{
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-}
-
-.subtask-icon-btn img{
-  width: 15px;
-  height: 15px;
-  filter: brightness(0) saturate(100%);
-}
-
-.subtask-icon-btn:hover img{
-  transform: scale(1.1);
-}
-
-.subtask-input-separator{
-  width: 1px;
-  height: 18px;
-  background-color: #b5b5b5;
-}
-
-.subtask-list{
-  height: 100px;
-  overflow-y: auto;
-}
-
-.subtask-list li::before{
-  content: "•";
-  margin-right: 20px;
-  color: black;
-}
-
-.subtask-list .subtask-edit::before{
-  content: "";
-  margin-right: 0;
-}
-
-.subtask{
-  height: 40px;
-  width: fit-content;
-  min-width: 320px;
-  margin-left: 10px;
-  margin-bottom: 4px;
-  padding: 5px 10px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-}
-
-.subtask-actions{
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.subtask-actions img{
-  width: 20px;
-  height: 20px;
-}
-
-.subtask-actions img:hover{
-transform: scale(1.1);
-}
-
-.subtask:hover{
-  cursor: pointer;
-  background-color: #eaeaea;
-}
-
-.subtask.subtask-edit:hover{
-  background-color: transparent !important;
-  cursor: default;
-}
-
-.subtask:hover .subtask-actions{
-  opacity: 1;
-}
-
-.action-separator{
+.action-separator {
   height: 25px;
   width: 2px;
   background-color: #b5b5b5;
@@ -417,15 +352,15 @@ transform: scale(1.1);
   margin-right: 5px;
 }
 
-/* Actions */
-.actions{
+.actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
   margin-top: 8px;
 }
 
-.clear, .create{
+.clear,
+.create {
   padding: 10px 18px;
   border-radius: 6px;
   font-weight: 600;
@@ -433,15 +368,15 @@ transform: scale(1.1);
   border: 1px solid var(--border);
 }
 
-.clear{
+.clear {
   background: var(--panel-bg);
 }
 
-.create{
+.create {
   background: var(--sidebar-bg);
   color: #fff;
 }
 
-.category-options:hover{
+.category-options:hover {
   background-color: #f0f0f0 !important;
 }

@@ -1,0 +1,280 @@
+@media (max-width: 1024px) {
+    .content {
+        padding-bottom: 120px;
+    }
+
+    .actions {
+        bottom: 96px;
+    }
+
+    .note-outside {
+        bottom: 96px;
+        left: 16px;
+    }
+
+    .clear,
+    .create {
+        padding: 8px 14px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .form-left,
+    .form-right {
+        min-width: 0;
+    }
+
+    .priority-options {
+        flex-wrap: nowrap;
+    }
+
+    .priority-options label {
+        min-width: 0;
+        flex: 1 1 0;
+    }
+}
+
+@media (max-width: 855px) {
+    .priority-options {
+        gap: 6px;
+    }
+
+    .priority-options label {
+        gap: 4px;
+        font-size: 14px;
+    }
+
+    .priority-options label svg {
+        width: 16px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 70px;
+        align-items: center;
+        padding: 20px 8px;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .form-left,
+    .form-right {
+        width: 100%;
+    }
+}
+
+@media (max-width: 750px) {
+    html,
+    body,
+    .app {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .main {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-limit {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .task-form {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-separator {
+        display: none;
+    }
+
+    .note {
+        font-size: 16px;
+    }
+
+    .content {
+        min-height: 0;
+    }
+
+    .form-scroll {
+        max-height: calc(100vh - 400px);
+    }
+}
+
+@media (max-width: 600px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .content {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .content {
+        padding: 16px;
+        padding-bottom: 120px;
+    }
+
+    .custom-select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .priority-options {
+        flex-wrap: nowrap;
+    }
+
+    .actions {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .actions {
+        bottom: 96px;
+        right: 16px;
+    }
+
+    .note-outside {
+        bottom: 96px;
+        left: 16px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .clear,
+    .create {
+        padding: 8px 14px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .note-inline {
+        display: block;
+        margin-bottom: 24px;
+        font-size: 16px;
+    }
+
+    .note-outside {
+        display: none;
+    }
+
+    .subtask-list {
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+    }
+
+    .priority-options label {
+        min-width: 90px;
+        padding: 4px 4px;
+        font-size: 16px;
+    }
+
+    .custom-select {
+        font-size: 16px;
+    }
+
+    .priority-options label svg {
+        width: 18px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 370px) {
+    .priority-options {
+        gap: 4px;
+    }
+
+    .priority-options label {
+        min-width: 80px;
+        font-size: 12px;
+    }
+
+    .priority-options label svg {
+        width: 14px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    .priority-options {
+        gap: 6px;
+    }
+
+    .priority-options label {
+        min-width: 80px;
+        padding: 4px 4px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .custom-select {
+        font-size: 16px;
+    }
+
+    .priority-options label {
+        min-width: 74px;
+        padding: 4px 4px;
+        font-size: 11px;
+    }
+
+    .subtask {
+        width: 280px;
+    }
+}
