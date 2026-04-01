@@ -43,48 +43,72 @@ function getContactInitialsFromName(name) {
  * - Only letters and hyphen per name part (hyphen allowed inside a part)
  * - 1 to 3 name parts (space separated)
  * - At least 2 letters total
+ * - Maximum 20 characters total
  * @param {string} name - Name input.
- * @returns {{ isValid: boolean, normalizedName: string, initials: string, error: string }} Result.
+ * @returns {{ isValid: boolean, normalizedName: string, initials: string, error: string, reason?: 'required'|'too_long'|'too_many_parts'|'invalid_chars'|'part_too_short'|'too_few_letters' }} Result.
  */
 function validateContactNameInput(name) {
   const normalizedName = normalizeContactNameInput(name);
   if (!normalizedName) {
-    return { isValid: false, normalizedName, initials: "", error: "Name ist erforderlich." };
+    return { isValid: false, normalizedName, initials: "", error: "Please enter a name.", reason: 'required' };
+  }
+  if (normalizedName.length > 20) {
+    return { isValid: false, normalizedName, initials: "", error: "Maximum 20 characters allowed.", reason: 'too_long' };
   }
   const parts = normalizedName.split(" ").filter(Boolean);
   if (parts.length > 3) {
-    return { isValid: false, normalizedName, initials: "", error: "Maximal 3 Namen sind erlaubt." };
+    return { isValid: false, normalizedName, initials: "", error: "Maximum 3 name parts allowed.", reason: 'too_many_parts' };
   }
   const partPattern = /^[\p{L}]+(?:-[\p{L}]+)*$/u;
   for (const part of parts) {
     if (!partPattern.test(part)) {
-      return { isValid: false, normalizedName, initials: "", error: "Name darf nur Buchstaben und Bindestrich enthalten." };
+      return { isValid: false, normalizedName, initials: "", error: "Please use only letters.", reason: 'invalid_chars' };
     }
     const lettersInPart = part.replace(/-/g, "").length;
     if (lettersInPart < 2) {
-      return { isValid: false, normalizedName, initials: "", error: "Jeder Namensbestandteil muss mindestens 2 Buchstaben haben." };
+      return { isValid: false, normalizedName, initials: "", error: "Names have more than 1 letter.", reason: 'part_too_short' };
     }
   }
   const totalLetters = normalizedName.replace(/[^\p{L}]/gu, "").length;
   if (totalLetters < 2) {
-    return { isValid: false, normalizedName, initials: "", error: "Name muss mindestens 2 Buchstaben enthalten." };
+    return { isValid: false, normalizedName, initials: "", error: "Names have more than 1 letter.", reason: 'too_few_letters' };
   }
   const initials = getContactInitialsFromName(normalizedName);
   return { isValid: true, normalizedName, initials, error: "" };
 }
 
 /**
- * Validates an email address the same way as the signup form.
+ * Validates an email address using the strict Join email rules.
+ *
+ * Note: This function is used by multiple forms (signup + contacts). Keep it
+ * stable and backwards-compatible.
+ *
  * @param {string} email - Email input.
- * @returns {{ isValid: boolean, normalizedEmail: string, error: string }} Result.
+ * @returns {{ isValid: boolean, normalizedEmail: string, error: string, reason?: 'required'|'too_long'|'pattern' }} Result.
  */
 function validateEmailLikeSignup(email) {
-  const normalizedEmail = String(email ?? "").trim();
-  if (!normalizedEmail) {
-    return { isValid: false, normalizedEmail, error: "Please enter an email address." };
+  const trimmedEmail = String(email ?? "").trim();
+  if (!trimmedEmail) {
+    return { isValid: false, normalizedEmail: trimmedEmail, error: "Please enter an email address.", reason: 'required' };
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
-    return { isValid: false, normalizedEmail, error: "Please enter a valid email address." };
+  const normalizedEmail = trimmedEmail.toLowerCase();
+  if (normalizedEmail.length > 20) {
+    return { isValid: false, normalizedEmail, error: "Maximum 20 characters allowed.", reason: 'too_long' };
+  }
+  const localLabel = "[A-Za-zÄÖÜäöüß0-9]+(?:(?:-+|_(?!_))[A-Za-zÄÖÜäöüß0-9]+)*";
+  const domainLabel = "[A-Za-zÄÖÜäöüß0-9]+(?:-[A-Za-zÄÖÜäöüß0-9]+)*";
+  const tldLabel = "[A-Za-zÄÖÜäöüß]{2,}";
+  const strictEmailPattern = new RegExp(
+    `^(?!.*\\.\\.)${localLabel}(?:\\.${localLabel})*@${domainLabel}(?:\\.${domainLabel})*\\.${tldLabel}$`,
+    "u"
+  );
+  if (!strictEmailPattern.test(normalizedEmail)) {
+    return {
+      isValid: false,
+      normalizedEmail,
+      error: "Please enter a valid email address.",
+      reason: 'pattern'
+    };
   }
   return { isValid: true, normalizedEmail, error: "" };
 }
@@ -98,13 +122,13 @@ function validateEmailLikeSignup(email) {
 function validateContactPhoneNumber(phone) {
   const normalizedPhone = String(phone ?? "").trim();
   if (!normalizedPhone) {
-    return { isValid: false, normalizedPhone, error: "Bitte Telefonnummer eingeben." };
+    return { isValid: false, normalizedPhone, error: "Please enter a phone number." };
   }
   if (!/^\d+$/.test(normalizedPhone)) {
-    return { isValid: false, normalizedPhone, error: "Bitte nur Zahlen eingeben." };
+    return { isValid: false, normalizedPhone, error: "Please enter digits only." };
   }
-  if (normalizedPhone.length < 6 || normalizedPhone.length > 20) {
-    return { isValid: false, normalizedPhone, error: "Telefonnummer muss 6 bis 20 Ziffern lang sein." };
+  if (!/^\d{6,15}$/.test(normalizedPhone)) {
+    return { isValid: false, normalizedPhone, error: "Must be 6 to 15 digits long." };
   }
   return { isValid: true, normalizedPhone, error: "" };
 }
@@ -118,7 +142,7 @@ async function loadContacts() {
     const data = await fetchContactsData();
     contacts = data ? mapContactsData(data) : [];
   } catch (error) {
-    console.error("Fehler beim Laden der Kontakte:", error);
+    console.error("Error loading contacts:", error);
   }
 }
 

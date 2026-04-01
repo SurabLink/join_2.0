@@ -5,6 +5,8 @@
 async function renderAddTask() {
   const content = document.getElementById('add-task-content');
   if (!content) return;
+  setAddTaskActionButtonsDisabled(false);
+  applyTodayMinDate();
   await loadContacts();
   resetSelectedContacts();
   selectContacts();
@@ -28,7 +30,10 @@ function initAddTaskBlurValidation() {
   const categorySelect = document.getElementById('category-select');
 
   titleInput?.addEventListener('blur', validateTitleField);
+  titleInput?.addEventListener('input', clearTitleErrorOnValidInput);
   dateInput?.addEventListener('blur', validateDateField);
+  dateInput?.addEventListener('input', clearDateErrorOnValidInput);
+  dateInput?.addEventListener('change', clearDateErrorOnValidInput);
   categorySelect?.addEventListener('blur', validateCategoryField);
 
   form.dataset.blurValidationInit = '1';
@@ -86,12 +91,74 @@ function validateTitleField() {
 }
 
 /**
+ * Clears title error while typing as soon as input is valid.
+ * @returns {void} Result.
+ */
+function clearTitleErrorOnValidInput() {
+  const input = document.getElementById('title');
+  if (!input) return;
+  if (!String(input.value || '').trim()) return;
+  setErrorText('title-error', '');
+  input.classList.remove('input-error');
+}
+
+/**
  * Validates date field.
  * @returns {void} Result.
  */
 function validateDateField() {
   const input = document.getElementById('date');
-  return validateRequiredInput(input, 'date-error');
+  if (!validateRequiredInput(input, 'date-error')) {
+    return false;
+  }
+
+  const today = getTodayDateString();
+  const selectedDate = String(input.value || '').trim();
+  if (selectedDate < today) {
+    setErrorText('date-error', 'Please select a future date');
+    input.classList.add('input-error');
+    return false;
+  }
+
+  setErrorText('date-error', '');
+  input.classList.remove('input-error');
+  return true;
+}
+
+/**
+ * Clears date error while typing as soon as input is valid and not in the past.
+ * @returns {void} Result.
+ */
+function clearDateErrorOnValidInput() {
+  const input = document.getElementById('date');
+  if (!input) return;
+  const selectedDate = String(input.value || '').trim();
+  if (!selectedDate) return;
+  if (selectedDate < getTodayDateString()) return;
+  setErrorText('date-error', '');
+  input.classList.remove('input-error');
+}
+
+/**
+ * Applies today's date as minimum selectable due date.
+ * @returns {void} Result.
+ */
+function applyTodayMinDate() {
+  const dateInput = document.getElementById('date');
+  if (!dateInput) return;
+  dateInput.min = getTodayDateString();
+}
+
+/**
+ * Returns today's local date in yyyy-mm-dd.
+ * @returns {string} Result.
+ */
+function getTodayDateString() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 /**
@@ -148,6 +215,7 @@ async function saveToArray(event) {
  * @returns {void} Result.
  */
 function handleSaveSuccess() {
+  setAddTaskActionButtonsDisabled(true);
     showMessage("Task added to board", "success", {
       iconSrc: "./assets/icons/vector-board.svg",
       iconAlt: "Board"
@@ -165,6 +233,19 @@ function handleSaveSuccess() {
  */
 function handleSaveFailure() {
   showMessage("Task could not be saved", "error");
+}
+
+/**
+ * Enables or disables add-task action buttons.
+ * @param {boolean} disabled - Whether buttons should be disabled.
+ * @returns {void} Result.
+ */
+function setAddTaskActionButtonsDisabled(disabled) {
+  const buttons = document.querySelectorAll('#add-task-form ~ .form-footer .clear, #add-task-form ~ .form-footer .create, .actions .clear[form="add-task-form"], .actions .create[form="add-task-form"]');
+  buttons.forEach((button) => {
+    button.disabled = !!disabled;
+    button.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+  });
 }
 
 /**

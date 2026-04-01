@@ -150,7 +150,7 @@
     }
 
     .ac-form {
-        gap: 16px;
+        gap: 8px;
         align-items: center;
         margin-top: 32px;
     }
@@ -235,12 +235,12 @@
     .ac-avatar {
         margin-bottom: 0px;
         position: absolute;
-        bottom: 79%;
+        bottom: 82%;
         z-index: 5;
     }
 
     .ac-form {
-        gap: 16px;
+        gap: 8px;
         align-items: center;
         margin-top: 32px;
     }
@@ -304,5 +304,13 @@
 
     .ac-avatar img {
         opacity: 1;
+    }
+}
+
+@media (max-width: 345px) {
+    .contact-initials-large {
+        width: 70px !important;
+        height: 70px !important;
+        font-size: 24px !important;
     }
 }

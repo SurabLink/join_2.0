@@ -1,15 +1,6 @@
 @media (max-width: 1024px) {
-    .content {
-        padding-bottom: 120px;
-    }
-
-    .actions {
-        bottom: 96px;
-    }
-
-    .note-outside {
-        bottom: 96px;
-        left: 16px;
+    #add-task-content {
+        padding-bottom: 92px;
     }
 
     .clear,
@@ -19,6 +10,7 @@
 }
 
 @media (max-width: 1200px) {
+
     .form-left,
     .form-right {
         min-width: 0;
@@ -41,7 +33,7 @@
 
     .priority-options label {
         gap: 4px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .priority-options label svg {
@@ -71,6 +63,7 @@
 }
 
 @media (max-width: 750px) {
+
     html,
     body,
     .app {
@@ -109,8 +102,12 @@
         min-height: 0;
     }
 
-    .form-scroll {
+    #add-task-content .form-scroll {
         max-height: calc(100vh - 400px);
+    }
+
+    .form-footer {
+        margin-top: 8px;
     }
 }
 
@@ -163,15 +160,14 @@
         align-items: center;
     }
 
-    .actions {
-        bottom: 96px;
-        right: 16px;
+    .form-footer {
+        bottom: 72px;
     }
 
-    .note-outside {
-        bottom: 96px;
-        left: 16px;
+    .form-footer {
+        margin-top: 32px;
     }
+
 }
 
 @media (max-width: 550px) {
@@ -196,6 +192,10 @@
 
     .subtask-list {
         height: 70px;
+    }
+
+    .form-footer {
+        margin-top: 16px;
     }
 }
 
@@ -234,7 +234,7 @@
 
     .priority-options label {
         min-width: 80px;
-        font-size: 12px;
+        font-size: 16px;
     }
 
     .priority-options label svg {
@@ -255,7 +255,7 @@
     .priority-options label {
         min-width: 80px;
         padding: 4px 4px;
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
@@ -271,7 +271,7 @@
     .priority-options label {
         min-width: 74px;
         padding: 4px 4px;
-        font-size: 11px;
+        font-size: 16px;
     }
 
     .subtask {

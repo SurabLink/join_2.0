@@ -25,6 +25,7 @@ async function showAddTaskDialog() {
   }
 
   modalContent.innerHTML = generateAddTask({ variant: "dialog" });
+  if (typeof applyTodayMinDate === "function") applyTodayMinDate();
   // force reflow so the transition runs every time
   void modalContent.offsetWidth;
   requestAnimationFrame(() => modalContent.classList.add("is-open"));
@@ -33,6 +34,7 @@ async function showAddTaskDialog() {
   selectContacts();
   renderSelectedAvatars();
   if (typeof initAddDropdownClose === "function") initAddDropdownClose();
+  if (typeof initAddTaskBlurValidation === "function") initAddTaskBlurValidation();
   if (typeof initAddSubtaskEnter === "function") initAddSubtaskEnter();
 }
 
